@@ -1,10 +1,12 @@
 {
   "name": "suncov-russian",
   "version": "1.0.0",
+  "homepage": "https://kriswis.github.io/SuncovRussian/",
   "scripts": {
     "start": "webpack serve --env port=3000",
     "build:prod": "webpack --env mode=production",
     "build:dev": "webpack --env mode=development",
+    "deploy": "gh-pages -d build",
     "lint:ts": "eslint \"**/*.{ts,tsx}\"",
     "lint:ts:fix": "eslint \"**/*.{ts,tsx}\" --fix",
     "lint:scss": "npx stylelint \"**/*.scss\"",
@@ -37,6 +39,7 @@
     "eslint-plugin-react-refresh": "^0.4.16",
     "eslint-plugin-storybook": "^0.11.1",
     "eslint-plugin-ulbi-tv-plugin": "^0.0.10",
+    "gh-pages": "^6.2.0",
     "globals": "^15.13.0",
     "html-webpack-plugin": "^5.6.3",
     "react-refresh": "^0.16.0",
