@@ -1,2 +1,3 @@
 /build
+*storybook.log
 /node_modules
