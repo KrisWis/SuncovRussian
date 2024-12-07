@@ -24,5 +24,15 @@ const config: StorybookConfig = {
 
     return config;
   },
+
+  swc: () => ({
+    jsc: {
+      transform: {
+        react: {
+          runtime: "automatic",
+        },
+      },
+    },
+  }),
 };
 export default config;
