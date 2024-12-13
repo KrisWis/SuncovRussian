@@ -1,4 +1,4 @@
 import { ReducersMapObject } from "@reduxjs/toolkit";
-import { StoreSchema } from "./AppStore";
+import { StateSchema } from "./types";
 
-export const RootReducer: ReducersMapObject<StoreSchema> = {};
+export const RootReducer: ReducersMapObject<StateSchema> = {};

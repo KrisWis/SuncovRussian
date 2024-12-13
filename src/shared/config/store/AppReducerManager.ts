@@ -3,34 +3,34 @@ import {
   combineReducers,
   Reducer,
   ReducersMapObject,
-} from "@reduxjs/toolkit";
-import { StoreSchema, StoreSchemaKey } from "./AppStore";
-import { OptionalRecord } from "../../types/global";
+} from '@reduxjs/toolkit';
+import { OptionalRecord } from '../../types/global';
+import { StateSchema, StateSchemaKey } from './types';
 
-export type MountedReducers = OptionalRecord<StoreSchemaKey, boolean>;
+export type MountedReducers = OptionalRecord<StateSchemaKey, boolean>;
 
 export interface ReducerManager {
-  getReducerMap: () => ReducersMapObject<StoreSchema>;
-  reduce: (state: StoreSchema, action: Action) => StoreSchema;
-  add: (key: StoreSchemaKey, reducer: Reducer) => void;
-  remove: (key: StoreSchemaKey) => void;
+  getReducerMap: () => ReducersMapObject<StateSchema>;
+  reduce: (state: StateSchema, action: Action) => StateSchema;
+  add: (key: StateSchemaKey, reducer: Reducer) => void;
+  remove: (key: StateSchemaKey) => void;
   getMountedReducers: () => MountedReducers;
 }
 
 export const createReducerManager = (
-  initialReducers: ReducersMapObject<StoreSchema>
+  initialReducers: ReducersMapObject<StateSchema>,
 ): ReducerManager => {
   const reducers = { ...initialReducers };
 
   let combinedReducer = combineReducers(reducers);
 
-  let keysToRemove: Array<StoreSchemaKey> = [];
+  let keysToRemove: Array<StateSchemaKey> = [];
   const mountedReducers: MountedReducers = {};
 
   return {
     getReducerMap: () => reducers,
     getMountedReducers: () => mountedReducers,
-    reduce: (state: StoreSchema, action: Action) => {
+    reduce: (state: StateSchema, action: Action) => {
       if (keysToRemove.length > 0) {
         state = { ...state };
         keysToRemove.forEach((key) => {
@@ -39,18 +39,21 @@ export const createReducerManager = (
         keysToRemove = [];
       }
 
+      // @ts-expect-error Ошибка ожидается
       return combinedReducer(state, action);
     },
-    add: (key: StoreSchemaKey, reducer: Reducer) => {
+    add: (key: StateSchemaKey, reducer: Reducer) => {
       if (!key || reducers[key]) {
         return;
       }
+      // @ts-expect-error Ошибка ожидается
       reducers[key] = reducer;
+      // @ts-expect-error Ошибка ожидается
       mountedReducers[key] = true;
 
       combinedReducer = combineReducers(reducers);
     },
-    remove: (key: StoreSchemaKey) => {
+    remove: (key: StateSchemaKey) => {
       if (!key || !reducers[key]) {
         return;
       }

@@ -1,14 +1,11 @@
-import { Reducer } from "@reduxjs/toolkit";
-import { useEffect } from "react";
-import { useDispatch, useStore } from "react-redux";
-import {
-  ReduxStoreWithManager,
-  StoreSchema,
-  StoreSchemaKey,
-} from "../config/store/AppStore";
+import { Reducer } from '@reduxjs/toolkit';
+import { useEffect } from 'react';
+import { useDispatch, useStore } from 'react-redux';
+import { StateSchema, StateSchemaKey } from '../config/store/types';
+import { ReduxStoreWithManager } from '../config/store/AppStore';
 
 export type ReducersList = {
-  [name in StoreSchemaKey]?: Reducer<NonNullable<StoreSchema[name]>>;
+  [name in StateSchemaKey]?: Reducer<NonNullable<StateSchema[name]>>;
 };
 
 interface DynamicModuleLoaderProps {
@@ -28,16 +25,17 @@ export const DynamicModuleLoader: React.FC<DynamicModuleLoaderProps> = ({
 
   useEffect(() => {
     Object.entries(reducers).forEach(([name, reducer]) => {
-      const mounted = mountedReducers[name as StoreSchemaKey];
+      const mounted = mountedReducers[name as StateSchemaKey];
       if (!mounted) {
-        store.reducerManager.add(name as StoreSchemaKey, reducer);
+        // @ts-expect-error Ошибка ожидается
+        store.reducerManager.add(name as StateSchemaKey, reducer);
       }
     });
 
     return () => {
       if (removeAfterUnmount) {
         Object.entries(reducers).forEach(([name]) => {
-          store.reducerManager.remove(name as StoreSchemaKey);
+          store.reducerManager.remove(name as StateSchemaKey);
         });
       }
     };
@@ -51,4 +49,4 @@ export const DynamicModuleLoader: React.FC<DynamicModuleLoaderProps> = ({
 
   return <>{children}</>;
 };
-DynamicModuleLoader.displayName = "DynamicModuleLoader";
+DynamicModuleLoader.displayName = 'DynamicModuleLoader';
