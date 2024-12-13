@@ -21,6 +21,7 @@
 - `npm run stylelint:fix` - Запуск исправления scss файлов проекта, там где это возможно, с помощью styleLint
 - `npm run eslint:check` - Запуск проверки ts файлов проекта с помощью esLint
 - `npm run eslint:fix` - Запуск исправления ts файлов проекта, там где это возможно, с помощью esLint
+- `npm run lint:depcruise` - Запуск dependency-cruiser для анализа зависимостей
 - `npm run storybook` - запуск Storybook
 - `npm run storybook:build` - Сборка storybook билда
 - `npm run test:unit` - Запуск unit тестов с jest/react-testing-library
@@ -57,7 +58,7 @@
 
 ## Линтинг
 
-В проекте используется eslint для проверки typescript кода и stylelint для проверки файлов со стилями.
+В проекте используется eslint для проверки typescript кода и stylelint для проверки файлов со стилями. Также используется dependency-cruiser для анализа зависимостей.
 
 ##### Запуск линтеров
 
@@ -65,6 +66,7 @@
 - `npm run lint:ts:fix` - Исправление ts файлов линтером
 - `npm run lint:scss` - Проверка scss файлов style линтером
 - `npm run lint:scss:fix` - Исправление scss файлов style линтером
+- `npm run lint:depcruise` - Запуск dependency-cruiser для анализа зависимостей
 
 ---
 
