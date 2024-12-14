@@ -1,4 +1,5 @@
-export interface TestsWords {
+export interface TestsWordsInterface {
   valid: string;
   invalid: string;
+  probability?: number;
 }

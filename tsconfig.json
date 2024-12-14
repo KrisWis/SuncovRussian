@@ -10,14 +10,15 @@
     "allowSyntheticDefaultImports": true,
     "jsx": "react-jsx",
     "strict": true,
-    "isolatedModules": true
+    "isolatedModules": true,
+    "baseUrl": "./src",
+    "paths": {
+      "@/*": ["./*"]
+    }
   },
   "ts-node": {
     "compilerOptions": {
       "module": "CommonJS"
     }
-  },
-  "paths": {
-    "*": ["./src/*"]
   }
 }

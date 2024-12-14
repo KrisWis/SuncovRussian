@@ -4,7 +4,7 @@ import {
   Reducer,
   ReducersMapObject,
 } from '@reduxjs/toolkit';
-import { OptionalRecord } from '../../types/global';
+import { OptionalRecord } from '../../shared/types/global';
 import { StateSchema, StateSchemaKey } from './types';
 
 export type MountedReducers = OptionalRecord<StateSchemaKey, boolean>;
@@ -39,16 +39,15 @@ export const createReducerManager = (
         keysToRemove = [];
       }
 
-      // @ts-expect-error Ошибка ожидается
+      // TODO: если глобальных редюссеров не появится, то мб починить
+      // @ts-expect-error state может не иметь редюссеров
       return combinedReducer(state, action);
     },
     add: (key: StateSchemaKey, reducer: Reducer) => {
       if (!key || reducers[key]) {
         return;
       }
-      // @ts-expect-error Ошибка ожидается
       reducers[key] = reducer;
-      // @ts-expect-error Ошибка ожидается
       mountedReducers[key] = true;
 
       combinedReducer = combineReducers(reducers);

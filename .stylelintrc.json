@@ -1,6 +1,7 @@
 {
   "extends": "stylelint-config-standard-scss",
   "rules": {
-    "declaration-no-important": true
+    "declaration-no-important": true,
+    "selector-class-pattern": null
   }
 }

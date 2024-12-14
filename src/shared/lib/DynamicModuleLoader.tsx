@@ -1,8 +1,8 @@
 import { Reducer } from '@reduxjs/toolkit';
 import { useEffect } from 'react';
 import { useDispatch, useStore } from 'react-redux';
-import { StateSchema, StateSchemaKey } from '../config/store/types';
-import { ReduxStoreWithManager } from '../config/store/AppStore';
+import { StateSchema, StateSchemaKey } from '../../app/store/types';
+import { ReduxStoreWithManager } from '../../app/store/AppStore';
 
 export type ReducersList = {
   [name in StateSchemaKey]?: Reducer<NonNullable<StateSchema[name]>>;
@@ -27,7 +27,6 @@ export const DynamicModuleLoader: React.FC<DynamicModuleLoaderProps> = ({
     Object.entries(reducers).forEach(([name, reducer]) => {
       const mounted = mountedReducers[name as StateSchemaKey];
       if (!mounted) {
-        // @ts-expect-error Ошибка ожидается
         store.reducerManager.add(name as StateSchemaKey, reducer);
       }
     });

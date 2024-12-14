@@ -1,6 +1,6 @@
-import { TestsWords } from './types';
+import { TestsWordsInterface } from './types';
 
-export const accentsTestsWords: TestsWords[] = [
+export const accentsTestsWords: TestsWordsInterface[] = [
   {
     valid: 'аэропОрты',
     invalid: 'аэропортЫ',
