@@ -435,7 +435,7 @@ export const accentsTestsWords: TestsWordsInterface[] = [
   },
   {
     valid: 'пломбировАть',
-    invalid: 'пломбТровать',
+    invalid: 'пломбИровать',
     id: 72,
     probability: 1,
   },
@@ -633,7 +633,7 @@ export const accentsTestsWords: TestsWordsInterface[] = [
   },
   {
     valid: 'начАвшись',
-    invalid: 'начавшись',
+    invalid: 'нАчавшись',
     id: 105,
     probability: 1,
   },
