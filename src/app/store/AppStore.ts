@@ -1,8 +1,8 @@
-import { configureStore, EnhancedStore, Reducer } from "@reduxjs/toolkit";
-import { TypedUseSelectorHook, useDispatch, useSelector } from "react-redux";
-import { createReducerManager, ReducerManager } from "./AppReducerManager";
-import { RootReducer } from "./AppReducer";
-import { StateSchema } from "./types";
+import { configureStore, EnhancedStore, Reducer } from '@reduxjs/toolkit';
+import { TypedUseSelectorHook, useDispatch, useSelector } from 'react-redux';
+import { createReducerManager, ReducerManager } from './AppReducerManager';
+import { RootReducer } from './AppReducer';
+import { StateSchema } from './types';
 
 const reducerManager = createReducerManager(RootReducer);
 

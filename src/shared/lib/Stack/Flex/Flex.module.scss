@@ -50,6 +50,14 @@
   flex-direction: column;
 }
 
+.directionRowReverse {
+  flex-direction: row-reverse;
+}
+
+.directionColumnReverse {
+  flex-direction: column-reverse;
+}
+
 .gap0 {
   gap: 0;
 }

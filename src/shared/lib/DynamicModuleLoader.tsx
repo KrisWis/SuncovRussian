@@ -23,11 +23,14 @@ export const DynamicModuleLoader: React.FC<DynamicModuleLoaderProps> = ({
   const dispatch = useDispatch();
   const mountedReducers = store.reducerManager.getMountedReducers();
 
+  // TODO: убрать логи
+
   useEffect(() => {
     Object.entries(reducers).forEach(([name, reducer]) => {
       const mounted = mountedReducers[name as StateSchemaKey];
       if (!mounted) {
         store.reducerManager.add(name as StateSchemaKey, reducer);
+        dispatch({ type: `@INIT ${name} reducer` });
       }
     });
 
@@ -35,6 +38,7 @@ export const DynamicModuleLoader: React.FC<DynamicModuleLoaderProps> = ({
       if (removeAfterUnmount) {
         Object.entries(reducers).forEach(([name]) => {
           store.reducerManager.remove(name as StateSchemaKey);
+          dispatch({ type: `@DESTROY ${name} reducer` });
         });
       }
     };

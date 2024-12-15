@@ -4,7 +4,7 @@ export interface TestWordsSliceSchema {
   words: TestsWordsInterface[];
 }
 
-export interface setWordsAction {
-  payload: TestsWordsInterface[];
-  type: string;
+export interface changeWordProbabilityPayload {
+  id: number;
+  probability: number;
 }

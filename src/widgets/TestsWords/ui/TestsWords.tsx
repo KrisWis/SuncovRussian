@@ -1,18 +1,25 @@
 import { Flex } from '@/shared/lib/Stack';
 import { TestsWordsProps } from '../model/types/types';
 import styles from './TestsWords.module.scss';
-import { memo, useEffect, useState } from 'react';
+import {
+  Fragment,
+  memo,
+  useCallback,
+  useEffect,
+  useMemo,
+  useState,
+} from 'react';
 import { DynamicModuleLoader } from '@/shared/lib/DynamicModuleLoader';
-import { TestsWordsReducer } from '..';
+import { TestsWordsReducer, useWords } from '..';
 import { useTestsWordsActions } from '../model/slice/slice';
-import { TestsWordsInterface } from '@/shared/static/tests_words/types';
+import { shuffleArray } from '@/shared/utils/shuffleArray/shuffleArray';
+
+// TODO: написать тесты
 
 const TestsWordsInner: React.FC<TestsWordsProps> = memo(
   ({ words }): React.JSX.Element => {
-    const { setWords } = useTestsWordsActions();
-    const [randomWord, setRandomWord] = useState<TestsWordsInterface | null>(
-      null,
-    );
+    const { setWords, changeWordProbability } = useTestsWordsActions();
+    const [randomWordId, setRandomWordId] = useState<number | null>(null);
 
     useEffect(() => {
       // Инициализация слов
@@ -20,34 +27,113 @@ const TestsWordsInner: React.FC<TestsWordsProps> = memo(
         word.probability = 1;
       }
 
-      setWords(words);
+      const timeoutForReducerRender = setTimeout(() => {
+        setWords(words);
+        clearTimeout(timeoutForReducerRender);
+      }, 0);
+    }, [setWords, words]);
 
-      // Получение случайного слова
-      let runningSum: number = 0;
-      const randomValue = Math.random() * 100;
-      for (let i = 0; i < words.length; i++) {
-        runningSum += words[i].probability!;
+    // Получение случайного слова
+    const storeWords = useWords();
 
-        if (randomValue <= runningSum) {
-          const choice = words[i];
+    const updateRandomWord = useCallback(() => {
+      const storeWordsCopy = storeWords.filter(
+        (word) => word.id !== randomWordId,
+      );
 
-          setRandomWord(choice);
-          break;
+      const totalChances = storeWordsCopy.reduce(
+        (acc, c) => acc + c.probability!,
+        0,
+      );
+      const rnd = totalChances * Math.random();
+
+      for (let i = 0, sum = 0; ; i++) {
+        sum += storeWordsCopy[i].probability!;
+
+        if (sum > rnd) {
+          setRandomWordId(storeWordsCopy[i].id);
+          return;
         }
       }
-    }, [setWords, words]);
+    }, [randomWordId, storeWords]);
+
+    useEffect(() => {
+      if (storeWords.length && randomWordId === null) {
+        updateRandomWord();
+      }
+    }, [randomWordId, storeWords, updateRandomWord]);
+
+    // Изменение вероятности при правильном ответе
+    const changeWordProbabilityInSuccess = useCallback(() => {
+      const randomWord = storeWords.find((word) => word.id === randomWordId);
+
+      if (randomWord!.probability === 0.2) {
+        changeWordProbability({ id: randomWord!.id, probability: 0.1 });
+      } else if (randomWord!.probability === 0.1) {
+        changeWordProbability({ id: randomWord!.id, probability: 0.05 });
+      } else {
+        changeWordProbability({ id: randomWord!.id, probability: 0.01 });
+      }
+
+      updateRandomWord();
+    }, [changeWordProbability, randomWordId, storeWords, updateRandomWord]);
+
+    // Изменение вероятности при неправильном ответе
+    const changeWordProbabilityInFail = useCallback(() => {
+      setIsIncorrect(true);
+
+      const timeoutForIncorrect = setTimeout(() => {
+        setIsIncorrect(false);
+        clearTimeout(timeoutForIncorrect);
+      }, 1000);
+
+      const randomWord = storeWords.find((word) => word.id === randomWordId);
+      changeWordProbability({ probability: 0.2, id: randomWord!.id });
+
+      updateRandomWord();
+    }, [changeWordProbability, randomWordId, storeWords, updateRandomWord]);
+
+    // Отображение слов в случайном порядке
+    const randomWords = useMemo(() => {
+      const randomWord = storeWords.find((word) => word.id === randomWordId);
+
+      if (!randomWord) return [];
+
+      return shuffleArray([
+        <Flex
+          key={randomWord.valid}
+          onClick={changeWordProbabilityInSuccess}
+          className={styles.TestsWords__word}
+          justify="center"
+        >
+          {randomWord.valid}
+        </Flex>,
+
+        <Flex
+          key={randomWord.invalid}
+          onClick={changeWordProbabilityInFail}
+          className={styles.TestsWords__word}
+          justify="center"
+        >
+          {randomWord.invalid}
+        </Flex>,
+      ]);
+    }, [
+      changeWordProbabilityInFail,
+      changeWordProbabilityInSuccess,
+      randomWordId,
+      storeWords,
+    ]);
+
+    // Появление плашки "Неверно"
+    const [isIncorrect, setIsIncorrect] = useState<boolean>(false);
 
     return (
       <>
-        {randomWord && (
+        {isIncorrect && <Flex justify="center">Неверно</Flex>}
+        {randomWords && (
           <Flex justify="center" maxWidth>
-            <Flex className={styles.TestsWords__word} justify="center">
-              {randomWord.valid}
-            </Flex>
-
-            <Flex className={styles.TestsWords__word} justify="center">
-              {randomWord.invalid}
-            </Flex>
+            {randomWords.map((word) => word)}
           </Flex>
         )}
       </>

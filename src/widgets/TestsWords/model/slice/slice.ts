@@ -1,5 +1,10 @@
 import { buildSlice } from '@/shared/lib/store';
-import { setWordsAction, TestWordsSliceSchema } from '../types/sliceTypes';
+import {
+  changeWordProbabilityPayload,
+  TestWordsSliceSchema,
+} from '../types/sliceTypes';
+import { PayloadAction } from '@reduxjs/toolkit';
+import { TestsWordsInterface } from '@/shared/static/tests_words/types';
 
 const initialState: TestWordsSliceSchema = {
   words: [],
@@ -9,8 +14,24 @@ export const TestsWordsSlice = buildSlice({
   name: 'TestsWordsSlice',
   initialState: initialState,
   reducers: {
-    setWords: (state: TestWordsSliceSchema, action: setWordsAction) => {
-      state.words = action.payload;
+    setWords: (
+      state: TestWordsSliceSchema,
+      { payload }: PayloadAction<TestsWordsInterface[]>,
+    ) => {
+      state.words = payload;
+    },
+
+    changeWordProbability: (
+      state: TestWordsSliceSchema,
+      { payload }: PayloadAction<changeWordProbabilityPayload>,
+    ) => {
+      state.words = state.words.filter((word) => {
+        if (word.id === payload.id) {
+          word.probability = payload.probability;
+        }
+
+        return word;
+      });
     },
   },
 });

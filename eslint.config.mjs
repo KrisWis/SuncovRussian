@@ -105,7 +105,7 @@ export default [
         'error',
         {
           alias: '@',
-          ignoreImportPatterns: ['**/StoreProvider', '**/testing'],
+          ignoreImportPatterns: ['@/app/store/**'],
         },
       ],
       'ulbi-tv-plugin/public-api-imports': [
@@ -122,6 +122,7 @@ export default [
 
       'react/prop-types': [0],
       'react/require-default-props': [0],
+      'react/jsx-no-bind': [0],
     },
   },
 ];
