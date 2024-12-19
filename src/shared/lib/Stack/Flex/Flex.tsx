@@ -24,7 +24,8 @@ export type FlexWitdth =
   | '70'
   | '75'
   | '80'
-  | '90';
+  | '90'
+  | '100';
 
 const justifyClasses: Record<FlexJustify, string> = {
   start: styles.justifyStart,
@@ -75,6 +76,7 @@ const widthClasses: Record<FlexWitdth, string> = {
   75: styles.width75,
   80: styles.width80,
   90: styles.width90,
+  100: styles.width100,
 };
 
 type DivProps = DetailedHTMLProps<
@@ -90,7 +92,6 @@ export interface FlexProps extends DivProps {
   direction?: FlexDirection;
   wrap?: boolean;
   gap?: FlexGap;
-  maxWidth?: boolean;
   maxHeight?: boolean;
   width?: FlexWitdth;
   innerRef?: React.Ref<HTMLDivElement>;
@@ -105,7 +106,6 @@ export const Flex = (props: FlexProps) => {
     align = 'center',
     direction = 'row',
     gap,
-    maxWidth,
     maxHeight,
     innerRef,
     wrap,
@@ -115,14 +115,13 @@ export const Flex = (props: FlexProps) => {
   } = props;
 
   const classes = [
+    styles.Flex,
     className,
     justifyClasses[justify],
     alignClasses[align],
     directionClasses[direction],
     gap && gapClasses[gap],
     width && widthClasses[width],
-    styles.Flex,
-    maxWidth && styles.maxWidth,
     maxHeight && styles.maxHeight,
     relative && styles.relative,
     wrap && styles.wrap,

@@ -1,6 +1,7 @@
 import { buildSlice } from '@/shared/lib/store';
 import {
   changeWordProbabilityPayload,
+  changeWordUncorrectTimesPayload,
   TestWordsSliceSchema,
 } from '../types/sliceTypes';
 import { PayloadAction } from '@reduxjs/toolkit';
@@ -28,6 +29,19 @@ export const TestsWordsSlice = buildSlice({
       state.words = state.words.filter((word) => {
         if (word.id === payload.id) {
           word.probability = payload.probability;
+        }
+
+        return word;
+      });
+    },
+
+    changeWordUncorrectTimes: (
+      state: TestWordsSliceSchema,
+      { payload }: PayloadAction<changeWordUncorrectTimesPayload>,
+    ) => {
+      state.words = state.words.filter((word) => {
+        if (word.id === payload.id) {
+          word.uncorrectTimes = payload.uncorrectTimes;
         }
 
         return word;

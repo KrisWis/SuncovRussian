@@ -5,12 +5,13 @@ import {
   Fragment,
   memo,
   useCallback,
+  useContext,
   useEffect,
   useMemo,
   useState,
 } from 'react';
 import { DynamicModuleLoader } from '@/shared/lib/DynamicModuleLoader';
-import { TestsWordsReducer, useWords } from '..';
+import { TestsWordsContext, TestsWordsReducer, useWords } from '..';
 import { useTestsWordsActions } from '../model/slice/slice';
 import { shuffleArray } from '@/shared/utils/shuffleArray/shuffleArray';
 
@@ -18,13 +19,15 @@ import { shuffleArray } from '@/shared/utils/shuffleArray/shuffleArray';
 
 const TestsWordsInner: React.FC<TestsWordsProps> = memo(
   ({ words }): React.JSX.Element => {
-    const { setWords, changeWordProbability } = useTestsWordsActions();
+    const { setWords, changeWordProbability, changeWordUncorrectTimes } =
+      useTestsWordsActions();
     const [randomWordId, setRandomWordId] = useState<number | null>(null);
 
     useEffect(() => {
       // Инициализация слов
       for (const word of words) {
         word.probability = 1;
+        word.uncorrectTimes = 0;
       }
 
       const timeoutForReducerRender = setTimeout(() => {
@@ -89,9 +92,19 @@ const TestsWordsInner: React.FC<TestsWordsProps> = memo(
 
       const randomWord = storeWords.find((word) => word.id === randomWordId);
       changeWordProbability({ probability: 0.2, id: randomWord!.id });
+      changeWordUncorrectTimes({
+        id: randomWord!.id,
+        uncorrectTimes: randomWord!.uncorrectTimes! + 1,
+      });
 
       updateRandomWord();
-    }, [changeWordProbability, randomWordId, storeWords, updateRandomWord]);
+    }, [
+      changeWordProbability,
+      changeWordUncorrectTimes,
+      randomWordId,
+      storeWords,
+      updateRandomWord,
+    ]);
 
     // Отображение слов в случайном порядке
     const randomWords = useMemo(() => {
@@ -128,12 +141,47 @@ const TestsWordsInner: React.FC<TestsWordsProps> = memo(
     // Появление плашки "Неверно"
     const [isIncorrect, setIsIncorrect] = useState<boolean>(false);
 
+    // Отображение тотального времени
+    const { totalTime } = useContext(TestsWordsContext);
+
+    // Отображение неправильных ответов
+    const wordsWithUncorrectTimes = useMemo(
+      () =>
+        storeWords
+          .filter((word) => word.uncorrectTimes! > 0)
+          .sort((a, b) => b.uncorrectTimes! - a.uncorrectTimes!),
+      [storeWords],
+    );
+
     return (
       <>
-        {isIncorrect && <Flex justify="center">Неверно</Flex>}
-        {randomWords && (
-          <Flex justify="center" maxWidth>
-            {randomWords.map((word) => word)}
+        {!totalTime ? (
+          <>
+            {isIncorrect && <Flex justify="center">Неверно</Flex>}
+            {randomWords && (
+              <Flex justify="center" width="100">
+                {randomWords.map((word) => word)}
+              </Flex>
+            )}
+          </>
+        ) : (
+          <Flex direction="column" width="100" maxHeight>
+            <span>
+              Тотальное время: {Math.round(totalTime / 60000)} минут и{' '}
+              {Math.round(totalTime / 1000)} секунд
+            </span>
+
+            {wordsWithUncorrectTimes.length > 0 && (
+              <span>Неправильные слова:</span>
+            )}
+
+            <Flex direction="column" width="100">
+              {wordsWithUncorrectTimes.map((word) => (
+                <span key={word.id}>
+                  {word.valid} - {word.uncorrectTimes} раз
+                </span>
+              ))}
+            </Flex>
           </Flex>
         )}
       </>

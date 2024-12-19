@@ -8,3 +8,8 @@ export interface changeWordProbabilityPayload {
   id: number;
   probability: number;
 }
+
+export interface changeWordUncorrectTimesPayload {
+  id: number;
+  uncorrectTimes: number;
+}
