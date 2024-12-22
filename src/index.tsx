@@ -17,7 +17,7 @@ const root = createRoot(container);
 
 root.render(
   <Provider store={store}>
-    <ErrorBoundary fallback={<div>Something went wrong</div>}>
+    <ErrorBoundary fallback={<div>Что-то пошло не так</div>}>
       <App />
     </ErrorBoundary>
   </Provider>,

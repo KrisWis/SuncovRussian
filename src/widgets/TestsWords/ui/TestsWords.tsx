@@ -66,8 +66,54 @@ const TestsWordsInner: React.FC<TestsWordsProps> = memo(
       }
     }, [randomWordId, storeWords, updateRandomWord]);
 
+    // Изменение вероятности при неправильном ответе
+    const [waitRepeatedClickInFail, setWaitRepeatedClickInFail] =
+      useState<boolean>(false);
+
+    const changeWordProbabilityInFail = useCallback(() => {
+      if (waitRepeatedClickInFail) return;
+
+      const audio = new Audio('sounds/FailSound.mp3');
+      audio.play();
+
+      setIsIncorrect(true);
+
+      const showNewWord = () => {
+        setWaitRepeatedClickInFail(false);
+        setIsIncorrect(false);
+
+        const randomWord = storeWords.find((word) => word.id === randomWordId);
+
+        changeWordProbability({ probability: 0.2, id: randomWord!.id });
+
+        changeWordUncorrectTimes({
+          id: randomWord!.id,
+          uncorrectTimes: randomWord!.uncorrectTimes! + 1,
+        });
+
+        updateRandomWord();
+
+        document.removeEventListener('click', showNewWord);
+      };
+
+      const eventTimeout = setTimeout(() => {
+        setWaitRepeatedClickInFail(true);
+        document.addEventListener('click', showNewWord);
+        clearTimeout(eventTimeout);
+      }, 0);
+    }, [
+      changeWordProbability,
+      changeWordUncorrectTimes,
+      randomWordId,
+      storeWords,
+      updateRandomWord,
+      waitRepeatedClickInFail,
+    ]);
+
     // Изменение вероятности при правильном ответе
     const changeWordProbabilityInSuccess = useCallback(() => {
+      if (waitRepeatedClickInFail) return;
+
       const randomWord = storeWords.find((word) => word.id === randomWordId);
 
       if (randomWord!.probability === 0.2) {
@@ -79,31 +125,12 @@ const TestsWordsInner: React.FC<TestsWordsProps> = memo(
       }
 
       updateRandomWord();
-    }, [changeWordProbability, randomWordId, storeWords, updateRandomWord]);
-
-    // Изменение вероятности при неправильном ответе
-    const changeWordProbabilityInFail = useCallback(() => {
-      setIsIncorrect(true);
-
-      const timeoutForIncorrect = setTimeout(() => {
-        setIsIncorrect(false);
-        clearTimeout(timeoutForIncorrect);
-      }, 1000);
-
-      const randomWord = storeWords.find((word) => word.id === randomWordId);
-      changeWordProbability({ probability: 0.2, id: randomWord!.id });
-      changeWordUncorrectTimes({
-        id: randomWord!.id,
-        uncorrectTimes: randomWord!.uncorrectTimes! + 1,
-      });
-
-      updateRandomWord();
     }, [
       changeWordProbability,
-      changeWordUncorrectTimes,
       randomWordId,
       storeWords,
       updateRandomWord,
+      waitRepeatedClickInFail,
     ]);
 
     // Отображение слов в случайном порядке
