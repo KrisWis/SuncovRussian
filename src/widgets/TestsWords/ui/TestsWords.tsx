@@ -2,7 +2,6 @@ import { Flex } from '@/shared/lib/Stack';
 import { TestsWordsProps } from '../model/types/types';
 import styles from './TestsWords.module.scss';
 import {
-  Fragment,
   memo,
   useCallback,
   useContext,
@@ -16,6 +15,7 @@ import { useTestsWordsActions } from '../model/slice/slice';
 import { shuffleArray } from '@/shared/utils/shuffleArray/shuffleArray';
 
 // TODO: написать тесты
+// TODO: подумать по поводу энтити адаптер
 
 const TestsWordsInner: React.FC<TestsWordsProps> = memo(
   ({ words }): React.JSX.Element => {

@@ -1,6 +1,10 @@
 import './MainPage.scss';
 import { memo, useState } from 'react';
-import { TestsWords, TestsWordsContext } from '@/widgets/TestsWords';
+import {
+  StrictModeSwitcher,
+  TestsWords,
+  TestsWordsContext,
+} from '@/widgets/TestsWords';
 import { accentsTestsWords } from '@/shared/static/tests_words/accents';
 import { TestsProgressBar } from '@/widgets/TestsWords';
 
@@ -19,6 +23,7 @@ export const MainPage: React.FC = memo((): React.JSX.Element => {
         >
           <TestsWords words={accentsTestsWords} />
           <TestsProgressBar />
+          <StrictModeSwitcher />
         </TestsWordsContext.Provider>
       </div>
     </main>
