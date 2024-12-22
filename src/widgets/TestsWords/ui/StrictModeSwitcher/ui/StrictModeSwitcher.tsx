@@ -11,15 +11,26 @@ export const StrictModeSwitcher: React.FC = memo((): React.JSX.Element => {
   // Включение строгого режима
   const storeWords = useWords();
 
-  const { changeWordProbability } = useTestsWordsActions();
+  const {
+    changeWordProbability,
+    changeWordConsecutivelyTimes,
+    changeWordInProgressStatus,
+  } = useTestsWordsActions();
 
   const strictModeFunction = useCallback(() => {
     if (document.hidden) {
       for (const word of storeWords) {
         changeWordProbability({ id: word.id, probability: 1 });
+        changeWordConsecutivelyTimes({ id: word.id, consecutivelyTimes: 0 });
+        changeWordInProgressStatus({ id: word.id, inProgress: false });
       }
     }
-  }, [changeWordProbability, storeWords]);
+  }, [
+    changeWordConsecutivelyTimes,
+    changeWordInProgressStatus,
+    changeWordProbability,
+    storeWords,
+  ]);
 
   const strictModeToggle = useCallback(() => {
     if (!strictModeIsOn) {

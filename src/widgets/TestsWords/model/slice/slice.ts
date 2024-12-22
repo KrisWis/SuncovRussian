@@ -1,5 +1,7 @@
 import { buildSlice } from '@/shared/lib/store';
 import {
+  changeWordConsecutivelyTimesPayload,
+  changeWordInProgressStatusPayload,
   changeWordProbabilityPayload,
   changeWordUncorrectTimesPayload,
   TestWordsSliceSchema,
@@ -42,6 +44,32 @@ export const TestsWordsSlice = buildSlice({
       state.words = state.words.filter((word) => {
         if (word.id === payload.id) {
           word.uncorrectTimes = payload.uncorrectTimes;
+        }
+
+        return word;
+      });
+    },
+
+    changeWordConsecutivelyTimes: (
+      state: TestWordsSliceSchema,
+      { payload }: PayloadAction<changeWordConsecutivelyTimesPayload>,
+    ) => {
+      state.words = state.words.filter((word) => {
+        if (word.id === payload.id) {
+          word.consecutivelyTimes = payload.consecutivelyTimes;
+        }
+
+        return word;
+      });
+    },
+
+    changeWordInProgressStatus: (
+      state: TestWordsSliceSchema,
+      { payload }: PayloadAction<changeWordInProgressStatusPayload>,
+    ) => {
+      state.words = state.words.filter((word) => {
+        if (word.id === payload.id) {
+          word.inProgress = payload.inProgress;
         }
 
         return word;

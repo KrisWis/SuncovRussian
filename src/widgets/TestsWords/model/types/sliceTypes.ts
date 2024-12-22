@@ -13,3 +13,13 @@ export interface changeWordUncorrectTimesPayload {
   id: number;
   uncorrectTimes: number;
 }
+
+export interface changeWordConsecutivelyTimesPayload {
+  id: number;
+  consecutivelyTimes: number;
+}
+
+export interface changeWordInProgressStatusPayload {
+  id: number;
+  inProgress: boolean;
+}

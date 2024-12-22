@@ -4,4 +4,6 @@ export interface TestsWordsInterface {
   invalid: string;
   probability?: number;
   uncorrectTimes?: number;
+  consecutivelyTimes?: number;
+  inProgress?: boolean;
 }

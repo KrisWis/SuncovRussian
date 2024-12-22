@@ -1,29 +1,27 @@
 import { Flex } from '@/shared/lib/Stack';
 import styles from './TestsProgressBar.module.scss';
 import { memo, useContext, useEffect, useMemo, useRef } from 'react';
-import { DynamicModuleLoader } from '@/shared/lib/DynamicModuleLoader';
-import { TestsWordsReducer } from '../../../model/slice/slice';
 import { useWords } from '../../../model/selectors/getWords/getWords';
 import { TestsWordsContext } from '../../../model/context/context';
 
-export const TestsProgressBarInner: React.FC = memo((): React.JSX.Element => {
+export const TestsProgressBar: React.FC = memo((): React.JSX.Element => {
   // Получение слов
   const storeWords = useWords();
 
-  // Получение слов с 1% выпадения
-  const wordsWithOnePercentProbability = useMemo(
-    () => storeWords.filter((word) => word.probability === 0.01),
+  // Получение слов, находящихся в прогрессе
+  const wordsInProgressProbability = useMemo(
+    () => storeWords.filter((word) => word.inProgress),
     [storeWords],
   );
 
-  // Получение процентов слов с 1% выпадения
-  const wordsWithOnePercentProbabilityPercent = useMemo(() => {
-    const result = wordsWithOnePercentProbability.length / storeWords.length;
+  // Получение процентов слов, находящихся в прогрессе
+  const wordsInProgressProbabilityPercent = useMemo(() => {
+    const result = wordsInProgressProbability.length / storeWords.length;
 
     if (isNaN(result)) return 0;
 
     return result;
-  }, [storeWords.length, wordsWithOnePercentProbability.length]);
+  }, [storeWords.length, wordsInProgressProbability.length]);
 
   // Сохранение времени начала прохождения
   const StartTimeRef = useRef<Date>(new Date());
@@ -33,39 +31,23 @@ export const TestsProgressBarInner: React.FC = memo((): React.JSX.Element => {
   }, []);
 
   // Окно с завершением тренажёра
-  const { setTotalTime, totalTime } = useContext(TestsWordsContext);
+  const { setTotalTime } = useContext(TestsWordsContext);
 
   useEffect(() => {
-    if (wordsWithOnePercentProbabilityPercent === 1) {
+    if (wordsInProgressProbabilityPercent === 1) {
       const endTime = new Date();
 
       const TotalTime = endTime.getTime() - StartTimeRef.current!.getTime();
 
       setTotalTime(TotalTime);
     }
-  }, [setTotalTime, wordsWithOnePercentProbabilityPercent]);
+  }, [setTotalTime, wordsInProgressProbabilityPercent]);
 
   return (
-    <>
-      {!totalTime && (
-        <Flex gap="5" className={styles.TestsProgressBar}>
-          <span>
-            {Math.round(wordsWithOnePercentProbabilityPercent * 100)}%
-          </span>
-          <progress value={wordsWithOnePercentProbabilityPercent}></progress>
-        </Flex>
-      )}
-    </>
-  );
-});
-
-TestsProgressBarInner.displayName = 'TestsProgressBarInner';
-
-export const TestsProgressBar: React.FC = memo((): React.JSX.Element => {
-  return (
-    <DynamicModuleLoader reducers={{ TestsWordsReducer }}>
-      <TestsProgressBarInner />
-    </DynamicModuleLoader>
+    <Flex gap="5" className={styles.TestsProgressBar}>
+      <span>{Math.round(wordsInProgressProbabilityPercent * 100)}%</span>
+      <progress value={wordsInProgressProbabilityPercent}></progress>
+    </Flex>
   );
 });
 

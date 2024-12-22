@@ -10,7 +10,13 @@ import {
   useState,
 } from 'react';
 import { DynamicModuleLoader } from '@/shared/lib/DynamicModuleLoader';
-import { TestsWordsContext, TestsWordsReducer, useWords } from '..';
+import {
+  StrictModeSwitcher,
+  TestsProgressBar,
+  TestsWordsContext,
+  TestsWordsReducer,
+  useWords,
+} from '..';
 import { useTestsWordsActions } from '../model/slice/slice';
 import { shuffleArray } from '@/shared/utils/shuffleArray/shuffleArray';
 
@@ -19,8 +25,13 @@ import { shuffleArray } from '@/shared/utils/shuffleArray/shuffleArray';
 
 const TestsWordsInner: React.FC<TestsWordsProps> = memo(
   ({ words }): React.JSX.Element => {
-    const { setWords, changeWordProbability, changeWordUncorrectTimes } =
-      useTestsWordsActions();
+    const {
+      setWords,
+      changeWordProbability,
+      changeWordUncorrectTimes,
+      changeWordConsecutivelyTimes,
+      changeWordInProgressStatus,
+    } = useTestsWordsActions();
     const [randomWordId, setRandomWordId] = useState<number | null>(null);
 
     useEffect(() => {
@@ -28,6 +39,8 @@ const TestsWordsInner: React.FC<TestsWordsProps> = memo(
       for (const word of words) {
         word.probability = 1;
         word.uncorrectTimes = 0;
+        word.consecutivelyTimes = 0;
+        word.inProgress = false;
       }
 
       const timeoutForReducerRender = setTimeout(() => {
@@ -43,6 +56,8 @@ const TestsWordsInner: React.FC<TestsWordsProps> = memo(
       const storeWordsCopy = storeWords.filter(
         (word) => word.id !== randomWordId,
       );
+
+      if (storeWordsCopy.length === 0) return;
 
       const totalChances = storeWordsCopy.reduce(
         (acc, c) => acc + c.probability!,
@@ -66,11 +81,48 @@ const TestsWordsInner: React.FC<TestsWordsProps> = memo(
       }
     }, [randomWordId, storeWords, updateRandomWord]);
 
+    // Появление плашки "Неверно"
+    const [isIncorrect, setIsIncorrect] = useState<boolean>(false);
+
+    // Отображение тотального времени
+    const { totalTime, setTotalTime } = useContext(TestsWordsContext);
+
+    // Отображение неправильных ответов
+    const wordsWithUncorrectTimes = useMemo(
+      () =>
+        storeWords
+          .filter((word) => word.uncorrectTimes! > 0)
+          .sort((a, b) => b.uncorrectTimes! - a.uncorrectTimes!),
+      [storeWords],
+    );
+
+    // Переход ко второму раунду
+    const [isErrorWork, setIsErrorWork] = useState<boolean>(false);
+
+    const startErrorWork = useCallback(() => {
+      setIsErrorWork(true);
+
+      const UpdatedWordsWithUncorrectTimes = wordsWithUncorrectTimes.map(
+        (word) => ({
+          ...word,
+          probability: 1,
+          uncorrectTimes: 0,
+          consecutivelyTimes: 0,
+          inProgress: false,
+        }),
+      );
+
+      setWords(UpdatedWordsWithUncorrectTimes);
+      setTotalTime(0);
+
+      updateRandomWord();
+    }, [setTotalTime, setWords, updateRandomWord, wordsWithUncorrectTimes]);
+
     // Изменение вероятности при неправильном ответе
     const [waitRepeatedClickInFail, setWaitRepeatedClickInFail] =
       useState<boolean>(false);
 
-    const changeWordProbabilityInFail = useCallback(() => {
+    const wordOnFail = useCallback(() => {
       if (waitRepeatedClickInFail) return;
 
       const audio = new Audio('sounds/FailSound.mp3');
@@ -78,17 +130,36 @@ const TestsWordsInner: React.FC<TestsWordsProps> = memo(
 
       setIsIncorrect(true);
 
+      setWaitRepeatedClickInFail(true);
+
       const showNewWord = () => {
         setWaitRepeatedClickInFail(false);
         setIsIncorrect(false);
 
-        const randomWord = storeWords.find((word) => word.id === randomWordId);
+        const currentRandomWord = storeWords.find(
+          (word) => word.id === randomWordId,
+        );
 
-        changeWordProbability({ probability: 0.2, id: randomWord!.id });
+        if (!isErrorWork) {
+          changeWordProbability({
+            probability: 0.2,
+            id: currentRandomWord!.id,
+          });
 
-        changeWordUncorrectTimes({
-          id: randomWord!.id,
-          uncorrectTimes: randomWord!.uncorrectTimes! + 1,
+          changeWordUncorrectTimes({
+            id: currentRandomWord!.id,
+            uncorrectTimes: currentRandomWord!.uncorrectTimes! + 1,
+          });
+        }
+
+        changeWordConsecutivelyTimes({
+          id: currentRandomWord!.id,
+          consecutivelyTimes: 0,
+        });
+
+        changeWordInProgressStatus({
+          id: currentRandomWord!.id,
+          inProgress: false,
         });
 
         updateRandomWord();
@@ -97,13 +168,15 @@ const TestsWordsInner: React.FC<TestsWordsProps> = memo(
       };
 
       const eventTimeout = setTimeout(() => {
-        setWaitRepeatedClickInFail(true);
         document.addEventListener('click', showNewWord);
         clearTimeout(eventTimeout);
       }, 0);
     }, [
+      changeWordConsecutivelyTimes,
+      changeWordInProgressStatus,
       changeWordProbability,
       changeWordUncorrectTimes,
+      isErrorWork,
       randomWordId,
       storeWords,
       updateRandomWord,
@@ -111,22 +184,63 @@ const TestsWordsInner: React.FC<TestsWordsProps> = memo(
     ]);
 
     // Изменение вероятности при правильном ответе
-    const changeWordProbabilityInSuccess = useCallback(() => {
+    const wordOnSuccess = useCallback(() => {
       if (waitRepeatedClickInFail) return;
 
-      const randomWord = storeWords.find((word) => word.id === randomWordId);
+      const currentRandomWord = storeWords.find(
+        (word) => word.id === randomWordId,
+      );
 
-      if (randomWord!.probability === 0.2) {
-        changeWordProbability({ id: randomWord!.id, probability: 0.1 });
-      } else if (randomWord!.probability === 0.1) {
-        changeWordProbability({ id: randomWord!.id, probability: 0.05 });
+      if (isErrorWork) {
+        const futureConsecutivelyTimes =
+          currentRandomWord!.consecutivelyTimes! + 1;
+
+        changeWordConsecutivelyTimes({
+          id: currentRandomWord!.id,
+          consecutivelyTimes: futureConsecutivelyTimes,
+        });
+
+        if (futureConsecutivelyTimes === 3) {
+          changeWordInProgressStatus({
+            id: currentRandomWord!.id,
+            inProgress: true,
+          });
+
+          changeWordProbability({
+            probability: 0.05,
+            id: currentRandomWord!.id,
+          });
+        }
       } else {
-        changeWordProbability({ id: randomWord!.id, probability: 0.01 });
+        if (currentRandomWord!.probability === 0.2) {
+          changeWordProbability({
+            id: currentRandomWord!.id,
+            probability: 0.1,
+          });
+        } else if (currentRandomWord!.probability === 0.1) {
+          changeWordProbability({
+            id: currentRandomWord!.id,
+            probability: 0.05,
+          });
+        } else {
+          changeWordProbability({
+            id: currentRandomWord!.id,
+            probability: 0.01,
+          });
+
+          changeWordInProgressStatus({
+            id: currentRandomWord!.id,
+            inProgress: true,
+          });
+        }
       }
 
       updateRandomWord();
     }, [
+      changeWordConsecutivelyTimes,
+      changeWordInProgressStatus,
       changeWordProbability,
+      isErrorWork,
       randomWordId,
       storeWords,
       updateRandomWord,
@@ -142,7 +256,7 @@ const TestsWordsInner: React.FC<TestsWordsProps> = memo(
       return shuffleArray([
         <Flex
           key={randomWord.valid}
-          onClick={changeWordProbabilityInSuccess}
+          onClick={wordOnSuccess}
           className={styles.TestsWords__word}
           justify="center"
         >
@@ -151,34 +265,14 @@ const TestsWordsInner: React.FC<TestsWordsProps> = memo(
 
         <Flex
           key={randomWord.invalid}
-          onClick={changeWordProbabilityInFail}
+          onClick={wordOnFail}
           className={styles.TestsWords__word}
           justify="center"
         >
           {randomWord.invalid}
         </Flex>,
       ]);
-    }, [
-      changeWordProbabilityInFail,
-      changeWordProbabilityInSuccess,
-      randomWordId,
-      storeWords,
-    ]);
-
-    // Появление плашки "Неверно"
-    const [isIncorrect, setIsIncorrect] = useState<boolean>(false);
-
-    // Отображение тотального времени
-    const { totalTime } = useContext(TestsWordsContext);
-
-    // Отображение неправильных ответов
-    const wordsWithUncorrectTimes = useMemo(
-      () =>
-        storeWords
-          .filter((word) => word.uncorrectTimes! > 0)
-          .sort((a, b) => b.uncorrectTimes! - a.uncorrectTimes!),
-      [storeWords],
-    );
+    }, [wordOnFail, wordOnSuccess, randomWordId, storeWords]);
 
     return (
       <>
@@ -190,6 +284,9 @@ const TestsWordsInner: React.FC<TestsWordsProps> = memo(
                 {randomWords.map((word) => word)}
               </Flex>
             )}
+
+            <TestsProgressBar />
+            <StrictModeSwitcher />
           </>
         ) : (
           <Flex direction="column" width="100" maxHeight>
@@ -199,16 +296,24 @@ const TestsWordsInner: React.FC<TestsWordsProps> = memo(
             </span>
 
             {wordsWithUncorrectTimes.length > 0 && (
-              <span>Неправильные слова:</span>
-            )}
+              <>
+                <span>Неправильные слова:</span>
 
-            <Flex direction="column" width="100">
-              {wordsWithUncorrectTimes.map((word) => (
-                <span key={word.id}>
-                  {word.valid} - {word.uncorrectTimes} раз
-                </span>
-              ))}
-            </Flex>
+                <Flex direction="column" width="100">
+                  {wordsWithUncorrectTimes.map((word) => (
+                    <span key={word.id}>
+                      {word.valid} - {word.uncorrectTimes} раз
+                    </span>
+                  ))}
+                </Flex>
+
+                {!isErrorWork && (
+                  <button onClick={startErrorWork} type="button">
+                    Работа над ошибками
+                  </button>
+                )}
+              </>
+            )}
           </Flex>
         )}
       </>
@@ -220,10 +325,23 @@ TestsWordsInner.displayName = 'TestsWordsInner';
 
 export const TestsWords: React.FC<TestsWordsProps> = memo(
   ({ words }): React.JSX.Element => {
+    // Настройка контекста
+    const [totalTime, setTotalTime] = useState<number>(0);
+
     return (
-      <DynamicModuleLoader reducers={{ TestsWordsReducer }}>
-        <TestsWordsInner words={words} />
-      </DynamicModuleLoader>
+      <TestsWordsContext.Provider
+        value={{
+          totalTime: totalTime,
+          setTotalTime: setTotalTime,
+        }}
+      >
+        <DynamicModuleLoader
+          removeAfterUnmount={false}
+          reducers={{ TestsWordsReducer }}
+        >
+          <TestsWordsInner words={words} />
+        </DynamicModuleLoader>
+      </TestsWordsContext.Provider>
     );
   },
 );
