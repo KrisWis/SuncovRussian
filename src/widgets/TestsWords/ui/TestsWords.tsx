@@ -164,10 +164,12 @@ const TestsWordsInner: React.FC<TestsWordsProps> = memo(
 
         updateRandomWord();
 
+        document.querySelector('body')!.style.pointerEvents = 'all';
         document.removeEventListener('click', showNewWord);
       };
 
       const eventTimeout = setTimeout(() => {
+        document.querySelector('body')!.style.pointerEvents = 'none';
         document.addEventListener('click', showNewWord);
         clearTimeout(eventTimeout);
       }, 0);
@@ -248,12 +250,14 @@ const TestsWordsInner: React.FC<TestsWordsProps> = memo(
     ]);
 
     // Отображение слов в случайном порядке
-    const randomWords = useMemo(() => {
+    const [randomWords, setRandomWords] = useState<React.JSX.Element[]>([]);
+
+    useEffect(() => {
       const randomWord = storeWords.find((word) => word.id === randomWordId);
 
-      if (!randomWord) return [];
+      if (!randomWord) return;
 
-      return shuffleArray([
+      const randomWords = shuffleArray([
         <Flex
           key={randomWord.valid}
           onClick={wordOnSuccess}
@@ -272,7 +276,10 @@ const TestsWordsInner: React.FC<TestsWordsProps> = memo(
           {randomWord.invalid}
         </Flex>,
       ]);
-    }, [wordOnFail, wordOnSuccess, randomWordId, storeWords]);
+
+      setRandomWords(randomWords);
+      // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [randomWordId]);
 
     return (
       <>
