@@ -17,13 +17,11 @@ export const StrictModeSwitcher: React.FC = memo((): React.JSX.Element => {
     changeWordInProgressStatus,
   } = useTestsWordsActions();
 
-  const strictModeFunction = useCallback(() => {
-    if (document.hidden) {
-      for (const word of storeWords) {
-        changeWordProbability({ id: word.id, probability: 1 });
-        changeWordConsecutivelyTimes({ id: word.id, consecutivelyTimes: 0 });
-        changeWordInProgressStatus({ id: word.id, inProgress: false });
-      }
+  const clearProgress = useCallback(() => {
+    for (const word of storeWords) {
+      changeWordProbability({ id: word.id, probability: 1 });
+      changeWordConsecutivelyTimes({ id: word.id, consecutivelyTimes: 0 });
+      changeWordInProgressStatus({ id: word.id, inProgress: false });
     }
   }, [
     changeWordConsecutivelyTimes,
@@ -32,15 +30,22 @@ export const StrictModeSwitcher: React.FC = memo((): React.JSX.Element => {
     storeWords,
   ]);
 
+  const strictModeFunction = useCallback(() => {
+    if (document.hidden) {
+      clearProgress();
+    }
+  }, [clearProgress]);
+
   const strictModeToggle = useCallback(() => {
     if (!strictModeIsOn) {
+      clearProgress();
       setStrictModeIsOn(true);
       document.onvisibilitychange = strictModeFunction;
     } else {
       setStrictModeIsOn(false);
       document.onvisibilitychange = null;
     }
-  }, [strictModeFunction, strictModeIsOn]);
+  }, [clearProgress, strictModeFunction, strictModeIsOn]);
 
   return (
     <Flex justify="end" width="100" maxHeight>

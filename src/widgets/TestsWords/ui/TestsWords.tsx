@@ -299,7 +299,7 @@ const TestsWordsInner: React.FC<TestsWordsProps> = memo(
           <Flex direction="column" width="100" maxHeight>
             <span>
               Тотальное время: {Math.round(totalTime / 60000)} минут и{' '}
-              {Math.round(totalTime / 1000)} секунд
+              {Math.round((totalTime / 1000) % 60)} секунд
             </span>
 
             {wordsWithUncorrectTimes.length > 0 && (
