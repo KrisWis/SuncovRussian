@@ -5,9 +5,6 @@ import { accentsTestsWords } from '@/shared/static/tests_words/accents';
 const meta = {
   title: 'Widgets/TestsWords',
   component: TestsWords,
-  parameters: {
-    layout: 'centered',
-  },
 } satisfies Meta<typeof TestsWords>;
 
 export default meta;

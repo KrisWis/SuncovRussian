@@ -1,5 +1,4 @@
 import { createRoot } from 'react-dom/client';
-import './app/styles/index.scss';
 import { App } from './app/App';
 import { ErrorBoundary } from 'react-error-boundary';
 import { store } from './app/store/AppStore';

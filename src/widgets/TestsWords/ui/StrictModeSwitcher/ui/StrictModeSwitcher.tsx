@@ -1,5 +1,5 @@
 import { Flex } from '@/shared/lib/Stack';
-import styles from './StrictModeSwitcher.module.scss';
+import * as styles from './StrictModeSwitcher.module.scss';
 import { memo, useCallback, useState } from 'react';
 import { useWords } from '../../../model/selectors/getWords/getWords';
 import { useTestsWordsActions } from '../../../model/slice/slice';

@@ -1,6 +1,6 @@
 import { Flex } from '@/shared/lib/Stack';
 import { TestsWordsProps } from '../model/types/types';
-import styles from './TestsWords.module.scss';
+import * as styles from './TestsWords.module.scss';
 import {
   memo,
   useCallback,
@@ -20,7 +20,7 @@ import {
 import { useTestsWordsActions } from '../model/slice/slice';
 import { TestsWordsInterface } from '@/shared/static/tests_words/types';
 
-// TODO: написать тесты
+// TODO: написать unit и ui тесты
 // TODO: подумать по поводу энтити адаптер
 
 const TestsWordsInner: React.FC<TestsWordsProps> = memo(
@@ -35,8 +35,9 @@ const TestsWordsInner: React.FC<TestsWordsProps> = memo(
     const [randomWordId, setRandomWordId] = useState<number | null>(null);
 
     useEffect(() => {
-      // Инициализация слов
-      for (const word of words) {
+      const wordsCopy = JSON.parse(JSON.stringify(words));
+
+      for (const word of wordsCopy) {
         word.probability = 1;
         word.uncorrectTimes = 0;
         word.consecutivelyTimes = 0;
@@ -44,7 +45,7 @@ const TestsWordsInner: React.FC<TestsWordsProps> = memo(
       }
 
       const timeoutForReducerRender = setTimeout(() => {
-        setWords(words);
+        setWords(wordsCopy);
         clearTimeout(timeoutForReducerRender);
       }, 0);
     }, [setWords, words]);
@@ -69,13 +70,13 @@ const TestsWordsInner: React.FC<TestsWordsProps> = memo(
         if (storeWordsCopy.length === 0) return;
 
         const totalChances = storeWordsCopy.reduce(
-          (acc, c) => acc + c.probability!,
+          (acc, c) => acc + (c.probability || 1),
           0,
         );
         const rnd = totalChances * Math.random();
 
         for (let i = 0, sum = 0; ; i++) {
-          sum += storeWordsCopy[i].probability!;
+          sum += storeWordsCopy[i].probability || 1;
 
           if (sum > rnd) {
             setRandomWordId(storeWordsCopy[i].id);

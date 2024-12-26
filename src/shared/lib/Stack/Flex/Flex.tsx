@@ -1,5 +1,5 @@
 import { DetailedHTMLProps, HTMLAttributes, ReactNode } from 'react';
-import styles from './Flex.module.scss';
+import * as styles from './Flex.module.scss';
 
 export type FlexJustify =
   | 'start'
