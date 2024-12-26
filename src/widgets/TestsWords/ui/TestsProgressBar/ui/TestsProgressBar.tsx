@@ -1,5 +1,4 @@
 import { Flex } from '@/shared/lib/Stack';
-import styles from './TestsProgressBar.module.scss';
 import { memo, useContext, useEffect, useMemo, useRef } from 'react';
 import { useWords } from '../../../model/selectors/getWords/getWords';
 import { TestsWordsContext } from '../../../model/context/context';
@@ -44,7 +43,7 @@ export const TestsProgressBar: React.FC = memo((): React.JSX.Element => {
   }, [setTotalTime, wordsInProgressProbabilityPercent]);
 
   return (
-    <Flex gap="5" className={styles.TestsProgressBar}>
+    <Flex gap="5">
       <span>{Math.round(wordsInProgressProbabilityPercent * 100)}%</span>
       <progress value={wordsInProgressProbabilityPercent}></progress>
     </Flex>
