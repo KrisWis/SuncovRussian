@@ -45,7 +45,10 @@ export const TestsProgressBar: React.FC = memo((): React.JSX.Element => {
   return (
     <Flex gap="5">
       <span>{Math.round(wordsInProgressProbabilityPercent * 100)}%</span>
-      <progress value={wordsInProgressProbabilityPercent}></progress>
+      <progress
+        data-testid="TestWords__TestsProgressBar__percent"
+        value={wordsInProgressProbabilityPercent}
+      ></progress>
     </Flex>
   );
 });

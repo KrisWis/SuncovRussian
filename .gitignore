@@ -1,3 +1,5 @@
 /build
 *storybook.log
 /node_modules
+html-report
+.loki

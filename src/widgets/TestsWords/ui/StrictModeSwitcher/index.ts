@@ -1,1 +1,1 @@
-export {StrictModeSwitcher} from './ui/StrictModeSwitcher';
+export { StrictModeSwitcher } from './ui/StrictModeSwitcher';

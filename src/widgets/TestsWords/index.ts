@@ -1,6 +1,6 @@
 export { TestsWords } from './ui/TestsWords';
 
-export { TestsWordsReducer } from './model/slice/slice';
+export { TestsWordsReducer } from './model/slice/TestWordsSlice';
 
 export type { TestWordsSliceSchema } from './model/types/sliceTypes';
 

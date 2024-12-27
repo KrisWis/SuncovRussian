@@ -7,7 +7,6 @@ const meta = {
   parameters: {
     layout: 'centered',
   },
-
 } satisfies Meta<typeof StrictModeSwitcher>;
 
 export default meta;
