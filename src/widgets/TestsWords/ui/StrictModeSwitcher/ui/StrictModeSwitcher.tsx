@@ -2,7 +2,7 @@ import { Flex } from '@/shared/lib/Stack';
 import * as styles from './StrictModeSwitcher.module.scss';
 import { memo, useCallback, useState } from 'react';
 import { useWords } from '../../../model/selectors/getWords/getWords';
-import { useTestsWordsActions } from '../../../model/slice/slice';
+import { useTestsWordsActions } from '../../../model/slice/TestWordsSlice';
 
 export const StrictModeSwitcher: React.FC = memo((): React.JSX.Element => {
   // Переключение строгого режима
@@ -48,7 +48,12 @@ export const StrictModeSwitcher: React.FC = memo((): React.JSX.Element => {
   }, [clearProgress, strictModeFunction, strictModeIsOn]);
 
   return (
-    <Flex justify="end" width="100" maxHeight>
+    <Flex
+      data-testid="TestWords__StrictModeSwitcher"
+      justify="end"
+      width="100"
+      maxHeight
+    >
       <Flex
         onClick={strictModeToggle}
         justify="center"

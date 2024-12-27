@@ -1,11 +1,11 @@
-import type { Meta, StoryObj } from "@storybook/react";
-import { Flex } from "./Flex";
+import type { Meta, StoryObj } from '@storybook/react';
+import { Flex } from './Flex';
 
 const meta = {
-  title: "Shared/Lib/Flex",
+  title: 'Shared/Lib/Flex',
   component: Flex,
   parameters: {
-    layout: "centered",
+    layout: 'centered',
   },
 } satisfies Meta<typeof Flex>;
 
@@ -27,7 +27,7 @@ export const Row: Story = {
 
 export const Row5: Story = {
   args: {
-    gap: "5",
+    gap: '5',
     children: (
       <>
         <div>first</div>
@@ -41,7 +41,7 @@ export const Row5: Story = {
 
 export const Row10: Story = {
   args: {
-    gap: "10",
+    gap: '10',
     children: (
       <>
         <div>first</div>
@@ -55,7 +55,7 @@ export const Row10: Story = {
 
 export const Row15: Story = {
   args: {
-    gap: "15",
+    gap: '15',
     children: (
       <>
         <div>first</div>
@@ -69,7 +69,7 @@ export const Row15: Story = {
 
 export const Row20: Story = {
   args: {
-    gap: "20",
+    gap: '20',
     children: (
       <>
         <div>first</div>
@@ -83,7 +83,7 @@ export const Row20: Story = {
 
 export const Column: Story = {
   args: {
-    direction: "column",
+    direction: 'column',
     children: (
       <>
         <div>first</div>
@@ -97,8 +97,8 @@ export const Column: Story = {
 
 export const ColumnGap20: Story = {
   args: {
-    direction: "column",
-    gap: "20",
+    direction: 'column',
+    gap: '20',
     children: (
       <>
         <div>first</div>
@@ -112,8 +112,8 @@ export const ColumnGap20: Story = {
 
 export const ColumnAlignEnd: Story = {
   args: {
-    direction: "column",
-    align: "end",
+    direction: 'column',
+    align: 'end',
     children: (
       <>
         <div>first</div>

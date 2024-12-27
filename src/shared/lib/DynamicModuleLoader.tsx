@@ -1,6 +1,6 @@
 import { Reducer } from '@reduxjs/toolkit';
 import { useEffect } from 'react';
-import { useDispatch, useStore } from 'react-redux';
+import { useStore } from 'react-redux';
 import { StateSchema, StateSchemaKey } from '../../app/store/types';
 import { ReduxStoreWithManager } from '../../app/store/AppStore';
 
@@ -20,17 +20,13 @@ export const DynamicModuleLoader: React.FC<DynamicModuleLoaderProps> = ({
   removeAfterUnmount = true,
 }) => {
   const store = useStore() as ReduxStoreWithManager;
-  const dispatch = useDispatch();
   const mountedReducers = store.reducerManager.getMountedReducers();
-
-  // TODO: убрать логи
 
   useEffect(() => {
     Object.entries(reducers).forEach(([name, reducer]) => {
       const mounted = mountedReducers[name as StateSchemaKey];
       if (!mounted) {
         store.reducerManager.add(name as StateSchemaKey, reducer);
-        dispatch({ type: `@INIT ${name} reducer` });
       }
     });
 
@@ -38,17 +34,10 @@ export const DynamicModuleLoader: React.FC<DynamicModuleLoaderProps> = ({
       if (removeAfterUnmount) {
         Object.entries(reducers).forEach(([name]) => {
           store.reducerManager.remove(name as StateSchemaKey);
-          dispatch({ type: `@DESTROY ${name} reducer` });
         });
       }
     };
-  }, [
-    dispatch,
-    mountedReducers,
-    reducers,
-    removeAfterUnmount,
-    store.reducerManager,
-  ]);
+  }, [mountedReducers, reducers, removeAfterUnmount, store.reducerManager]);
 
   return <>{children}</>;
 };

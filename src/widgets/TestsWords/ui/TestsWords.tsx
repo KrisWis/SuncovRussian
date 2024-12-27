@@ -17,10 +17,11 @@ import {
   TestsWordsReducer,
   useWords,
 } from '..';
-import { useTestsWordsActions } from '../model/slice/slice';
-import { TestsWordsInterface } from '@/shared/static/tests_words/types';
 
-// TODO: написать unit и ui тесты
+import { TestsWordsInterface } from '@/shared/static/tests_words/types';
+import { useTestsWordsActions } from '../model/slice/TestWordsSlice';
+
+// TODO: починить когда-нибудь ui тесты
 // TODO: подумать по поводу энтити адаптер
 
 const TestsWordsInner: React.FC<TestsWordsProps> = memo(
@@ -138,8 +139,10 @@ const TestsWordsInner: React.FC<TestsWordsProps> = memo(
       (words: TestsWordsInterface[]) => {
         if (waitRepeatedClickInFail) return;
 
-        const audio = new Audio('sounds/FailSound.mp3');
-        audio.play();
+        if (process.env.NODE_ENV !== 'test') {
+          const audio = new Audio('sounds/FailSound.mp3');
+          audio.play();
+        }
 
         setIsIncorrect(true);
 
@@ -278,7 +281,11 @@ const TestsWordsInner: React.FC<TestsWordsProps> = memo(
       <>
         {!totalTime ? (
           <>
-            {isIncorrect && <Flex justify="center">Неверно</Flex>}
+            {isIncorrect && (
+              <Flex data-testid="TestsWords__uncorrect" justify="center">
+                Неверно
+              </Flex>
+            )}
             {randomWord && (
               <Flex
                 width="100"
@@ -287,6 +294,7 @@ const TestsWordsInner: React.FC<TestsWordsProps> = memo(
                 direction={randomWordsIsReverse ? 'rowReverse' : 'row'}
               >
                 <Flex
+                  data-testid="TestsWords__valid"
                   key={randomWord.valid}
                   onClick={() => wordOnSuccess(storeWords)}
                   className={styles.TestsWords__word}
@@ -296,6 +304,7 @@ const TestsWordsInner: React.FC<TestsWordsProps> = memo(
                 </Flex>
 
                 <Flex
+                  data-testid="TestsWords__invalid"
                   key={randomWord.invalid}
                   onClick={() => wordOnFail(storeWords)}
                   className={styles.TestsWords__word}
