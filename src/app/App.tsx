@@ -1,11 +1,10 @@
 import { MainPage } from '@/pages/MainPage';
-import { Header } from '@/widgets/Header';
+import { PageLoading } from '@/shared/ui-kit/PageLoading/PageLoading';
 import { Suspense } from 'react';
 
 export const App = () => {
   return (
-    <Suspense fallback="Идёт загрузка...">
-      <Header />
+    <Suspense fallback={<PageLoading />}>
       <MainPage />
     </Suspense>
   );

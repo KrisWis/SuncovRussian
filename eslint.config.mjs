@@ -123,6 +123,7 @@ export default [
       'react/prop-types': [0],
       'react/require-default-props': [0],
       'react/jsx-no-bind': [0],
+      'react/no-array-index-key': [1],
     },
   },
 ];
