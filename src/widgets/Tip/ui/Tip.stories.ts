@@ -7,10 +7,14 @@ const meta = {
   parameters: {
     layout: 'centered',
   },
-
 } satisfies Meta<typeof Tip>;
 
 export default meta;
 type Story = StoryObj<typeof meta>;
 
-export const Primary: Story = {};
+export const Primary: Story = {
+  args: {
+    id: 0,
+    text: 'Не ставь запятую между подлежащим и сказуемым.',
+  },
+};
