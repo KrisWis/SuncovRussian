@@ -1,0 +1,13 @@
+.Header {
+  height: 90px;
+  background: var(--color-black);
+  padding: 0 84px;
+
+  &__item {
+    cursor: pointer;
+    font-weight: 500;
+    font-size: 18px;
+    line-height: 100%;
+    color: var(--color-white);
+  }
+}

@@ -1,7 +1,7 @@
-import { TestWordsSliceSchema } from '@/widgets/TestsWords';
+import { AccentsWordsSliceSchema } from '@/widgets/AccentsWords';
 
 export interface StateSchema {
-  TestsWordsReducer?: TestWordsSliceSchema;
+  AccentsWordsReducer?: AccentsWordsSliceSchema;
 }
 
 export type StateSchemaKey = keyof StateSchema;
