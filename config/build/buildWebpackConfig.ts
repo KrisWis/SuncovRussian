@@ -25,5 +25,10 @@ export function buildWebpackConfig(
     resolve: buildResolvers(options.paths),
     devtool: options.isDev ? "eval-cheap-module-source-map" : undefined,
     devServer: options.isDev ? buildDevServer(options) : undefined,
+
+    performance: {
+      maxEntrypointSize: 512000,
+      maxAssetSize: 512000
+    },
   };
 }
