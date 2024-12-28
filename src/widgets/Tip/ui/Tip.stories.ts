@@ -15,6 +15,6 @@ type Story = StoryObj<typeof meta>;
 export const Primary: Story = {
   args: {
     id: 0,
-    text: 'Не ставь запятую между подлежащим и сказуемым',
+    text: 'Не ставь запятую между подлежащим и сказуемым.',
   },
 };
