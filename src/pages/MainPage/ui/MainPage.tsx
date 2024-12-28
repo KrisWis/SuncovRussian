@@ -1,11 +1,17 @@
-import { memo } from 'react';
-import { TestsWords } from '@/widgets/TestsWords';
-import { accentsTestsWords } from '@/shared/static/tests_words/accents';
+import { tips } from '@/shared/assets/static/tips';
+import { Tip } from '@/widgets/Tip';
+import { memo, useMemo } from 'react';
 
 export const MainPage: React.FC = memo((): React.JSX.Element => {
+  // Выбор случайного совета при загрузке страницы
+  const randomTip = useMemo(
+    () => tips[Math.floor(Math.random() * (tips.length - 1))],
+    [],
+  );
+
   return (
     <main>
-      <TestsWords words={accentsTestsWords} />
+      <Tip id={randomTip.id} text={randomTip.text} />
     </main>
   );
 });

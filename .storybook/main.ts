@@ -16,13 +16,9 @@ const config: StorybookConfig = {
 
   framework: {
     name: '@storybook/react-webpack5',
-    options: {},
-  },
 
-  core: {
-    builder: {
-      name: '@storybook/builder-webpack5',
-      options: {
+    options: {
+      builder: {
         fsCache: true,
         lazyCompilation: true,
       },
@@ -67,5 +63,9 @@ const config: StorybookConfig = {
       },
     },
   }),
+
+  typescript: {
+    reactDocgen: 'react-docgen-typescript',
+  },
 };
 export default config;
