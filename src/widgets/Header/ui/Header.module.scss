@@ -1,6 +1,8 @@
 .Header {
-  height: 90px;
-  padding: 0 84px;
+  min-height: 90px;
+  display: flex;
+  width: 100%;
+  justify-content: space-between;
 
   &__item {
     width: 100%;

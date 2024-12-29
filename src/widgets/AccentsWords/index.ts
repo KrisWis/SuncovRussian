@@ -6,7 +6,7 @@ export type { AccentsWordsSliceSchema } from './model/types/sliceTypes';
 
 export { useWords } from './model/selectors/getAccentsWords/getAccentsWords';
 
-export { TestsProgressBar } from './ui/AccentsWordsProgressBar/ui/AccentsWordsProgressBar';
+export { AccentsProgressBar } from './ui/AccentsWordsProgressBar/ui/AccentsWordsProgressBar';
 
 export { AccentsWordsContext } from './model/context/AccentsWordsContext';
 

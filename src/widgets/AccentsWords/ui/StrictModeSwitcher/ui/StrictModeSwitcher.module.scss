@@ -1,8 +1,76 @@
 .StrictModeSwitcher {
-  border-radius: 30px;
-  width: 150px;
-  height: 150px;
-  background-color: #000;
-  color: #fff;
-  cursor: pointer;
+  border: 3px solid #000;
+  height: 45px;
+  padding: 8px 10px;
+  transition: var(--transition-duration-default) linear background-color;
+
+  &__switcher {
+    border: 3px solid #000;
+    width: 29px;
+    height: 29px;
+    background: #fff;
+    transition: var(--transition-duration-default) linear border-width;
+    cursor: pointer;
+
+    &__checkmark {
+      opacity: 0;
+      transition: var(--transition-duration-default) linear opacity;
+    }
+  }
+
+  &__text {
+    font-weight: 500;
+    font-size: 20px;
+    line-height: 100%;
+    color: #000;
+    transition: var(--transition-duration-default) linear color;
+    white-space: nowrap;
+  }
+
+  &__active {
+    background-color: #000;
+
+    .StrictModeSwitcher__switcher__checkmark {
+      opacity: 1;
+    }
+
+    .StrictModeSwitcher__switcher {
+      border-width: 0;
+    }
+
+    .StrictModeSwitcher__text {
+      color: #fff;
+    }
+  }
+
+  &__hint {
+    border-radius: 100%;
+    background-color: var(--color-black);
+    font-weight: 600;
+    font-size: 24px;
+    line-height: 100%;
+    color: #fff;
+    min-width: 45px;
+    min-height: 45px;
+    cursor: pointer;
+
+    &__text {
+      font-weight: 500;
+      font-size: 18px;
+      line-height: 120%;
+      text-align: right;
+      color: #000;
+      opacity: 0;
+      transition: var(--transition-duration-default) linear opacity;
+      width: 60%;
+      position: absolute;
+      z-index: var(--z-index-default);
+      right: 0;
+      top: -50px;
+
+      &__active {
+        opacity: 1;
+      }
+    }
+  }
 }

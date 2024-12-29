@@ -17,6 +17,8 @@ export const MainPage: React.FC = memo((): React.JSX.Element => {
     null,
   );
 
+  // TODO: проверить все комментарии на макете в конце работы
+
   return (
     <HeaderContext.Provider value={{ headerCategory, setHeaderCategory }}>
       <Header />

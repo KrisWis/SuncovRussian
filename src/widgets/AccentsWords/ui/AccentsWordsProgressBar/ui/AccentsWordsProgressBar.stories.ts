@@ -1,13 +1,13 @@
 import type { Meta, StoryObj } from '@storybook/react';
-import { TestsProgressBar } from './AccentsWordsProgressBar';
+import { AccentsProgressBar } from './AccentsWordsProgressBar';
 
 const meta = {
-  title: 'Widgets/TestsProgressBar',
-  component: TestsProgressBar,
+  title: 'Widgets/AccentsProgressBar',
+  component: AccentsProgressBar,
   parameters: {
     layout: 'centered',
   },
-} satisfies Meta<typeof TestsProgressBar>;
+} satisfies Meta<typeof AccentsProgressBar>;
 
 export default meta;
 type Story = StoryObj<typeof meta>;

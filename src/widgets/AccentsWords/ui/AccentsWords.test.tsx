@@ -11,13 +11,13 @@ describe('AccentsWords', () => {
 
     await waitFor(() => {
       // Check progress bar value equal zero
-      const AccentsWordsTestsProgressBarPercent = getByTestId(
-        'AccentsWords__TestsProgressBar__percent',
+      const AccentsWordsProgressBarPercent = getByTestId(
+        'AccentsWords__AccentsProgressBar__percent',
       );
 
-      expect(
-        Number(AccentsWordsTestsProgressBarPercent.getAttribute('value')),
-      ).toBe(0);
+      expect(Number(AccentsWordsProgressBarPercent.getAttribute('value'))).toBe(
+        0,
+      );
 
       // Click valid words
       const valid = getByTestId('AccentsWords__valid');
@@ -38,7 +38,7 @@ describe('AccentsWords', () => {
 
       // Progress bar value must increase
       expect(
-        Number(AccentsWordsTestsProgressBarPercent.getAttribute('value')),
+        Number(AccentsWordsProgressBarPercent.getAttribute('value')),
       ).toBeGreaterThan(0);
     });
   });
@@ -50,13 +50,13 @@ describe('AccentsWords', () => {
 
     await waitFor(() => {
       // Check progress bar value equal zero
-      const AccentsWordsTestsProgressBarPercent = getByTestId(
-        'AccentsWords__TestsProgressBar__percent',
+      const AccentsWordsProgressBarPercent = getByTestId(
+        'AccentsWords__AccentsProgressBar__percent',
       );
 
-      expect(
-        Number(AccentsWordsTestsProgressBarPercent.getAttribute('value')),
-      ).toBe(0);
+      expect(Number(AccentsWordsProgressBarPercent.getAttribute('value'))).toBe(
+        0,
+      );
 
       // Click valid word
       const valid = getByTestId('AccentsWords__valid');
@@ -78,7 +78,7 @@ describe('AccentsWords', () => {
 
       // Progress bar value must increase, because valid word was clicked
       expect(
-        Number(AccentsWordsTestsProgressBarPercent.getAttribute('value')),
+        Number(AccentsWordsProgressBarPercent.getAttribute('value')),
       ).toBeGreaterThan(0);
     });
   });
@@ -89,13 +89,13 @@ describe('AccentsWords', () => {
     );
 
     // Progress bar value must be equal zero
-    const AccentsWordsTestsProgressBarPercent = getByTestId(
-      'AccentsWords__TestsProgressBar__percent',
+    const AccentsWordsProgressBarPercent = getByTestId(
+      'AccentsWords__AccentsProgressBar__percent',
     );
 
-    expect(
-      Number(AccentsWordsTestsProgressBarPercent.getAttribute('value')),
-    ).toBe(0);
+    expect(Number(AccentsWordsProgressBarPercent.getAttribute('value'))).toBe(
+      0,
+    );
 
     // Click invalid words
     const invalid = getByTestId('AccentsWords__invalid');
@@ -115,9 +115,9 @@ describe('AccentsWords', () => {
     expect(queryByTestId('AccentsWords__uncorrect')).toBeInTheDocument();
 
     // Progress bar value must be equal zero
-    expect(
-      Number(AccentsWordsTestsProgressBarPercent.getAttribute('value')),
-    ).toBe(0);
+    expect(Number(AccentsWordsProgressBarPercent.getAttribute('value'))).toBe(
+      0,
+    );
   });
 
   afterEach(() => {

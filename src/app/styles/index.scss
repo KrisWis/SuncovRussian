@@ -13,9 +13,14 @@
   // Colors
   --color-white: #fff;
   --color-black: #000;
+  --color-gray: rgba(0 0 0 / 40%);
 
   // Transition
   --transition-duration-default: 0.3s;
+
+  // Z-indexes
+  --z-index-hidden: -1;
+  --z-index-default: 0;
 }
 
 * {

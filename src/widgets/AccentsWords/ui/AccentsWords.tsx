@@ -12,7 +12,7 @@ import {
 import { DynamicModuleLoader } from '@/shared/lib/DynamicModuleLoader';
 import {
   StrictModeSwitcher,
-  TestsProgressBar,
+  AccentsProgressBar,
   AccentsWordsContext,
   AccentsWordsReducer,
   useWords,
@@ -65,7 +65,7 @@ const AccentsWordsInner: React.FC<AccentsWordsProps> = memo(
           );
         }
 
-        setRandomWordsIsReverse((prev) => !prev);
+        setRandomWordsIsReverse([true, false][Math.floor(Math.random() * 2)]);
 
         if (storeWordsCopy.length === 0) return;
 
@@ -276,46 +276,79 @@ const AccentsWordsInner: React.FC<AccentsWordsProps> = memo(
       [randomWordId, storeWords],
     );
 
+    // Отображение подсказки
+    const [isHintVisible, setIsHintVisible] = useState<boolean>(false);
+
     return (
-      <>
+      <Flex
+        maxHeight
+        justify="between"
+        direction="column"
+        className={styles.AccentsWords}
+        relative
+        width="100"
+      >
         {!totalTime ? (
           <>
+            <Flex align="start" gap="10">
+              <Flex
+                onMouseEnter={() => setIsHintVisible(true)}
+                onMouseLeave={() => setIsHintVisible(false)}
+                className={styles.AccentsWords__hint}
+                justify="center"
+              >
+                <span>?</span>
+              </Flex>
+
+              <p
+                className={`${styles.AccentsWords__hint__text}
+              ${isHintVisible && styles.AccentsWords__hint__text__active}`}
+              >
+                Выбирайте ответ, а система будет предлагать новые слова или те,
+                в которых были допущены ошибки. Когда вы перестанете их
+                допускать, шкала полностью заполнится. Заполните шкалу несколько
+                раз и вы будете готовы к 4 заданию.
+              </p>
+            </Flex>
             {isIncorrect && (
-              <Flex data-testid="AccentsWords__uncorrect" justify="center">
+              <Flex
+                className={styles.AccentsWords__uncorrect}
+                data-testid="AccentsWords__uncorrect"
+                justify="center"
+              >
                 Неверно
               </Flex>
             )}
             {randomWord && (
               <Flex
-                width="100"
-                justify="center"
-                align="center"
                 direction={randomWordsIsReverse ? 'rowReverse' : 'row'}
-                className={styles.AccentsWords}
+                width="100"
               >
                 <Flex
+                  justify="center"
                   data-testid="AccentsWords__valid"
                   key={randomWord.valid}
                   onClick={() => wordOnSuccess(storeWords)}
                   className={styles.AccentsWords__word}
-                  justify="center"
+                  style={{ borderRightWidth: !randomWordsIsReverse ? 0 : 3 }}
                 >
                   {randomWord.valid}
                 </Flex>
 
                 <Flex
+                  justify="center"
                   data-testid="AccentsWords__invalid"
                   key={randomWord.invalid}
                   onClick={() => wordOnFail(storeWords)}
                   className={styles.AccentsWords__word}
-                  justify="center"
+                  style={{ borderRightWidth: randomWordsIsReverse ? 0 : 3 }}
                 >
                   {randomWord.invalid}
                 </Flex>
               </Flex>
             )}
 
-            <TestsProgressBar />
+            <AccentsProgressBar />
             <StrictModeSwitcher />
           </>
         ) : (
@@ -346,7 +379,7 @@ const AccentsWordsInner: React.FC<AccentsWordsProps> = memo(
             )}
           </Flex>
         )}
-      </>
+      </Flex>
     );
   },
 );

@@ -3,12 +3,13 @@ import * as styles from './StrictModeSwitcher.module.scss';
 import { memo, useCallback, useState } from 'react';
 import { useWords } from '../../../model/selectors/getAccentsWords/getAccentsWords';
 import { useAccentsWordsActions } from '../../../model/slice/AccentsWordsSlice';
+import СheckmarkSVG from '@/shared/assets/icons/global/СheckmarkSVG.svg';
 
 export const StrictModeSwitcher: React.FC = memo((): React.JSX.Element => {
   // Переключение строгого режима
   const [strictModeIsOn, setStrictModeIsOn] = useState<boolean>(false);
 
-  // Включение строгого режима
+  // Строгий режим
   const storeWords = useWords();
 
   const {
@@ -17,6 +18,7 @@ export const StrictModeSwitcher: React.FC = memo((): React.JSX.Element => {
     changeWordInProgressStatus,
   } = useAccentsWordsActions();
 
+  // Функция очистки прогресса
   const clearProgress = useCallback(() => {
     for (const word of storeWords) {
       changeWordProbability({ id: word.id, probability: 1 });
@@ -30,12 +32,14 @@ export const StrictModeSwitcher: React.FC = memo((): React.JSX.Element => {
     storeWords,
   ]);
 
+  // Функция очистки прогресса когда юзер выходит с вкладки
   const strictModeFunction = useCallback(() => {
     if (document.hidden) {
       clearProgress();
     }
   }, [clearProgress]);
 
+  // Функция включения строгого режима
   const strictModeToggle = useCallback(() => {
     if (!strictModeIsOn) {
       clearProgress();
@@ -47,22 +51,53 @@ export const StrictModeSwitcher: React.FC = memo((): React.JSX.Element => {
     }
   }, [clearProgress, strictModeFunction, strictModeIsOn]);
 
+  // Отображение подсказки
+  const [isHintVisible, setIsHintVisible] = useState<boolean>(false);
+
   return (
     <Flex
       data-testid="AccentsWords__StrictModeSwitcher"
       justify="end"
       width="100"
-      maxHeight
+      gap="20"
+      relative
     >
       <Flex
-        onClick={strictModeToggle}
-        justify="center"
-        className={styles.StrictModeSwitcher}
-        direction="column"
         gap="10"
+        className={`${styles.StrictModeSwitcher}
+        ${strictModeIsOn && styles.StrictModeSwitcher__active}`}
       >
-        <span>Строгий режим</span>
-        <span>{strictModeIsOn ? 'вкл' : 'выкл'}</span>
+        <Flex
+          onClick={strictModeToggle}
+          className={styles.StrictModeSwitcher__switcher}
+          justify="center"
+        >
+          <СheckmarkSVG
+            className={styles.StrictModeSwitcher__switcher__checkmark}
+          />
+        </Flex>
+
+        <span className={styles.StrictModeSwitcher__text}>Строгий режим</span>
+      </Flex>
+
+      <Flex direction="column" align="start" gap="10">
+        <p
+          className={`${styles.StrictModeSwitcher__hint__text}
+              ${isHintVisible && styles.StrictModeSwitcher__hint__text__active}`}
+        >
+          Обнуляет прогресс каждый раз.
+          <br />
+          Когда вы покидаете сайт.
+        </p>
+
+        <Flex
+          onMouseEnter={() => setIsHintVisible(true)}
+          onMouseLeave={() => setIsHintVisible(false)}
+          className={styles.StrictModeSwitcher__hint}
+          justify="center"
+        >
+          <span>?</span>
+        </Flex>
       </Flex>
     </Flex>
   );

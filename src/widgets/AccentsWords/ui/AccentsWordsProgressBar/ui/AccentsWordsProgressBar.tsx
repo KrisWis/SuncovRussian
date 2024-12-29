@@ -2,8 +2,9 @@ import { Flex } from '@/shared/lib/Stack';
 import { memo, useContext, useEffect, useMemo, useRef } from 'react';
 import { useWords } from '../../../model/selectors/getAccentsWords/getAccentsWords';
 import { AccentsWordsContext } from '../../../model/context/AccentsWordsContext';
+import * as styles from './AccentsWordsProgressBar.module.scss';
 
-export const TestsProgressBar: React.FC = memo((): React.JSX.Element => {
+export const AccentsProgressBar: React.FC = memo((): React.JSX.Element => {
   // Получение слов
   const storeWords = useWords();
 
@@ -43,14 +44,22 @@ export const TestsProgressBar: React.FC = memo((): React.JSX.Element => {
   }, [setTotalTime, wordsInProgressProbabilityPercent]);
 
   return (
-    <Flex gap="5">
-      <span>{Math.round(wordsInProgressProbabilityPercent * 100)}%</span>
+    <Flex
+      className={styles.AccentsProgressBar}
+      width="100"
+      justify="center"
+      gap="10"
+    >
+      <span className={styles.AccentsProgressBar__percent}>
+        {Math.round(wordsInProgressProbabilityPercent * 100)}%
+      </span>
       <progress
-        data-testid="AccentsWords__TestsProgressBar__percent"
+        className={styles.AccentsProgressBar__progressbar}
+        data-testid="AccentsWords__AccentsProgressBar__percent"
         value={wordsInProgressProbabilityPercent}
       ></progress>
     </Flex>
   );
 });
 
-TestsProgressBar.displayName = 'TestsProgressBar';
+AccentsProgressBar.displayName = 'AccentsProgressBar';
