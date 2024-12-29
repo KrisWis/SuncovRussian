@@ -1,5 +1,5 @@
 import type { Meta, StoryObj } from '@storybook/react';
-import { AccentsWords } from './TestsWords';
+import { AccentsWords } from './AccentsWords';
 import { accentsWords } from '@/shared/assets/static/accentsWords';
 
 const meta = {

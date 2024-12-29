@@ -1,4 +1,4 @@
-import { AccentsWords } from './TestsWords';
+import { AccentsWords } from './AccentsWords';
 import { accentsWords } from '@/shared/assets/static/accentsWords';
 import { renderWithRouter } from '@/shared/utils/renderWithRouter';
 import { cleanup, fireEvent, waitFor } from '@testing-library/react';

@@ -1,4 +1,4 @@
-export { AccentsWords } from './ui/TestsWords';
+export { AccentsWords } from './ui/AccentsWords';
 
 export { AccentsWordsReducer } from './model/slice/AccentsWordsSlice';
 

@@ -1,4 +1,6 @@
+import { accentsWords } from '@/shared/assets/static/accentsWords';
 import { tips } from '@/shared/assets/static/tips';
+import { AccentsWords } from '@/widgets/AccentsWords';
 import { Header, HeaderCategories, HeaderContext } from '@/widgets/Header';
 import { Tip } from '@/widgets/Tip';
 import { memo, useMemo, useState } from 'react';
@@ -20,7 +22,11 @@ export const MainPage: React.FC = memo((): React.JSX.Element => {
       <Header />
 
       <main>
-        <Tip id={randomTip.id} text={randomTip.text} />
+        {headerCategory === null && (
+          <Tip id={randomTip.id} text={randomTip.text} />
+        )}
+
+        {headerCategory === 'Тренажер' && <AccentsWords words={accentsWords} />}
       </main>
     </HeaderContext.Provider>
   );

@@ -291,6 +291,7 @@ const AccentsWordsInner: React.FC<AccentsWordsProps> = memo(
                 justify="center"
                 align="center"
                 direction={randomWordsIsReverse ? 'rowReverse' : 'row'}
+                className={styles.AccentsWords}
               >
                 <Flex
                   data-testid="AccentsWords__valid"
