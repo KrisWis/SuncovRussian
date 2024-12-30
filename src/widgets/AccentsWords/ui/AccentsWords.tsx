@@ -20,7 +20,7 @@ import {
 
 import { AccentsWordsInterface } from '@/shared/assets/static/accentsWords';
 import { useAccentsWordsActions } from '../model/slice/AccentsWordsSlice';
-import { tabletMediaQueryWidth } from '@/shared/assets/const/global';
+import { tabletMediaQueryWidth } from '@/shared/const/global';
 
 // TODO: починить когда-нибудь ui тесты
 
