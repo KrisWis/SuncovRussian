@@ -30,9 +30,9 @@ export function buildPlugins({
         mode: "write-references",
       },
     }),
-        new CopyWebpackPlugin({
+    new CopyWebpackPlugin({
       patterns: [
-        { from: 'public', to: 'public' }, 
+        { from: 'public/sounds', to: 'sounds' }, 
       ],
     }),
   ];
