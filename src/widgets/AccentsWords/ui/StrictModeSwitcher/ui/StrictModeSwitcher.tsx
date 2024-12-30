@@ -61,6 +61,7 @@ export const StrictModeSwitcher: React.FC = memo((): React.JSX.Element => {
       width="100"
       gap="20"
       relative
+      className={styles.StrictModeSwitcher__wrapper}
     >
       <Flex
         gap="10"
@@ -80,7 +81,7 @@ export const StrictModeSwitcher: React.FC = memo((): React.JSX.Element => {
         <span className={styles.StrictModeSwitcher__text}>Строгий режим</span>
       </Flex>
 
-      <Flex direction="column" align="start" gap="10">
+      <Flex relative direction="column" align="start" gap="10">
         <p
           className={`${styles.StrictModeSwitcher__hint__text}
               ${isHintVisible && styles.StrictModeSwitcher__hint__text__active}`}

@@ -1,6 +1,6 @@
 import { AccentsWords } from './AccentsWords';
 import { accentsWords } from '@/shared/assets/static/accentsWords';
-import { renderWithRouter } from '@/shared/utils/renderWithRouter';
+import { renderWithRouter } from '@/shared/tests/renderWithRouter';
 import { cleanup, fireEvent, waitFor } from '@testing-library/react';
 
 describe('AccentsWords', () => {

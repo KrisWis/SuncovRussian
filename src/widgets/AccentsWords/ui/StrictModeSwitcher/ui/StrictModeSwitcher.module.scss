@@ -1,14 +1,16 @@
+@use '@/app/styles/ScssVars' as *;
+
 .StrictModeSwitcher {
-  border: 3px solid #000;
+  border: 3px solid var(--color-black);
   height: 45px;
   padding: 8px 10px;
   transition: var(--transition-duration-default) linear background-color;
 
   &__switcher {
-    border: 3px solid #000;
+    border: 3px solid var(--color-black);
     width: 29px;
     height: 29px;
-    background: #fff;
+    background: var(--color-white);
     transition: var(--transition-duration-default) linear border-width;
     cursor: pointer;
 
@@ -22,13 +24,13 @@
     font-weight: 500;
     font-size: 20px;
     line-height: 100%;
-    color: #000;
+    color: var(--color-black);
     transition: var(--transition-duration-default) linear color;
     white-space: nowrap;
   }
 
   &__active {
-    background-color: #000;
+    background-color: var(--color-black);
 
     .StrictModeSwitcher__switcher__checkmark {
       opacity: 1;
@@ -39,7 +41,7 @@
     }
 
     .StrictModeSwitcher__text {
-      color: #fff;
+      color: var(--color-white);
     }
   }
 
@@ -49,7 +51,7 @@
     font-weight: 600;
     font-size: 24px;
     line-height: 100%;
-    color: #fff;
+    color: var(--color-white);
     min-width: 45px;
     min-height: 45px;
     cursor: pointer;
@@ -59,18 +61,22 @@
       font-size: 18px;
       line-height: 120%;
       text-align: right;
-      color: #000;
+      color: var(--color-black);
       opacity: 0;
       transition: var(--transition-duration-default) linear opacity;
-      width: 60%;
       position: absolute;
       z-index: var(--z-index-default);
-      right: 0;
+      left: -600%;
       top: -50px;
+      white-space: nowrap;
 
       &__active {
         opacity: 1;
       }
     }
+  }
+
+  &__wrapper {
+    margin-top: 50px;
   }
 }

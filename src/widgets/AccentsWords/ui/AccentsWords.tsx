@@ -20,6 +20,7 @@ import {
 
 import { AccentsWordsInterface } from '@/shared/assets/static/accentsWords';
 import { useAccentsWordsActions } from '../model/slice/AccentsWordsSlice';
+import { tabletMediaQueryWidth } from '@/shared/assets/const/global';
 
 // TODO: починить когда-нибудь ui тесты
 
@@ -65,7 +66,9 @@ const AccentsWordsInner: React.FC<AccentsWordsProps> = memo(
           );
         }
 
-        setRandomWordsIsReverse([true, false][Math.floor(Math.random() * 2)]);
+        const randomIsReverse = [true, false][Math.floor(Math.random() * 2)];
+
+        setRandomWordsIsReverse(randomIsReverse);
 
         if (storeWordsCopy.length === 0) return;
 
@@ -147,6 +150,10 @@ const AccentsWordsInner: React.FC<AccentsWordsProps> = memo(
 
         setWaitRepeatedClickInFail(true);
 
+        const root =
+          (document.querySelector('#root') as HTMLElement) ||
+          (document.querySelector('body') as HTMLElement);
+
         const showNewWord = () => {
           setWaitRepeatedClickInFail(false);
           setIsIncorrect(false);
@@ -179,12 +186,18 @@ const AccentsWordsInner: React.FC<AccentsWordsProps> = memo(
 
           updateRandomWord();
 
-          document.querySelector('body')!.style.pointerEvents = 'all';
+          if (process.env.NODE_ENV !== 'test') {
+            root.style.pointerEvents = 'all';
+          }
+
           document.removeEventListener('click', showNewWord);
         };
 
         const eventTimeout = setTimeout(() => {
-          document.querySelector('body')!.style.pointerEvents = 'none';
+          if (process.env.NODE_ENV !== 'test') {
+            root.style.pointerEvents = 'none';
+          }
+
           document.addEventListener('click', showNewWord);
           clearTimeout(eventTimeout);
         }, 0);
@@ -279,6 +292,17 @@ const AccentsWordsInner: React.FC<AccentsWordsProps> = memo(
     // Отображение подсказки
     const [isHintVisible, setIsHintVisible] = useState<boolean>(false);
 
+    // Высчитывание данных для общего времени
+    const totalTimeMinutes = useMemo(
+      () => Math.round(totalTime / 60000),
+      [totalTime],
+    );
+
+    const totalTimeSeconds = useMemo(
+      () => Math.round((totalTime / 1000) % 60),
+      [totalTime],
+    );
+
     return (
       <Flex
         maxHeight
@@ -321,16 +345,37 @@ const AccentsWordsInner: React.FC<AccentsWordsProps> = memo(
             )}
             {randomWord && (
               <Flex
-                direction={randomWordsIsReverse ? 'rowReverse' : 'row'}
+                direction={
+                  tabletMediaQueryWidth.matches
+                    ? randomWordsIsReverse
+                      ? 'columnReverse'
+                      : 'column'
+                    : randomWordsIsReverse
+                      ? 'rowReverse'
+                      : 'row'
+                }
                 width="100"
               >
                 <Flex
                   justify="center"
                   data-testid="AccentsWords__valid"
                   key={randomWord.valid}
+                  width={tabletMediaQueryWidth.matches ? '100' : '50'}
                   onClick={() => wordOnSuccess(storeWords)}
                   className={styles.AccentsWords__word}
-                  style={{ borderRightWidth: !randomWordsIsReverse ? 0 : 3 }}
+                  style={{
+                    borderRightWidth: tabletMediaQueryWidth.matches
+                      ? 3
+                      : !randomWordsIsReverse
+                        ? 0
+                        : 3,
+
+                    borderBottomWidth: !tabletMediaQueryWidth.matches
+                      ? 3
+                      : !randomWordsIsReverse
+                        ? 0
+                        : 3,
+                  }}
                 >
                   {randomWord.valid}
                 </Flex>
@@ -341,7 +386,20 @@ const AccentsWordsInner: React.FC<AccentsWordsProps> = memo(
                   key={randomWord.invalid}
                   onClick={() => wordOnFail(storeWords)}
                   className={styles.AccentsWords__word}
-                  style={{ borderRightWidth: randomWordsIsReverse ? 0 : 3 }}
+                  width={tabletMediaQueryWidth.matches ? '100' : '50'}
+                  style={{
+                    borderRightWidth: tabletMediaQueryWidth.matches
+                      ? 3
+                      : randomWordsIsReverse
+                        ? 0
+                        : 3,
+
+                    borderBottomWidth: !tabletMediaQueryWidth.matches
+                      ? 3
+                      : randomWordsIsReverse
+                        ? 0
+                        : 3,
+                  }}
                 >
                   {randomWord.invalid}
                 </Flex>
@@ -349,36 +407,51 @@ const AccentsWordsInner: React.FC<AccentsWordsProps> = memo(
             )}
 
             <AccentsProgressBar />
-            <StrictModeSwitcher />
           </>
         ) : (
           <Flex direction="column" width="100" maxHeight>
-            <span>
-              Тотальное время: {Math.round(totalTime / 60000)} минут и{' '}
-              {Math.round((totalTime / 1000) % 60)} секунд
+            <span className={styles.AccentsWords__totalTime}>
+              Общее время:{' '}
+              {`${totalTimeMinutes < 10 ? '0' : ''}${totalTimeMinutes}`}:
+              {`${totalTimeSeconds < 10 ? '0' : ''}${totalTimeSeconds}`}
             </span>
 
             {wordsWithUncorrectTimes.length > 0 && (
-              <>
-                <span>Неправильные слова:</span>
+              <Flex maxHeight justify="around" direction="column">
+                <Flex direction="column" gap="15">
+                  <span className={styles.AccentsWords__totalTime}>
+                    Ошибки:
+                  </span>
 
-                <Flex direction="column" width="100">
-                  {wordsWithUncorrectTimes.map((word) => (
-                    <span key={word.id}>
-                      {word.valid} - {word.uncorrectTimes} раз
-                    </span>
-                  ))}
+                  <Flex direction="column" gap="3" width="100">
+                    {wordsWithUncorrectTimes.map((word) => (
+                      <span
+                        className={styles.AccentsWords__wordWithError}
+                        key={word.id}
+                      >
+                        {word.valid} - {word.uncorrectTimes}{' '}
+                        {[2, 3, 4].includes(word.uncorrectTimes!)
+                          ? 'раза'
+                          : 'раз'}
+                      </span>
+                    ))}
+                  </Flex>
                 </Flex>
 
                 {!isErrorWork && (
-                  <button onClick={startErrorWork} type="button">
+                  <button
+                    className={styles.AccentsWords__errorWork}
+                    onClick={startErrorWork}
+                    type="button"
+                  >
                     Работа над ошибками
                   </button>
                 )}
-              </>
+              </Flex>
             )}
           </Flex>
         )}
+        <StrictModeSwitcher />
       </Flex>
     );
   },

@@ -1,24 +1,29 @@
+@use '@/app/styles/ScssVars' as *;
+
 .AccentsWords {
-  margin-top: 15px;
+  margin: 15px 0;
 
   &__word {
-    border: 3px solid #000;
+    border: 3px solid var(--color-black);
     padding: 20px;
     cursor: pointer;
     user-select: none;
     height: 120px;
-    width: 50%;
     font-weight: 500;
     font-size: 36px;
     line-height: 100%;
-    color: #000;
-    background-color: #fff;
+    color: var(--color-black);
+    background-color: var(--color-white);
     transition: var(--transition-duration-default) linear;
     transition-property: background-color, color;
 
+    @media (max-width: $mobile-mediaquery-width) {
+      font-size: 30px;
+    }
+
     &:hover {
-      color: #fff;
-      background-color: #000;
+      color: var(--color-white);
+      background-color: var(--color-black);
     }
   }
 
@@ -28,7 +33,7 @@
     font-weight: 600;
     font-size: 24px;
     line-height: 100%;
-    color: #fff;
+    color: var(--color-white);
     min-width: 45px;
     min-height: 45px;
     cursor: pointer;
@@ -42,6 +47,10 @@
       transition: var(--transition-duration-default) linear opacity;
       width: 60%;
 
+      @media (max-width: $mobile-mediaquery-width) {
+        width: 100%;
+      }
+
       &__active {
         opacity: 1;
       }
@@ -50,15 +59,47 @@
 
   &__uncorrect {
     height: 60px;
-    background: #000;
+    background: var(--color-black);
     font-weight: 500;
     font-size: 36px;
     line-height: 100%;
-    color: #fff8f8;
+    color: var(--color-white);
     text-align: center;
-    margin-bottom: 50px;
-    position: absolute;
-    top: 50px;
+    margin-bottom: 30px;
     padding: 10px 28px;
+  }
+
+  &__totalTime {
+    font-weight: 600;
+    font-size: 36px;
+    line-height: 150%;
+    color: var(--color-black);
+  }
+
+  &__wordWithError {
+    font-weight: 500;
+    font-size: 24px;
+    line-height: 150%;
+    text-align: center;
+    color: var(--color-black);
+  }
+
+  &__errorWork {
+    height: 97px;
+    border-radius: 25px;
+    background-color: var(--color-black);
+    padding: 31px 42px;
+    font-weight: 600;
+    font-size: 24px;
+    line-height: 150%;
+    color: var(--color-white);
+    cursor: pointer;
+    transition: var(--transition-duration-default) linear;
+    transition-property: background-color, color;
+
+    &:hover {
+      color: var(--color-black);
+      background-color: var(--color-white);
+    }
   }
 }

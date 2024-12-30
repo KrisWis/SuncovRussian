@@ -5,12 +5,12 @@
     font-weight: 500;
     font-size: 20px;
     line-height: 100%;
-    color: #000;
+    color: var(--color-black);
   }
 
   &__progressbar {
     width: 100%;
-    border: 1.69px solid #000;
+    border: 1.69px solid var(--color-black);
     height: 28px;
 
     &::-webkit-progress-bar {
@@ -18,7 +18,7 @@
     }
 
     &::-webkit-progress-value {
-      background: #000;
+      background: var(--color-black);
     }
   }
 }

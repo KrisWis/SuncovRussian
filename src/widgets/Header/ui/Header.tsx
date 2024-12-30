@@ -18,7 +18,14 @@ export const Header: React.FC = memo((): React.JSX.Element => {
   // При клике на пустое пространство сбрасывается выбор категории
   useEffect(() => {
     const onClickEmptySpace = (e: MouseEvent) => {
-      if (['MAIN', 'BODY'].includes((e.target as HTMLElement).nodeName)) {
+      const root =
+        (document.querySelector('#root') as HTMLElement) ||
+        (document.querySelector('body') as HTMLElement);
+
+      if (
+        ['MAIN', 'BODY'].includes((e.target as HTMLElement).nodeName) &&
+        root.style.pointerEvents !== 'none'
+      ) {
         setHeaderCategory(null);
       }
     };
@@ -46,6 +53,8 @@ export const Header: React.FC = memo((): React.JSX.Element => {
     <header className={styles.Header}>
       {headerCategories.map((category) => (
         <Flex
+          width="100"
+          maxHeight
           justify="center"
           onClick={() => onClickCategory(category)}
           key={category}
