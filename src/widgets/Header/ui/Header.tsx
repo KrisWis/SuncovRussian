@@ -53,13 +53,11 @@ export const Header: React.FC = memo((): React.JSX.Element => {
     <header className={styles.Header}>
       {headerCategories.map((category) => (
         <Flex
-          width="100"
           maxHeight
           justify="center"
           onClick={() => onClickCategory(category)}
           key={category}
-          className={`${styles.Header__item} 
-          ${headerCategory === category && styles.Header__item__active}`}
+          className={styles.Header__item}
         >
           {category}
         </Flex>

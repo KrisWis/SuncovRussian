@@ -345,6 +345,7 @@ const AccentsWordsInner: React.FC<AccentsWordsProps> = memo(
             )}
             {randomWord && (
               <Flex
+                justify="center"
                 direction={
                   tabletMediaQueryWidth.matches
                     ? randomWordsIsReverse
@@ -360,7 +361,7 @@ const AccentsWordsInner: React.FC<AccentsWordsProps> = memo(
                   justify="center"
                   data-testid="AccentsWords__valid"
                   key={randomWord.valid}
-                  width={tabletMediaQueryWidth.matches ? '100' : '50'}
+                  width="100"
                   onClick={() => wordOnSuccess(storeWords)}
                   className={styles.AccentsWords__word}
                   style={{
@@ -375,6 +376,8 @@ const AccentsWordsInner: React.FC<AccentsWordsProps> = memo(
                       : !randomWordsIsReverse
                         ? 0
                         : 3,
+
+                    fontSize: randomWord.valid.length >= 10 ? 26 : 36,
                   }}
                 >
                   {randomWord.valid}
@@ -399,6 +402,8 @@ const AccentsWordsInner: React.FC<AccentsWordsProps> = memo(
                       : randomWordsIsReverse
                         ? 0
                         : 3,
+
+                    fontSize: randomWord.valid.length >= 10 ? 26 : 36,
                   }}
                 >
                   {randomWord.invalid}

@@ -1,11 +1,11 @@
 @use '@/app/styles/ScssVars' as *;
 
 .Header {
-  height: 90px;
-  min-height: 90px;
+  height: 30px;
+  min-height: 30px;
   display: flex;
-  width: 100%;
-  justify-content: space-between;
+  width: 100vw;
+  background-color: var(--color-black);
 
   &__item {
     cursor: pointer;
@@ -17,12 +17,13 @@
     transition: var(--transition-duration-default) linear;
     transition-property: background-color, color;
     user-select: none;
+    padding: 0 10px;
 
     @media (max-width: $mobile-mediaquery-width) {
       font-size: 14px;
     }
 
-    &__active {
+    &:hover {
       color: var(--color-black);
       background: var(--color-white);
     }

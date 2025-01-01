@@ -42,16 +42,7 @@ body {
   flex-direction: column;
   width: 100%;
   font-family: var(--font-family);
-  padding: 0 var(--padding-x);
   height: 100vh;
-
-  @media (max-width: $tablet-mediaquery-width) {
-    padding: 0 var(--padding-tablet-x);
-  }
-
-  @media (max-width: $mobile-mediaquery-width) {
-    padding: 0 var(--padding-mobile-x);
-  }
 }
 
 #root {
@@ -69,4 +60,13 @@ main {
   height: 100%;
   min-height: 80vh;
   position: relative;
+  padding: 0 var(--padding-x);
+
+  @media (max-width: $tablet-mediaquery-width) {
+    padding: 0 var(--padding-tablet-x);
+  }
+
+  @media (max-width: $mobile-mediaquery-width) {
+    padding: 0 var(--padding-mobile-x);
+  }
 }

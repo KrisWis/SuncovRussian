@@ -46,7 +46,7 @@ export const AccentsProgressBar: React.FC = memo((): React.JSX.Element => {
   return (
     <Flex
       className={styles.AccentsProgressBar}
-      width="100"
+      width="50"
       justify="center"
       gap="10"
     >
