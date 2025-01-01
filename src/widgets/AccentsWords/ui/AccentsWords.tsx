@@ -137,6 +137,60 @@ const AccentsWordsInner: React.FC<AccentsWordsProps> = memo(
     const [waitRepeatedClickInFail, setWaitRepeatedClickInFail] =
       useState<boolean>(false);
 
+    const showNewWord = useCallback(
+      (words: AccentsWordsInterface[]) => {
+        setWaitRepeatedClickInFail(false);
+        setIsIncorrect(false);
+
+        const currentRandomWord = words.find(
+          (word) => word.id === randomWordId,
+        );
+
+        if (!isErrorWork) {
+          changeWordProbability({
+            probability: 0.2,
+            id: currentRandomWord!.id,
+          });
+
+          changeWordUncorrectTimes({
+            id: currentRandomWord!.id,
+            uncorrectTimes: currentRandomWord!.uncorrectTimes! + 1,
+          });
+        }
+
+        changeWordConsecutivelyTimes({
+          id: currentRandomWord!.id,
+          consecutivelyTimes: 0,
+        });
+
+        changeWordInProgressStatus({
+          id: currentRandomWord!.id,
+          inProgress: false,
+        });
+
+        updateRandomWord();
+
+        const root =
+          (document.querySelector('#root') as HTMLElement) ||
+          (document.querySelector('body') as HTMLElement);
+
+        if (process.env.NODE_ENV !== 'test') {
+          root.style.pointerEvents = 'all';
+        }
+
+        document.onclick = null;
+      },
+      [
+        changeWordConsecutivelyTimes,
+        changeWordInProgressStatus,
+        changeWordProbability,
+        changeWordUncorrectTimes,
+        isErrorWork,
+        randomWordId,
+        updateRandomWord,
+      ],
+    );
+
     const wordOnFail = useCallback(
       (words: AccentsWordsInterface[]) => {
         if (waitRepeatedClickInFail) return;
@@ -154,64 +208,16 @@ const AccentsWordsInner: React.FC<AccentsWordsProps> = memo(
           (document.querySelector('#root') as HTMLElement) ||
           (document.querySelector('body') as HTMLElement);
 
-        const showNewWord = () => {
-          setWaitRepeatedClickInFail(false);
-          setIsIncorrect(false);
-
-          const currentRandomWord = words.find(
-            (word) => word.id === randomWordId,
-          );
-
-          if (!isErrorWork) {
-            changeWordProbability({
-              probability: 0.2,
-              id: currentRandomWord!.id,
-            });
-
-            changeWordUncorrectTimes({
-              id: currentRandomWord!.id,
-              uncorrectTimes: currentRandomWord!.uncorrectTimes! + 1,
-            });
-          }
-
-          changeWordConsecutivelyTimes({
-            id: currentRandomWord!.id,
-            consecutivelyTimes: 0,
-          });
-
-          changeWordInProgressStatus({
-            id: currentRandomWord!.id,
-            inProgress: false,
-          });
-
-          updateRandomWord();
-
-          if (process.env.NODE_ENV !== 'test') {
-            root.style.pointerEvents = 'all';
-          }
-
-          document.removeEventListener('click', showNewWord);
-        };
-
         const eventTimeout = setTimeout(() => {
           if (process.env.NODE_ENV !== 'test') {
             root.style.pointerEvents = 'none';
           }
 
-          document.addEventListener('click', showNewWord);
+          document.onclick = () => showNewWord(words);
           clearTimeout(eventTimeout);
         }, 0);
       },
-      [
-        changeWordConsecutivelyTimes,
-        changeWordInProgressStatus,
-        changeWordProbability,
-        changeWordUncorrectTimes,
-        isErrorWork,
-        randomWordId,
-        updateRandomWord,
-        waitRepeatedClickInFail,
-      ],
+      [showNewWord, waitRepeatedClickInFail],
     );
 
     // Изменение вероятности при правильном ответе
@@ -302,6 +308,65 @@ const AccentsWordsInner: React.FC<AccentsWordsProps> = memo(
       () => Math.round((totalTime / 1000) % 60),
       [totalTime],
     );
+
+    // При нажатии на стрелочки, фокус падает на соответствующее слово
+    useEffect(() => {
+      const checkArrowsPress = (
+        event: KeyboardEvent,
+        words: AccentsWordsInterface[],
+      ): void => {
+        if (totalTime) return;
+
+        if (waitRepeatedClickInFail && isIncorrect) {
+          showNewWord(words);
+        }
+
+        if (!tabletMediaQueryWidth.matches) {
+          if (event.key === 'ArrowLeft') {
+            if (!randomWordsIsReverse) {
+              wordOnSuccess(words);
+            } else {
+              wordOnFail(words);
+            }
+          } else if (event.key === 'ArrowRight') {
+            if (randomWordsIsReverse) {
+              wordOnSuccess(words);
+            } else {
+              wordOnFail(words);
+            }
+          }
+        } else {
+          if (event.key === 'ArrowUp') {
+            if (!randomWordsIsReverse) {
+              wordOnSuccess(words);
+            } else {
+              wordOnFail(words);
+            }
+          } else if (event.key === 'ArrowDown') {
+            if (randomWordsIsReverse) {
+              wordOnSuccess(words);
+            } else {
+              wordOnFail(words);
+            }
+          }
+        }
+      };
+
+      document.onkeydown = (e) => checkArrowsPress(e, storeWords);
+
+      return () => {
+        document.onkeydown = null;
+      };
+    }, [
+      isIncorrect,
+      randomWordsIsReverse,
+      showNewWord,
+      storeWords,
+      totalTime,
+      waitRepeatedClickInFail,
+      wordOnFail,
+      wordOnSuccess,
+    ]);
 
     return (
       <Flex
@@ -412,6 +477,7 @@ const AccentsWordsInner: React.FC<AccentsWordsProps> = memo(
             )}
 
             <AccentsProgressBar />
+            <StrictModeSwitcher />
           </>
         ) : (
           <Flex direction="column" width="100" maxHeight>
@@ -423,7 +489,7 @@ const AccentsWordsInner: React.FC<AccentsWordsProps> = memo(
 
             {wordsWithUncorrectTimes.length > 0 && (
               <Flex maxHeight justify="around" direction="column">
-                <Flex direction="column" gap="15">
+                <Flex direction="column">
                   <span className={styles.AccentsWords__totalTime}>
                     Ошибки:
                   </span>
@@ -431,6 +497,13 @@ const AccentsWordsInner: React.FC<AccentsWordsProps> = memo(
                   <Flex direction="column" gap="3" width="100">
                     {wordsWithUncorrectTimes.map((word) => (
                       <span
+                        style={{
+                          fontSize:
+                            24 -
+                            (wordsWithUncorrectTimes.length / 2 >= 24
+                              ? 20
+                              : wordsWithUncorrectTimes.length / 2),
+                        }}
                         className={styles.AccentsWords__wordWithError}
                         key={word.id}
                       >
@@ -456,7 +529,6 @@ const AccentsWordsInner: React.FC<AccentsWordsProps> = memo(
             )}
           </Flex>
         )}
-        <StrictModeSwitcher />
       </Flex>
     );
   },

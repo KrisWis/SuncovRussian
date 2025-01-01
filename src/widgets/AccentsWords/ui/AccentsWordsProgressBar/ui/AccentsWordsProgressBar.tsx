@@ -40,6 +40,10 @@ export const AccentsProgressBar: React.FC = memo((): React.JSX.Element => {
       const TotalTime = endTime.getTime() - StartTimeRef.current!.getTime();
 
       setTotalTime(TotalTime);
+
+      document.onkeydown = null;
+
+      document.onclick = null;
     }
   }, [setTotalTime, wordsInProgressProbabilityPercent]);
 

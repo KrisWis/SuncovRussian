@@ -15,7 +15,11 @@
     background-color: var(--color-white);
     transition: var(--transition-duration-default) linear;
     transition-property: background-color, color;
-    max-width: 30%;
+    max-width: 20%;
+
+    @media (max-width: $laptop-mediaquery-width) {
+      max-width: 30%;
+    }
 
     @media (max-width: $tablet-mediaquery-width) {
       max-width: 100%;
@@ -84,7 +88,6 @@
 
   &__wordWithError {
     font-weight: 500;
-    font-size: 24px;
     line-height: 150%;
     text-align: center;
     color: var(--color-black);

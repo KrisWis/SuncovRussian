@@ -18,6 +18,7 @@
     transition-property: background-color, color;
     user-select: none;
     padding: 0 10px;
+    text-transform: lowercase;
 
     @media (max-width: $mobile-mediaquery-width) {
       font-size: 14px;
