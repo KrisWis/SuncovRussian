@@ -33,6 +33,7 @@ export function buildPlugins({
     new CopyWebpackPlugin({
       patterns: [
         { from: 'public/sounds', to: 'sounds' }, 
+        { from: 'public/gifs', to: 'gifs' }, 
       ],
     }),
   ];
