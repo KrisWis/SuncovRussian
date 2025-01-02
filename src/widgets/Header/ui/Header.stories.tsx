@@ -1,13 +1,11 @@
 import type { Meta, StoryObj } from '@storybook/react';
 import { Header } from './Header';
-import { HeaderCategories, HeaderContext } from '..';
+import { HeaderContext } from '..';
 import { useState } from 'react';
 
 const HeaderWrapper: React.FC = (): React.JSX.Element => {
   // Настройка контекста
-  const [headerCategory, setHeaderCategory] = useState<HeaderCategories | null>(
-    null,
-  );
+  const [headerCategory, setHeaderCategory] = useState<string | null>(null);
 
   return (
     <HeaderContext.Provider value={{ headerCategory, setHeaderCategory }}>

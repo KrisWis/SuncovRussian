@@ -1,7 +1,7 @@
 import { accentsWords } from '@/shared/assets/static/accentsWords';
 import { tips } from '@/shared/assets/static/tips';
 import { AccentsWords } from '@/widgets/AccentsWords';
-import { Header, HeaderCategories, HeaderContext } from '@/widgets/Header';
+import { Header, HeaderContext } from '@/widgets/Header';
 import { Tip } from '@/widgets/Tip';
 import { memo, useMemo, useState } from 'react';
 
@@ -13,9 +13,7 @@ export const MainPage: React.FC = memo((): React.JSX.Element => {
   );
 
   // Настройка контекста
-  const [headerCategory, setHeaderCategory] = useState<HeaderCategories | null>(
-    null,
-  );
+  const [headerCategory, setHeaderCategory] = useState<string | null>(null);
 
   // TODO: проверить все комментарии на макете в конце работы
 
@@ -28,7 +26,7 @@ export const MainPage: React.FC = memo((): React.JSX.Element => {
           <Tip id={randomTip.id} text={randomTip.text} />
         )}
 
-        {headerCategory === 'Тренажер' && <AccentsWords words={accentsWords} />}
+        {headerCategory === 'Ударения' && <AccentsWords words={accentsWords} />}
       </main>
     </HeaderContext.Provider>
   );

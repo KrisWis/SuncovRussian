@@ -29,4 +29,37 @@
       background: var(--color-white);
     }
   }
+
+  &__submenu {
+    position: absolute;
+    opacity: 0;
+    z-index: var(--z-index-one);
+    transform: translateY(50px);
+    top: 30px;
+    left: 0;
+    transition: var(--transition-duration-default) linear;
+    transition-property: transform, opacity;
+    background-color: var(--color-white);
+    padding-top: 10px;
+
+    &__active {
+      transform: translateY(0);
+      opacity: 1;
+    }
+
+    &__item {
+      font-weight: 300;
+      font-size: 16px;
+      line-height: 100%;
+      color: var(--color-gray);
+      cursor: pointer;
+      white-space: nowrap;
+      text-transform: lowercase;
+      transition: var(--transition-duration-default) linear color;
+
+      &:hover {
+        color: var(--color-black);
+      }
+    }
+  }
 }

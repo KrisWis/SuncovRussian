@@ -10,8 +10,7 @@ export const MainPage: React.LazyExoticComponent<React.FC> = lazy(() => {
             default: MainPage,
           })),
         ),
-      // TODO: сказать про эту задержку
-      randomIntFromInterval(500, 2000),
+      randomIntFromInterval(500, 1500),
     );
   });
 });

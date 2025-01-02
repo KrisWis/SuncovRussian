@@ -1,15 +1,22 @@
 import { Flex } from '@/shared/lib/Stack';
 import * as styles from './Header.module.scss';
-import { memo, useCallback, useContext, useEffect } from 'react';
-import { HeaderCategories } from '../model/types';
+import { memo, useCallback, useContext, useEffect, useState } from 'react';
 import { HeaderContext } from '../model/HeaderContext';
+import { HeaderCategories, HeaderMenu } from '../model/types';
 
-const headerCategories: HeaderCategories[] = [
-  'Тесты',
-  'Теория',
-  'Тренажер',
-  'Сочинения',
-];
+const headerCategories: HeaderMenu = {
+  Тесты: [],
+  Теория: [],
+  Тренажер: [
+    'Ударения',
+    'Паронимы',
+    'Тропы',
+    'Словарные слова',
+    'Виды союзов',
+    'Виды подчинительных союзов',
+  ],
+  Сочинения: [],
+};
 
 export const Header: React.FC = memo((): React.JSX.Element => {
   // Получение данных из контекста
@@ -49,17 +56,55 @@ export const Header: React.FC = memo((): React.JSX.Element => {
     [headerCategory, setHeaderCategory],
   );
 
+  // Обработка наведения на категории
+  const [headerHoveredCategory, setHoveredHeaderCategory] = useState<
+    string | null
+  >(null);
+
   return (
     <header className={styles.Header}>
-      {headerCategories.map((category) => (
+      {Object.entries(headerCategories).map(([category, submenu]) => (
         <Flex
-          maxHeight
-          justify="center"
-          onClick={() => onClickCategory(category)}
+          onMouseEnter={() =>
+            setHoveredHeaderCategory(category as HeaderCategories)
+          }
+          onMouseLeave={() => setHoveredHeaderCategory(null)}
           key={category}
-          className={styles.Header__item}
+          direction="column"
+          relative
         >
-          {category}
+          <Flex
+            maxHeight
+            justify="center"
+            onClick={
+              submenu.length > 0
+                ? () => {}
+                : () => onClickCategory(category as HeaderCategories)
+            }
+            className={styles.Header__item}
+          >
+            {category}
+          </Flex>
+
+          {submenu.length > 0 && (
+            <Flex
+              gap="10"
+              align="start"
+              className={`${styles.Header__submenu} 
+            ${headerHoveredCategory === category && styles.Header__submenu__active}`}
+              direction="column"
+            >
+              {submenu.map((menuItem) => (
+                <span
+                  onClick={() => setHeaderCategory(menuItem)}
+                  key={menuItem}
+                  className={styles.Header__submenu__item}
+                >
+                  {menuItem}
+                </span>
+              ))}
+            </Flex>
+          )}
         </Flex>
       ))}
     </header>
