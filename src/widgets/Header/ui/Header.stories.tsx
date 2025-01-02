@@ -17,6 +17,9 @@ const HeaderWrapper: React.FC = (): React.JSX.Element => {
 const meta = {
   title: 'Widgets/Header',
   component: HeaderWrapper,
+  parameters: {
+    layout: 'fullscreen',
+  },
 } satisfies Meta<typeof HeaderWrapper>;
 
 export default meta;

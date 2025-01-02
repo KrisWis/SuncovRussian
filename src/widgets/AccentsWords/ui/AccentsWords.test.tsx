@@ -3,129 +3,113 @@ import { accentsWords } from '@/shared/assets/static/accentsWords';
 import { renderWithRouter } from '@/shared/tests/renderWithRouter';
 import { cleanup, fireEvent, waitFor } from '@testing-library/react';
 
+type ComparisonType = 'equal' | 'greaterThan';
+
+type WordsTestIDs = 'AccentsWords__valid' | 'AccentsWords__invalid';
+
 describe('AccentsWords', () => {
-  test('Click valid words and not get an error, check progress bar', async () => {
-    const { getByTestId, queryByTestId } = renderWithRouter(
-      <AccentsWords words={accentsWords} />,
+  // Helpers
+  const setupTest = () => {
+    return renderWithRouter(<AccentsWords words={accentsWords} />);
+  };
+
+  let component: ReturnType<typeof setupTest>;
+
+  beforeEach(() => {
+    component = setupTest();
+  });
+
+  const checkProgressBarValue = (
+    expectedValue: number,
+    comparisonType: ComparisonType = 'equal',
+  ) => {
+    const progressBar = component.getByTestId(
+      'AccentsWords__AccentsProgressBar__percent',
     );
 
+    if (comparisonType === 'equal') {
+      expect(Number(progressBar.getAttribute('value'))).toBe(expectedValue);
+    } else if (comparisonType === 'greaterThan') {
+      expect(Number(progressBar.getAttribute('value'))).toBeGreaterThan(
+        expectedValue,
+      );
+    }
+  };
+
+  const clickWordAndCheckUncorrectBar = (
+    elementTestID: WordsTestIDs,
+    isUncorrectIsExpected: boolean,
+  ) => {
+    const valid = component.getByTestId(elementTestID);
+
+    expect(valid).toBeInTheDocument();
+
+    fireEvent.click(valid);
+
+    if (isUncorrectIsExpected) {
+      expect(
+        component.queryByTestId('AccentsWords__uncorrect'),
+      ).toBeInTheDocument();
+    } else {
+      expect(
+        component.queryByTestId('AccentsWords__uncorrect'),
+      ).not.toBeInTheDocument();
+    }
+  };
+
+  // Tests
+  test('Click valid words and not get an error, check progress bar', async () => {
     await waitFor(() => {
       // Check progress bar value equal zero
-      const AccentsWordsProgressBarPercent = getByTestId(
-        'AccentsWords__AccentsProgressBar__percent',
-      );
-
-      expect(Number(AccentsWordsProgressBarPercent.getAttribute('value'))).toBe(
-        0,
-      );
+      checkProgressBarValue(0);
 
       // Click valid words
-      const valid = getByTestId('AccentsWords__valid');
+      clickWordAndCheckUncorrectBar('AccentsWords__valid', false);
 
-      expect(valid).toBeInTheDocument();
+      clickWordAndCheckUncorrectBar('AccentsWords__valid', false);
 
-      fireEvent.click(valid);
-
-      expect(queryByTestId('AccentsWords__uncorrect')).not.toBeInTheDocument();
-
-      fireEvent.click(valid);
-
-      expect(queryByTestId('AccentsWords__uncorrect')).not.toBeInTheDocument();
-
-      fireEvent.click(valid);
-
-      expect(queryByTestId('AccentsWords__uncorrect')).not.toBeInTheDocument();
+      clickWordAndCheckUncorrectBar('AccentsWords__valid', false);
 
       // Progress bar value must increase
-      expect(
-        Number(AccentsWordsProgressBarPercent.getAttribute('value')),
-      ).toBeGreaterThan(0);
+      checkProgressBarValue(0, 'greaterThan');
     });
   });
 
   test('Click invalid word and valid word and get an error, check progress bar', async () => {
-    const { getByTestId, queryByTestId } = renderWithRouter(
-      <AccentsWords words={accentsWords} />,
-    );
-
     await waitFor(() => {
       // Check progress bar value equal zero
-      const AccentsWordsProgressBarPercent = getByTestId(
-        'AccentsWords__AccentsProgressBar__percent',
-      );
-
-      expect(Number(AccentsWordsProgressBarPercent.getAttribute('value'))).toBe(
-        0,
-      );
+      checkProgressBarValue(0);
 
       // Click valid word
-      const valid = getByTestId('AccentsWords__valid');
-
-      expect(valid).toBeInTheDocument();
-
-      fireEvent.click(valid);
-
-      expect(queryByTestId('AccentsWords__uncorrect')).not.toBeInTheDocument();
+      clickWordAndCheckUncorrectBar('AccentsWords__valid', false);
 
       // Click invalid word
-      const invalid = getByTestId('AccentsWords__invalid');
-
-      expect(invalid).toBeInTheDocument();
-
-      fireEvent.click(invalid);
-
-      expect(queryByTestId('AccentsWords__uncorrect')).toBeInTheDocument();
+      clickWordAndCheckUncorrectBar('AccentsWords__invalid', true);
 
       // Progress bar value must increase, because valid word was clicked
-      expect(
-        Number(AccentsWordsProgressBarPercent.getAttribute('value')),
-      ).toBeGreaterThan(0);
+      checkProgressBarValue(0, 'greaterThan');
     });
   });
 
   test('Click invalid words, check progress bar', () => {
-    const { getByTestId, queryByTestId } = renderWithRouter(
-      <AccentsWords words={accentsWords} />,
-    );
-
     // Progress bar value must be equal zero
-    const AccentsWordsProgressBarPercent = getByTestId(
-      'AccentsWords__AccentsProgressBar__percent',
-    );
-
-    expect(Number(AccentsWordsProgressBarPercent.getAttribute('value'))).toBe(
-      0,
-    );
+    checkProgressBarValue(0);
 
     // Click invalid words
-    const invalid = getByTestId('AccentsWords__invalid');
+    clickWordAndCheckUncorrectBar('AccentsWords__invalid', true);
 
-    expect(invalid).toBeInTheDocument();
+    clickWordAndCheckUncorrectBar('AccentsWords__invalid', true);
 
-    fireEvent.click(invalid);
-
-    expect(queryByTestId('AccentsWords__uncorrect')).toBeInTheDocument();
-
-    fireEvent.click(invalid);
-
-    expect(queryByTestId('AccentsWords__uncorrect')).toBeInTheDocument();
-
-    fireEvent.click(invalid);
-
-    expect(queryByTestId('AccentsWords__uncorrect')).toBeInTheDocument();
+    clickWordAndCheckUncorrectBar('AccentsWords__invalid', true);
 
     // Progress bar value must be equal zero
-    expect(Number(AccentsWordsProgressBarPercent.getAttribute('value'))).toBe(
-      0,
-    );
+    checkProgressBarValue(0);
   });
 
   afterEach(() => {
     cleanup();
 
-    const { getByTestId } = renderWithRouter(
-      <AccentsWords words={accentsWords} />,
-    );
+    const { getByTestId } = setupTest();
 
     const AccentsWordsStrictModeSwitcher = getByTestId(
       'AccentsWords__StrictModeSwitcher',

@@ -18,22 +18,36 @@ import {
   useWords,
 } from '..';
 
-import { AccentsWordsInterface } from '@/shared/assets/static/accentsWords';
 import { useAccentsWordsActions } from '../model/slice/AccentsWordsSlice';
 import { tabletMediaQueryWidth } from '@/shared/const/global';
+import { useRandomWord, useWordActions } from '../model/hooks';
+import { AccentsWordsInterface } from '@/shared/assets/static/accentsWords';
 
 // TODO: починить когда-нибудь ui тесты
 
 const AccentsWordsInner: React.FC<AccentsWordsProps> = memo(
   ({ words }): React.JSX.Element => {
-    const {
-      setWords,
-      changeWordProbability,
-      changeWordUncorrectTimes,
-      changeWordConsecutivelyTimes,
-      changeWordInProgressStatus,
-    } = useAccentsWordsActions();
+    // Инициализация данных и хуков
+    const { setWords } = useAccentsWordsActions();
+
     const [randomWordId, setRandomWordId] = useState<number | null>(null);
+
+    const [randomWordsIsReverse, setRandomWordsIsReverse] =
+      useState<boolean>(false);
+
+    const { randomWord, updateRandomWord } = useRandomWord(
+      randomWordId,
+      setRandomWordsIsReverse,
+      setRandomWordId,
+    );
+
+    const {
+      wordOnFail,
+      wordOnSuccess,
+      showNewWord,
+      isIncorrect,
+      waitRepeatedClickInFail,
+    } = useWordActions(randomWordId, setRandomWordsIsReverse, setRandomWordId);
 
     useEffect(() => {
       const wordsCopy = JSON.parse(JSON.stringify(words));
@@ -54,50 +68,11 @@ const AccentsWordsInner: React.FC<AccentsWordsProps> = memo(
     // Получение случайного слова
     const storeWords = useWords();
 
-    const updateRandomWord = useCallback(
-      (words?: AccentsWordsInterface[]) => {
-        let storeWordsCopy;
-
-        if (words) {
-          storeWordsCopy = words.filter((word) => word.id !== randomWordId);
-        } else {
-          storeWordsCopy = storeWords.filter(
-            (word) => word.id !== randomWordId,
-          );
-        }
-
-        const randomIsReverse = [true, false][Math.floor(Math.random() * 2)];
-
-        setRandomWordsIsReverse(randomIsReverse);
-
-        if (storeWordsCopy.length === 0) return;
-
-        const totalChances = storeWordsCopy.reduce(
-          (acc, c) => acc + (c.probability || 1),
-          0,
-        );
-        const rnd = totalChances * Math.random();
-
-        for (let i = 0, sum = 0; ; i++) {
-          sum += storeWordsCopy[i].probability || 1;
-
-          if (sum > rnd) {
-            setRandomWordId(storeWordsCopy[i].id);
-            return;
-          }
-        }
-      },
-      [randomWordId, storeWords],
-    );
-
     useEffect(() => {
       if (storeWords.length && randomWordId === null) {
         updateRandomWord();
       }
     }, [randomWordId, storeWords, updateRandomWord]);
-
-    // Появление плашки "Неверно"
-    const [isIncorrect, setIsIncorrect] = useState<boolean>(false);
 
     // Отображение тотального времени
     const { totalTime, setTotalTime } = useContext(AccentsWordsContext);
@@ -133,168 +108,6 @@ const AccentsWordsInner: React.FC<AccentsWordsProps> = memo(
       updateRandomWord(UpdatedWordsWithUncorrectTimes);
     }, [setTotalTime, setWords, updateRandomWord, wordsWithUncorrectTimes]);
 
-    // Изменение вероятности при неправильном ответе
-    const [waitRepeatedClickInFail, setWaitRepeatedClickInFail] =
-      useState<boolean>(false);
-
-    const showNewWord = useCallback(
-      (words: AccentsWordsInterface[]) => {
-        setWaitRepeatedClickInFail(false);
-        setIsIncorrect(false);
-
-        const currentRandomWord = words.find(
-          (word) => word.id === randomWordId,
-        );
-
-        if (!isErrorWork) {
-          changeWordProbability({
-            probability: 0.2,
-            id: currentRandomWord!.id,
-          });
-
-          changeWordUncorrectTimes({
-            id: currentRandomWord!.id,
-            uncorrectTimes: currentRandomWord!.uncorrectTimes! + 1,
-          });
-        }
-
-        changeWordConsecutivelyTimes({
-          id: currentRandomWord!.id,
-          consecutivelyTimes: 0,
-        });
-
-        changeWordInProgressStatus({
-          id: currentRandomWord!.id,
-          inProgress: false,
-        });
-
-        updateRandomWord();
-
-        const root =
-          (document.querySelector('#root') as HTMLElement) ||
-          (document.querySelector('body') as HTMLElement);
-
-        if (process.env.NODE_ENV !== 'test') {
-          root.style.pointerEvents = 'all';
-        }
-
-        document.onclick = null;
-      },
-      [
-        changeWordConsecutivelyTimes,
-        changeWordInProgressStatus,
-        changeWordProbability,
-        changeWordUncorrectTimes,
-        isErrorWork,
-        randomWordId,
-        updateRandomWord,
-      ],
-    );
-
-    const wordOnFail = useCallback(
-      (words: AccentsWordsInterface[]) => {
-        if (waitRepeatedClickInFail) return;
-
-        if (process.env.NODE_ENV !== 'test') {
-          const audio = new Audio('sounds/FailSound.mp3');
-          audio.play();
-        }
-
-        setIsIncorrect(true);
-
-        setWaitRepeatedClickInFail(true);
-
-        const root =
-          (document.querySelector('#root') as HTMLElement) ||
-          (document.querySelector('body') as HTMLElement);
-
-        const eventTimeout = setTimeout(() => {
-          if (process.env.NODE_ENV !== 'test') {
-            root.style.pointerEvents = 'none';
-          }
-
-          document.onclick = () => showNewWord(words);
-          clearTimeout(eventTimeout);
-        }, 0);
-      },
-      [showNewWord, waitRepeatedClickInFail],
-    );
-
-    // Изменение вероятности при правильном ответе
-    const wordOnSuccess = useCallback(
-      (words: AccentsWordsInterface[]) => {
-        if (waitRepeatedClickInFail) return;
-
-        const currentRandomWord = words.find(
-          (word) => word.id === randomWordId,
-        );
-
-        if (isErrorWork) {
-          const futureConsecutivelyTimes =
-            currentRandomWord!.consecutivelyTimes! + 1;
-
-          changeWordConsecutivelyTimes({
-            id: currentRandomWord!.id,
-            consecutivelyTimes: futureConsecutivelyTimes,
-          });
-
-          if (futureConsecutivelyTimes === 3) {
-            changeWordInProgressStatus({
-              id: currentRandomWord!.id,
-              inProgress: true,
-            });
-
-            changeWordProbability({
-              probability: 0.05,
-              id: currentRandomWord!.id,
-            });
-          }
-        } else {
-          if (currentRandomWord!.probability === 0.2) {
-            changeWordProbability({
-              id: currentRandomWord!.id,
-              probability: 0.1,
-            });
-          } else if (currentRandomWord!.probability === 0.1) {
-            changeWordProbability({
-              id: currentRandomWord!.id,
-              probability: 0.05,
-            });
-          } else {
-            changeWordProbability({
-              id: currentRandomWord!.id,
-              probability: 0.01,
-            });
-
-            changeWordInProgressStatus({
-              id: currentRandomWord!.id,
-              inProgress: true,
-            });
-          }
-        }
-
-        updateRandomWord();
-      },
-      [
-        changeWordConsecutivelyTimes,
-        changeWordInProgressStatus,
-        changeWordProbability,
-        isErrorWork,
-        randomWordId,
-        updateRandomWord,
-        waitRepeatedClickInFail,
-      ],
-    );
-
-    // Отображение слов в случайном порядке
-    const [randomWordsIsReverse, setRandomWordsIsReverse] =
-      useState<boolean>(false);
-
-    const randomWord = useMemo(
-      () => storeWords.find((word) => word.id === randomWordId),
-      [randomWordId, storeWords],
-    );
-
     // Отображение подсказки
     const [isHintVisible, setIsHintVisible] = useState<boolean>(false);
 
@@ -318,35 +131,35 @@ const AccentsWordsInner: React.FC<AccentsWordsProps> = memo(
         if (totalTime) return;
 
         if (waitRepeatedClickInFail && isIncorrect) {
-          showNewWord(words);
+          showNewWord(words, isErrorWork, randomWordId);
         }
 
         if (!tabletMediaQueryWidth.matches) {
           if (event.key === 'ArrowLeft') {
             if (!randomWordsIsReverse) {
-              wordOnSuccess(words);
+              wordOnSuccess(words, isErrorWork, randomWordId);
             } else {
-              wordOnFail(words);
+              wordOnFail(words, isErrorWork, randomWordId);
             }
           } else if (event.key === 'ArrowRight') {
             if (randomWordsIsReverse) {
-              wordOnSuccess(words);
+              wordOnSuccess(words, isErrorWork, randomWordId);
             } else {
-              wordOnFail(words);
+              wordOnFail(words, isErrorWork, randomWordId);
             }
           }
         } else {
           if (event.key === 'ArrowUp') {
             if (!randomWordsIsReverse) {
-              wordOnSuccess(words);
+              wordOnSuccess(words, isErrorWork, randomWordId);
             } else {
-              wordOnFail(words);
+              wordOnFail(words, isErrorWork, randomWordId);
             }
           } else if (event.key === 'ArrowDown') {
             if (randomWordsIsReverse) {
-              wordOnSuccess(words);
+              wordOnSuccess(words, isErrorWork, randomWordId);
             } else {
-              wordOnFail(words);
+              wordOnFail(words, isErrorWork, randomWordId);
             }
           }
         }
@@ -358,7 +171,9 @@ const AccentsWordsInner: React.FC<AccentsWordsProps> = memo(
         document.onkeydown = null;
       };
     }, [
+      isErrorWork,
       isIncorrect,
+      randomWordId,
       randomWordsIsReverse,
       showNewWord,
       storeWords,
@@ -427,7 +242,9 @@ const AccentsWordsInner: React.FC<AccentsWordsProps> = memo(
                   data-testid="AccentsWords__valid"
                   key={randomWord.valid}
                   width="100"
-                  onClick={() => wordOnSuccess(storeWords)}
+                  onClick={() =>
+                    wordOnSuccess(storeWords, isErrorWork, randomWordId)
+                  }
                   className={styles.AccentsWords__word}
                   style={{
                     borderRightWidth: tabletMediaQueryWidth.matches
@@ -452,7 +269,9 @@ const AccentsWordsInner: React.FC<AccentsWordsProps> = memo(
                   justify="center"
                   data-testid="AccentsWords__invalid"
                   key={randomWord.invalid}
-                  onClick={() => wordOnFail(storeWords)}
+                  onClick={() =>
+                    wordOnFail(storeWords, isErrorWork, randomWordId)
+                  }
                   className={styles.AccentsWords__word}
                   width={tabletMediaQueryWidth.matches ? '100' : '50'}
                   style={{
@@ -500,8 +319,8 @@ const AccentsWordsInner: React.FC<AccentsWordsProps> = memo(
                         style={{
                           fontSize:
                             24 -
-                            (wordsWithUncorrectTimes.length / 2 >= 24
-                              ? 20
+                            (wordsWithUncorrectTimes.length / 2 >= 21
+                              ? 21
                               : wordsWithUncorrectTimes.length / 2),
                         }}
                         className={styles.AccentsWords__wordWithError}
