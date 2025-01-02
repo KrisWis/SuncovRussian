@@ -1,0 +1,35 @@
+@use '@/app/styles/ScssVars' as *;
+
+.AccentsTrainerWords {
+  &__word {
+    border: 3px solid var(--color-black);
+    padding: 20px;
+    cursor: pointer;
+    user-select: none;
+    height: 70px;
+    font-weight: 500;
+    line-height: 100%;
+    color: var(--color-black);
+    background-color: var(--color-white);
+    transition: var(--transition-duration-default) linear;
+    transition-property: background-color, color;
+    max-width: 20%;
+
+    @media (max-width: $laptop-mediaquery-width) {
+      max-width: 30%;
+    }
+
+    @media (max-width: $tablet-mediaquery-width) {
+      max-width: 100%;
+    }
+
+    @media (max-width: $mobile-mediaquery-width) {
+      font-size: 30px;
+    }
+
+    &:hover {
+      color: var(--color-white);
+      background-color: var(--color-black);
+    }
+  }
+}

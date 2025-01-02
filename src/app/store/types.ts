@@ -1,7 +1,7 @@
-import { AccentsWordsSliceSchema } from '@/widgets/AccentsWords';
+import { TrainerSliceSchema } from '@/widgets/Trainer';
 
 export interface StateSchema {
-  AccentsWordsReducer?: AccentsWordsSliceSchema;
+  TrainerReducer?: TrainerSliceSchema;
 }
 
 export type StateSchemaKey = keyof StateSchema;
