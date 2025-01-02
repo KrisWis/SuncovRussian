@@ -34,6 +34,7 @@ export function buildPlugins({
       patterns: [
         { from: 'public/sounds', to: 'sounds' }, 
         { from: 'public/gifs', to: 'gifs' }, 
+        { from: 'public/favicon.ico', to: 'favicon.ico' },
       ],
     }),
   ];
