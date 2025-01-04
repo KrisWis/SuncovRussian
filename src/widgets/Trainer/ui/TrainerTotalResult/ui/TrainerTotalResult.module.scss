@@ -1,0 +1,33 @@
+.TrainerTotalResult {
+  &__button {
+    border-radius: 25px;
+    background-color: var(--color-black);
+    padding: 31px 42px;
+    font-weight: 600;
+    font-size: 24px;
+    line-height: 150%;
+    color: var(--color-white);
+    cursor: pointer;
+    transition: var(--transition-duration-default) linear;
+    transition-property: background-color, color;
+
+    &:hover {
+      color: var(--color-black);
+      background-color: var(--color-white);
+    }
+  }
+
+  &__totalTime {
+    font-weight: 600;
+    font-size: 36px;
+    line-height: 150%;
+    color: var(--color-black);
+  }
+
+  &__wordWithError {
+    font-weight: 500;
+    line-height: 150%;
+    text-align: center;
+    color: var(--color-black);
+  }
+}

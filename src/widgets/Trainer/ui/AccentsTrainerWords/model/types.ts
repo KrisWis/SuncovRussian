@@ -1,10 +1,9 @@
-import { AccentsWordsInterface } from '../../../model/static/accentsWords';
+import { wordActionsFunctionType } from './../../../model/hooks';
+import { AccentsWordsInterface } from '../../../model/static/wordsForAccentsTests';
 
 export interface AccentsTrainerWordsProps {
   randomWord: AccentsWordsInterface;
   randomWordsIsReverse: boolean;
-  setRandomWordsIsReverse: React.Dispatch<React.SetStateAction<boolean>>;
-  setRandomWordId: React.Dispatch<React.SetStateAction<number | null>>;
-  isErrorWork: boolean;
-  setIsIncorrect: React.Dispatch<React.SetStateAction<boolean>>;
+  wordOnSuccess: wordActionsFunctionType;
+  wordOnFail: wordActionsFunctionType;
 }

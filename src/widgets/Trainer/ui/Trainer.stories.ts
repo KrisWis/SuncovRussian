@@ -1,5 +1,5 @@
 import type { Meta, StoryObj } from '@storybook/react';
-import { accentsWords, Trainer } from '..';
+import { wordsForAccentsTests, Trainer } from '..';
 
 const meta = {
   title: 'Widgets/Trainer',
@@ -9,8 +9,8 @@ const meta = {
 export default meta;
 type Story = StoryObj<typeof meta>;
 
-export const AccentsWords: Story = {
+export const AccentsTests: Story = {
   args: {
-    words: accentsWords,
+    words: wordsForAccentsTests,
   },
 };

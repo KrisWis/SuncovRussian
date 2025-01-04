@@ -12,4 +12,8 @@ export { TrainerContext } from './model/context/TrainerContext';
 
 export { StrictModeSwitcher } from './ui/StrictModeSwitcher/ui/StrictModeSwitcher';
 
-export { accentsWords } from './model/static/accentsWords';
+export { wordsForAccentsTests } from './model/static/wordsForAccentsTests';
+
+export { wordsForUnionsTests } from './model/static/wordsForUnionsTests';
+
+export { useTrainerActions } from './model/slice/TrainerSlice';

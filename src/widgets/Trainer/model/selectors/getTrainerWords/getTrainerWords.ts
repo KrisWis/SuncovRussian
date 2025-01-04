@@ -2,7 +2,7 @@ import { buildSelector } from '@/shared/lib/store';
 import { WordsTypes } from '../../types/types';
 
 export const [useWords, getWords] = buildSelector<WordsTypes[]>((state) => {
-  if (!state.TrainerReducer) return [];
+  if (!state.Trainer) return [];
 
-  return state.TrainerReducer.words;
+  return state.Trainer.words;
 }, true);

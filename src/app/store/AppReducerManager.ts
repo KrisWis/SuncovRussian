@@ -39,9 +39,8 @@ export const createReducerManager = (
         keysToRemove = [];
       }
 
-      // TODO: если глобальных редюссеров не появится, то мб починить
-      // @ts-expect-error state может не иметь редюссеров
-      return combinedReducer(state, action);
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      return combinedReducer(state as any, action);
     },
     add: (key: StateSchemaKey, reducer: Reducer) => {
       if (!key || reducers[key]) {

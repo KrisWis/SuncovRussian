@@ -1,17 +1,21 @@
-import { AccentsWordsInterface } from '../static/accentsWords';
+import { AccentsWordsInterface } from '../static/wordsForAccentsTests';
+import { UnionsWordsInterface } from '../static/wordsForUnionsTests';
 
-type TrainerWordsTypes = 'accents';
+type TrainerWordsTypes = 'accents' | 'unions';
 
 export interface TrainerWordsInterface {
   id: number;
-  type: TrainerWordsTypes;
+  trainerType: TrainerWordsTypes;
   probability?: number;
   uncorrectTimes?: number;
   consecutivelyTimes?: number;
   inProgress?: boolean;
 }
 
-export type WordsTypes = AccentsWordsInterface;
+export type WordsTypes =
+  | TrainerWordsInterface
+  | AccentsWordsInterface
+  | UnionsWordsInterface;
 
 export interface TrainerProps {
   words: WordsTypes[];

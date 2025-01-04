@@ -1,19 +1,15 @@
 import { TrainerReducer, TrainerSliceSchema } from '../..';
-import { AccentsWordsInterface } from '../static/accentsWords';
+import { TrainerWordsInterface } from '../types/types';
 import { TrainerActions } from './TrainerSlice';
 
-const mockWords: AccentsWordsInterface[] = [
+const mockWords: TrainerWordsInterface[] = [
   {
-    valid: 'аэропОрты',
-    invalid: 'аэропортЫ',
     id: 0,
-    type: 'accents',
+    trainerType: 'accents',
   },
   {
-    valid: 'бАнты',
-    invalid: 'бантЫ',
     id: 1,
-    type: 'accents',
+    trainerType: 'unions',
   },
 ];
 

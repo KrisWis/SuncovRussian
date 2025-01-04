@@ -1,29 +1,22 @@
 import { Flex } from '@/shared/lib/Stack';
-import * as styles from './AccentsTrainerWords.module.scss';
-import { memo } from 'react';
+import { memo, useContext } from 'react';
 import { tabletMediaQueryWidth } from '@/shared/const/global';
 import { AccentsTrainerWordsProps } from '../model/types';
-import { useWordActions } from '../../../model/hooks';
 import { useWords } from '../../../model/selectors/getTrainerWords/getTrainerWords';
+import { TrainerWord } from '@/shared/ui-kit/TrainerWord';
+import { TrainerContext } from '../../../model/context/TrainerContext';
 
 export const AccentsTrainerWords: React.FC<AccentsTrainerWordsProps> = memo(
   ({
     randomWord,
     randomWordsIsReverse,
-    setRandomWordId,
-    setRandomWordsIsReverse,
-    isErrorWork,
-    setIsIncorrect,
+    wordOnFail,
+    wordOnSuccess,
   }): React.JSX.Element => {
-    // Инициализация данных
+    // Инициализация данных и контекста
     const storeWords = useWords();
 
-    const { wordOnFail, wordOnSuccess } = useWordActions(
-      randomWord.id,
-      setRandomWordsIsReverse,
-      setRandomWordId,
-      setIsIncorrect,
-    );
+    const { isIncorrect, isErrorWork } = useContext(TrainerContext);
 
     return (
       <Flex
@@ -39,23 +32,19 @@ export const AccentsTrainerWords: React.FC<AccentsTrainerWordsProps> = memo(
         }
         width="100"
       >
-        <Flex
-          justify="center"
-          data-testid="AccentsTrainerWords__valid"
-          key={randomWord.valid}
-          width="100"
+        <TrainerWord
+          dataTestId="AccentsTrainerWords__valid"
           onClick={() => wordOnSuccess(storeWords, isErrorWork, randomWord.id)}
-          className={styles.AccentsTrainerWords__word}
           style={{
             borderRightWidth: tabletMediaQueryWidth.matches
               ? 3
-              : !randomWordsIsReverse
+              : !randomWordsIsReverse && !isIncorrect
                 ? 0
                 : 3,
 
             borderBottomWidth: !tabletMediaQueryWidth.matches
               ? 3
-              : !randomWordsIsReverse
+              : !randomWordsIsReverse && !isIncorrect
                 ? 0
                 : 3,
 
@@ -63,15 +52,12 @@ export const AccentsTrainerWords: React.FC<AccentsTrainerWordsProps> = memo(
           }}
         >
           {randomWord.valid}
-        </Flex>
+        </TrainerWord>
 
-        <Flex
-          justify="center"
-          data-testid="AccentsTrainerWords__invalid"
-          key={randomWord.invalid}
+        <TrainerWord
+          dataTestId="AccentsTrainerWords__invalid"
           onClick={() => wordOnFail(storeWords, isErrorWork, randomWord.id)}
-          className={styles.AccentsTrainerWords__word}
-          width={tabletMediaQueryWidth.matches ? '100' : '50'}
+          type={isIncorrect ? 'invalid' : 'default'}
           style={{
             borderRightWidth: tabletMediaQueryWidth.matches
               ? 3
@@ -89,7 +75,7 @@ export const AccentsTrainerWords: React.FC<AccentsTrainerWordsProps> = memo(
           }}
         >
           {randomWord.invalid}
-        </Flex>
+        </TrainerWord>
       </Flex>
     );
   },

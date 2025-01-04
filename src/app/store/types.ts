@@ -1,7 +1,10 @@
 import { TrainerSliceSchema } from '@/widgets/Trainer';
 
 export interface StateSchema {
-  TrainerReducer?: TrainerSliceSchema;
+  Global: object;
+  Trainer?: TrainerSliceSchema;
 }
 
 export type StateSchemaKey = keyof StateSchema;
+
+export type StateSchemas = TrainerSliceSchema;

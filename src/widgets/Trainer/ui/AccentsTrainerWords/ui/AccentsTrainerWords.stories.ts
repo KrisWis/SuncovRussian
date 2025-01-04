@@ -1,6 +1,6 @@
 import type { Meta, StoryObj } from '@storybook/react';
 import { AccentsTrainerWords } from './AccentsTrainerWords';
-import { accentsWords } from '../../../model/static/accentsWords';
+import { wordsForAccentsTests } from '../../../model/static/wordsForAccentsTests';
 
 const meta = {
   title: 'Widgets/Trainer/AccentsTrainerWords',
@@ -15,11 +15,9 @@ type Story = StoryObj<typeof meta>;
 
 export const Primary: Story = {
   args: {
-    randomWord: accentsWords[0],
+    randomWord: wordsForAccentsTests[0],
     randomWordsIsReverse: false,
-    setRandomWordsIsReverse: () => {},
-    setRandomWordId: () => {},
-    isErrorWork: false,
-    setIsIncorrect: () => {},
+    wordOnFail: () => {},
+    wordOnSuccess: () => {},
   },
 };

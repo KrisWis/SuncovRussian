@@ -2,21 +2,8 @@ import { Flex } from '@/shared/lib/Stack';
 import * as styles from './Header.module.scss';
 import { memo, useCallback, useContext, useEffect, useState } from 'react';
 import { HeaderContext } from '../model/HeaderContext';
-import { HeaderCategories, HeaderMenu } from '../model/types';
-
-const headerCategories: HeaderMenu = {
-  Тесты: [],
-  Теория: [],
-  Тренажер: [
-    'Ударения',
-    'Паронимы',
-    'Тропы',
-    'Словарные слова',
-    'Виды союзов',
-    'Виды подчинительных союзов',
-  ],
-  Сочинения: [],
-};
+import { HeaderCategories } from '../model/types';
+import { headerCategories } from '../model/data';
 
 export const Header: React.FC = memo((): React.JSX.Element => {
   // Получение данных из контекста

@@ -1,15 +1,27 @@
 import { StateSchema } from '@/app/store/types';
-import { accentsWords } from '../../static/accentsWords';
+import { wordsForAccentsTests } from '../../static/wordsForAccentsTests';
 import { getWords } from './getTrainerWords';
-
-const initialState: StateSchema = {
-  TrainerReducer: {
-    words: accentsWords,
-  },
-};
+import { wordsForUnionsTests } from '../../static/wordsForUnionsTests';
 
 describe('getWords', () => {
   test('should return trainer test words', () => {
-    expect(getWords(initialState)).toBe(accentsWords);
+    const initialStateWithAccentsTests: DeepPartial<StateSchema> = {
+      Trainer: {
+        words: wordsForAccentsTests,
+      },
+    };
+
+    const initialStateWithUnionsTests: DeepPartial<StateSchema> = {
+      Trainer: {
+        words: wordsForUnionsTests,
+      },
+    };
+
+    expect(getWords(initialStateWithAccentsTests as StateSchema)).toBe(
+      wordsForAccentsTests,
+    );
+    expect(getWords(initialStateWithUnionsTests as StateSchema)).toBe(
+      wordsForUnionsTests,
+    );
   });
 });

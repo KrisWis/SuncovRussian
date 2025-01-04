@@ -1,14 +1,7 @@
 import { Flex } from '@/shared/lib/Stack';
 import { TrainerProps, TrainerWordsInterface } from '../model/types/types';
 import * as styles from './Trainer.module.scss';
-import {
-  memo,
-  useCallback,
-  useContext,
-  useEffect,
-  useMemo,
-  useState,
-} from 'react';
+import { memo, useCallback, useContext, useEffect, useState } from 'react';
 import { DynamicModuleLoader } from '@/shared/lib/DynamicModuleLoader';
 import {
   StrictModeSwitcher,
@@ -22,12 +15,16 @@ import { tabletMediaQueryWidth } from '@/shared/const/global';
 import { useRandomWord, useWordActions } from '../model/hooks';
 import { TrainerProgressBar } from './TrainerProgressBar/ui/TrainerProgressBar';
 import { AccentsTrainerWords } from './AccentsTrainerWords/ui/AccentsTrainerWords';
+import { AccentsWordsInterface } from '../model/static/wordsForAccentsTests';
+import { UnionsTrainerWords } from './UnionsTrainerWords';
+import { UnionsWordsInterface } from '../model/static/wordsForUnionsTests';
+import { TrainerTotalResult } from './TrainerTotalResult';
 
 // TODO: починить когда-нибудь ui тесты
 
 const TrainerInner: React.FC<TrainerProps> = memo(
   ({ words }): React.JSX.Element => {
-    // Инициализация данных и хуков
+    // Инициализация данных, хуков, контекста
     const { setWords } = useTrainerActions();
 
     const [randomWordId, setRandomWordId] = useState<number | null>(null);
@@ -41,9 +38,15 @@ const TrainerInner: React.FC<TrainerProps> = memo(
       setRandomWordId,
     );
 
-    // Появление плашки "Неверно"
-    const [isIncorrect, setIsIncorrect] = useState<boolean>(false);
+    const { totalTime, setIsIncorrect, isIncorrect, isErrorWork } =
+      useContext(TrainerContext);
 
+    useEffect(() => {
+      if (!randomWord) setRandomWordId(0);
+      // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [randomWordId]);
+
+    // Появление плашки "Неверно"
     const { wordOnFail, wordOnSuccess, showNewWord, waitRepeatedClickInFail } =
       useWordActions(
         randomWordId,
@@ -52,7 +55,8 @@ const TrainerInner: React.FC<TrainerProps> = memo(
         setIsIncorrect,
       );
 
-    useEffect(() => {
+    // Инициализация слов
+    const initializeWords = useCallback(() => {
       const wordsCopy = JSON.parse(JSON.stringify(words));
 
       for (const word of wordsCopy) {
@@ -68,6 +72,10 @@ const TrainerInner: React.FC<TrainerProps> = memo(
       }, 0);
     }, [setWords, words]);
 
+    useEffect(() => {
+      initializeWords();
+    }, [initializeWords]);
+
     // Получение случайного слова
     const storeWords = useWords();
 
@@ -77,53 +85,8 @@ const TrainerInner: React.FC<TrainerProps> = memo(
       }
     }, [randomWordId, storeWords, updateRandomWord]);
 
-    // Отображение тотального времени
-    const { totalTime, setTotalTime } = useContext(TrainerContext);
-
-    // Отображение неправильных ответов
-    const wordsWithUncorrectTimes = useMemo(
-      () =>
-        storeWords
-          .filter((word) => word.uncorrectTimes! > 0)
-          .sort((a, b) => b.uncorrectTimes! - a.uncorrectTimes!),
-      [storeWords],
-    );
-
-    // Переход ко второму раунду
-    const [isErrorWork, setIsErrorWork] = useState<boolean>(false);
-
-    const startErrorWork = useCallback(() => {
-      setIsErrorWork(true);
-
-      const UpdatedWordsWithUncorrectTimes = wordsWithUncorrectTimes.map(
-        (word) => ({
-          ...word,
-          probability: 1,
-          uncorrectTimes: 0,
-          consecutivelyTimes: 0,
-          inProgress: false,
-        }),
-      );
-
-      setWords(UpdatedWordsWithUncorrectTimes);
-      setTotalTime(0);
-
-      updateRandomWord(UpdatedWordsWithUncorrectTimes);
-    }, [setTotalTime, setWords, updateRandomWord, wordsWithUncorrectTimes]);
-
     // Отображение подсказки
     const [isHintVisible, setIsHintVisible] = useState<boolean>(false);
-
-    // Высчитывание данных для общего времени
-    const totalTimeMinutes = useMemo(
-      () => Math.round(totalTime / 60000),
-      [totalTime],
-    );
-
-    const totalTimeSeconds = useMemo(
-      () => Math.round((totalTime / 1000) % 60),
-      [totalTime],
-    );
 
     // При нажатии на стрелочки, фокус падает на соответствующее слово
     useEffect(() => {
@@ -137,33 +100,33 @@ const TrainerInner: React.FC<TrainerProps> = memo(
           showNewWord(words, isErrorWork, randomWordId);
         }
 
+        const wordElements = document.querySelectorAll('.TrainerWord');
+
+        const clickElements = (NotReverseIndex: number): void => {
+          if (words[0].trainerType === 'unions') {
+            (wordElements[NotReverseIndex] as HTMLElement).click();
+            return;
+          }
+
+          if (!randomWordsIsReverse)
+            (wordElements[NotReverseIndex] as HTMLElement).click();
+          else
+            (
+              wordElements[NotReverseIndex === 0 ? 1 : 0] as HTMLElement
+            ).click();
+        };
+
         if (!tabletMediaQueryWidth.matches) {
           if (event.key === 'ArrowLeft') {
-            if (!randomWordsIsReverse) {
-              wordOnSuccess(words, isErrorWork, randomWordId);
-            } else {
-              wordOnFail(words, isErrorWork, randomWordId);
-            }
+            clickElements(0);
           } else if (event.key === 'ArrowRight') {
-            if (randomWordsIsReverse) {
-              wordOnSuccess(words, isErrorWork, randomWordId);
-            } else {
-              wordOnFail(words, isErrorWork, randomWordId);
-            }
+            clickElements(1);
           }
         } else {
           if (event.key === 'ArrowUp') {
-            if (!randomWordsIsReverse) {
-              wordOnSuccess(words, isErrorWork, randomWordId);
-            } else {
-              wordOnFail(words, isErrorWork, randomWordId);
-            }
+            clickElements(0);
           } else if (event.key === 'ArrowDown') {
-            if (randomWordsIsReverse) {
-              wordOnSuccess(words, isErrorWork, randomWordId);
-            } else {
-              wordOnFail(words, isErrorWork, randomWordId);
-            }
+            clickElements(1);
           }
         }
       };
@@ -214,7 +177,7 @@ const TrainerInner: React.FC<TrainerProps> = memo(
                 Выбирайте ответ, а система будет предлагать новые слова или те,
                 в которых были допущены ошибки. Когда вы перестанете их
                 допускать, шкала полностью заполнится. Заполните шкалу несколько
-                раз и вы будете готовы к 4 заданию.
+                раз, сделайте работу над ошибками - и вы готовы.
               </p>
             </Flex>
             {isIncorrect && (
@@ -226,67 +189,36 @@ const TrainerInner: React.FC<TrainerProps> = memo(
                 Неверно
               </Flex>
             )}
-            {randomWord && words[0].type === 'accents' && (
-              <AccentsTrainerWords
-                randomWord={randomWord}
-                setRandomWordId={setRandomWordId}
-                setRandomWordsIsReverse={setRandomWordsIsReverse}
-                randomWordsIsReverse={randomWordsIsReverse}
-                isErrorWork={isErrorWork}
-                setIsIncorrect={setIsIncorrect}
-              />
+
+            {randomWord && (
+              <>
+                {words[0].trainerType === 'accents' && (
+                  <AccentsTrainerWords
+                    randomWord={randomWord as AccentsWordsInterface}
+                    randomWordsIsReverse={randomWordsIsReverse}
+                    wordOnFail={wordOnFail}
+                    wordOnSuccess={wordOnSuccess}
+                  />
+                )}
+
+                {words[0].trainerType === 'unions' && (
+                  <UnionsTrainerWords
+                    randomWord={randomWord as UnionsWordsInterface}
+                    wordOnSuccess={wordOnSuccess}
+                    wordOnFail={wordOnFail}
+                  />
+                )}
+              </>
             )}
 
             <TrainerProgressBar />
             <StrictModeSwitcher />
           </>
         ) : (
-          <Flex direction="column" width="100" maxHeight>
-            <span className={styles.Trainer__totalTime}>
-              Общее время:{' '}
-              {`${totalTimeMinutes < 10 ? '0' : ''}${totalTimeMinutes}`}:
-              {`${totalTimeSeconds < 10 ? '0' : ''}${totalTimeSeconds}`}
-            </span>
-
-            {wordsWithUncorrectTimes.length > 0 && (
-              <Flex maxHeight justify="around" direction="column">
-                <Flex direction="column">
-                  <span className={styles.Trainer__totalTime}>Ошибки:</span>
-
-                  <Flex direction="column" gap="3" width="100">
-                    {wordsWithUncorrectTimes.map((word) => (
-                      <span
-                        style={{
-                          fontSize:
-                            24 -
-                            (wordsWithUncorrectTimes.length / 2 >= 21
-                              ? 21
-                              : wordsWithUncorrectTimes.length / 2),
-                        }}
-                        className={styles.Trainer__wordWithError}
-                        key={word.id}
-                      >
-                        {word.valid} - {word.uncorrectTimes}{' '}
-                        {[2, 3, 4].includes(word.uncorrectTimes!)
-                          ? 'раза'
-                          : 'раз'}
-                      </span>
-                    ))}
-                  </Flex>
-                </Flex>
-
-                {!isErrorWork && (
-                  <button
-                    className={styles.Trainer__errorWork}
-                    onClick={startErrorWork}
-                    type="button"
-                  >
-                    Работа над ошибками
-                  </button>
-                )}
-              </Flex>
-            )}
-          </Flex>
+          <TrainerTotalResult
+            updateRandomWord={updateRandomWord}
+            initializeWords={initializeWords}
+          />
         )}
       </Flex>
     );
@@ -299,17 +231,23 @@ export const Trainer: React.FC<TrainerProps> = memo(
   ({ words }): React.JSX.Element => {
     // Настройка контекста
     const [totalTime, setTotalTime] = useState<number>(0);
+    const [isIncorrect, setIsIncorrect] = useState<boolean>(false);
+    const [isErrorWork, setIsErrorWork] = useState<boolean>(false);
 
     return (
       <TrainerContext.Provider
         value={{
-          totalTime: totalTime,
-          setTotalTime: setTotalTime,
+          totalTime,
+          setTotalTime,
+          isIncorrect,
+          setIsIncorrect,
+          isErrorWork,
+          setIsErrorWork,
         }}
       >
         <DynamicModuleLoader
           removeAfterUnmount={false}
-          reducers={{ TrainerReducer }}
+          reducers={{ Trainer: TrainerReducer }}
         >
           <TrainerInner words={words} />
         </DynamicModuleLoader>
