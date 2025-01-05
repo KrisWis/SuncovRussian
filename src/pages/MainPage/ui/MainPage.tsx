@@ -1,5 +1,6 @@
 import { tips } from '@/shared/assets/static/tips';
 import { Header, headerCategories, HeaderContext } from '@/widgets/Header';
+import { Theory } from '@/widgets/Theory';
 import { Tip } from '@/widgets/Tip';
 import {
   wordsForAccentsTests,
@@ -41,18 +42,23 @@ export const MainPage: React.FC = memo((): React.JSX.Element => {
           <Tip id={randomTip.id} text={randomTip.text} />
         )}
 
-        {headerCategory &&
-          headerCategories.Тренажеры.includes(headerCategory) && (
-            <>
-              {headerCategory === 'Ударения' && (
-                <Trainer words={wordsForAccentsTests} />
-              )}
+        {headerCategory && (
+          <>
+            {headerCategory === 'Теория' && <Theory />}
 
-              {headerCategory === 'Виды союзов' && (
-                <Trainer words={wordsForUnionsTests} />
-              )}
-            </>
-          )}
+            {headerCategories.Тренажеры.includes(headerCategory) && (
+              <>
+                {headerCategory === 'Ударения' && (
+                  <Trainer words={wordsForAccentsTests} />
+                )}
+
+                {headerCategory === 'Виды союзов' && (
+                  <Trainer words={wordsForUnionsTests} />
+                )}
+              </>
+            )}
+          </>
+        )}
       </main>
     </HeaderContext.Provider>
   );

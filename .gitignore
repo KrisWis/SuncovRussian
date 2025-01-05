@@ -3,3 +3,4 @@
 /node_modules
 html-report
 .loki
+src/shared/config/*

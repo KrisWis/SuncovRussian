@@ -82,13 +82,9 @@ export const StrictModeSwitcher: React.FC = memo((): React.JSX.Element => {
       <Hint
         textClassName={styles.StrictModeSwitcher__hint}
         textDirection="right"
-      >
-        <p>
-          Обнуляет прогресс каждый раз,
-          <br />
-          Когда вы покидаете сайт.
-        </p>
-      </Hint>
+        text={`Обнуляет прогресс каждый раз,
+          Когда вы покидаете сайт.`}
+      ></Hint>
     </Flex>
   );
 });
