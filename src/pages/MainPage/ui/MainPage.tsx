@@ -42,7 +42,7 @@ export const MainPage: React.FC = memo((): React.JSX.Element => {
         )}
 
         {headerCategory &&
-          headerCategories.Тренажер.includes(headerCategory) && (
+          headerCategories.Тренажеры.includes(headerCategory) && (
             <>
               {headerCategory === 'Ударения' && (
                 <Trainer words={wordsForAccentsTests} />

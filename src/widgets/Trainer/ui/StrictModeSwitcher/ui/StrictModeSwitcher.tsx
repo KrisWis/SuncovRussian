@@ -4,6 +4,7 @@ import { memo, useCallback, useState } from 'react';
 import СheckmarkSVG from '@/shared/assets/icons/global/СheckmarkSVG.svg';
 import { useWords } from '../../../model/selectors/getTrainerWords/getTrainerWords';
 import { useTrainerActions } from '../../../model/slice/TrainerSlice';
+import { Hint } from '@/shared/ui-kit/Hint';
 
 export const StrictModeSwitcher: React.FC = memo((): React.JSX.Element => {
   // Переключение строгого режима
@@ -51,9 +52,6 @@ export const StrictModeSwitcher: React.FC = memo((): React.JSX.Element => {
     }
   }, [clearProgress, strictModeFunction, strictModeIsOn]);
 
-  // Отображение подсказки
-  const [isHintVisible, setIsHintVisible] = useState<boolean>(false);
-
   return (
     <Flex
       data-testid="Trainer__StrictModeSwitcher"
@@ -81,25 +79,16 @@ export const StrictModeSwitcher: React.FC = memo((): React.JSX.Element => {
         <span className={styles.StrictModeSwitcher__text}>Строгий режим</span>
       </Flex>
 
-      <Flex relative direction="column" align="start" gap="10">
-        <p
-          className={`${styles.StrictModeSwitcher__hint__text}
-              ${isHintVisible && styles.StrictModeSwitcher__hint__text__active}`}
-        >
-          Обнуляет прогресс каждый раз.
+      <Hint
+        textClassName={styles.StrictModeSwitcher__hint}
+        textDirection="right"
+      >
+        <p>
+          Обнуляет прогресс каждый раз,
           <br />
           Когда вы покидаете сайт.
         </p>
-
-        <Flex
-          onMouseEnter={() => setIsHintVisible(true)}
-          onMouseLeave={() => setIsHintVisible(false)}
-          className={styles.StrictModeSwitcher__hint}
-          justify="center"
-        >
-          <span>?</span>
-        </Flex>
-      </Flex>
+      </Hint>
     </Flex>
   );
 });

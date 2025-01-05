@@ -52,9 +52,6 @@ export const Header: React.FC = memo((): React.JSX.Element => {
     <header className={styles.Header}>
       {Object.entries(headerCategories).map(([category, submenu]) => (
         <Flex
-          onMouseEnter={() =>
-            setHoveredHeaderCategory(category as HeaderCategories)
-          }
           onMouseLeave={() => setHoveredHeaderCategory(null)}
           key={category}
           direction="column"
@@ -67,6 +64,9 @@ export const Header: React.FC = memo((): React.JSX.Element => {
               submenu.length > 0
                 ? () => {}
                 : () => onClickCategory(category as HeaderCategories)
+            }
+            onMouseEnter={() =>
+              setHoveredHeaderCategory(category as HeaderCategories)
             }
             className={styles.Header__item}
           >
