@@ -158,26 +158,25 @@ const TrainerInner: React.FC<TrainerProps> = memo(
       >
         {!totalTime ? (
           <>
-            <Hint textClassName={styles.Trainer__hint}>
-              <>
-                {words[0].trainerType === 'accents' && (
-                  <p>
-                    Выбирайте ответ, а система будет предлагать новые слова или
+            {words[0].trainerType === 'accents' && (
+              <Hint
+                text={`Выбирайте ответ, а система будет предлагать новые слова или
                     те, в которых были допущены ошибки. Когда вы перестанете их
                     допускать, шкала полностью заполнится. Заполните шкалу
-                    несколько раз, сделайте работу над ошибками - и вы готовы.
-                  </p>
-                )}
+                    несколько раз, сделайте работу над ошибками - и вы готовы.`}
+                textClassName={styles.Trainer__hint}
+              />
+            )}
 
-                {words[0].trainerType === 'unions' && (
-                  <p>
-                    В этом тренажере под подчинительным союзом понимается любое
+            {words[0].trainerType === 'unions' && (
+              <Hint
+                text={`В этом тренажере под подчинительным союзом понимается любое
                     средство подчинительной связи, т.е. союз, союзное слово,
-                    частица
-                  </p>
-                )}
-              </>
-            </Hint>
+                    частица`}
+                textClassName={styles.Trainer__hint}
+              />
+            )}
+
             {isIncorrect && (
               <Flex
                 className={styles.Trainer__uncorrect}

@@ -1,14 +1,7 @@
-import { createSlice, ReducersMapObject } from '@reduxjs/toolkit';
+import { ReducersMapObject } from '@reduxjs/toolkit';
 import { StateSchema } from './types';
-
-export const GlobalSlice = createSlice({
-  name: 'GlobalSlice',
-  reducers: {},
-  initialState: {},
-});
-
-export const { reducer: GlobalReducer } = GlobalSlice;
+import { yandexCloudApi } from '@/shared/api/yandexCloudApi/api';
 
 export const RootReducer: ReducersMapObject<StateSchema> = {
-  Global: GlobalReducer,
+  [yandexCloudApi.reducerPath]: yandexCloudApi.reducer,
 };

@@ -4,7 +4,7 @@ import { HintProps } from '../model/types';
 import { Flex } from '@/shared/lib/Stack';
 
 export const Hint: React.FC<HintProps> = memo(
-  ({ textClassName, children, textDirection = 'top' }): React.JSX.Element => {
+  ({ textClassName, text, textDirection = 'top' }): React.JSX.Element => {
     // Отображение подсказки
     const [isHintVisible, setIsHintVisible] = useState<boolean>(false);
 
@@ -25,7 +25,7 @@ export const Hint: React.FC<HintProps> = memo(
               ${styles[`Hint__text__${textDirection}`]}
               ${textClassName}`}
         >
-          {children}
+          {text}
         </p>
       </Flex>
     );

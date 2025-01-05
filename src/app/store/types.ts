@@ -1,7 +1,8 @@
+import { yandexCloudApi } from '@/shared/api/yandexCloudApi/api';
 import { TrainerSliceSchema } from '@/widgets/Trainer';
 
 export interface StateSchema {
-  Global: object;
+  [yandexCloudApi.reducerPath]: ReturnType<typeof yandexCloudApi.reducer>;
   Trainer?: TrainerSliceSchema;
 }
 
