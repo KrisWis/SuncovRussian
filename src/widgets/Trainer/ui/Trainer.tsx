@@ -19,6 +19,7 @@ import { AccentsWordsInterface } from '../model/static/wordsForAccentsTests';
 import { UnionsTrainerWords } from './UnionsTrainerWords';
 import { UnionsWordsInterface } from '../model/static/wordsForUnionsTests';
 import { TrainerTotalResult } from './TrainerTotalResult';
+import { Hint } from '@/shared/ui-kit/Hint';
 
 // TODO: починить когда-нибудь ui тесты
 
@@ -84,9 +85,6 @@ const TrainerInner: React.FC<TrainerProps> = memo(
         updateRandomWord();
       }
     }, [randomWordId, storeWords, updateRandomWord]);
-
-    // Отображение подсказки
-    const [isHintVisible, setIsHintVisible] = useState<boolean>(false);
 
     // При нажатии на стрелочки, фокус падает на соответствующее слово
     useEffect(() => {
@@ -160,26 +158,26 @@ const TrainerInner: React.FC<TrainerProps> = memo(
       >
         {!totalTime ? (
           <>
-            <Flex align="start" gap="10">
-              <Flex
-                onMouseEnter={() => setIsHintVisible(true)}
-                onMouseLeave={() => setIsHintVisible(false)}
-                className={styles.Trainer__hint}
-                justify="center"
-              >
-                <span>?</span>
-              </Flex>
+            <Hint textClassName={styles.Trainer__hint}>
+              <>
+                {words[0].trainerType === 'accents' && (
+                  <p>
+                    Выбирайте ответ, а система будет предлагать новые слова или
+                    те, в которых были допущены ошибки. Когда вы перестанете их
+                    допускать, шкала полностью заполнится. Заполните шкалу
+                    несколько раз, сделайте работу над ошибками - и вы готовы.
+                  </p>
+                )}
 
-              <p
-                className={`${styles.Trainer__hint__text}
-              ${isHintVisible && styles.Trainer__hint__text__active}`}
-              >
-                Выбирайте ответ, а система будет предлагать новые слова или те,
-                в которых были допущены ошибки. Когда вы перестанете их
-                допускать, шкала полностью заполнится. Заполните шкалу несколько
-                раз, сделайте работу над ошибками - и вы готовы.
-              </p>
-            </Flex>
+                {words[0].trainerType === 'unions' && (
+                  <p>
+                    В этом тренажере под подчинительным союзом понимается любое
+                    средство подчинительной связи, т.е. союз, союзное слово,
+                    частица
+                  </p>
+                )}
+              </>
+            </Hint>
             {isIncorrect && (
               <Flex
                 className={styles.Trainer__uncorrect}

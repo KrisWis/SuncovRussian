@@ -3,7 +3,7 @@ import { HeaderMenu } from './types';
 export const headerCategories: HeaderMenu = {
   Тесты: [],
   Теория: [],
-  Тренажер: [
+  Тренажеры: [
     'Ударения',
     'Паронимы',
     'Тропы',

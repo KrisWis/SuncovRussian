@@ -1,0 +1,33 @@
+@use '@/app/styles/ScssVars' as *;
+
+.Hint {
+  border-radius: 100%;
+  background-color: var(--color-black);
+  font-weight: 600;
+  font-size: 24px;
+  line-height: 100%;
+  color: var(--color-white);
+  min-width: 45px;
+  min-height: 45px;
+  cursor: pointer;
+
+  &__text {
+    font-weight: 500;
+    font-size: 18px;
+    line-height: 120%;
+    color: rgba(0 0 0 / 40%);
+    opacity: 0;
+    transition: var(--transition-duration-default) linear opacity;
+
+    &__right {
+      position: absolute;
+      z-index: var(--z-index-default);
+      right: 0;
+      top: -50px;
+    }
+
+    &__active {
+      opacity: 1;
+    }
+  }
+}

@@ -7,6 +7,8 @@
   width: 100vw;
   background-color: var(--color-black);
 
+  $item-padding-x: 10px;
+
   &__item {
     cursor: pointer;
     font-weight: 500;
@@ -17,7 +19,7 @@
     transition: var(--transition-duration-default) linear;
     transition-property: background-color, color;
     user-select: none;
-    padding: 0 10px;
+    padding: 0 $item-padding-x;
     text-transform: lowercase;
 
     @media (max-width: $mobile-mediaquery-width) {
@@ -36,7 +38,7 @@
     z-index: var(--z-index-one);
     transform: translateY(50px);
     top: 30px;
-    left: 0;
+    left: $item-padding-x;
     transition: var(--transition-duration-default) linear;
     transition-property: transform, opacity;
     background-color: var(--color-white);
