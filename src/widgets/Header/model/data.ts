@@ -1,7 +1,8 @@
 import { HeaderMenu } from './types';
 
 export const headerCategories: HeaderMenu = {
-  Тесты: [],
+  Диктанты: [],
+  Пунктуация: [],
   Теория: [],
   Тренажеры: [
     'Ударения',

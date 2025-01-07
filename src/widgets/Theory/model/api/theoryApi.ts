@@ -7,7 +7,10 @@ interface getTheoriesResponse {
   offset: number;
 }
 
-export const theoriesFolderName: string = 'SuncovRussian';
+// TODO: сделать так, чтобы русские названия тоже нормальными были
+
+// TODO: сделать так, чтобы сначала подгружались только названия, а при клике на название подгружался уже сам файл
+export const theoriesFolderName: string = 'теория';
 
 const theoryApi = yandexCloudApi.injectEndpoints({
   endpoints: (build) => ({

@@ -40,5 +40,12 @@ export const PDFViewer: React.FC<PDFViewerProps> = ({ url }) => {
     });
   }, [url]);
 
+  // Очистка DOM всего родителя при изменении ссылки для избежения большого кол-ва ненужных элементов
+  useEffect(() => {
+    if (parentRef.current) {
+      parentRef.current.innerHTML = '';
+    }
+  }, [url]);
+
   return <div ref={parentRef} />;
 };

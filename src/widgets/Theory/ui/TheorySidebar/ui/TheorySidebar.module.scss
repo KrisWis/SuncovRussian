@@ -1,0 +1,16 @@
+.TheorySidebar {
+  padding: 15px 5px;
+  border-right: 1px solid var(--color-black);
+
+  &__title {
+    font-size: 14px;
+    color: var(--color-gray);
+    cursor: pointer;
+    transition: color var(--transition-duration-default) linear;
+
+    &:hover,
+    &__selected {
+      color: var(--color-black);
+    }
+  }
+}
