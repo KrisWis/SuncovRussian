@@ -2,6 +2,15 @@
 
 .Trainer {
   margin: 15px 0;
+  padding: 0 var(--padding-x);
+
+  @media (max-width: $tablet-mediaquery-width) {
+    padding: 0 var(--padding-tablet-x);
+  }
+
+  @media (max-width: $mobile-mediaquery-width) {
+    padding: 0 var(--padding-mobile-x);
+  }
 
   &__hint {
     width: 60%;

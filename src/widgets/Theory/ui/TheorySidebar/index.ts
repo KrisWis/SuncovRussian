@@ -1,0 +1,1 @@
+export { TheorySidebar } from './ui/TheorySidebar';
