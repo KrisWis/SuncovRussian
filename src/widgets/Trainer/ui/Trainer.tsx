@@ -3,23 +3,23 @@ import { TrainerProps, TrainerWordsInterface } from '../model/types/types';
 import * as styles from './Trainer.module.scss';
 import { memo, useCallback, useContext, useEffect, useState } from 'react';
 import { DynamicModuleLoader } from '@/shared/lib/DynamicModuleLoader';
-import {
-  StrictModeSwitcher,
-  TrainerContext,
-  TrainerReducer,
-  useWords,
-} from '..';
 
-import { useTrainerActions } from '../model/slice/TrainerSlice';
+import { TrainerReducer, useTrainerActions } from '../model/slice/TrainerSlice';
 import { tabletMediaQueryWidth } from '@/shared/const/global';
-import { useRandomWord, useWordActions } from '../model/hooks';
 import { TrainerProgressBar } from './TrainerProgressBar/ui/TrainerProgressBar';
 import { AccentsTrainerWords } from './AccentsTrainerWords/ui/AccentsTrainerWords';
 import { AccentsWordsInterface } from '../model/static/wordsForAccentsTests';
-import { UnionsTrainerWords } from './UnionsTrainerWords';
+
 import { UnionsWordsInterface } from '../model/static/wordsForUnionsTests';
-import { TrainerTotalResult } from './TrainerTotalResult';
+
 import { Hint } from '@/shared/ui-kit/Hint';
+import { TrainerContext } from '../model/context/TrainerContext';
+import { useWords } from '../model/selectors/getTrainerWords/getTrainerWords';
+import { UnionsTrainerWords } from './UnionsTrainerWords/ui/UnionsTrainerWords';
+import { StrictModeSwitcher } from './StrictModeSwitcher/ui/StrictModeSwitcher';
+import { TrainerTotalResult } from './TrainerTotalResult/ui/TrainerTotalResult';
+import { useRandomWord } from '../model/hooks/useRandomWord';
+import { useWordActions } from '../model/hooks/useWordActions';
 
 // TODO: починить когда-нибудь ui тесты
 

@@ -1,7 +1,7 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
 import { YANDEX_CLOUD_OAUTH_TOKEN } from '../../config/tokens';
 
-const yandexCloudApiURL: string =
+export const yandexCloudApiURL: string =
   'https://cloud-api.yandex.net/v1/disk/resources/';
 
 export const yandexCloudApi = createApi({

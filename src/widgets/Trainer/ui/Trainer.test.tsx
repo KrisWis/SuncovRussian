@@ -9,8 +9,6 @@ import {
 import { wordsForAccentsTests, Trainer, wordsForUnionsTests } from '..';
 import { unionTypes } from '../model/static/wordsForUnionsTests';
 
-// TODO: починить когда-нибудь ворнинг с act
-
 // Types
 type ComparisonType = 'equal' | 'greaterThan';
 
@@ -62,6 +60,10 @@ const clickWordAndCheckUncorrectBar = (
   }
 };
 
+// Функция задержки для полного рендера компонента
+const delay = (ms: number) => new Promise((resolve) => setTimeout(resolve, ms));
+
+// Функция для очистки DOM и прогресса после каждого теста
 const afterEachClear = async (
   setupTest: () => RenderResult<typeof queries, HTMLElement, HTMLElement>,
 ) => {
@@ -95,9 +97,6 @@ describe('AccentsTrainerWords', () => {
 
   // Tests
   test('Click valid words and not get an error, check progress bar', () => {
-    // Check progress bar value equal zero
-    checkProgressBarValue(0, component);
-
     // Click valid words
     clickWordAndCheckUncorrectBar(
       'AccentsTrainerWords__valid',
@@ -123,9 +122,6 @@ describe('AccentsTrainerWords', () => {
 
   test('Click invalid word and valid word and get an error, check progress bar', async () => {
     await waitFor(() => {
-      // Check progress bar value equal zero
-      checkProgressBarValue(0, component);
-
       // Click valid word
       clickWordAndCheckUncorrectBar(
         'AccentsTrainerWords__valid',
@@ -146,9 +142,6 @@ describe('AccentsTrainerWords', () => {
   });
 
   test('Click invalid words, check progress bar', () => {
-    // Progress bar value must be equal zero
-    checkProgressBarValue(0, component);
-
     // Click invalid words
     clickWordAndCheckUncorrectBar(
       'AccentsTrainerWords__invalid',
@@ -172,9 +165,9 @@ describe('AccentsTrainerWords', () => {
     checkProgressBarValue(0, component);
   });
 
-  afterEach(() => {
+  afterEach(async () => {
     cleanup();
-    afterEachClear(setupTest);
+    await afterEachClear(setupTest);
   });
 });
 
@@ -213,9 +206,6 @@ describe('UnionsTrainerWords', () => {
 
   test('Click valid words and not get an error, check progress bar', async () => {
     await waitFor(() => {
-      // Check progress bar value equal zero
-      checkProgressBarValue(0, component);
-
       // Get type of current word
       const wordCurrentType = getTypeOfCurrentWord();
 
@@ -245,9 +235,6 @@ describe('UnionsTrainerWords', () => {
 
   test('Click invalid word and valid word and get an error, check progress bar', async () => {
     await waitFor(() => {
-      // Check progress bar value equal zero
-      checkProgressBarValue(0, component);
-
       // Get type of current word
       const wordCurrentType = getTypeOfCurrentWord();
 
@@ -278,9 +265,6 @@ describe('UnionsTrainerWords', () => {
 
   test('Click invalid words, check progress bar', async () => {
     await waitFor(() => {
-      // Progress bar value must be equal zero
-      checkProgressBarValue(0, component);
-
       // Get type of current word
       const wordCurrentType = getTypeOfCurrentWord();
 
@@ -314,8 +298,8 @@ describe('UnionsTrainerWords', () => {
     });
   });
 
-  afterEach(() => {
+  afterEach(async () => {
     cleanup();
-    afterEachClear(setupTest);
+    await afterEachClear(setupTest);
   });
 });

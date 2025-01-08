@@ -2,7 +2,7 @@ import type { Meta, StoryObj } from '@storybook/react';
 import { StrictModeSwitcher } from './StrictModeSwitcher';
 
 const meta = {
-  title: 'Widgets/StrictModeSwitcher',
+  title: 'Widgets/Trainer/StrictModeSwitcher',
   component: StrictModeSwitcher,
   parameters: {
     layout: 'centered',

@@ -1,12 +1,33 @@
+@use '@/app/styles/ScssVars' as *;
+
 .TheorySidebar {
-  padding: 15px 5px;
+  $padding-y: 15px;
+
+  padding: $padding-y 10px;
   border-right: 1px solid var(--color-black);
+  max-height: 100%;
+  height: 100vh;
+  overflow-y: auto;
+  position: fixed;
+  background-color: var(--color-white);
+  top: 0;
+  transition: margin-top var(--transition-duration-default) linear;
+  z-index: var(--z-index-one);
+
+  @media (max-width: $mobile-mediaquery-width) {
+    border-right: none;
+    border-bottom: 1px solid var(--color-black);
+    padding: 20px 10px;
+    height: var(--theory-sidebar-height-mobile);
+    overflow: auto hidden;
+  }
 
   &__title {
     font-size: 14px;
     color: var(--color-gray);
     cursor: pointer;
     transition: color var(--transition-duration-default) linear;
+    white-space: nowrap;
 
     &:hover,
     &__selected {

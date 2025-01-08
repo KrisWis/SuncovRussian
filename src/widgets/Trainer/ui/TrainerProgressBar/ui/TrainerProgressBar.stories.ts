@@ -2,7 +2,7 @@ import type { Meta, StoryObj } from '@storybook/react';
 import { TrainerProgressBar } from './TrainerProgressBar';
 
 const meta = {
-  title: 'Widgets/TrainerProgressBar',
+  title: 'Widgets/Trainer/TrainerProgressBar',
   component: TrainerProgressBar,
   parameters: {
     layout: 'centered',

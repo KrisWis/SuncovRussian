@@ -6,11 +6,12 @@ import {
 import { YandexCloudAPIItem } from '@/shared/api/yandexCloudApi/types';
 import { PageLoading } from '@/shared/ui-kit/PageLoading/PageLoading';
 import { ErrorComponent } from '@/shared/ui-kit/ErrorComponent';
-import { TheorySidebar } from './TheorySidebar';
 import { Flex } from '@/shared/lib/Stack';
 import * as styles from './Theory.module.scss';
 import { TheoryContext } from '../model/context/TheoryContext';
 import { PDFViewer } from '@/shared/lib/PDFViewer';
+import { mobileMediaQueryWidth } from '@/shared/const/global';
+import { TheorySidebar } from './TheorySidebar/ui/TheorySidebar';
 
 export const Theory: React.FC = memo((): React.JSX.Element => {
   // Получение всех pdf файлов с теорией с Яндекс Диска
@@ -26,6 +27,7 @@ export const Theory: React.FC = memo((): React.JSX.Element => {
       const dataPfdFiles = data.items.filter(
         (item) => item.name.endsWith('.pdf') && regex.test(item.path),
       );
+
       setPdfFiles(dataPfdFiles);
     }
   }, [data]);
@@ -50,17 +52,27 @@ export const Theory: React.FC = memo((): React.JSX.Element => {
 
   return (
     <TheoryContext.Provider value={{ selectedSection, setSelectedSection }}>
-      <Flex gap="50" maxHeight width="100">
-        <TheorySidebar
-          pdfFilesTitles={pdfFiles.map((item) => item.name.slice(0, -4))}
-        />
+      <Flex
+        direction={mobileMediaQueryWidth.matches ? 'column' : 'row'}
+        relative
+        maxHeight
+        width="100"
+        gap={mobileMediaQueryWidth.matches ? '20' : '0'}
+      >
+        {pdfFiles.length > 0 && (
+          <TheorySidebar
+            pdfFilesTitles={pdfFiles.map((item) => item.name.slice(0, -4))}
+          />
+        )}
 
         {selectedPdfFile && (
           <Flex
             className={styles.Theory__content}
             relative
             maxHeight
-            width="80"
+            width={mobileMediaQueryWidth.matches ? '100' : '85'}
+            justify="center"
+            align="start"
           >
             <PDFViewer url={selectedPdfFile.file} />
           </Flex>
