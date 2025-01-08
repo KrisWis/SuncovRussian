@@ -26,6 +26,7 @@
 
   // Heights
   --header-height: 30px;
+  --theory-sidebar-height-mobile: 60px;
 }
 
 * {
@@ -64,4 +65,8 @@ main {
   height: 100%;
   min-height: 80vh;
   position: relative;
+}
+
+canvas {
+  max-width: 100%;
 }

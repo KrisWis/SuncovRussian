@@ -12,19 +12,25 @@ export type FlexAlign = 'start' | 'center' | 'end' | 'stretch';
 export type FlexDirection = 'row' | 'column' | 'rowReverse' | 'columnReverse';
 export type FlexGap = '0' | '3' | '5' | '10' | '15' | '20' | '30' | '40' | '50';
 export type FlexWitdth =
+  | '5'
   | '10'
+  | '15'
   | '20'
   | '25'
   | '30'
   | '35'
   | '40'
+  | '45'
   | '50'
+  | '55'
   | '60'
   | '65'
   | '70'
   | '75'
   | '80'
+  | '85'
   | '90'
+  | '95'
   | '100';
 
 const justifyClasses: Record<FlexJustify, string> = {
@@ -63,19 +69,25 @@ const gapClasses: Record<FlexGap, string> = {
 };
 
 const widthClasses: Record<FlexWitdth, string> = {
+  5: styles.width5,
   10: styles.width10,
+  15: styles.width15,
   20: styles.width20,
   25: styles.width25,
   30: styles.width30,
   35: styles.width35,
   40: styles.width40,
+  45: styles.width45,
   50: styles.width50,
+  55: styles.width55,
   60: styles.width60,
   65: styles.width65,
   70: styles.width70,
   75: styles.width75,
   80: styles.width80,
+  85: styles.width85,
   90: styles.width90,
+  95: styles.width95,
   100: styles.width100,
 };
 

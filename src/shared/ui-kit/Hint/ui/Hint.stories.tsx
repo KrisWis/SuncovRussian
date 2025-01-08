@@ -4,9 +4,6 @@ import { Hint } from './Hint';
 const meta = {
   title: 'Shared/UI-Kit/Hint',
   component: Hint,
-  parameters: {
-    layout: 'centered',
-  },
 } satisfies Meta<typeof Hint>;
 
 export default meta;
@@ -20,17 +17,16 @@ export const Right: Story = {
         полностью заполнится. Заполните шкалу несколько раз, сделайте работу над
         ошибками - и вы готовы.
       `,
-    textDirection: 'right',
   },
 };
 
-export const Top: Story = {
-  args: {
-    text: `
-        В этом тренажере под подчинительным союзом понимается любое
-        средство подчинительной связи, т.е. союз, союзное слово,
-        частица
-      `,
-    textDirection: 'top',
-  },
+export const Top: React.FC = (): React.JSX.Element => {
+  return (
+    <div style={{ marginTop: 100, width: 250, position: 'relative' }}>
+      <Hint
+        textDirection="top"
+        text="Не ставь запятую между подлежащим и сказуемым."
+      />
+    </div>
+  );
 };

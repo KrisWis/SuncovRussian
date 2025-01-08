@@ -21,7 +21,6 @@
 - `npm run stylelint:fix` - Запуск исправления scss файлов проекта, там где это возможно, с помощью styleLint
 - `npm run eslint:check` - Запуск проверки ts файлов проекта с помощью esLint
 - `npm run eslint:fix` - Запуск исправления ts файлов проекта, там где это возможно, с помощью esLint
-- `npm run lint:depcruise` - Запуск dependency-cruiser для анализа зависимостей
 - `npm run storybook` - запуск Storybook
 - `npm run storybook:build` - Сборка storybook билда
 - `npm run test:unit` - Запуск unit тестов с jest/react-testing-library
@@ -66,7 +65,6 @@
 - `npm run lint:ts:fix` - Исправление ts файлов линтером
 - `npm run lint:scss` - Проверка scss файлов style линтером
 - `npm run lint:scss:fix` - Исправление scss файлов style линтером
-- `npm run lint:depcruise` - Запуск dependency-cruiser для анализа зависимостей
 
 ---
 
@@ -85,15 +83,15 @@
 Пример:
 
 ```typescript jsx
-import type { Meta, StoryObj } from "@storybook/react";
-import { Button } from "./Button";
-import { ButtonTypes } from "../model/Button__types";
+import type { Meta, StoryObj } from '@storybook/react';
+import { Button } from './Button';
+import { ButtonTypes } from '../model/Button__types';
 
 const meta = {
-  title: "shared/Button",
+  title: 'shared/Button',
   component: Button,
   parameters: {
-    layout: "centered",
+    layout: 'centered',
   },
 } satisfies Meta<typeof Button>;
 
@@ -102,32 +100,32 @@ type Story = StoryObj<typeof meta>;
 
 export const ButtonRed: Story = {
   args: {
-    to: "/",
-    text: "Красная кнопка",
+    to: '/',
+    text: 'Красная кнопка',
     type: ButtonTypes.RED,
   },
 };
 
 export const ButtonBlue: Story = {
   args: {
-    to: "/",
-    text: "Синяя кнопка",
+    to: '/',
+    text: 'Синяя кнопка',
     type: ButtonTypes.BLUE,
   },
 };
 
 export const ButtonGray: Story = {
   args: {
-    to: "/",
-    text: "Серая кнопка",
+    to: '/',
+    text: 'Серая кнопка',
     type: ButtonTypes.GRAY,
   },
 };
 
 export const ButtonBlack: Story = {
   args: {
-    to: "/",
-    text: "Чёрная кнопка",
+    to: '/',
+    text: 'Чёрная кнопка',
     type: ButtonTypes.BLACK,
   },
 };

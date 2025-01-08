@@ -5,6 +5,7 @@ import { BundleAnalyzerPlugin } from "webpack-bundle-analyzer";
 import ReactRefreshWebpackPlugin from "@pmmmwh/react-refresh-webpack-plugin";
 import ForkTsCheckerWebpackPlugin from "fork-ts-checker-webpack-plugin";
 import CopyWebpackPlugin from "copy-webpack-plugin";
+import CircularDependencyPlugin from "circular-dependency-plugin";
 import { BuildOptions } from "./types/config";
 
 export function buildPlugins({
@@ -36,6 +37,11 @@ export function buildPlugins({
         { from: 'public/gifs', to: 'gifs' }, 
         { from: 'public/favicon.ico', to: 'favicon.ico' },
       ],
+    }),
+
+    new CircularDependencyPlugin({
+      exclude: /a\.js|node_modules/,
+      failOnError: true,
     }),
   ];
 

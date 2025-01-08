@@ -11,7 +11,7 @@ const TipWrapper: React.FC = (): React.JSX.Element => {
 };
 
 const meta = {
-  title: 'Widgets/Tip',
+  title: 'Shared/UI-Kit/Tip',
   component: TipWrapper,
   parameters: {
     layout: 'centered',

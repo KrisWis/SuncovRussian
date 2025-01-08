@@ -1,7 +1,7 @@
 import { tips } from '@/shared/assets/static/tips';
 import { Header, headerCategories, HeaderContext } from '@/widgets/Header';
 import { Theory } from '@/widgets/Theory';
-import { Tip } from '@/widgets/Tip';
+import { Tip } from '@/shared/ui-kit/Tip';
 import {
   wordsForAccentsTests,
   Trainer,
@@ -30,8 +30,6 @@ export const MainPage: React.FC = memo((): React.JSX.Element => {
     setWords([]);
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [headerCategory]);
-
-  // TODO: проверить все комментарии на макете в конце работы
 
   return (
     <HeaderContext.Provider value={{ headerCategory, setHeaderCategory }}>

@@ -1,6 +1,7 @@
 import { useCallback, useMemo } from 'react';
-import { useWords } from '../..';
+
 import { WordsTypes } from '../types/types';
+import { useWords } from '../selectors/getTrainerWords/getTrainerWords';
 
 interface UseRandomWordResult {
   updateRandomWord: (words?: WordsTypes[]) => void;

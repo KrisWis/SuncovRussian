@@ -1,8 +1,9 @@
 import { Flex } from '@/shared/lib/Stack';
 import * as styles from './TheorySidebar.module.scss';
-import { memo, useContext, useEffect } from 'react';
+import { memo, useContext, useEffect, useState } from 'react';
 import { TheorySidebarProps } from '../model/types';
 import { TheoryContext } from '../../../model/context/TheoryContext';
+import { mobileMediaQueryWidth } from '@/shared/const/global';
 
 export const TheorySidebar: React.FC<TheorySidebarProps> = memo(
   ({ pdfFilesTitles }): React.JSX.Element => {
@@ -15,14 +16,33 @@ export const TheorySidebar: React.FC<TheorySidebarProps> = memo(
       // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [setSelectedSection]);
 
+    // Если скролл пользователя не максимально вверху, то убираем margin-top
+    const [marginTop, setMarginTop] = useState<string | number>(
+      'var(--header-height)',
+    );
+
+    useEffect(() => {
+      const checkScroll = () => {
+        if (document.body.scrollTop === 0) {
+          setMarginTop('var(--header-height)');
+        } else {
+          setMarginTop(0);
+        }
+      };
+
+      document.body.addEventListener('scroll', checkScroll);
+      return () => document.body.removeEventListener('scroll', checkScroll);
+    }, []);
+
     return (
       <Flex
-        direction="column"
+        direction={mobileMediaQueryWidth.matches ? 'row' : 'column'}
         maxHeight
         align="start"
-        width="20"
+        width={mobileMediaQueryWidth.matches ? '100' : '15'}
         gap="15"
         className={styles.TheorySidebar}
+        style={{ marginTop: marginTop }}
       >
         {pdfFilesTitles.map((title) => (
           <span
