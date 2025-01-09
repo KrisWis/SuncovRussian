@@ -1,4 +1,4 @@
-import { wordActionsFunctionType } from '@/widgets/Trainer/model/hooks/useWordActions';
+import { wordActionsFunctionType } from '../../../model/hooks/useWordActions';
 import { AccentsWordsInterface } from '../../../model/static/wordsForAccentsTests';
 
 export interface AccentsTrainerWordsProps {
