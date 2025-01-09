@@ -60,9 +60,6 @@ const clickWordAndCheckUncorrectBar = (
   }
 };
 
-// Функция задержки для полного рендера компонента
-const delay = (ms: number) => new Promise((resolve) => setTimeout(resolve, ms));
-
 // Функция для очистки DOM и прогресса после каждого теста
 const afterEachClear = async (
   setupTest: () => RenderResult<typeof queries, HTMLElement, HTMLElement>,
