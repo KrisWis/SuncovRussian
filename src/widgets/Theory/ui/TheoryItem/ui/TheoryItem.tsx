@@ -8,10 +8,10 @@ import { ErrorComponent } from '@/shared/ui-kit/ErrorComponent';
 export const TheoryItem: React.FC<TheoryItemProps> = memo(
   ({ fileKey }): React.JSX.Element => {
     // Получение ссылки на файл по ключу
-    const { data, isLoading, isError } = useGetTheoryQuery(fileKey);
+    const { data, isLoading, isError, isFetching } = useGetTheoryQuery(fileKey);
 
     // Обработка события загрузки файлов
-    if (isLoading) {
+    if (isLoading || isFetching) {
       return <PageLoading />;
     }
 

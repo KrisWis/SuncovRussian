@@ -12,11 +12,6 @@
     "lint:scss": "npx stylelint \"**/*.scss\"",
     "lint:scss:fix": "npx stylelint \"**/*.scss\" --fix",
     "storybook": "storybook dev -p 6006 --ci",
-    "test:ui": "npx loki test --port 6006 & npm run test:ui:report",
-    "test:ui:ok": "npx loki approve",
-    "test:ui:report:json": "node scripts/generate-visual-json-report.cjs",
-    "test:ui:report:html": "npx reg-cli --from .loki/report.json --report .loki/report.html",
-    "test:ui:report": "npm run test:ui:report:json && npm run test:ui:report:html",
     "test:unit": "jest --config ./config/jest/jest.config.ts",
     "prettier": "npx prettier --write **/*.{ts,tsx,json}"
   },
@@ -26,8 +21,8 @@
   "description": "",
   "dependencies": {
     "@reduxjs/toolkit": "^2.5.0",
-    "react": "^19.0.0",
-    "react-dom": "^19.0.0",
+    "react": "^18.3.1",
+    "react-dom": "^18.3.1",
     "react-error-boundary": "^4.1.2",
     "react-pdf": "^9.2.1",
     "react-redux": "^9.2.0"
@@ -80,7 +75,6 @@
     "jest-environment-jsdom": "^29.7.0",
     "jest-html-reporters": "^3.1.7",
     "lint-staged": "^15.2.11",
-    "loki": "^0.35.1",
     "prettier": "^3.4.2",
     "react-refresh": "^0.16.0",
     "reg-cli": "^0.18.9",
@@ -105,20 +99,5 @@
     "**/*.scss": [
       "stylelint"
     ]
-  },
-  "loki": {
-    "configurations": {
-      "chrome.laptop": {
-        "target": "chrome.app",
-        "width": 1366,
-        "height": 768,
-        "deviceScaleFactor": 1,
-        "mobile": false
-      },
-      "chrome.iphone7": {
-        "target": "chrome.app",
-        "preset": "iPhone 7"
-      }
-    }
   }
 }

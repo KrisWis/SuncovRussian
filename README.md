@@ -22,12 +22,6 @@
 - `npm run storybook` - запуск Storybook
 - `npm run storybook:build` - Сборка storybook билда
 - `npm run test:unit` - Запуск unit тестов с jest/react-testing-library
-- `npm run test:ui` - Запуск скриншотных тестов с loki
-- `npm run test:ui:ok` - Подтверждение новых скриншотов
-- `npm run test:ui:ci` - Запуск скриншотных тестов в CI
-- `npm run test:ui:report` - Генерация полного отчета для скриншотных тестов
-- `npm run test:ui:json` - Генерация json отчета для скриншотных тестов
-- `npm run test:ui:html` - Генерация HTML отчета для скриншотных тестов
 - `npm run prettier` - запуск Prettier для форматирования кода
 - `npm run prepare` - Загрузка husky для прекоммит-хуков
 
@@ -47,7 +41,6 @@
 
 1. Обычные unit тесты на jest - `npm run test:unit`
 2. Тесты на компоненты с React testing library - `npm run test:unit`
-3. Скриншотное тестирование с loki - `npm run test:ui`
 
 Подробнее о тестах - [документация тестирования](/docs/tests.md)
 
