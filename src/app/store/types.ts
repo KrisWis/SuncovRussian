@@ -1,8 +1,8 @@
-import { yandexCloudApi } from '@/shared/api/yandexCloudApi/api';
+import { UTApi } from '@/shared/api/UTApi/api';
 import { TrainerSliceSchema } from '@/widgets/Trainer';
 
 export interface StateSchema {
-  [yandexCloudApi.reducerPath]: ReturnType<typeof yandexCloudApi.reducer>;
+  [UTApi.reducerPath]: ReturnType<typeof UTApi.reducer>;
   Trainer?: TrainerSliceSchema;
 }
 

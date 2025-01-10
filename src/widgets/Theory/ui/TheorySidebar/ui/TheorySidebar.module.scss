@@ -12,7 +12,7 @@
   background-color: var(--color-white);
   top: 0;
   transition: margin-top var(--transition-duration-default) linear;
-  z-index: var(--z-index-one);
+  z-index: var(--z-index-sidebar);
 
   @media (max-width: $mobile-mediaquery-width) {
     border-right: none;
