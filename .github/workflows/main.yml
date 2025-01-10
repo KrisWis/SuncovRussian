@@ -23,5 +23,6 @@ jobs:
 
       - name: Deploy to GitHub Pages
         run: |
+          npm run build:prod
           npm install gh-pages
           npx gh-pages -d build -r https://EvgeniyWis:${{ secrets.GH_TOKEN }}@github.com/EvgeniyWis/SuncovRussian.git
