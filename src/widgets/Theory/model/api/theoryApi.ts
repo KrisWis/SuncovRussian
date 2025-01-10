@@ -1,22 +1,24 @@
-import { yandexCloudApi } from '@/shared/api/yandexCloudApi/api';
-import { YandexCloudAPIItem } from '@/shared/api/yandexCloudApi/types';
+import { UTApi } from '@/shared/api/UTApi/api';
+import { getAllTheoriesResponse, getTheoryResponse } from './types';
 
-interface getTheoriesResponse {
-  items: YandexCloudAPIItem[];
-  limit: number;
-  offset: number;
-}
-
-export const theoriesFolderName: string = 'theory';
-
-const theoryApi = yandexCloudApi.injectEndpoints({
+const theoryApi = UTApi.injectEndpoints({
   endpoints: (build) => ({
-    getTheories: build.query<getTheoriesResponse, void>({
+    getAllTheories: build.mutation<getAllTheoriesResponse, void>({
       query: () => ({
-        url: `/files?media_type=document&limit=100`,
+        url: `/v6/listFiles`,
+        method: 'POST',
+        body: {},
       }),
+    }),
+
+    getTheory: build.query<getTheoryResponse, string>({
+      query: (fileKey) => ({
+        url: `/v6/pollUpload/${fileKey}`,
+      }),
+
+      keepUnusedDataFor: 120,
     }),
   }),
 });
 
-export const { useGetTheoriesQuery } = theoryApi;
+export const { useGetAllTheoriesMutation, useGetTheoryQuery } = theoryApi;
