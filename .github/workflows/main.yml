@@ -1,0 +1,27 @@
+name: CI
+
+on:
+  push:
+    branches:
+      - features/theory
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v2
+        with:
+          node-version: '20.18.1'
+
+      - name: Install dependencies
+        run: npm install
+
+      - name: Deploy the project
+        env:
+          UT_API_TOKEN: ${{ secrets.UT_API_TOKEN }}
+        run: npm run deploy
