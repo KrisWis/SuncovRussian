@@ -21,8 +21,6 @@ import { TrainerTotalResult } from './TrainerTotalResult/ui/TrainerTotalResult';
 import { useRandomWord } from '../model/hooks/useRandomWord';
 import { useWordActions } from '../model/hooks/useWordActions';
 
-// TODO: починить когда-нибудь ui тесты
-
 const TrainerInner: React.FC<TrainerProps> = memo(
   ({ words }): React.JSX.Element => {
     // Инициализация данных, хуков, контекста

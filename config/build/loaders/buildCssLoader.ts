@@ -1,9 +1,9 @@
 import MiniCssExtractPlugin from 'mini-css-extract-plugin';
 
-export function buildCssLoader(isDev: boolean) {
+export function buildCssLoader(isDev: boolean, isStorybook: boolean) {
     return {
         test: /\.(sa|sc|c)ss$/i,
-        exclude: /node_modules\/(?!react-pdf)/,
+        exclude: isStorybook ? /node_modules/ : /node_modules\/(?!react-pdf)/,
         use: [
             isDev ? 'style-loader' : MiniCssExtractPlugin.loader,
             {

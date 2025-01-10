@@ -57,7 +57,7 @@ const config: StorybookConfig = {
       use: ['@svgr/webpack'],
     });
 
-    config!.module!.rules.push(buildCssLoader(true));
+    config!.module!.rules.push(buildCssLoader(true, true));
 
     config!.plugins!.push(
       new DefinePlugin({

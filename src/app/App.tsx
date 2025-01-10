@@ -2,7 +2,8 @@ import { MainPage } from '@/pages/MainPage';
 import { PageLoading } from '@/shared/ui-kit/PageLoading/PageLoading';
 import { Suspense } from 'react';
 
-// TODO: написать cypress тесты в конце разработки
+// TODO: написать cypress тесты
+// TODO: найти библиотеку для скриншотного тестирования со Storybook и написать тесты
 
 export const App = () => {
   return (

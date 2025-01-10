@@ -2,7 +2,7 @@ import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
 
 export const UTApiURL: string = 'https://api.uploadthing.com';
 
-// TODO: сделать так, чтобы токен не попадал в сборку
+// TODO: когда появится бекенд, то сделать так, чтобы апи ключ брался не из .env, а отправлялся запрос на бекенд и брался уже оттуда.
 export const UTApi = createApi({
   reducerPath: 'UTApi',
   baseQuery: fetchBaseQuery({
