@@ -4,7 +4,7 @@ import { Flex } from '@/shared/lib/Stack';
 
 export const PageLoading: React.FC = memo((): React.JSX.Element => {
   return (
-    <Flex justify="center" className={styles.PageLoading}>
+    <Flex data-testid="Loading" justify="center" className={styles.PageLoading}>
       <img src="gifs/PageLoading.gif" alt="Анимация загрузки страниц" />
     </Flex>
   );
