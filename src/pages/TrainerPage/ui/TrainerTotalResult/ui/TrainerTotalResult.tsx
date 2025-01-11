@@ -3,10 +3,10 @@ import * as styles from './TrainerTotalResult.module.scss';
 import { memo, useCallback, useContext, useMemo } from 'react';
 import { TrainerTotalResultProps } from '../model/types';
 import { useWords } from '../../../model/selectors/getTrainerWords/getTrainerWords';
-import { useTrainerActions } from '../../../model/slice/TrainerPageSlice';
-import { AccentsWordsInterface } from '../../../model/static/wordsForAccentsTests';
+import { PrimaryWordsInterface } from '../../../model/types/types';
 import { UnionsWordsInterface } from '../../../model/static/wordsForUnionsTests';
 import { TrainerPageContext } from '../../../model/context/TrainerPageContext';
+import { useTrainerActions } from '../../../model/slice/TrainerPageSlice';
 
 export const TrainerTotalResult: React.FC<TrainerTotalResultProps> = memo(
   ({ initializeWords, updateRandomWord }): React.JSX.Element => {
@@ -96,9 +96,9 @@ export const TrainerTotalResult: React.FC<TrainerTotalResultProps> = memo(
                     className={styles.TrainerTotalResult__wordWithError}
                     key={word.id}
                   >
-                    {word.trainerType === 'accents' && (
+                    {word.trainerType === 'ударения' && (
                       <>
-                        {(word as AccentsWordsInterface).valid} -{' '}
+                        {(word as PrimaryWordsInterface).valid} -{' '}
                         {word.uncorrectTimes}{' '}
                         {[2, 3, 4].includes(word.uncorrectTimes!)
                           ? 'раза'
@@ -106,7 +106,7 @@ export const TrainerTotalResult: React.FC<TrainerTotalResultProps> = memo(
                       </>
                     )}
 
-                    {word.trainerType === 'unions' && (
+                    {word.trainerType === 'виды союзов' && (
                       <>
                         {(word as UnionsWordsInterface).word} -{' '}
                         {word.uncorrectTimes}{' '}
