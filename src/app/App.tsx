@@ -2,7 +2,7 @@ import { MainPage } from '@/pages/MainPage';
 import { PageLoading } from '@/shared/ui-kit/PageLoading/PageLoading';
 import { Suspense } from 'react';
 
-// TODO: найти библиотеку для скриншотного тестирования со Storybook и написать тесты
+// TODO: Исправить ошибку с creevey, либо найти новую либу для ui тестирования со Storybook
 
 export const App = () => {
   return (
