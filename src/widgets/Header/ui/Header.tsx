@@ -69,6 +69,7 @@ export const Header: React.FC = memo((): React.JSX.Element => {
               setHoveredHeaderCategory(category as HeaderCategories)
             }
             className={styles.Header__item}
+            data-testid={`Header__${category}`}
           >
             {category}
           </Flex>

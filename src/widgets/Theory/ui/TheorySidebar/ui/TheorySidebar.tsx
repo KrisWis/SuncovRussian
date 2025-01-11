@@ -36,6 +36,7 @@ export const TheorySidebar: React.FC<TheorySidebarProps> = memo(
 
     return (
       <Flex
+        data-testid="Theory__Sidebar"
         direction={mobileMediaQueryWidth.matches ? 'row' : 'column'}
         maxHeight
         align="start"
@@ -44,8 +45,9 @@ export const TheorySidebar: React.FC<TheorySidebarProps> = memo(
         className={styles.TheorySidebar}
         style={{ marginTop: marginTop }}
       >
-        {pdfFilesTitles.map((title) => (
+        {pdfFilesTitles.map((title, index) => (
           <span
+            data-testid={`Theory__Sidebar__${index}`}
             onClick={() => setSelectedSection(title)}
             className={`${styles.TheorySidebar__title} ${selectedSection === title && styles.TheorySidebar__title__selected}`}
             key={title}

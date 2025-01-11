@@ -20,7 +20,11 @@ export const TheoryItem: React.FC<TheoryItemProps> = memo(
       return <ErrorComponent />;
     }
 
-    return <>{data?.fileData && <PDFViewer url={data?.fileData.fileUrl} />}</>;
+    return (
+      <div data-testid="TheoryItem">
+        {data?.fileData && <PDFViewer url={data?.fileData.fileUrl} />}
+      </div>
+    );
   },
 );
 
