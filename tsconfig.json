@@ -2,8 +2,6 @@
   "compilerOptions": {
     "outDir": "./dist/",
     "noImplicitAny": true,
-    "module": "es2022",
-    "target": "es5",
     "allowJs": true,
     "moduleResolution": "node",
     "esModuleInterop": true,
@@ -14,7 +12,9 @@
     "baseUrl": "./src",
     "paths": {
       "@/*": ["./*"]
-    }
+    },
+    "target": "esnext",
+    "module": "esnext"
   },
   "ts-node": {
     "compilerOptions": {

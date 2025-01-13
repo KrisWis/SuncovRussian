@@ -1,18 +1,15 @@
 import { useState } from 'react';
-import { PageLoading } from '../ui-kit/PageLoading/PageLoading';
+import { PageLoading } from '../ui/PageLoading/PageLoading';
 import { Document, Page, pdfjs } from 'react-pdf';
 import 'react-pdf/dist/Page/AnnotationLayer.css';
 import 'react-pdf/dist/Page/TextLayer.css';
-import { ErrorComponent } from '../ui-kit/ErrorComponent';
+import { ErrorComponent } from '../ui/ErrorComponent';
 
 interface PDFViewerProps {
   url: string;
 }
 
-pdfjs.GlobalWorkerOptions.workerSrc = new URL(
-  'pdfjs-dist/build/pdf.worker.min.mjs',
-  import.meta.url,
-).toString();
+pdfjs.GlobalWorkerOptions.workerSrc = `/scripts/pdf.worker.min.mjs`;
 
 export const PDFViewer: React.FC<PDFViewerProps> = ({ url }) => {
   // Отображение PDF файла на сайте
