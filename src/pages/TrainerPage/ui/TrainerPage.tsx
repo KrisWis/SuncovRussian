@@ -7,7 +7,6 @@ import { DynamicModuleLoader } from '@/shared/lib/DynamicModuleLoader';
 import { TrainerReducer } from '../model/slice/TrainerPageSlice';
 import { tabletMediaQueryWidth } from '@/shared/const/global';
 import { TrainerProgressBar } from './TrainerProgressBar/ui/TrainerProgressBar';
-import { PrimaryTrainerWords } from './PrimaryTrainerWords/ui/PrimaryTrainerWords';
 import { PrimaryWordsInterface } from '../model/types/types';
 
 import { UnionsWordsInterface } from '../model/static/wordsForUnionsTests';
@@ -20,8 +19,9 @@ import { StrictModeSwitcher } from './StrictModeSwitcher/ui/StrictModeSwitcher';
 import { TrainerTotalResult } from './TrainerTotalResult/ui/TrainerTotalResult';
 import { useRandomWord } from '../model/hooks/useRandomWord';
 import { useWordActions } from '../model/hooks/useWordActions';
-import { Page } from '@/widgets/Page';
 import { useInitializeWords } from '../model/hooks/useInitializeWords';
+import { PrimaryTrainerWords } from './PrimaryTrainerWords/ui/PrimaryTrainerWords';
+import { Page } from '@/widgets/Page';
 
 const TrainerInner: React.FC<TrainerPageProps> = memo(
   ({ words }): React.JSX.Element => {
@@ -134,78 +134,72 @@ const TrainerInner: React.FC<TrainerPageProps> = memo(
     }, [initializeWords]);
 
     return (
-      <Flex
-        maxHeight
-        justify="between"
-        direction="column"
-        className={styles.Trainer}
-        relative
-        width="100"
-      >
-        {!totalTime ? (
+      <Page>
+        {storeWords.length > 0 && (
           <>
-            {words[0].trainerType === 'ударения' && (
-              <Hint
-                text={`Выбирайте ответ, а система будет предлагать новые слова или
+            {!totalTime ? (
+              <>
+                {storeWords[0].trainerType === 'ударения' && (
+                  <Hint
+                    text={`Выбирайте ответ, а система будет предлагать новые слова или
                     те, в которых были допущены ошибки. Когда вы перестанете их
                     допускать, шкала полностью заполнится. Заполните шкалу
                     несколько раз, сделайте работу над ошибками - и вы готовы.`}
-                      textClassName={styles.TrainerPage__hint}
-                    />
-                  )}
+                    textClassName={styles.TrainerPage__hint}
+                  />
+                )}
 
-            {words[0].trainerType === 'виды союзов' && (
-              <Hint
-                text={`В этом тренажере под подчинительным союзом понимается любое
+                {storeWords[0].trainerType === 'виды союзов' && (
+                  <Hint
+                    text={`В этом тренажере под подчинительным союзом понимается любое
                     средство подчинительной связи, т.е. союз, союзное слово,
                     частица`}
-                      textClassName={styles.TrainerPage__hint}
-                    />
-                  )}
-
-                  {isIncorrect && (
-                    <Flex
-                      className={styles.TrainerPage__uncorrect}
-                      data-testid="Trainer__uncorrect"
-                      justify="center"
-                    >
-                      Неверно
-                    </Flex>
-                  )}
-
-            {randomWord && (
-              <>
-                {words[0].trainerType === 'ударения' && (
-                  <PrimaryTrainerWords
-                    randomWord={randomWord as PrimaryWordsInterface}
-                    randomWordsIsReverse={randomWordsIsReverse}
-                    wordOnFail={wordOnFail}
-                    wordOnSuccess={wordOnSuccess}
+                    textClassName={styles.TrainerPage__hint}
                   />
                 )}
 
-                {words[0].trainerType === 'виды союзов' && (
-                  <UnionsTrainerWords
-                    randomWord={randomWord as UnionsWordsInterface}
-                    wordOnSuccess={wordOnSuccess}
-                    wordOnFail={wordOnFail}
-                  />
+                {isIncorrect && (
+                  <Flex
+                    className={styles.TrainerPage__uncorrect}
+                    data-testid="Trainer__uncorrect"
+                    justify="center"
+                  >
+                    Неверно
+                  </Flex>
                 )}
+
+                {randomWord && (
+                  <>
+                    {storeWords[0].trainerType === 'ударения' && (
+                      <PrimaryTrainerWords
+                        randomWord={randomWord as PrimaryWordsInterface}
+                        randomWordsIsReverse={randomWordsIsReverse}
+                        wordOnFail={wordOnFail}
+                        wordOnSuccess={wordOnSuccess}
+                      />
+                    )}
+
+                    {words[0].trainerType === 'виды союзов' && (
+                      <UnionsTrainerWords
+                        randomWord={randomWord as UnionsWordsInterface}
+                        wordOnSuccess={wordOnSuccess}
+                        wordOnFail={wordOnFail}
+                      />
+                    )}
+                  </>
+                )}
+
+                <TrainerProgressBar />
+                <StrictModeSwitcher />
               </>
+            ) : (
+              <TrainerTotalResult
+                updateRandomWord={updateRandomWord}
+                initializeWords={initializeWords}
+              />
             )}
-
-                  <TrainerProgressBar />
-                  <StrictModeSwitcher />
-                </>
-              ) : (
-                <TrainerTotalResult
-                  updateRandomWord={updateRandomWord}
-                  initializeWords={initializeWords}
-                />
-              )}
-            </>
-          )}
-        </Flex>
+          </>
+        )}
       </Page>
     );
   },

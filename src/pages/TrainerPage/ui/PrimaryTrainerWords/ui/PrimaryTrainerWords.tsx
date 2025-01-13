@@ -3,8 +3,8 @@ import { memo, useContext } from 'react';
 import { tabletMediaQueryWidth } from '@/shared/const/global';
 import { PrimaryTrainerWordsProps } from '../model/types';
 import { useWords } from '../../../model/selectors/getTrainerWords/getTrainerWords';
-import { TrainerWord } from '@/shared/ui-kit/TrainerWord';
-import { TrainerContext } from '../../../model/context/TrainerContext';
+import { TrainerPageContext } from '../../../model/context/TrainerPageContext';
+import { TrainerWord } from '@/shared/ui/TrainerWord';
 
 export const PrimaryTrainerWords: React.FC<PrimaryTrainerWordsProps> = memo(
   ({
@@ -16,7 +16,7 @@ export const PrimaryTrainerWords: React.FC<PrimaryTrainerWordsProps> = memo(
     // Инициализация данных и контекста
     const storeWords = useWords();
 
-    const { isIncorrect, isErrorWork } = useContext(TrainerContext);
+    const { isIncorrect, isErrorWork } = useContext(TrainerPageContext);
 
     return (
       <Flex

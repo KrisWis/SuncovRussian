@@ -6,6 +6,7 @@ import '@/app/styles/reset.scss';
 import '@/app/styles/index.scss';
 import { ErrorComponent } from '@/shared/ui/ErrorComponent';
 import { store } from '@/shared/lib/store';
+import { BrowserRouter } from 'react-router-dom';
 
 const container = document.getElementById('root');
 
@@ -18,9 +19,11 @@ if (!container) {
 const root = createRoot(container);
 
 root.render(
-  <Provider store={store}>
-    <ErrorBoundary fallback={<ErrorComponent />}>
-      <App />
-    </ErrorBoundary>
-  </Provider>,
+  <BrowserRouter basename="/">
+    <Provider store={store}>
+      <ErrorBoundary fallback={<ErrorComponent />}>
+        <App />
+      </ErrorBoundary>
+    </Provider>
+  </BrowserRouter>,
 );
