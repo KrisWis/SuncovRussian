@@ -62,7 +62,10 @@
     color: var(--color-gray);
     cursor: pointer;
     transition: color var(--transition-duration-default) linear;
-    white-space: nowrap;
+
+    @media (max-width: $mobile-mediaquery-width) {
+      white-space: nowrap;
+    }
 
 <<<<<<< HEAD
     @media (max-width: $mobile-mediaquery-width) {

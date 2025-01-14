@@ -9,6 +9,7 @@ export const TheoryItem: React.FC<TheoryItemProps> = memo(
   ({ fileKey }): React.JSX.Element => {
     // Получение ссылки на файл по ключу
 <<<<<<< HEAD
+<<<<<<< HEAD
     const { data, isLoading, isError, isFetching } = useGetTheoryQuery(fileKey);
 
     // Обработка события загрузки файлов
@@ -19,6 +20,12 @@ export const TheoryItem: React.FC<TheoryItemProps> = memo(
     // Обработка события загрузки файлов
     if (isLoading) {
 >>>>>>> 4fa07a1 (Replace yandex cloud api to uploadthingapi, rewrite api requests, add dotenvplugin for webpack. Theory is finished, but have some details to fix.)
+=======
+    const { data, isLoading, isError, isFetching } = useGetTheoryQuery(fileKey);
+
+    // Обработка события загрузки файлов
+    if (isLoading || isFetching) {
+>>>>>>> 1df825a (Remove loki from project.)
       return <PageLoading />;
     }
 
