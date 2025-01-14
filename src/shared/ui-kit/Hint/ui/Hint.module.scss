@@ -18,17 +18,27 @@
     color: rgba(0 0 0 / 40%);
     opacity: 0;
     transition: var(--transition-duration-default) linear opacity;
+<<<<<<< HEAD
     z-index: var(--z-index-hidden);
 
     &__top {
       position: absolute;
+=======
+
+    &__right {
+      position: absolute;
+      z-index: var(--z-index-default);
+>>>>>>> 3b93d38 (Fix header, add UI-Kit component -Hint, fix some other things.)
       right: 0;
       top: -50px;
     }
 
     &__active {
       opacity: 1;
+<<<<<<< HEAD
       z-index: var(--z-index-default);
+=======
+>>>>>>> 3b93d38 (Fix header, add UI-Kit component -Hint, fix some other things.)
     }
   }
 }

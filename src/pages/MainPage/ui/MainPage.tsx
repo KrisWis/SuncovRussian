@@ -42,9 +42,18 @@ export const MainPage: React.FC = memo((): React.JSX.Element => {
           <Tip id={randomTip.id} text={randomTip.text} />
         )}
 
+<<<<<<< HEAD
         {headerCategory && (
           <>
             {headerCategory === 'Теория' && <Theory />}
+=======
+        {headerCategory &&
+          headerCategories.Тренажеры.includes(headerCategory) && (
+            <>
+              {headerCategory === 'Ударения' && (
+                <Trainer words={wordsForAccentsTests} />
+              )}
+>>>>>>> 3b93d38 (Fix header, add UI-Kit component -Hint, fix some other things.)
 
             {headerCategories.Тренажеры.includes(headerCategory) && (
               <>

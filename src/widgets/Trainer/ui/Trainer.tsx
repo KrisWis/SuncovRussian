@@ -9,6 +9,13 @@ import { tabletMediaQueryWidth } from '@/shared/const/global';
 import { TrainerProgressBar } from './TrainerProgressBar/ui/TrainerProgressBar';
 import { AccentsTrainerWords } from './AccentsTrainerWords/ui/AccentsTrainerWords';
 import { AccentsWordsInterface } from '../model/static/wordsForAccentsTests';
+<<<<<<< HEAD
+=======
+import { UnionsTrainerWords } from './UnionsTrainerWords';
+import { UnionsWordsInterface } from '../model/static/wordsForUnionsTests';
+import { TrainerTotalResult } from './TrainerTotalResult';
+import { Hint } from '@/shared/ui-kit/Hint';
+>>>>>>> 3b93d38 (Fix header, add UI-Kit component -Hint, fix some other things.)
 
 import { UnionsWordsInterface } from '../model/static/wordsForUnionsTests';
 
@@ -156,6 +163,7 @@ const TrainerInner: React.FC<TrainerProps> = memo(
       >
         {!totalTime ? (
           <>
+<<<<<<< HEAD
             {words[0].trainerType === 'accents' && (
               <Hint
                 text={`Выбирайте ответ, а система будет предлагать новые слова или
@@ -175,6 +183,28 @@ const TrainerInner: React.FC<TrainerProps> = memo(
               />
             )}
 
+=======
+            <Hint textClassName={styles.Trainer__hint}>
+              <>
+                {words[0].trainerType === 'accents' && (
+                  <p>
+                    Выбирайте ответ, а система будет предлагать новые слова или
+                    те, в которых были допущены ошибки. Когда вы перестанете их
+                    допускать, шкала полностью заполнится. Заполните шкалу
+                    несколько раз, сделайте работу над ошибками - и вы готовы.
+                  </p>
+                )}
+
+                {words[0].trainerType === 'unions' && (
+                  <p>
+                    В этом тренажере под подчинительным союзом понимается любое
+                    средство подчинительной связи, т.е. союз, союзное слово,
+                    частица
+                  </p>
+                )}
+              </>
+            </Hint>
+>>>>>>> 3b93d38 (Fix header, add UI-Kit component -Hint, fix some other things.)
             {isIncorrect && (
               <Flex
                 className={styles.Trainer__uncorrect}
