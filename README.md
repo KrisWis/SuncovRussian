@@ -26,6 +26,7 @@
 - `npm run test:unit` - Запуск unit тестов с jest/react-testing-library
 - `npm run prettier` - запуск Prettier для форматирования кода
 - `npm run prepare` - Загрузка husky для прекоммит-хуков
+- `npm run test:e2e` - Запуск e2e тестов с Cypress
 
 ---
 
@@ -43,6 +44,7 @@
 
 1. Обычные unit тесты на jest - `npm run test:unit`
 2. Тесты на компоненты с React testing library - `npm run test:unit`
+3. e2e тестирование с Cypress - `npm run test:e2e`
 
 Подробнее о тестах - [документация тестирования](/docs/tests.md)
 

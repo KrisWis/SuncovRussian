@@ -13,12 +13,14 @@
     "lint:scss:fix": "npx stylelint \"**/*.scss\" --fix",
     "storybook": "storybook dev -p 6006 --ci",
     "test:unit": "jest --config ./config/jest/jest.config.ts",
+    "test:e2e": "cypress open",
     "prettier": "npx prettier --write **/*.{ts,tsx,json}"
   },
   "author": "EvgeniyWis",
   "license": "ISC",
   "dependencies": {
     "@reduxjs/toolkit": "^2.5.0",
+    "creevey": "^0.9.5",
     "cypress": "^13.17.0",
     "react": "^19.0.0",
     "react-dom": "^19.0.0",
@@ -31,7 +33,7 @@
     "@babel/plugin-transform-runtime": "^7.25.9",
     "@babel/preset-env": "^7.26.0",
     "@babel/preset-react": "^7.26.3",
-    "@chromatic-com/storybook": "^3.2.2",
+    "@chromatic-com/storybook": "^3.2.3",
     "@eslint/compat": "^1.2.4",
     "@eslint/eslintrc": "^3.2.0",
     "@eslint/js": "^9.16.0",
