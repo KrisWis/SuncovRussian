@@ -9,12 +9,16 @@
 3.  Напишите в терминале команду `npm run dev`.
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 ## Или вы можете просто зайти на [сайт](https://evgeniywis.github.io/SuncovRussian/), загруженный на Github Pages.
 =======
 Или вы можете просто зайти на [сайт](evgeniywis.github.io/SuncovRussian/), загруженный на Github Pages.
 
 ---
 >>>>>>> 4e457ec (update readme)
+=======
+## Или вы можете просто зайти на [сайт](https://evgeniywis.github.io/SuncovRussian/), загруженный на Github Pages.
+>>>>>>> 444e18f (update readme)
 
 ## Скрипты
 
