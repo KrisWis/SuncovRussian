@@ -7,14 +7,15 @@ import { PrimaryWordsInterface } from '../../../model/types/types';
 import { UnionsWordsInterface } from '../../../model/static/wordsForUnionsTests';
 import { TrainerPageContext } from '../../../model/context/TrainerPageContext';
 import { useTrainerActions } from '../../../model/slice/TrainerPageSlice';
+import { useInitializeWords } from '../../../model/hooks/useInitializeWords';
 
 export const TrainerTotalResult: React.FC<TrainerTotalResultProps> = memo(
-  ({ initializeWords, updateRandomWord }): React.JSX.Element => {
+  ({ updateRandomWord, words }): React.JSX.Element => {
     // Инициализация хуков и контекста
     const storeWords = useWords();
     const { setWords } = useTrainerActions();
-    const { totalTime, setTotalTime } = useContext(TrainerPageContext);
-    const { isErrorWork, setIsErrorWork } = useContext(TrainerPageContext);
+    const { totalTime, setTotalTime, isErrorWork, setIsErrorWork } =
+      useContext(TrainerPageContext);
 
     // Высчитывание данных для общего времени
     const totalTimeMinutes = useMemo(
@@ -63,10 +64,13 @@ export const TrainerTotalResult: React.FC<TrainerTotalResultProps> = memo(
     ]);
 
     // Очистка результатов при нажатии "Повторить"
+    const { initializeWords } = useInitializeWords(words);
+
     const Retry = useCallback(() => {
-      setTotalTime(0);
       initializeWords();
-    }, [initializeWords, setTotalTime]);
+      setTotalTime(0);
+      setIsErrorWork(false);
+    }, [initializeWords, setIsErrorWork, setTotalTime]);
 
     return (
       <Flex justify="between" direction="column" width="100" maxHeight>
@@ -77,7 +81,7 @@ export const TrainerTotalResult: React.FC<TrainerTotalResultProps> = memo(
         </span>
 
         {wordsWithUncorrectTimes.length > 0 ? (
-          <Flex maxHeight justify="around" direction="column">
+          <Flex maxHeight justify="between" direction="column">
             <Flex direction="column">
               <span className={styles.TrainerTotalResult__totalTime}>
                 Ошибки:

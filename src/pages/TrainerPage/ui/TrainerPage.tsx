@@ -37,8 +37,14 @@ const TrainerInner: React.FC<TrainerPageProps> = memo(
       setRandomWordId,
     );
 
-    const { totalTime, setIsIncorrect, isIncorrect, isErrorWork } =
-      useContext(TrainerPageContext);
+    const {
+      totalTime,
+      setIsIncorrect,
+      isIncorrect,
+      isErrorWork,
+      setIsErrorWork,
+      setTotalTime,
+    } = useContext(TrainerPageContext);
 
     useEffect(() => {
       if (!randomWord) setRandomWordId(0);
@@ -128,13 +134,16 @@ const TrainerInner: React.FC<TrainerPageProps> = memo(
 
     useEffect(() => {
       const timeoutForInitializeWords = setTimeout(() => {
+        setIsIncorrect(false);
+        setIsErrorWork(false);
+        setTotalTime(0);
         initializeWords();
         clearTimeout(timeoutForInitializeWords);
       }, 0);
-    }, [initializeWords]);
+    }, [initializeWords, setIsErrorWork, setIsIncorrect, setTotalTime]);
 
     return (
-      <Page>
+      <Page className={styles.TrainerPage}>
         {storeWords.length > 0 && (
           <>
             {!totalTime ? (
@@ -194,8 +203,8 @@ const TrainerInner: React.FC<TrainerPageProps> = memo(
               </>
             ) : (
               <TrainerTotalResult
+                words={words}
                 updateRandomWord={updateRandomWord}
-                initializeWords={initializeWords}
               />
             )}
           </>
