@@ -41,10 +41,14 @@
     transform: translateY(50px);
     top: 30px;
 <<<<<<< HEAD
+<<<<<<< HEAD
     left: $item-padding-x - $submenu-padding-x;
 =======
     left: $item-padding-x;
 >>>>>>> 3b93d38 (Fix header, add UI-Kit component -Hint, fix some other things.)
+=======
+    left: $item-padding-x - $submenu-padding-x;
+>>>>>>> 3736a6b (Add SideBar for Theory Block, add Theory Context and add functional of switching sections of theories.)
     transition: var(--transition-duration-default) linear;
     transition-property: transform, opacity;
     background-color: var(--color-white);

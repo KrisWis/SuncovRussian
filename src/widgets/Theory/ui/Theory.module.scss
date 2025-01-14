@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 @use '@/app/styles/ScssVars' as *;
 
 .Theory {
@@ -10,5 +11,10 @@
       right: 0;
       top: var(--theory-sidebar-height-mobile);
     }
+=======
+.Theory {
+  &__content {
+    top: var(--header-height);
+>>>>>>> 3736a6b (Add SideBar for Theory Block, add Theory Context and add functional of switching sections of theories.)
   }
 }
