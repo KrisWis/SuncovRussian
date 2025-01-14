@@ -1,6 +1,15 @@
+<<<<<<< HEAD
 describe('Пользователь заходит в блок "Теория"', () => {
   beforeEach(() => {
     cy.visit('/theory');
+=======
+import { selectByTestId } from '../helpers/selectByTestId';
+
+describe('Пользователь заходит в блок "Теория"', () => {
+  beforeEach(() => {
+    cy.visit('/');
+    cy.get(selectByTestId('Header__Теория')).click();
+>>>>>>> 04df36d (Add cypress, e2e tests for theory block.)
   });
 
   it('И видит содержимое сайдбара, контента, отсутствие ошибки и быстро проходит загрузка', () => {
