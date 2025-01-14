@@ -71,6 +71,7 @@ export const TheorySidebar: React.FC<TheorySidebarProps> = memo(
 >>>>>>> f1d426f (Delete dependency cruiser and replace it eslint plugin, fix circular dependencies, fix storybook and unit tests, finish theory block - fix pdf viewer, add adaptive for theory)
     return (
       <Flex
+        data-testid="Theory__Sidebar"
         direction={mobileMediaQueryWidth.matches ? 'row' : 'column'}
         maxHeight
         align="start"
@@ -79,9 +80,13 @@ export const TheorySidebar: React.FC<TheorySidebarProps> = memo(
         className={styles.TheorySidebar}
         style={{ marginTop: marginTop }}
       >
-        {pdfFilesTitles.map((title) => (
+        {pdfFilesTitles.map((title, index) => (
           <span
+<<<<<<< HEAD
 >>>>>>> 3736a6b (Add SideBar for Theory Block, add Theory Context and add functional of switching sections of theories.)
+=======
+            data-testid={`Theory__Sidebar__${index}`}
+>>>>>>> 04df36d (Add cypress, e2e tests for theory block.)
             onClick={() => setSelectedSection(title)}
             className={`${styles.TheorySidebar__title} ${selectedSection === title && styles.TheorySidebar__title__selected}`}
             key={title}

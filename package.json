@@ -17,13 +17,17 @@
     "prettier": "npx prettier --write **/*.{ts,tsx,json}"
   },
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
   "keywords": [],
 >>>>>>> 4fa07a1 (Replace yandex cloud api to uploadthingapi, rewrite api requests, add dotenvplugin for webpack. Theory is finished, but have some details to fix.)
+=======
+>>>>>>> 04df36d (Add cypress, e2e tests for theory block.)
   "author": "EvgeniyWis",
   "license": "ISC",
   "dependencies": {
     "@reduxjs/toolkit": "^2.5.0",
+<<<<<<< HEAD
 <<<<<<< HEAD
     "creevey": "^0.9.5",
     "cypress": "^13.17.0",
@@ -33,6 +37,11 @@
     "react": "^18.3.1",
     "react-dom": "^18.3.1",
 >>>>>>> 1df825a (Remove loki from project.)
+=======
+    "cypress": "^13.17.0",
+    "react": "^19.0.0",
+    "react-dom": "^19.0.0",
+>>>>>>> 04df36d (Add cypress, e2e tests for theory block.)
     "react-error-boundary": "^4.1.2",
     "react-pdf": "^9.2.1",
     "react-redux": "^9.2.0"

@@ -35,14 +35,20 @@ export const TheoryItem: React.FC<TheoryItemProps> = memo(
     }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+>>>>>>> 04df36d (Add cypress, e2e tests for theory block.)
     return (
       <div data-testid="TheoryItem">
         {data?.fileData && <PDFViewer url={data?.fileData.fileUrl} />}
       </div>
     );
+<<<<<<< HEAD
 =======
     return <>{data?.fileData && <PDFViewer url={data?.fileData.fileUrl} />}</>;
 >>>>>>> 4fa07a1 (Replace yandex cloud api to uploadthingapi, rewrite api requests, add dotenvplugin for webpack. Theory is finished, but have some details to fix.)
+=======
+>>>>>>> 04df36d (Add cypress, e2e tests for theory block.)
   },
 );
 
