@@ -4,6 +4,7 @@ import { wordsForAccentsTests } from '../../../model/static/wordsForAccentsTests
 
 const meta = {
 <<<<<<< HEAD
+<<<<<<< HEAD
 <<<<<<<< HEAD:src/pages/TrainerPage/ui/PrimaryTrainerWords/ui/PrimaryTrainerWords.stories.ts
   title: 'Pages/Trainer/PrimaryTrainerWords',
   component: PrimaryTrainerWords,
@@ -13,6 +14,9 @@ const meta = {
 >>>>>>>> 93ebe07 (Fully initialize router, add routing for all project, add unit and e2e tests for routing, refactore project - made sections as pages.):src/pages/TrainerPage/ui/AccentsTrainerWords/ui/AccentsTrainerWords.stories.ts
 =======
   title: 'Widgets/Trainer/PrimaryTrainerWords',
+=======
+  title: 'Pages/Trainer/PrimaryTrainerWords',
+>>>>>>> 786c80e (Add new trainers.)
   component: PrimaryTrainerWords,
 >>>>>>> c31c805 (bugfix)
   parameters: {

@@ -1,8 +1,12 @@
 <<<<<<< HEAD
+<<<<<<< HEAD
 import { tips } from '../model/static/tips';
 =======
 import { tips } from '@/shared/assets/static/tips';
 >>>>>>> 93ebe07 (Fully initialize router, add routing for all project, add unit and e2e tests for routing, refactore project - made sections as pages.)
+=======
+import { tips } from '../model/static/tips';
+>>>>>>> 786c80e (Add new trainers.)
 import { Tip } from '@/shared/ui/Tip';
 import { memo, useMemo } from 'react';
 import { Page } from '@/widgets/Page';

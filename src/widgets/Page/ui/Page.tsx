@@ -2,6 +2,9 @@ import { memo } from 'react';
 import { PageProps } from '../model/types';
 import { Header } from './Header/ui/Header';
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+>>>>>>> 786c80e (Add new trainers.)
 import { isOnStorybook } from '@/shared/utils/isOnStorybook';
 
 export const Page: React.FC<PageProps> = memo(
@@ -21,6 +24,9 @@ export const Page: React.FC<PageProps> = memo(
 
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+>>>>>>> 786c80e (Add new trainers.)
         <main
           style={{
             justifyContent: isOnStorybook() ? 'center' : 'space-between',
@@ -29,12 +35,15 @@ export const Page: React.FC<PageProps> = memo(
         >
           {children}
         </main>
+<<<<<<< HEAD
 =======
         <main>{children}</main>
 >>>>>>> 93ebe07 (Fully initialize router, add routing for all project, add unit and e2e tests for routing, refactore project - made sections as pages.)
 =======
         <main className={className}>{children}</main>
 >>>>>>> 06f1d0e (Bugfix)
+=======
+>>>>>>> 786c80e (Add new trainers.)
       </div>
     );
   },

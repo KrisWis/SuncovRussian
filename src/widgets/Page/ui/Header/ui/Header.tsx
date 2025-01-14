@@ -5,9 +5,13 @@ import { headerCategories, headerRoutesCategories } from '../model/data';
 import { HeaderCategoryType } from '../model/types';
 import { Link } from 'react-router-dom';
 <<<<<<< HEAD
+<<<<<<< HEAD
 import { isOnStorybook } from '@/shared/utils/isOnStorybook';
 =======
 >>>>>>> 93ebe07 (Fully initialize router, add routing for all project, add unit and e2e tests for routing, refactore project - made sections as pages.)
+=======
+import { isOnStorybook } from '@/shared/utils/isOnStorybook';
+>>>>>>> 786c80e (Add new trainers.)
 
 export const Header: React.FC = memo((): React.JSX.Element => {
   // При клике на пустое пространство сбрасывается выбор категории
@@ -26,6 +30,7 @@ export const Header: React.FC = memo((): React.JSX.Element => {
         ) {
           window.location.pathname = mainRoute;
         }
+<<<<<<< HEAD
 =======
 =======
       const mainRoute: string = '/';
@@ -42,6 +47,8 @@ export const Header: React.FC = memo((): React.JSX.Element => {
 =======
         window.location.pathname = mainRoute;
 >>>>>>> 06f1d0e (Bugfix)
+=======
+>>>>>>> 786c80e (Add new trainers.)
       }
     };
 
