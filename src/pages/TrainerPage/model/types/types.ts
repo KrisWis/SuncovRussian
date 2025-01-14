@@ -1,7 +1,10 @@
-import { AccentsWordsInterface } from '../static/wordsForAccentsTests';
 import { UnionsWordsInterface } from '../static/wordsForUnionsTests';
 
-type TrainerWordsTypes = 'accents' | 'unions';
+type TrainerWordsTypes =
+  | 'ударения'
+  | 'виды союзов'
+  | 'cловарные слова'
+  | 'н/нн';
 
 export interface TrainerWordsInterface {
   id: number;
@@ -12,9 +15,14 @@ export interface TrainerWordsInterface {
   inProgress?: boolean;
 }
 
+export interface PrimaryWordsInterface extends TrainerWordsInterface {
+  valid: string;
+  invalid: string;
+}
+
 export type WordsTypes =
   | TrainerWordsInterface
-  | AccentsWordsInterface
+  | PrimaryWordsInterface
   | UnionsWordsInterface;
 
 export interface TrainerPageProps {

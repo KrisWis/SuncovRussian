@@ -18,8 +18,8 @@ import { getRouteTrainer } from '@/shared/const/router';
 type ComparisonType = 'equal' | 'greaterThan';
 
 type WordsTestIDs =
-  | 'AccentsTrainerWords__valid'
-  | 'AccentsTrainerWords__invalid'
+  | 'PrimaryTrainerWords__valid'
+  | 'PrimaryTrainerWords__invalid'
   | 'UnionsTrainerWords__Подчинительный'
   | 'UnionsTrainerWords__Сочинительный';
 
@@ -92,7 +92,7 @@ const afterEachClear = async (
 };
 
 // Tests
-describe('AccentsTrainerWords', () => {
+describe('PrimaryTrainerWords', () => {
   // Helpers
   const setupTest = () => {
     return renderWithProviders(
@@ -110,42 +110,44 @@ describe('AccentsTrainerWords', () => {
   });
 
   // Tests
-  test('Click valid words and not get an error, check progress bar', () => {
-    // Click valid words
-    clickWordAndCheckUncorrectBar(
-      'AccentsTrainerWords__valid',
-      false,
-      component,
-    );
+  test('Click valid words and not get an error, check progress bar', async () => {
+    await waitFor(() => {
+      // Click valid words
+      clickWordAndCheckUncorrectBar(
+        'PrimaryTrainerWords__valid',
+        false,
+        component,
+      );
 
-    clickWordAndCheckUncorrectBar(
-      'AccentsTrainerWords__valid',
-      false,
-      component,
-    );
+      clickWordAndCheckUncorrectBar(
+        'PrimaryTrainerWords__valid',
+        false,
+        component,
+      );
 
-    clickWordAndCheckUncorrectBar(
-      'AccentsTrainerWords__valid',
-      false,
-      component,
-    );
+      clickWordAndCheckUncorrectBar(
+        'PrimaryTrainerWords__valid',
+        false,
+        component,
+      );
 
-    // Progress bar value must increase
-    checkProgressBarValue(0, component, 'greaterThan');
+      // Progress bar value must increase
+      checkProgressBarValue(0, component, 'greaterThan');
+    });
   });
 
   test('Click invalid word and valid word and get an error, check progress bar', async () => {
     await waitFor(() => {
       // Click valid word
       clickWordAndCheckUncorrectBar(
-        'AccentsTrainerWords__valid',
+        'PrimaryTrainerWords__valid',
         false,
         component,
       );
 
       // Click invalid word
       clickWordAndCheckUncorrectBar(
-        'AccentsTrainerWords__invalid',
+        'PrimaryTrainerWords__invalid',
         true,
         component,
       );
@@ -158,19 +160,19 @@ describe('AccentsTrainerWords', () => {
   test('Click invalid words, check progress bar', () => {
     // Click invalid words
     clickWordAndCheckUncorrectBar(
-      'AccentsTrainerWords__invalid',
+      'PrimaryTrainerWords__invalid',
       true,
       component,
     );
 
     clickWordAndCheckUncorrectBar(
-      'AccentsTrainerWords__invalid',
+      'PrimaryTrainerWords__invalid',
       true,
       component,
     );
 
     clickWordAndCheckUncorrectBar(
-      'AccentsTrainerWords__invalid',
+      'PrimaryTrainerWords__invalid',
       true,
       component,
     );

@@ -12,13 +12,13 @@ const meta = {
 export default meta;
 type Story = StoryObj<typeof meta>;
 
-export const AccentsTests: Story = {
+export const PrimaryTrainerWords: Story = {
   args: {
     words: wordsForAccentsTests,
   },
 };
 
-export const UnionsTests: Story = {
+export const UnionsTrainerWords: Story = {
   args: {
     words: wordsForUnionsTests,
   },

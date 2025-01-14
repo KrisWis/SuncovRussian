@@ -6,15 +6,12 @@ import { TrainerWord } from '@/shared/ui/TrainerWord';
 import { unionTypes } from '../../../model/static/wordsForUnionsTests';
 import { TrainerPageContext } from '../../../model/context/TrainerPageContext';
 import * as styles from './UnionsTrainerWords.module.scss';
+import { useWords } from '../../../model/selectors/getTrainerWords/getTrainerWords';
 
 export const UnionsTrainerWords: React.FC<UnionsTrainerWordsProps> = memo(
-  ({
-    randomWord,
-    wordOnSuccess,
-    wordOnFail,
-    storeWords,
-  }): React.JSX.Element => {
+  ({ randomWord, wordOnSuccess, wordOnFail }): React.JSX.Element => {
     // Инициализация данных и контекста
+    const storeWords = useWords();
     const { isIncorrect, isErrorWork } = useContext(TrainerPageContext);
 
     return (

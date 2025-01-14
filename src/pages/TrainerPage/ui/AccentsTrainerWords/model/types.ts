@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 <<<<<<< HEAD:src/widgets/Trainer/ui/AccentsTrainerWords/model/types.ts
 <<<<<<< HEAD
 <<<<<<< HEAD
@@ -20,3 +21,5 @@ export interface AccentsTrainerWordsProps {
   wordOnFail: wordActionsFunctionType;
   storeWords: WordsTypes[];
 }
+=======
+>>>>>>> fb89821 (Made types for header, rebuild accents for trainer words to primary trainer words for reusing.)
