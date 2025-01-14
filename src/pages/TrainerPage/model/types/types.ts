@@ -4,7 +4,8 @@ type TrainerWordsTypes =
   | 'ударения'
   | 'виды союзов'
   | 'cловарные слова'
-  | 'н/нн';
+  | 'н/нн'
+  | 'наречия';
 
 export interface TrainerWordsInterface {
   id: number;

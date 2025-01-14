@@ -148,7 +148,9 @@ const TrainerInner: React.FC<TrainerPageProps> = memo(
           <>
             {!totalTime ? (
               <>
-                {storeWords[0].trainerType === 'ударения' && (
+                {['ударения', 'cловарные слова', 'наречия', 'н/нн'].includes(
+                  storeWords[0].trainerType,
+                ) && (
                   <Hint
                     text={`Выбирайте ответ, а система будет предлагать новые слова или
                     те, в которых были допущены ошибки. Когда вы перестанете их
@@ -179,7 +181,12 @@ const TrainerInner: React.FC<TrainerPageProps> = memo(
 
                 {randomWord && (
                   <>
-                    {storeWords[0].trainerType === 'ударения' && (
+                    {[
+                      'ударения',
+                      'cловарные слова',
+                      'наречия',
+                      'н/нн',
+                    ].includes(storeWords[0].trainerType) && (
                       <PrimaryTrainerWords
                         randomWord={randomWord as PrimaryWordsInterface}
                         randomWordsIsReverse={randomWordsIsReverse}

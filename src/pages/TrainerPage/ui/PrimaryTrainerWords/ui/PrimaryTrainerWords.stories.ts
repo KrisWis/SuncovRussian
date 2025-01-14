@@ -3,7 +3,7 @@ import { PrimaryTrainerWords } from './PrimaryTrainerWords';
 import { wordsForAccentsTests } from '../../../model/static/wordsForAccentsTests';
 
 const meta = {
-  title: 'Widgets/Trainer/PrimaryTrainerWords',
+  title: 'Pages/Trainer/PrimaryTrainerWords',
   component: PrimaryTrainerWords,
   parameters: {
     layout: 'centered',

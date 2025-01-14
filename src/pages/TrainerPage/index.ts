@@ -27,8 +27,15 @@ export { TrainerPageContext } from './model/context/TrainerPageContext';
 
 export { StrictModeSwitcher } from './ui/StrictModeSwitcher/ui/StrictModeSwitcher';
 
+export { useTrainerActions } from './model/slice/TrainerPageSlice';
+
+// Static
 export { wordsForAccentsTests } from './model/static/wordsForAccentsTests';
 
-export { wordsForUnionsTests } from './model/static/wordsForUnionsTests';
+export { wordsForNNTests } from './model/static/wordsForNNTests';
 
-export { useTrainerActions } from './model/slice/TrainerPageSlice';
+export { wordsForDictionaryTests } from './model/static/wordsForDictionaryTests';
+
+export { wordsForAdverbsTests } from './model/static/wordsForAdverbsTests';
+
+export { wordsForUnionsTests } from './model/static/wordsForUnionsTests';

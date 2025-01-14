@@ -3,15 +3,16 @@ import {
   wordsForAccentsTests,
   wordsForUnionsTests,
   WordsTypes,
+  wordsForNNTests,
+  wordsForDictionaryTests,
+  wordsForAdverbsTests,
 } from '@/pages/TrainerPage';
 
 type TrainerRouteSubcategories =
   | 'accents'
-  | 'paronyms'
-  | 'trops'
   | 'dictionary'
   | 'unions'
-  | 'subordinate'
+  | 'adverbs'
   | 'n/nn';
 
 interface TrainerRoutes {
@@ -21,7 +22,10 @@ interface TrainerRoutes {
 
 export const trainerRoutes: TrainerRoutes[] = [
   { subcategory: 'accents', words: wordsForAccentsTests },
+  { subcategory: 'dictionary', words: wordsForDictionaryTests },
   { subcategory: 'unions', words: wordsForUnionsTests },
+  { subcategory: 'adverbs', words: wordsForAdverbsTests },
+  { subcategory: 'n/nn', words: wordsForNNTests },
 ];
 
 export const getRouteMain = () => '/';

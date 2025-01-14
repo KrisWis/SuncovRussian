@@ -8,6 +8,7 @@
   background-color: var(--color-black);
 
   $item-padding-x: 10px;
+  $item-padding-adaptive-x: 5px;
 
   &__item {
     cursor: pointer;
@@ -24,6 +25,7 @@
 
     @media (max-width: $mobile-mediaquery-width) {
       font-size: 14px;
+      padding: 0 $item-padding-adaptive-x;
     }
 
     &:hover {
