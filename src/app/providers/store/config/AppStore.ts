@@ -4,6 +4,7 @@ import { createReducerManager, ReducerManager } from './AppReducerManager';
 import { RootReducer } from './AppReducer';
 import { UTApi } from '@/shared/api/UTApi/api';
 import { StateSchema } from './types';
+import { UTApi } from '@/shared/api/UTApi/api';
 
 const reducerManager = createReducerManager(RootReducer);
 
