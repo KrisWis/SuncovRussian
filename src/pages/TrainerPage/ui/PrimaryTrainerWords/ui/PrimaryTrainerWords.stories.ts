@@ -3,6 +3,7 @@ import { PrimaryTrainerWords } from './PrimaryTrainerWords';
 import { wordsForAccentsTests } from '../../../model/static/wordsForAccentsTests';
 
 const meta = {
+<<<<<<< HEAD
 <<<<<<<< HEAD:src/pages/TrainerPage/ui/PrimaryTrainerWords/ui/PrimaryTrainerWords.stories.ts
   title: 'Pages/Trainer/PrimaryTrainerWords',
   component: PrimaryTrainerWords,
@@ -10,6 +11,10 @@ const meta = {
   title: 'Pages/Trainer/AccentsTrainerWords',
   component: AccentsTrainerWords,
 >>>>>>>> 93ebe07 (Fully initialize router, add routing for all project, add unit and e2e tests for routing, refactore project - made sections as pages.):src/pages/TrainerPage/ui/AccentsTrainerWords/ui/AccentsTrainerWords.stories.ts
+=======
+  title: 'Widgets/Trainer/PrimaryTrainerWords',
+  component: PrimaryTrainerWords,
+>>>>>>> c31c805 (bugfix)
   parameters: {
     layout: 'centered',
   },
@@ -24,6 +29,9 @@ export const Primary: Story = {
     randomWordsIsReverse: false,
     wordOnFail: () => {},
     wordOnSuccess: () => {},
+<<<<<<< HEAD
     storeWords: wordsForAccentsTests,
+=======
+>>>>>>> c31c805 (bugfix)
   },
 };

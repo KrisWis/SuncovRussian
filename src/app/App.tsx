@@ -1,5 +1,6 @@
 import { AppRouter } from './providers/router';
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 <<<<<<< HEAD
 <<<<<<< HEAD
@@ -7,6 +8,9 @@ import { AppRouter } from './providers/router';
 =======
 import { BrowserRouter } from 'react-router-dom';
 >>>>>>> 93ebe07 (Fully initialize router, add routing for all project, add unit and e2e tests for routing, refactore project - made sections as pages.)
+=======
+
+>>>>>>> c31c805 (bugfix)
 // TODO: Исправить ошибку с creevey, либо найти новую либу для ui тестирования со Storybook
 
 // TODO: Исправить ошибку с creevey, либо найти новую либу для ui тестирования со Storybook
@@ -22,6 +26,7 @@ import { BrowserRouter } from 'react-router-dom';
 
 export const App = () => {
 <<<<<<< HEAD
+<<<<<<< HEAD
   return <AppRouter />;
 =======
   return (
@@ -30,4 +35,7 @@ export const App = () => {
     </BrowserRouter>
   );
 >>>>>>> 93ebe07 (Fully initialize router, add routing for all project, add unit and e2e tests for routing, refactore project - made sections as pages.)
+=======
+  return <AppRouter />;
+>>>>>>> c31c805 (bugfix)
 };

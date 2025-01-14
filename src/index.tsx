@@ -7,9 +7,13 @@ import '@/app/styles/index.scss';
 import { ErrorComponent } from '@/shared/ui/ErrorComponent';
 import { store } from '@/shared/lib/store';
 <<<<<<< HEAD
+<<<<<<< HEAD
 import { BrowserRouter } from 'react-router-dom';
 =======
 >>>>>>> 93ebe07 (Fully initialize router, add routing for all project, add unit and e2e tests for routing, refactore project - made sections as pages.)
+=======
+import { BrowserRouter } from 'react-router-dom';
+>>>>>>> c31c805 (bugfix)
 
 const container = document.getElementById('root');
 

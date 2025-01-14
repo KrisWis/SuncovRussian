@@ -9,6 +9,7 @@ import { tabletMediaQueryWidth } from '@/shared/const/global';
 import { TrainerProgressBar } from './TrainerProgressBar/ui/TrainerProgressBar';
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 import { PrimaryWordsInterface } from '../model/types/types';
 =======
 import { AccentsTrainerWords } from './AccentsTrainerWords/ui/AccentsTrainerWords';
@@ -16,6 +17,8 @@ import { AccentsWordsInterface } from '../model/static/wordsForAccentsTests';
 >>>>>>> 93ebe07 (Fully initialize router, add routing for all project, add unit and e2e tests for routing, refactore project - made sections as pages.)
 =======
 import { PrimaryTrainerWords } from './PrimaryTrainerWords/ui/PrimaryTrainerWords';
+=======
+>>>>>>> c31c805 (bugfix)
 import { PrimaryWordsInterface } from '../model/types/types';
 >>>>>>> fb89821 (Made types for header, rebuild accents for trainer words to primary trainer words for reusing.)
 
@@ -30,6 +33,7 @@ import { TrainerTotalResult } from './TrainerTotalResult/ui/TrainerTotalResult';
 import { useRandomWord } from '../model/hooks/useRandomWord';
 import { useWordActions } from '../model/hooks/useWordActions';
 <<<<<<< HEAD
+<<<<<<< HEAD
 import { useInitializeWords } from '../model/hooks/useInitializeWords';
 import { PrimaryTrainerWords } from './PrimaryTrainerWords/ui/PrimaryTrainerWords';
 import { Page } from '@/widgets/Page';
@@ -37,6 +41,11 @@ import { Page } from '@/widgets/Page';
 import { Page } from '@/widgets/Page';
 import { useInitializeWords } from '../model/hooks/useInitializeWords';
 >>>>>>> 93ebe07 (Fully initialize router, add routing for all project, add unit and e2e tests for routing, refactore project - made sections as pages.)
+=======
+import { useInitializeWords } from '../model/hooks/useInitializeWords';
+import { PrimaryTrainerWords } from './PrimaryTrainerWords/ui/PrimaryTrainerWords';
+import { Page } from '@/widgets/Page';
+>>>>>>> c31c805 (bugfix)
 
 const TrainerInner: React.FC<TrainerPageProps> = memo(
   ({ words }): React.JSX.Element => {
@@ -252,65 +261,71 @@ const TrainerInner: React.FC<TrainerPageProps> = memo(
     }, [initializeWords]);
 
     return (
-      <Flex
-        maxHeight
-        justify="between"
-        direction="column"
-        className={styles.Trainer}
-        relative
-        width="100"
-      >
-        {!totalTime ? (
+      <Page>
+        {storeWords.length > 0 && (
           <>
-            {words[0].trainerType === 'ударения' && (
-              <Hint
-                text={`Выбирайте ответ, а система будет предлагать новые слова или
+            {!totalTime ? (
+              <>
+                {storeWords[0].trainerType === 'ударения' && (
+                  <Hint
+                    text={`Выбирайте ответ, а система будет предлагать новые слова или
                     те, в которых были допущены ошибки. Когда вы перестанете их
                     допускать, шкала полностью заполнится. Заполните шкалу
                     несколько раз, сделайте работу над ошибками - и вы готовы.`}
-                      textClassName={styles.TrainerPage__hint}
-                    />
-                  )}
+                    textClassName={styles.TrainerPage__hint}
+                  />
+                )}
 
-            {words[0].trainerType === 'виды союзов' && (
-              <Hint
-                text={`В этом тренажере под подчинительным союзом понимается любое
+                {storeWords[0].trainerType === 'виды союзов' && (
+                  <Hint
+                    text={`В этом тренажере под подчинительным союзом понимается любое
                     средство подчинительной связи, т.е. союз, союзное слово,
                     частица`}
-                      textClassName={styles.TrainerPage__hint}
-                    />
-                  )}
-
-                  {isIncorrect && (
-                    <Flex
-                      className={styles.TrainerPage__uncorrect}
-                      data-testid="Trainer__uncorrect"
-                      justify="center"
-                    >
-                      Неверно
-                    </Flex>
-                  )}
-
-            {randomWord && (
-              <>
-                {words[0].trainerType === 'ударения' && (
-                  <PrimaryTrainerWords
-                    randomWord={randomWord as PrimaryWordsInterface}
-                    randomWordsIsReverse={randomWordsIsReverse}
-                    wordOnFail={wordOnFail}
-                    wordOnSuccess={wordOnSuccess}
+                    textClassName={styles.TrainerPage__hint}
                   />
                 )}
 
-                {words[0].trainerType === 'виды союзов' && (
-                  <UnionsTrainerWords
-                    randomWord={randomWord as UnionsWordsInterface}
-                    wordOnSuccess={wordOnSuccess}
-                    wordOnFail={wordOnFail}
-                  />
+                {isIncorrect && (
+                  <Flex
+                    className={styles.TrainerPage__uncorrect}
+                    data-testid="Trainer__uncorrect"
+                    justify="center"
+                  >
+                    Неверно
+                  </Flex>
                 )}
+
+                {randomWord && (
+                  <>
+                    {storeWords[0].trainerType === 'ударения' && (
+                      <PrimaryTrainerWords
+                        randomWord={randomWord as PrimaryWordsInterface}
+                        randomWordsIsReverse={randomWordsIsReverse}
+                        wordOnFail={wordOnFail}
+                        wordOnSuccess={wordOnSuccess}
+                      />
+                    )}
+
+                    {words[0].trainerType === 'виды союзов' && (
+                      <UnionsTrainerWords
+                        randomWord={randomWord as UnionsWordsInterface}
+                        wordOnSuccess={wordOnSuccess}
+                        wordOnFail={wordOnFail}
+                      />
+                    )}
+                  </>
+                )}
+
+                <TrainerProgressBar />
+                <StrictModeSwitcher />
               </>
+            ) : (
+              <TrainerTotalResult
+                updateRandomWord={updateRandomWord}
+                initializeWords={initializeWords}
+              />
             )}
+<<<<<<< HEAD
 
                   <TrainerProgressBar />
                   <StrictModeSwitcher />
@@ -325,6 +340,10 @@ const TrainerInner: React.FC<TrainerPageProps> = memo(
           )}
         </Flex>
 >>>>>>> 93ebe07 (Fully initialize router, add routing for all project, add unit and e2e tests for routing, refactore project - made sections as pages.)
+=======
+          </>
+        )}
+>>>>>>> c31c805 (bugfix)
       </Page>
     );
   },
