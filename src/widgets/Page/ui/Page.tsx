@@ -3,12 +3,12 @@ import { PageProps } from '../model/types';
 import { Header } from './Header/ui/Header';
 
 export const Page: React.FC<PageProps> = memo(
-  ({ children, 'data-testid': dataTestId }): React.JSX.Element => {
+  ({ children, 'data-testid': dataTestId, className }): React.JSX.Element => {
     return (
       <div data-testid={dataTestId}>
         <Header />
 
-        <main>{children}</main>
+        <main className={className}>{children}</main>
       </div>
     );
   },

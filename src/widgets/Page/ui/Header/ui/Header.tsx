@@ -10,12 +10,14 @@ export const Header: React.FC = memo((): React.JSX.Element => {
   useEffect(() => {
     const onClickEmptySpace = (e: MouseEvent) => {
       const main: HTMLElement = document.querySelector('main')!;
+      const mainRoute: string = '/';
 
       if (
         ['MAIN', 'BODY'].includes((e.target as HTMLElement).nodeName) &&
-        main.style.pointerEvents !== 'none'
+        main.style.pointerEvents !== 'none' &&
+        window.location.pathname !== mainRoute
       ) {
-        window.location.href = '/';
+        window.location.pathname = mainRoute;
       }
     };
 

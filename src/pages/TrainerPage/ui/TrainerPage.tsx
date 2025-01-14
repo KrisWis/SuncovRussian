@@ -7,37 +7,7 @@ import { DynamicModuleLoader } from '@/shared/lib/DynamicModuleLoader';
 import { TrainerReducer } from '../model/slice/TrainerPageSlice';
 import { tabletMediaQueryWidth } from '@/shared/const/global';
 import { TrainerProgressBar } from './TrainerProgressBar/ui/TrainerProgressBar';
-<<<<<<< HEAD
-<<<<<<< HEAD
-import { AccentsTrainerWords } from './AccentsTrainerWords/ui/AccentsTrainerWords';
-import { AccentsWordsInterface } from '../model/static/wordsForAccentsTests';
-<<<<<<< HEAD
-<<<<<<< HEAD
-=======
-import { UnionsTrainerWords } from './UnionsTrainerWords';
-=======
-
->>>>>>> f1d426f (Delete dependency cruiser and replace it eslint plugin, fix circular dependencies, fix storybook and unit tests, finish theory block - fix pdf viewer, add adaptive for theory)
-import { UnionsWordsInterface } from '../model/static/wordsForUnionsTests';
-
-import { Hint } from '@/shared/ui-kit/Hint';
-<<<<<<< HEAD
->>>>>>> 3b93d38 (Fix header, add UI-Kit component -Hint, fix some other things.)
-=======
-import { TrainerContext } from '../model/context/TrainerContext';
-import { useWords } from '../model/selectors/getTrainerWords/getTrainerWords';
-import { UnionsTrainerWords } from './UnionsTrainerWords/ui/UnionsTrainerWords';
-import { StrictModeSwitcher } from './StrictModeSwitcher/ui/StrictModeSwitcher';
-import { TrainerTotalResult } from './TrainerTotalResult/ui/TrainerTotalResult';
-import { useRandomWord } from '../model/hooks/useRandomWord';
-import { useWordActions } from '../model/hooks/useWordActions';
->>>>>>> f1d426f (Delete dependency cruiser and replace it eslint plugin, fix circular dependencies, fix storybook and unit tests, finish theory block - fix pdf viewer, add adaptive for theory)
-=======
-import { PrimaryTrainerWords } from './PrimaryTrainerWords/ui/PrimaryTrainerWords';
-=======
->>>>>>> c31c805 (bugfix)
 import { PrimaryWordsInterface } from '../model/types/types';
->>>>>>> fb89821 (Made types for header, rebuild accents for trainer words to primary trainer words for reusing.)
 
 import { UnionsWordsInterface } from '../model/static/wordsForUnionsTests';
 
@@ -67,8 +37,14 @@ const TrainerInner: React.FC<TrainerPageProps> = memo(
       setRandomWordId,
     );
 
-    const { totalTime, setIsIncorrect, isIncorrect, isErrorWork } =
-      useContext(TrainerPageContext);
+    const {
+      totalTime,
+      setIsIncorrect,
+      isIncorrect,
+      isErrorWork,
+      setIsErrorWork,
+      setTotalTime,
+    } = useContext(TrainerPageContext);
 
     useEffect(() => {
       if (!randomWord) setRandomWordId(0);
@@ -158,58 +134,16 @@ const TrainerInner: React.FC<TrainerPageProps> = memo(
 
     useEffect(() => {
       const timeoutForInitializeWords = setTimeout(() => {
+        setIsIncorrect(false);
+        setIsErrorWork(false);
+        setTotalTime(0);
         initializeWords();
         clearTimeout(timeoutForInitializeWords);
       }, 0);
-    }, [initializeWords]);
+    }, [initializeWords, setIsErrorWork, setIsIncorrect, setTotalTime]);
 
     return (
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD:src/widgets/Trainer/ui/Trainer.tsx
-=======
->>>>>>> fb89821 (Made types for header, rebuild accents for trainer words to primary trainer words for reusing.)
-      <Flex
-        maxHeight
-        justify="between"
-        direction="column"
-        className={styles.Trainer}
-        relative
-        width="100"
-      >
-        {!totalTime ? (
-          <>
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-            {words[0].trainerType === 'accents' && (
-              <Hint
-                text={`Выбирайте ответ, а система будет предлагать новые слова или
-=======
-      <Page>
-        <Flex
-          maxHeight
-          justify="between"
-          direction="column"
-          className={styles.TrainerPage}
-          relative
-          width="100"
-        >
-          {storeWords.length > 0 && (
-            <>
-              {!totalTime ? (
-                <>
-                  {storeWords[0].trainerType === 'accents' && (
-                    <Hint
-                      text={`Выбирайте ответ, а система будет предлагать новые слова или
->>>>>>> 93ebe07 (Fully initialize router, add routing for all project, add unit and e2e tests for routing, refactore project - made sections as pages.):src/pages/TrainerPage/ui/TrainerPage.tsx
-=======
-            {words[0].trainerType === 'ударения' && (
-              <Hint
-                text={`Выбирайте ответ, а система будет предлагать новые слова или
->>>>>>> fb89821 (Made types for header, rebuild accents for trainer words to primary trainer words for reusing.)
-=======
-      <Page>
+      <Page className={styles.TrainerPage}>
         {storeWords.length > 0 && (
           <>
             {!totalTime ? (
@@ -217,7 +151,6 @@ const TrainerInner: React.FC<TrainerPageProps> = memo(
                 {storeWords[0].trainerType === 'ударения' && (
                   <Hint
                     text={`Выбирайте ответ, а система будет предлагать новые слова или
->>>>>>> c31c805 (bugfix)
                     те, в которых были допущены ошибки. Когда вы перестанете их
                     допускать, шкала полностью заполнится. Заполните шкалу
                     несколько раз, сделайте работу над ошибками - и вы готовы.`}
@@ -230,80 +163,7 @@ const TrainerInner: React.FC<TrainerPageProps> = memo(
                     text={`В этом тренажере под подчинительным союзом понимается любое
                     средство подчинительной связи, т.е. союз, союзное слово,
                     частица`}
-<<<<<<< HEAD
-                      textClassName={styles.TrainerPage__hint}
-                    />
-                  )}
-
-<<<<<<< HEAD:src/widgets/Trainer/ui/Trainer.tsx
-=======
-            <Hint textClassName={styles.Trainer__hint}>
-              <>
-                {words[0].trainerType === 'accents' && (
-                  <p>
-                    Выбирайте ответ, а система будет предлагать новые слова или
-=======
-            {words[0].trainerType === 'accents' && (
-              <Hint
-                text={`Выбирайте ответ, а система будет предлагать новые слова или
->>>>>>> fed6419 (Add PDFViewer Component, UI-kit ErrorComponent and Theory basic functional.)
-                    те, в которых были допущены ошибки. Когда вы перестанете их
-                    допускать, шкала полностью заполнится. Заполните шкалу
-                    несколько раз, сделайте работу над ошибками - и вы готовы.`}
-                textClassName={styles.Trainer__hint}
-              />
-            )}
-
-            {words[0].trainerType === 'unions' && (
-              <Hint
-                text={`В этом тренажере под подчинительным союзом понимается любое
-                    средство подчинительной связи, т.е. союз, союзное слово,
-<<<<<<< HEAD
-                    частица
-                  </p>
-                )}
-              </>
-            </Hint>
->>>>>>> 3b93d38 (Fix header, add UI-Kit component -Hint, fix some other things.)
-=======
-                    частица`}
-                textClassName={styles.Trainer__hint}
-              />
-            )}
-
->>>>>>> fed6419 (Add PDFViewer Component, UI-kit ErrorComponent and Theory basic functional.)
-            {isIncorrect && (
-              <Flex
-                className={styles.Trainer__uncorrect}
-                data-testid="Trainer__uncorrect"
-                justify="center"
-              >
-                Неверно
-              </Flex>
-            )}
-=======
-                  {isIncorrect && (
-                    <Flex
-                      className={styles.TrainerPage__uncorrect}
-                      data-testid="Trainer__uncorrect"
-                      justify="center"
-                    >
-                      Неверно
-                    </Flex>
-                  )}
->>>>>>> 93ebe07 (Fully initialize router, add routing for all project, add unit and e2e tests for routing, refactore project - made sections as pages.):src/pages/TrainerPage/ui/TrainerPage.tsx
-
-            {randomWord && (
-              <>
-                {words[0].trainerType === 'ударения' && (
-                  <PrimaryTrainerWords
-                    randomWord={randomWord as PrimaryWordsInterface}
-                    randomWordsIsReverse={randomWordsIsReverse}
-                    wordOnFail={wordOnFail}
-                    wordOnSuccess={wordOnSuccess}
-=======
                     textClassName={styles.TrainerPage__hint}
->>>>>>> c31c805 (bugfix)
                   />
                 )}
 
@@ -343,8 +203,8 @@ const TrainerInner: React.FC<TrainerPageProps> = memo(
               </>
             ) : (
               <TrainerTotalResult
+                words={words}
                 updateRandomWord={updateRandomWord}
-                initializeWords={initializeWords}
               />
             )}
           </>
