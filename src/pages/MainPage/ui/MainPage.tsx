@@ -1,4 +1,4 @@
-import { tips } from '@/shared/assets/static/tips';
+import { tips } from '../model/static/tips';
 import { Tip } from '@/shared/ui/Tip';
 import { memo, useMemo } from 'react';
 import { Page } from '@/widgets/Page';

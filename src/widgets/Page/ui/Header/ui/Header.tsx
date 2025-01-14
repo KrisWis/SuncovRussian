@@ -4,6 +4,7 @@ import { memo, useEffect, useState } from 'react';
 import { headerCategories, headerRoutesCategories } from '../model/data';
 import { HeaderCategoryType } from '../model/types';
 import { Link } from 'react-router-dom';
+import { isOnStorybook } from '@/shared/utils/isOnStorybook';
 
 export const Header: React.FC = memo((): React.JSX.Element => {
   // При клике на пустое пространство сбрасывается выбор категории
@@ -12,12 +13,14 @@ export const Header: React.FC = memo((): React.JSX.Element => {
       const main: HTMLElement = document.querySelector('main')!;
       const mainRoute: string = '/';
 
-      if (
-        ['MAIN', 'BODY'].includes((e.target as HTMLElement).nodeName) &&
-        main.style.pointerEvents !== 'none' &&
-        window.location.pathname !== mainRoute
-      ) {
-        window.location.pathname = mainRoute;
+      if (!isOnStorybook()) {
+        if (
+          ['MAIN', 'BODY'].includes((e.target as HTMLElement).nodeName) &&
+          main.style.pointerEvents !== 'none' &&
+          window.location.pathname !== mainRoute
+        ) {
+          window.location.pathname = mainRoute;
+        }
       }
     };
 
