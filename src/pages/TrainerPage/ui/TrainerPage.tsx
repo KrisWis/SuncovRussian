@@ -62,6 +62,9 @@ const TrainerInner: React.FC<TrainerPageProps> = memo(
     );
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+>>>>>>> 06f1d0e (Bugfix)
     const {
       totalTime,
       setIsIncorrect,
@@ -70,10 +73,13 @@ const TrainerInner: React.FC<TrainerPageProps> = memo(
       setIsErrorWork,
       setTotalTime,
     } = useContext(TrainerPageContext);
+<<<<<<< HEAD
 =======
     const { totalTime, setIsIncorrect, isIncorrect, isErrorWork } =
       useContext(TrainerPageContext);
 >>>>>>> 93ebe07 (Fully initialize router, add routing for all project, add unit and e2e tests for routing, refactore project - made sections as pages.)
+=======
+>>>>>>> 06f1d0e (Bugfix)
 
     useEffect(() => {
       if (!randomWord) setRandomWordId(0);
@@ -172,6 +178,7 @@ const TrainerInner: React.FC<TrainerPageProps> = memo(
     useEffect(() => {
       const timeoutForInitializeWords = setTimeout(() => {
 <<<<<<< HEAD
+<<<<<<< HEAD
         setIsIncorrect(false);
         setIsErrorWork(false);
         setTotalTime(0);
@@ -255,13 +262,18 @@ const TrainerInner: React.FC<TrainerPageProps> = memo(
           </>
         )}
 =======
+=======
+        setIsIncorrect(false);
+        setIsErrorWork(false);
+        setTotalTime(0);
+>>>>>>> 06f1d0e (Bugfix)
         initializeWords();
         clearTimeout(timeoutForInitializeWords);
       }, 0);
-    }, [initializeWords]);
+    }, [initializeWords, setIsErrorWork, setIsIncorrect, setTotalTime]);
 
     return (
-      <Page>
+      <Page className={styles.TrainerPage}>
         {storeWords.length > 0 && (
           <>
             {!totalTime ? (
@@ -321,8 +333,8 @@ const TrainerInner: React.FC<TrainerPageProps> = memo(
               </>
             ) : (
               <TrainerTotalResult
+                words={words}
                 updateRandomWord={updateRandomWord}
-                initializeWords={initializeWords}
               />
             )}
 <<<<<<< HEAD

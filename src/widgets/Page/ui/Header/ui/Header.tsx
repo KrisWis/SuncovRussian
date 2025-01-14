@@ -15,6 +15,7 @@ export const Header: React.FC = memo((): React.JSX.Element => {
     const onClickEmptySpace = (e: MouseEvent) => {
       const main: HTMLElement = document.querySelector('main')!;
 <<<<<<< HEAD
+<<<<<<< HEAD
       const mainRoute: string = '/';
 
       if (!isOnStorybook()) {
@@ -26,13 +27,21 @@ export const Header: React.FC = memo((): React.JSX.Element => {
           window.location.pathname = mainRoute;
         }
 =======
+=======
+      const mainRoute: string = '/';
+>>>>>>> 06f1d0e (Bugfix)
 
       if (
         ['MAIN', 'BODY'].includes((e.target as HTMLElement).nodeName) &&
-        main.style.pointerEvents !== 'none'
+        main.style.pointerEvents !== 'none' &&
+        window.location.pathname !== mainRoute
       ) {
+<<<<<<< HEAD
         window.location.href = '/';
 >>>>>>> 93ebe07 (Fully initialize router, add routing for all project, add unit and e2e tests for routing, refactore project - made sections as pages.)
+=======
+        window.location.pathname = mainRoute;
+>>>>>>> 06f1d0e (Bugfix)
       }
     };
 
