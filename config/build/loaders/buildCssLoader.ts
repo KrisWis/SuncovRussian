@@ -1,17 +1,9 @@
 import MiniCssExtractPlugin from 'mini-css-extract-plugin';
 
-export function buildCssLoader(isDev: boolean, isStorybook: boolean) {
+export function buildCssLoader(isDev: boolean) {
     return {
         test: /\.(sa|sc|c)ss$/i,
-<<<<<<< HEAD
-<<<<<<< HEAD
-        exclude: isStorybook ? /node_modules/ : /node_modules\/(?!react-pdf)/,
-=======
         exclude: /node_modules\/(?!react-pdf)/,
->>>>>>> 12d4b89 (Delete cnd package for pdf and add react alternative lib.)
-=======
-        exclude: isStorybook ? /node_modules/ : /node_modules\/(?!react-pdf)/,
->>>>>>> 1df825a (Remove loki from project.)
         use: [
             isDev ? 'style-loader' : MiniCssExtractPlugin.loader,
             {
