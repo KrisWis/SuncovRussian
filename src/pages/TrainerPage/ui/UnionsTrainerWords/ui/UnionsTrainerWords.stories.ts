@@ -18,5 +18,6 @@ export const Primary: Story = {
     randomWord: wordsForUnionsTests[0],
     wordOnSuccess: () => {},
     wordOnFail: () => {},
+    storeWords: wordsForUnionsTests,
   },
 };

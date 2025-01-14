@@ -3,19 +3,31 @@ import * as styles from './TrainerTotalResult.module.scss';
 import { memo, useCallback, useContext, useMemo } from 'react';
 import { TrainerTotalResultProps } from '../model/types';
 import { useWords } from '../../../model/selectors/getTrainerWords/getTrainerWords';
+<<<<<<< HEAD
 import { PrimaryWordsInterface } from '../../../model/types/types';
 import { UnionsWordsInterface } from '../../../model/static/wordsForUnionsTests';
 import { TrainerPageContext } from '../../../model/context/TrainerPageContext';
 import { useTrainerActions } from '../../../model/slice/TrainerPageSlice';
 import { useInitializeWords } from '../../../model/hooks/useInitializeWords';
+=======
+import { useTrainerActions } from '../../../model/slice/TrainerPageSlice';
+import { AccentsWordsInterface } from '../../../model/static/wordsForAccentsTests';
+import { UnionsWordsInterface } from '../../../model/static/wordsForUnionsTests';
+import { TrainerPageContext } from '../../../model/context/TrainerPageContext';
+>>>>>>> 93ebe07 (Fully initialize router, add routing for all project, add unit and e2e tests for routing, refactore project - made sections as pages.)
 
 export const TrainerTotalResult: React.FC<TrainerTotalResultProps> = memo(
   ({ updateRandomWord, words }): React.JSX.Element => {
     // Инициализация хуков и контекста
     const storeWords = useWords();
     const { setWords } = useTrainerActions();
+<<<<<<< HEAD
     const { totalTime, setTotalTime, isErrorWork, setIsErrorWork } =
       useContext(TrainerPageContext);
+=======
+    const { totalTime, setTotalTime } = useContext(TrainerPageContext);
+    const { isErrorWork, setIsErrorWork } = useContext(TrainerPageContext);
+>>>>>>> 93ebe07 (Fully initialize router, add routing for all project, add unit and e2e tests for routing, refactore project - made sections as pages.)
 
     // Высчитывание данных для общего времени
     const totalTimeMinutes = useMemo(

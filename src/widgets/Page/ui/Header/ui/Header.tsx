@@ -4,13 +4,17 @@ import { memo, useEffect, useState } from 'react';
 import { headerCategories, headerRoutesCategories } from '../model/data';
 import { HeaderCategoryType } from '../model/types';
 import { Link } from 'react-router-dom';
+<<<<<<< HEAD
 import { isOnStorybook } from '@/shared/utils/isOnStorybook';
+=======
+>>>>>>> 93ebe07 (Fully initialize router, add routing for all project, add unit and e2e tests for routing, refactore project - made sections as pages.)
 
 export const Header: React.FC = memo((): React.JSX.Element => {
   // При клике на пустое пространство сбрасывается выбор категории
   useEffect(() => {
     const onClickEmptySpace = (e: MouseEvent) => {
       const main: HTMLElement = document.querySelector('main')!;
+<<<<<<< HEAD
       const mainRoute: string = '/';
 
       if (!isOnStorybook()) {
@@ -21,6 +25,14 @@ export const Header: React.FC = memo((): React.JSX.Element => {
         ) {
           window.location.pathname = mainRoute;
         }
+=======
+
+      if (
+        ['MAIN', 'BODY'].includes((e.target as HTMLElement).nodeName) &&
+        main.style.pointerEvents !== 'none'
+      ) {
+        window.location.href = '/';
+>>>>>>> 93ebe07 (Fully initialize router, add routing for all project, add unit and e2e tests for routing, refactore project - made sections as pages.)
       }
     };
 

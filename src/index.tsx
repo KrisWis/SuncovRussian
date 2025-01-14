@@ -6,7 +6,10 @@ import '@/app/styles/reset.scss';
 import '@/app/styles/index.scss';
 import { ErrorComponent } from '@/shared/ui/ErrorComponent';
 import { store } from '@/shared/lib/store';
+<<<<<<< HEAD
 import { BrowserRouter } from 'react-router-dom';
+=======
+>>>>>>> 93ebe07 (Fully initialize router, add routing for all project, add unit and e2e tests for routing, refactore project - made sections as pages.)
 
 const container = document.getElementById('root');
 

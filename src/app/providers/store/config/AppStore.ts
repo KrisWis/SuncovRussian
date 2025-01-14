@@ -2,9 +2,13 @@ import { configureStore, EnhancedStore, Reducer } from '@reduxjs/toolkit';
 import { TypedUseSelectorHook, useDispatch, useSelector } from 'react-redux';
 import { createReducerManager, ReducerManager } from './AppReducerManager';
 import { RootReducer } from './AppReducer';
+<<<<<<< HEAD
 import { UTApi } from '@/shared/api/UTApi/api';
 import { StateSchema } from './types';
+=======
+>>>>>>> 93ebe07 (Fully initialize router, add routing for all project, add unit and e2e tests for routing, refactore project - made sections as pages.)
 import { UTApi } from '@/shared/api/UTApi/api';
+import { StateSchema } from './types';
 
 const reducerManager = createReducerManager(RootReducer);
 

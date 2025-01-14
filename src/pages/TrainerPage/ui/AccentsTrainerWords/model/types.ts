@@ -1,4 +1,5 @@
 <<<<<<< HEAD
+<<<<<<< HEAD
 <<<<<<< HEAD:src/widgets/Trainer/ui/AccentsTrainerWords/model/types.ts
 <<<<<<< HEAD
 <<<<<<< HEAD
@@ -12,6 +13,10 @@ import { wordActionsFunctionType } from '@/widgets/Trainer/model/hooks/useWordAc
 =======
 import { wordActionsFunctionType } from '../../../model/hooks/useWordActions';
 >>>>>>> 12d4b89 (Delete cnd package for pdf and add react alternative lib.)
+=======
+import { WordsTypes } from '../../../model/types/types';
+import { wordActionsFunctionType } from '../../../model/hooks/useWordActions';
+>>>>>>> 3f8fb2c (Resolve conflicts by taking incoming changes)
 import { AccentsWordsInterface } from '../../../model/static/wordsForAccentsTests';
 
 export interface AccentsTrainerWordsProps {
@@ -21,5 +26,8 @@ export interface AccentsTrainerWordsProps {
   wordOnFail: wordActionsFunctionType;
   storeWords: WordsTypes[];
 }
+<<<<<<< HEAD
 =======
 >>>>>>> fb89821 (Made types for header, rebuild accents for trainer words to primary trainer words for reusing.)
+=======
+>>>>>>> 3f8fb2c (Resolve conflicts by taking incoming changes)

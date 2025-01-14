@@ -7,7 +7,12 @@ import { DynamicModuleLoader } from '@/shared/lib/DynamicModuleLoader';
 import { TrainerReducer } from '../model/slice/TrainerPageSlice';
 import { tabletMediaQueryWidth } from '@/shared/const/global';
 import { TrainerProgressBar } from './TrainerProgressBar/ui/TrainerProgressBar';
+<<<<<<< HEAD
 import { PrimaryWordsInterface } from '../model/types/types';
+=======
+import { AccentsTrainerWords } from './AccentsTrainerWords/ui/AccentsTrainerWords';
+import { AccentsWordsInterface } from '../model/static/wordsForAccentsTests';
+>>>>>>> 93ebe07 (Fully initialize router, add routing for all project, add unit and e2e tests for routing, refactore project - made sections as pages.)
 
 import { UnionsWordsInterface } from '../model/static/wordsForUnionsTests';
 
@@ -19,9 +24,14 @@ import { StrictModeSwitcher } from './StrictModeSwitcher/ui/StrictModeSwitcher';
 import { TrainerTotalResult } from './TrainerTotalResult/ui/TrainerTotalResult';
 import { useRandomWord } from '../model/hooks/useRandomWord';
 import { useWordActions } from '../model/hooks/useWordActions';
+<<<<<<< HEAD
 import { useInitializeWords } from '../model/hooks/useInitializeWords';
 import { PrimaryTrainerWords } from './PrimaryTrainerWords/ui/PrimaryTrainerWords';
 import { Page } from '@/widgets/Page';
+=======
+import { Page } from '@/widgets/Page';
+import { useInitializeWords } from '../model/hooks/useInitializeWords';
+>>>>>>> 93ebe07 (Fully initialize router, add routing for all project, add unit and e2e tests for routing, refactore project - made sections as pages.)
 
 const TrainerInner: React.FC<TrainerPageProps> = memo(
   ({ words }): React.JSX.Element => {
@@ -37,6 +47,7 @@ const TrainerInner: React.FC<TrainerPageProps> = memo(
       setRandomWordId,
     );
 
+<<<<<<< HEAD
     const {
       totalTime,
       setIsIncorrect,
@@ -45,6 +56,10 @@ const TrainerInner: React.FC<TrainerPageProps> = memo(
       setIsErrorWork,
       setTotalTime,
     } = useContext(TrainerPageContext);
+=======
+    const { totalTime, setIsIncorrect, isIncorrect, isErrorWork } =
+      useContext(TrainerPageContext);
+>>>>>>> 93ebe07 (Fully initialize router, add routing for all project, add unit and e2e tests for routing, refactore project - made sections as pages.)
 
     useEffect(() => {
       if (!randomWord) setRandomWordId(0);
@@ -83,7 +98,11 @@ const TrainerInner: React.FC<TrainerPageProps> = memo(
         const wordElements = document.querySelectorAll('.TrainerWord');
 
         const clickElements = (NotReverseIndex: number): void => {
+<<<<<<< HEAD
           if (words[0].trainerType === 'виды союзов') {
+=======
+          if (storeWords[0].trainerType === 'unions') {
+>>>>>>> 93ebe07 (Fully initialize router, add routing for all project, add unit and e2e tests for routing, refactore project - made sections as pages.)
             (wordElements[NotReverseIndex] as HTMLElement).click();
             return;
           }
@@ -134,6 +153,7 @@ const TrainerInner: React.FC<TrainerPageProps> = memo(
 
     useEffect(() => {
       const timeoutForInitializeWords = setTimeout(() => {
+<<<<<<< HEAD
         setIsIncorrect(false);
         setIsErrorWork(false);
         setTotalTime(0);
@@ -216,6 +236,91 @@ const TrainerInner: React.FC<TrainerPageProps> = memo(
             )}
           </>
         )}
+=======
+        initializeWords();
+        clearTimeout(timeoutForInitializeWords);
+      }, 0);
+    }, [initializeWords]);
+
+    return (
+      <Page>
+        <Flex
+          maxHeight
+          justify="between"
+          direction="column"
+          className={styles.TrainerPage}
+          relative
+          width="100"
+        >
+          {storeWords.length > 0 && (
+            <>
+              {!totalTime ? (
+                <>
+                  {storeWords[0].trainerType === 'accents' && (
+                    <Hint
+                      text={`Выбирайте ответ, а система будет предлагать новые слова или
+                    те, в которых были допущены ошибки. Когда вы перестанете их
+                    допускать, шкала полностью заполнится. Заполните шкалу
+                    несколько раз, сделайте работу над ошибками - и вы готовы.`}
+                      textClassName={styles.TrainerPage__hint}
+                    />
+                  )}
+
+                  {storeWords[0].trainerType === 'unions' && (
+                    <Hint
+                      text={`В этом тренажере под подчинительным союзом понимается любое
+                    средство подчинительной связи, т.е. союз, союзное слово,
+                    частица`}
+                      textClassName={styles.TrainerPage__hint}
+                    />
+                  )}
+
+                  {isIncorrect && (
+                    <Flex
+                      className={styles.TrainerPage__uncorrect}
+                      data-testid="Trainer__uncorrect"
+                      justify="center"
+                    >
+                      Неверно
+                    </Flex>
+                  )}
+
+                  {randomWord && (
+                    <>
+                      {storeWords[0].trainerType === 'accents' && (
+                        <AccentsTrainerWords
+                          randomWord={randomWord as AccentsWordsInterface}
+                          randomWordsIsReverse={randomWordsIsReverse}
+                          wordOnFail={wordOnFail}
+                          wordOnSuccess={wordOnSuccess}
+                          storeWords={storeWords}
+                        />
+                      )}
+
+                      {storeWords[0].trainerType === 'unions' && (
+                        <UnionsTrainerWords
+                          randomWord={randomWord as UnionsWordsInterface}
+                          wordOnSuccess={wordOnSuccess}
+                          wordOnFail={wordOnFail}
+                          storeWords={storeWords}
+                        />
+                      )}
+                    </>
+                  )}
+
+                  <TrainerProgressBar />
+                  <StrictModeSwitcher />
+                </>
+              ) : (
+                <TrainerTotalResult
+                  updateRandomWord={updateRandomWord}
+                  initializeWords={initializeWords}
+                />
+              )}
+            </>
+          )}
+        </Flex>
+>>>>>>> 93ebe07 (Fully initialize router, add routing for all project, add unit and e2e tests for routing, refactore project - made sections as pages.)
       </Page>
     );
   },

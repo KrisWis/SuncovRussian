@@ -8,9 +8,11 @@ import { wordActionsFunctionType } from '@/widgets/Trainer/model/hooks/useWordAc
 import { wordActionsFunctionType } from '../../../model/hooks/useWordActions';
 >>>>>>> 12d4b89 (Delete cnd package for pdf and add react alternative lib.)
 import { UnionsWordsInterface } from '../../../model/static/wordsForUnionsTests';
+import { WordsTypes } from '../../../model/types/types';
 
 export interface UnionsTrainerWordsProps {
   randomWord: UnionsWordsInterface;
   wordOnSuccess: wordActionsFunctionType;
   wordOnFail: wordActionsFunctionType;
+  storeWords: WordsTypes[];
 }

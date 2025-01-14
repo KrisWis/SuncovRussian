@@ -9,9 +9,17 @@ import * as styles from './UnionsTrainerWords.module.scss';
 import { useWords } from '../../../model/selectors/getTrainerWords/getTrainerWords';
 
 export const UnionsTrainerWords: React.FC<UnionsTrainerWordsProps> = memo(
-  ({ randomWord, wordOnSuccess, wordOnFail }): React.JSX.Element => {
+  ({
+    randomWord,
+    wordOnSuccess,
+    wordOnFail,
+    storeWords,
+  }): React.JSX.Element => {
     // Инициализация данных и контекста
+<<<<<<< HEAD
     const storeWords = useWords();
+=======
+>>>>>>> 93ebe07 (Fully initialize router, add routing for all project, add unit and e2e tests for routing, refactore project - made sections as pages.)
     const { isIncorrect, isErrorWork } = useContext(TrainerPageContext);
 
     return (

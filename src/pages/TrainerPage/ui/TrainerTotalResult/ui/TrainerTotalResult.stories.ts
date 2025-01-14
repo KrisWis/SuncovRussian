@@ -6,7 +6,7 @@ const meta = {
   title: 'Pages/Trainer/TrainerTotalResult',
   component: TrainerTotalResult,
   parameters: {
-    layout: 'centered',
+    layout: 'fullscreen',
   },
 } satisfies Meta<typeof TrainerTotalResult>;
 

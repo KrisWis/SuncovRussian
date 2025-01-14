@@ -27,6 +27,7 @@ export { TrainerPageContext } from './model/context/TrainerPageContext';
 
 export { StrictModeSwitcher } from './ui/StrictModeSwitcher/ui/StrictModeSwitcher';
 
+<<<<<<< HEAD
 export { useTrainerActions } from './model/slice/TrainerPageSlice';
 
 // Static
@@ -39,3 +40,10 @@ export { wordsForDictionaryTests } from './model/static/wordsForDictionaryTests'
 export { wordsForAdverbsTests } from './model/static/wordsForAdverbsTests';
 
 export { wordsForUnionsTests } from './model/static/wordsForUnionsTests';
+=======
+export { wordsForAccentsTests } from './model/static/wordsForAccentsTests';
+
+export { wordsForUnionsTests } from './model/static/wordsForUnionsTests';
+
+export { useTrainerActions } from './model/slice/TrainerPageSlice';
+>>>>>>> 93ebe07 (Fully initialize router, add routing for all project, add unit and e2e tests for routing, refactore project - made sections as pages.)
