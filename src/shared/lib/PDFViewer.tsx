@@ -1,71 +1,38 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
-import { useEffect, useRef, useState } from 'react';
+import { useState } from 'react';
 import { PageLoading } from '../ui-kit/PageLoading/PageLoading';
-import { Flex } from './Stack';
+import { pdfjs } from 'react-pdf';
+import { Document, Page } from 'react-pdf';
+import 'react-pdf/dist/Page/AnnotationLayer.css';
+import 'react-pdf/dist/Page/TextLayer.css';
+import { ErrorComponent } from '../ui-kit/ErrorComponent';
 
 interface PDFViewerProps {
   url: string;
 }
 
-pdfjsLib.GlobalWorkerOptions.workerSrc = `https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.10.377/pdf.worker.min.js`;
+pdfjs.GlobalWorkerOptions.workerSrc = new URL(
+  'pdfjs-dist/build/pdf.worker.min.mjs',
+  import.meta.url,
+).toString();
 
 export const PDFViewer: React.FC<PDFViewerProps> = ({ url }) => {
-  // Отображение PDF файла на странице
-  const parentRef = useRef<HTMLDivElement>(null);
-
-  const [isLoading, setIsLoading] = useState<boolean>(true);
-
-  useEffect(() => {
-    const loadingTask = pdfjsLib.getDocument(url);
-
-    setIsLoading(true);
-
-    loadingTask.promise.then((pdf: any) => {
-      const totalPages = pdf.numPages;
-
-      for (let pageNum = 1; pageNum <= totalPages; pageNum++) {
-        const canvas = document.createElement('canvas');
-        const context = canvas.getContext('2d')!;
-        const scale = 1.5;
-
-        pdf.getPage(pageNum).then((page: any) => {
-          const viewport = page.getViewport({ scale: scale });
-
-          canvas.height = viewport.height;
-          canvas.width = viewport.width;
-
-          const renderContext = {
-            canvasContext: context,
-            viewport: viewport,
-          };
-          page.render(renderContext);
-        });
-
-        setIsLoading(false);
-
-        const appendChildTimeout = setTimeout(() => {
-          parentRef.current!.appendChild(canvas);
-          clearTimeout(appendChildTimeout);
-        }, 1);
-      }
-    });
-  }, [url]);
-
-  // Очистка DOM всего родителя при изменении ссылки для избежения большого кол-ва ненужных элементов
-  useEffect(() => {
-    if (parentRef.current) {
-      parentRef.current.innerHTML = '';
-    }
-  }, [url]);
-
-  // При загрузке страницы показываем анимацию загрузки
-  if (isLoading) {
-    return <PageLoading />;
-  }
+  // Отображение PDF файла на сайте
+  const [numPages, setNumPages] = useState<number>();
 
   return (
-    <Flex align="start" direction="column" ref={parentRef}>
-      <></>
-    </Flex>
+    <Document
+      error={<ErrorComponent />}
+      loading={<PageLoading />}
+      file={url}
+      onLoadSuccess={(document) => setNumPages(document.numPages)}
+    >
+      {Array.from(Array(numPages), (_, index) => (
+        <Page
+          loading={<PageLoading />}
+          key={index + 1}
+          pageNumber={index + 1}
+        />
+      ))}
+    </Document>
   );
 };
