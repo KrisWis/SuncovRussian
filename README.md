@@ -8,17 +8,9 @@
 2.  Напиши в терминале `npm install` для установки всех зависимостей.
 3.  Напишите в терминале команду `npm run dev`.
 
-<<<<<<< HEAD
-<<<<<<< HEAD
-## Или вы можете просто зайти на [сайт](https://evgeniywis.github.io/SuncovRussian/), загруженный на Github Pages.
-=======
 Или вы можете просто зайти на [сайт](evgeniywis.github.io/SuncovRussian/), загруженный на Github Pages.
 
 ---
->>>>>>> 4e457ec (update readme)
-=======
-## Или вы можете просто зайти на [сайт](https://evgeniywis.github.io/SuncovRussian/), загруженный на Github Pages.
->>>>>>> 444e18f (update readme)
 
 ## Скрипты
 
@@ -32,9 +24,14 @@
 - `npm run storybook` - запуск Storybook
 - `npm run storybook:build` - Сборка storybook билда
 - `npm run test:unit` - Запуск unit тестов с jest/react-testing-library
+- `npm run test:ui` - Запуск скриншотных тестов с loki
+- `npm run test:ui:ok` - Подтверждение новых скриншотов
+- `npm run test:ui:ci` - Запуск скриншотных тестов в CI
+- `npm run test:ui:report` - Генерация полного отчета для скриншотных тестов
+- `npm run test:ui:json` - Генерация json отчета для скриншотных тестов
+- `npm run test:ui:html` - Генерация HTML отчета для скриншотных тестов
 - `npm run prettier` - запуск Prettier для форматирования кода
 - `npm run prepare` - Загрузка husky для прекоммит-хуков
-- `npm run test:e2e` - Запуск e2e тестов с Cypress
 
 ---
 
@@ -52,14 +49,7 @@
 
 1. Обычные unit тесты на jest - `npm run test:unit`
 2. Тесты на компоненты с React testing library - `npm run test:unit`
-<<<<<<< HEAD
-<<<<<<< HEAD
-3. e2e тестирование с Cypress - `npm run test:e2e`
-=======
->>>>>>> 1df825a (Remove loki from project.)
-=======
-3. e2e тестирование с Cypress - `npm run test:e2e`
->>>>>>> 4d9286d (Add creevey instead of loki.)
+3. Скриншотное тестирование с loki - `npm run test:ui`
 
 Подробнее о тестах - [документация тестирования](/docs/tests.md)
 
@@ -173,7 +163,7 @@ Cборщик адаптирован под основные фичи прило
 По возможности переиспользуемые сущности необходимо нормализовать с помощью EntityAdapter.
 
 Для асинхронного подключения редюсеров (чтобы не тянуть их в общий бандл) используется
-[DynamicModuleLoader](src/shared/ui/DynamicModuleLoader/ui/DynamicModuleLoader.tsx)
+[DynamicModuleLoader](src/shared/ui-kit/DynamicModuleLoader/ui/DynamicModuleLoader.tsx)
 
 ---
 
