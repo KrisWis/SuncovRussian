@@ -173,7 +173,7 @@ Cборщик адаптирован под основные фичи прило
 По возможности переиспользуемые сущности необходимо нормализовать с помощью EntityAdapter.
 
 Для асинхронного подключения редюсеров (чтобы не тянуть их в общий бандл) используется
-[DynamicModuleLoader](src/shared/ui-kit/DynamicModuleLoader/ui/DynamicModuleLoader.tsx)
+[DynamicModuleLoader](src/shared/ui/DynamicModuleLoader/ui/DynamicModuleLoader.tsx)
 
 ---
 

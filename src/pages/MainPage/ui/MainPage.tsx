@@ -1,15 +1,7 @@
 import { tips } from '@/shared/assets/static/tips';
-import { Header, headerCategories, HeaderContext } from '@/widgets/Header';
-import { Theory } from '@/widgets/Theory';
-import { Tip } from '@/shared/ui-kit/Tip';
-import {
-  wordsForAccentsTests,
-  Trainer,
-  wordsForUnionsTests,
-  TrainerContext,
-  useTrainerActions,
-} from '@/widgets/Trainer';
-import { memo, useContext, useEffect, useMemo, useState } from 'react';
+import { Tip } from '@/shared/ui/Tip';
+import { memo, useMemo } from 'react';
+import { Page } from '@/widgets/Page';
 
 export const MainPage: React.FC = memo((): React.JSX.Element => {
   // Выбор случайного совета при загрузке страницы
@@ -18,20 +10,8 @@ export const MainPage: React.FC = memo((): React.JSX.Element => {
     [],
   );
 
-  // Настройка контекста
-  const [headerCategory, setHeaderCategory] = useState<string | null>(null);
-
-  // При изменении категории, данные очищаются
-  const { setWords } = useTrainerActions();
-  const { setTotalTime } = useContext(TrainerContext);
-
-  useEffect(() => {
-    setTotalTime(0);
-    setWords([]);
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [headerCategory]);
-
   return (
+<<<<<<< HEAD
     <HeaderContext.Provider value={{ headerCategory, setHeaderCategory }}>
       <Header />
 
@@ -74,6 +54,11 @@ export const MainPage: React.FC = memo((): React.JSX.Element => {
         )}
       </main>
     </HeaderContext.Provider>
+=======
+    <Page data-testid="MainPage">
+      <Tip id={randomTip.id} text={randomTip.text} />
+    </Page>
+>>>>>>> 93ebe07 (Fully initialize router, add routing for all project, add unit and e2e tests for routing, refactore project - made sections as pages.)
   );
 });
 

@@ -2,7 +2,7 @@ import type { Meta, StoryObj } from '@storybook/react';
 import { MainPage } from './MainPage';
 
 const meta = {
-  title: 'Pages/MainPage',
+  title: 'Pages/Main',
   component: MainPage,
   parameters: {
     layout: 'fullscreen',

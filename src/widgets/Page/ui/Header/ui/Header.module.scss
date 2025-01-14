@@ -1,0 +1,78 @@
+@use '@/app/styles/ScssVars' as *;
+
+.Header {
+  height: var(--header-height);
+  min-height: var(--header-height);
+  display: flex;
+  width: 100vw;
+  background-color: var(--color-black);
+
+  $item-padding-x: 10px;
+
+  &__item {
+    cursor: pointer;
+    font-weight: 500;
+    font-size: 18px;
+    line-height: 100%;
+    color: var(--color-white);
+    background: var(--color-black);
+    transition: var(--transition-duration-default) linear;
+    transition-property: background-color, color;
+    user-select: none;
+    padding: 0 $item-padding-x;
+    text-transform: lowercase;
+
+    @media (max-width: $mobile-mediaquery-width) {
+      font-size: 14px;
+    }
+
+    &:hover {
+      color: var(--color-black);
+      background: var(--color-white);
+    }
+  }
+
+  &__submenu {
+    $submenu-padding-x: 10px;
+
+    position: absolute;
+    opacity: 0;
+    z-index: var(--z-index-hidden);
+    transform: translateY(50px);
+    top: 30px;
+<<<<<<< HEAD
+<<<<<<< HEAD
+    left: $item-padding-x - $submenu-padding-x;
+=======
+    left: $item-padding-x;
+>>>>>>> 3b93d38 (Fix header, add UI-Kit component -Hint, fix some other things.)
+=======
+    left: $item-padding-x - $submenu-padding-x;
+>>>>>>> 3736a6b (Add SideBar for Theory Block, add Theory Context and add functional of switching sections of theories.)
+    transition: var(--transition-duration-default) linear;
+    transition-property: transform, opacity;
+    background-color: var(--color-white);
+    padding: $submenu-padding-x;
+
+    &__active {
+      transform: translateY(0);
+      opacity: 1;
+      z-index: var(--z-index-header);
+    }
+
+    &__item {
+      font-weight: 300;
+      font-size: 16px;
+      line-height: 100%;
+      color: var(--color-gray);
+      cursor: pointer;
+      white-space: nowrap;
+      text-transform: lowercase;
+      transition: var(--transition-duration-default) linear color;
+
+      &:hover {
+        color: var(--color-black);
+      }
+    }
+  }
+}

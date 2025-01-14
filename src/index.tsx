@@ -1,11 +1,11 @@
 import { createRoot } from 'react-dom/client';
 import { App } from './app/App';
 import { ErrorBoundary } from 'react-error-boundary';
-import { store } from './app/store/AppStore';
 import { Provider } from 'react-redux';
 import '@/app/styles/reset.scss';
 import '@/app/styles/index.scss';
-import { ErrorComponent } from './shared/ui-kit/ErrorComponent';
+import { ErrorComponent } from '@/shared/ui/ErrorComponent';
+import { store } from '@/shared/lib/store';
 
 const container = document.getElementById('root');
 

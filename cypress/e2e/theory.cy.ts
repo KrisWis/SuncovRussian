@@ -1,9 +1,6 @@
-import { selectByTestId } from '../helpers/selectByTestId';
-
 describe('Пользователь заходит в блок "Теория"', () => {
   beforeEach(() => {
-    cy.visit('/');
-    cy.get(selectByTestId('Header__Теория')).click();
+    cy.visit('/theory');
   });
 
   it('И видит содержимое сайдбара, контента, отсутствие ошибки и быстро проходит загрузка', () => {

@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 import { MainPage } from '@/pages/MainPage';
 import { PageLoading } from '@/shared/ui-kit/PageLoading/PageLoading';
 import { Suspense } from 'react';
@@ -6,6 +7,10 @@ import { Suspense } from 'react';
 <<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
+=======
+import { AppRouter } from './providers/router';
+import { BrowserRouter } from 'react-router-dom';
+>>>>>>> 93ebe07 (Fully initialize router, add routing for all project, add unit and e2e tests for routing, refactore project - made sections as pages.)
 // TODO: Исправить ошибку с creevey, либо найти новую либу для ui тестирования со Storybook
 =======
 // TODO: написать cypress тесты в конце разработки
@@ -22,8 +27,8 @@ import { Suspense } from 'react';
 
 export const App = () => {
   return (
-    <Suspense fallback={<PageLoading />}>
-      <MainPage />
-    </Suspense>
+    <BrowserRouter basename="/">
+      <AppRouter />
+    </BrowserRouter>
   );
 };

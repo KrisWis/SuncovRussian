@@ -14,6 +14,11 @@ const config: Config = {
     '\\.s?css$': 'identity-obj-proxy',
     '\\.svg': path.resolve(__dirname, 'jestEmptyComponent.tsx'),
     '^@/(.*)$': '<rootDir>/src/$1',
+    'react-pdf': '<rootDir>/config/jest/__mocks__/react-pdf.js',
+    'react-pdf/dist/Page/AnnotationLayer.css':
+      '<rootDir>/config/jest/__mocks__/styleMock.js',
+    'react-pdf/dist/Page/TextLayer.css':
+      '<rootDir>/config/jest/__mocks__/styleMock.js',
   },
 
   globals: {
