@@ -43,6 +43,7 @@ export const MainPage: React.FC = memo((): React.JSX.Element => {
         )}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
         {headerCategory && (
           <>
             {headerCategory === 'Теория' && <Theory />}
@@ -54,6 +55,11 @@ export const MainPage: React.FC = memo((): React.JSX.Element => {
                 <Trainer words={wordsForAccentsTests} />
               )}
 >>>>>>> 3b93d38 (Fix header, add UI-Kit component -Hint, fix some other things.)
+=======
+        {headerCategory && (
+          <>
+            {headerCategory === 'Теория' && <Theory />}
+>>>>>>> fed6419 (Add PDFViewer Component, UI-kit ErrorComponent and Theory basic functional.)
 
             {headerCategories.Тренажеры.includes(headerCategory) && (
               <>

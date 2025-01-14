@@ -164,6 +164,7 @@ const TrainerInner: React.FC<TrainerProps> = memo(
         {!totalTime ? (
           <>
 <<<<<<< HEAD
+<<<<<<< HEAD
             {words[0].trainerType === 'accents' && (
               <Hint
                 text={`Выбирайте ответ, а система будет предлагать новые слова или
@@ -189,22 +190,36 @@ const TrainerInner: React.FC<TrainerProps> = memo(
                 {words[0].trainerType === 'accents' && (
                   <p>
                     Выбирайте ответ, а система будет предлагать новые слова или
+=======
+            {words[0].trainerType === 'accents' && (
+              <Hint
+                text={`Выбирайте ответ, а система будет предлагать новые слова или
+>>>>>>> fed6419 (Add PDFViewer Component, UI-kit ErrorComponent and Theory basic functional.)
                     те, в которых были допущены ошибки. Когда вы перестанете их
                     допускать, шкала полностью заполнится. Заполните шкалу
-                    несколько раз, сделайте работу над ошибками - и вы готовы.
-                  </p>
-                )}
+                    несколько раз, сделайте работу над ошибками - и вы готовы.`}
+                textClassName={styles.Trainer__hint}
+              />
+            )}
 
-                {words[0].trainerType === 'unions' && (
-                  <p>
-                    В этом тренажере под подчинительным союзом понимается любое
+            {words[0].trainerType === 'unions' && (
+              <Hint
+                text={`В этом тренажере под подчинительным союзом понимается любое
                     средство подчинительной связи, т.е. союз, союзное слово,
+<<<<<<< HEAD
                     частица
                   </p>
                 )}
               </>
             </Hint>
 >>>>>>> 3b93d38 (Fix header, add UI-Kit component -Hint, fix some other things.)
+=======
+                    частица`}
+                textClassName={styles.Trainer__hint}
+              />
+            )}
+
+>>>>>>> fed6419 (Add PDFViewer Component, UI-kit ErrorComponent and Theory basic functional.)
             {isIncorrect && (
               <Flex
                 className={styles.Trainer__uncorrect}
