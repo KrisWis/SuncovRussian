@@ -9,8 +9,12 @@ import { Suspense } from 'react';
 <<<<<<< HEAD
 =======
 import { AppRouter } from './providers/router';
+<<<<<<< HEAD
 import { BrowserRouter } from 'react-router-dom';
 >>>>>>> 93ebe07 (Fully initialize router, add routing for all project, add unit and e2e tests for routing, refactore project - made sections as pages.)
+=======
+
+>>>>>>> c31c805 (bugfix)
 // TODO: Исправить ошибку с creevey, либо найти новую либу для ui тестирования со Storybook
 =======
 // TODO: написать cypress тесты в конце разработки
@@ -26,9 +30,5 @@ import { BrowserRouter } from 'react-router-dom';
 >>>>>>> 4d9286d (Add creevey instead of loki.)
 
 export const App = () => {
-  return (
-    <BrowserRouter basename="/">
-      <AppRouter />
-    </BrowserRouter>
-  );
+  return <AppRouter />;
 };
