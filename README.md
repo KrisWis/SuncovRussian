@@ -49,9 +49,13 @@
 1. Обычные unit тесты на jest - `npm run test:unit`
 2. Тесты на компоненты с React testing library - `npm run test:unit`
 <<<<<<< HEAD
+<<<<<<< HEAD
 3. e2e тестирование с Cypress - `npm run test:e2e`
 =======
 >>>>>>> 1df825a (Remove loki from project.)
+=======
+3. e2e тестирование с Cypress - `npm run test:e2e`
+>>>>>>> 4d9286d (Add creevey instead of loki.)
 
 Подробнее о тестах - [документация тестирования](/docs/tests.md)
 

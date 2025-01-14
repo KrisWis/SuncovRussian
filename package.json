@@ -29,6 +29,9 @@
     "@reduxjs/toolkit": "^2.5.0",
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+>>>>>>> 4d9286d (Add creevey instead of loki.)
     "creevey": "^0.9.5",
     "cypress": "^13.17.0",
     "react": "^19.0.0",
