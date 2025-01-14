@@ -15,6 +15,7 @@
   top: 0;
   transition: margin-top var(--transition-duration-default) linear;
   z-index: var(--z-index-sidebar);
+<<<<<<< HEAD
 
   @media (max-width: $mobile-mediaquery-width) {
     border-right: none;
@@ -44,6 +45,8 @@
   top: 0;
   transition: margin-top var(--transition-duration-default) linear;
   z-index: var(--z-index-one);
+=======
+>>>>>>> 4fa07a1 (Replace yandex cloud api to uploadthingapi, rewrite api requests, add dotenvplugin for webpack. Theory is finished, but have some details to fix.)
 
   @media (max-width: $mobile-mediaquery-width) {
     border-right: none;

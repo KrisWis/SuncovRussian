@@ -1,31 +1,31 @@
 import { memo, useEffect, useMemo, useState } from 'react';
-import {
-  theoriesFolderName,
-  useGetTheoriesQuery,
-} from '../model/api/theoryApi';
-import { YandexCloudAPIItem } from '@/shared/api/yandexCloudApi/types';
+import { useGetAllTheoriesMutation } from '../model/api/theoryApi';
 import { PageLoading } from '@/shared/ui-kit/PageLoading/PageLoading';
 import { ErrorComponent } from '@/shared/ui-kit/ErrorComponent';
 import { Flex } from '@/shared/lib/Stack';
 import * as styles from './Theory.module.scss';
 import { TheoryContext } from '../model/context/TheoryContext';
-import { PDFViewer } from '@/shared/lib/PDFViewer';
 import { mobileMediaQueryWidth } from '@/shared/const/global';
 import { TheorySidebar } from './TheorySidebar/ui/TheorySidebar';
+import { UTAPIFileInList } from '@/shared/api/UTApi/types';
+import { TheoryItem } from './TheoryItem';
 
 export const Theory: React.FC = memo((): React.JSX.Element => {
   // Получение всех pdf файлов с теорией с Яндекс Диска
-  const { data, isLoading, isError } = useGetTheoriesQuery();
+  const [getTheories, { data, isError, isLoading }] =
+    useGetAllTheoriesMutation();
 
-  const [pdfFiles, setPdfFiles] = useState<YandexCloudAPIItem[]>([]);
+  useEffect(() => {
+    getTheories();
+  }, [getTheories]);
+
+  const [pdfFiles, setPdfFiles] = useState<UTAPIFileInList[]>([]);
 
   // Фильтрация полученных файлов
   useEffect(() => {
     if (data) {
-      const regex = new RegExp(`^disk:\\/${theoriesFolderName}\\/.*$`);
-
-      const dataPfdFiles = data.items.filter(
-        (item) => item.name.endsWith('.pdf') && regex.test(item.path),
+      const dataPfdFiles = data.files.filter((item) =>
+        item.name.endsWith('.pdf'),
       );
 
       setPdfFiles(dataPfdFiles);
@@ -74,7 +74,7 @@ export const Theory: React.FC = memo((): React.JSX.Element => {
             justify="center"
             align="start"
           >
-            <PDFViewer url={selectedPdfFile.file} />
+            <TheoryItem fileKey={selectedPdfFile.key} />
           </Flex>
         )}
       </Flex>
