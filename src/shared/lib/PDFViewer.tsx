@@ -1,37 +1,44 @@
-import { useState } from 'react';
-import { PageLoading } from '../ui-kit/PageLoading/PageLoading';
-import { Document, Page, pdfjs } from 'react-pdf';
-import 'react-pdf/dist/Page/AnnotationLayer.css';
-import 'react-pdf/dist/Page/TextLayer.css';
-import { ErrorComponent } from '../ui-kit/ErrorComponent';
+/* eslint-disable @typescript-eslint/no-explicit-any */
+import { useEffect, useRef } from 'react';
 
 interface PDFViewerProps {
   url: string;
 }
 
-pdfjs.GlobalWorkerOptions.workerSrc = new URL(
-  'pdfjs-dist/build/pdf.worker.min.mjs',
-  import.meta.url,
-).toString();
+pdfjsLib.GlobalWorkerOptions.workerSrc = `https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.10.377/pdf.worker.min.js`;
 
 export const PDFViewer: React.FC<PDFViewerProps> = ({ url }) => {
-  // Отображение PDF файла на сайте
-  const [numPages, setNumPages] = useState<number>();
+  // Отображение PDF файла на странице
+  const parentRef = useRef<HTMLDivElement>(null);
 
-  return (
-    <Document
-      error={<ErrorComponent />}
-      loading={<PageLoading />}
-      file={url}
-      onLoadSuccess={(document) => setNumPages(document.numPages)}
-    >
-      {Array.from(Array(numPages), (_, index) => (
-        <Page
-          loading={<PageLoading />}
-          key={index + 1}
-          pageNumber={index + 1}
-        />
-      ))}
-    </Document>
-  );
+  useEffect(() => {
+    const loadingTask = pdfjsLib.getDocument(url);
+
+    loadingTask.promise.then((pdf: any) => {
+      const totalPages = pdf.numPages;
+
+      for (let pageNum = 1; pageNum <= totalPages; pageNum++) {
+        const canvas = document.createElement('canvas');
+        const context = canvas.getContext('2d')!;
+        const scale = 1.5;
+
+        pdf.getPage(pageNum).then((page: any) => {
+          const viewport = page.getViewport({ scale: scale });
+
+          canvas.height = viewport.height;
+          canvas.width = viewport.width;
+
+          const renderContext = {
+            canvasContext: context,
+            viewport: viewport,
+          };
+          page.render(renderContext);
+        });
+
+        parentRef.current!.appendChild(canvas);
+      }
+    });
+  }, [url]);
+
+  return <div ref={parentRef} />;
 };

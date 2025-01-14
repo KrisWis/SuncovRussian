@@ -3,14 +3,14 @@ import { TypedUseSelectorHook, useDispatch, useSelector } from 'react-redux';
 import { createReducerManager, ReducerManager } from './AppReducerManager';
 import { RootReducer } from './AppReducer';
 import { StateSchema } from './types';
-import { UTApi } from '@/shared/api/UTApi/api';
+import { yandexCloudApi } from '@/shared/api/yandexCloudApi/api';
 
 const reducerManager = createReducerManager(RootReducer);
 
 export const store = configureStore({
   reducer: reducerManager.reduce as Reducer<StateSchema>,
   middleware: (getDefaultMiddleware) =>
-    getDefaultMiddleware().concat(UTApi.middleware),
+    getDefaultMiddleware().concat(yandexCloudApi.middleware),
 });
 
 // @ts-expect-error EnhancedStore не имеет свойства reducerManager

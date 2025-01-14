@@ -5,13 +5,7 @@ import { ErrorComponentProps } from '../model/types';
 export const ErrorComponent: React.FC<ErrorComponentProps> = memo(
   ({ className }): React.JSX.Element => {
     return (
-      <Flex
-        data-testid="ErrorComponent"
-        className={className}
-        maxHeight
-        width="100"
-        justify="center"
-      >
+      <Flex className={className} maxHeight width="100" justify="center">
         На сайте возникла непредвиденная ошибка. Приносим свои извинения.
       </Flex>
     );
