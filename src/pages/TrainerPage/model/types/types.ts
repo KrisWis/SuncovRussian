@@ -4,8 +4,12 @@ type TrainerWordsTypes =
   | 'ударения'
   | 'виды союзов'
   | 'cловарные слова'
+<<<<<<< HEAD
   | 'н/нн'
   | 'наречия';
+=======
+  | 'н/нн';
+>>>>>>> fb89821 (Made types for header, rebuild accents for trainer words to primary trainer words for reusing.)
 
 export interface TrainerWordsInterface {
   id: number;

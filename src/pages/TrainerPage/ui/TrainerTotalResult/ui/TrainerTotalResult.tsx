@@ -4,6 +4,7 @@ import { memo, useCallback, useContext, useMemo } from 'react';
 import { TrainerTotalResultProps } from '../model/types';
 import { useWords } from '../../../model/selectors/getTrainerWords/getTrainerWords';
 <<<<<<< HEAD
+<<<<<<< HEAD
 import { PrimaryWordsInterface } from '../../../model/types/types';
 import { UnionsWordsInterface } from '../../../model/static/wordsForUnionsTests';
 import { TrainerPageContext } from '../../../model/context/TrainerPageContext';
@@ -15,6 +16,12 @@ import { AccentsWordsInterface } from '../../../model/static/wordsForAccentsTest
 import { UnionsWordsInterface } from '../../../model/static/wordsForUnionsTests';
 import { TrainerPageContext } from '../../../model/context/TrainerPageContext';
 >>>>>>> 93ebe07 (Fully initialize router, add routing for all project, add unit and e2e tests for routing, refactore project - made sections as pages.)
+=======
+import { PrimaryWordsInterface } from '../../../model/types/types';
+import { UnionsWordsInterface } from '../../../model/static/wordsForUnionsTests';
+import { TrainerPageContext } from '../../../model/context/TrainerPageContext';
+import { useTrainerActions } from '../../../model/slice/TrainerPageSlice';
+>>>>>>> fb89821 (Made types for header, rebuild accents for trainer words to primary trainer words for reusing.)
 
 export const TrainerTotalResult: React.FC<TrainerTotalResultProps> = memo(
   ({ updateRandomWord, words }): React.JSX.Element => {

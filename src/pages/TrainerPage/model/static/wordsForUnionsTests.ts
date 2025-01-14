@@ -201,6 +201,81 @@ export const wordsForUnionsTests: UnionsWordsInterface[] = [
     unionType: 'Подчинительный',
     id: 31,
     trainerType: 'виды союзов',
+<<<<<<< HEAD
+  },
+  {
+    word: 'КОТОРЫЙ',
+    unionType: 'Подчинительный',
+    id: 32,
+    trainerType: 'виды союзов',
+  },
+  {
+    word: 'ЛИ',
+    unionType: 'Подчинительный',
+    id: 33,
+    trainerType: 'виды союзов',
+  },
+  {
+    word: 'КАКОЙ',
+    unionType: 'Подчинительный',
+    id: 34,
+    trainerType: 'виды союзов',
+  },
+  {
+    word: 'ЧЕЙ',
+    unionType: 'Подчинительный',
+    id: 35,
+    trainerType: 'виды союзов',
+  },
+  {
+    word: 'ГДЕ',
+    unionType: 'Подчинительный',
+    id: 36,
+    trainerType: 'виды союзов',
+  },
+  {
+    word: 'КУДА',
+    unionType: 'Подчинительный',
+    id: 37,
+    trainerType: 'виды союзов',
+  },
+  {
+    word: 'ОТКУДА',
+    unionType: 'Подчинительный',
+    id: 38,
+    trainerType: 'виды союзов',
+  },
+  {
+    word: 'ПОЧЕМУ',
+    unionType: 'Подчинительный',
+    id: 39,
+    trainerType: 'виды союзов',
+  },
+  {
+    word: 'ЗАЧЕМ',
+    unionType: 'Подчинительный',
+    id: 40,
+    trainerType: 'виды союзов',
+  },
+  {
+    word: 'КТО',
+    unionType: 'Подчинительный',
+    id: 41,
+    trainerType: 'виды союзов',
+  },
+  {
+    word: 'НАСКОЛЬКО',
+    unionType: 'Подчинительный',
+    id: 42,
+    trainerType: 'виды союзов',
+  },
+  {
+    word: 'КАКОВ',
+    unionType: 'Подчинительный',
+    id: 43,
+    trainerType: 'виды союзов',
+=======
+>>>>>>> fb89821 (Made types for header, rebuild accents for trainer words to primary trainer words for reusing.)
   },
   {
     word: 'КОТОРЫЙ',
