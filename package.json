@@ -49,7 +49,10 @@
     "@svgr/webpack": "^8.1.0",
     "@testing-library/react": "^16.1.0",
     "@types/circular-dependency-plugin": "^5.0.8",
+<<<<<<< HEAD
     "@types/dotenv-webpack": "^7.0.8",
+=======
+>>>>>>> f1d426f (Delete dependency cruiser and replace it eslint plugin, fix circular dependencies, fix storybook and unit tests, finish theory block - fix pdf viewer, add adaptive for theory)
     "@types/html-webpack-plugin": "^3.2.9",
     "@types/jest": "^29.5.14",
     "@types/mini-css-extract-plugin": "^2.5.0",
@@ -62,7 +65,10 @@
     "circular-dependency-plugin": "^5.2.2",
     "copy-webpack-plugin": "^12.0.2",
     "css-loader": "^7.1.2",
+<<<<<<< HEAD
     "dotenv-webpack": "^8.1.0",
+=======
+>>>>>>> f1d426f (Delete dependency cruiser and replace it eslint plugin, fix circular dependencies, fix storybook and unit tests, finish theory block - fix pdf viewer, add adaptive for theory)
     "eslint": "^9.16.0",
     "eslint-config-prettier": "^9.1.0",
     "eslint-plugin-react-refresh": "^0.4.16",

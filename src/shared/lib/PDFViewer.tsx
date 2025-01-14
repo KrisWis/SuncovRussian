@@ -1,5 +1,7 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import { useEffect, useRef } from 'react';
+import { useEffect, useRef, useState } from 'react';
+import { PageLoading } from '../ui-kit/PageLoading/PageLoading';
+import { Flex } from './Stack';
 
 interface PDFViewerProps {
   url: string;
@@ -11,8 +13,12 @@ export const PDFViewer: React.FC<PDFViewerProps> = ({ url }) => {
   // Отображение PDF файла на странице
   const parentRef = useRef<HTMLDivElement>(null);
 
+  const [isLoading, setIsLoading] = useState<boolean>(true);
+
   useEffect(() => {
     const loadingTask = pdfjsLib.getDocument(url);
+
+    setIsLoading(true);
 
     loadingTask.promise.then((pdf: any) => {
       const totalPages = pdf.numPages;
@@ -35,7 +41,12 @@ export const PDFViewer: React.FC<PDFViewerProps> = ({ url }) => {
           page.render(renderContext);
         });
 
-        parentRef.current!.appendChild(canvas);
+        setIsLoading(false);
+
+        const appendChildTimeout = setTimeout(() => {
+          parentRef.current!.appendChild(canvas);
+          clearTimeout(appendChildTimeout);
+        }, 1);
       }
     });
   }, [url]);
@@ -47,5 +58,14 @@ export const PDFViewer: React.FC<PDFViewerProps> = ({ url }) => {
     }
   }, [url]);
 
-  return <div ref={parentRef} />;
+  // При загрузке страницы показываем анимацию загрузки
+  if (isLoading) {
+    return <PageLoading />;
+  }
+
+  return (
+    <Flex align="start" direction="column" ref={parentRef}>
+      <></>
+    </Flex>
+  );
 };

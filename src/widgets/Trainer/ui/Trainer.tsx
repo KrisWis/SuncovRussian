@@ -10,12 +10,26 @@ import { TrainerProgressBar } from './TrainerProgressBar/ui/TrainerProgressBar';
 import { AccentsTrainerWords } from './AccentsTrainerWords/ui/AccentsTrainerWords';
 import { AccentsWordsInterface } from '../model/static/wordsForAccentsTests';
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
 import { UnionsTrainerWords } from './UnionsTrainerWords';
+=======
+
+>>>>>>> f1d426f (Delete dependency cruiser and replace it eslint plugin, fix circular dependencies, fix storybook and unit tests, finish theory block - fix pdf viewer, add adaptive for theory)
 import { UnionsWordsInterface } from '../model/static/wordsForUnionsTests';
-import { TrainerTotalResult } from './TrainerTotalResult';
+
 import { Hint } from '@/shared/ui-kit/Hint';
+<<<<<<< HEAD
 >>>>>>> 3b93d38 (Fix header, add UI-Kit component -Hint, fix some other things.)
+=======
+import { TrainerContext } from '../model/context/TrainerContext';
+import { useWords } from '../model/selectors/getTrainerWords/getTrainerWords';
+import { UnionsTrainerWords } from './UnionsTrainerWords/ui/UnionsTrainerWords';
+import { StrictModeSwitcher } from './StrictModeSwitcher/ui/StrictModeSwitcher';
+import { TrainerTotalResult } from './TrainerTotalResult/ui/TrainerTotalResult';
+import { useRandomWord } from '../model/hooks/useRandomWord';
+import { useWordActions } from '../model/hooks/useWordActions';
+>>>>>>> f1d426f (Delete dependency cruiser and replace it eslint plugin, fix circular dependencies, fix storybook and unit tests, finish theory block - fix pdf viewer, add adaptive for theory)
 
 import { UnionsWordsInterface } from '../model/static/wordsForUnionsTests';
 

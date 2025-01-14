@@ -29,11 +29,14 @@
   // Heights
   --header-height: 30px;
   --theory-sidebar-height-mobile: 60px;
+<<<<<<< HEAD
 =======
 
   // Heights
   --header-height: 30px;
 >>>>>>> 3736a6b (Add SideBar for Theory Block, add Theory Context and add functional of switching sections of theories.)
+=======
+>>>>>>> f1d426f (Delete dependency cruiser and replace it eslint plugin, fix circular dependencies, fix storybook and unit tests, finish theory block - fix pdf viewer, add adaptive for theory)
 }
 
 * {
@@ -79,4 +82,8 @@ canvas {
   max-width: 100%;
 =======
 >>>>>>> 3736a6b (Add SideBar for Theory Block, add Theory Context and add functional of switching sections of theories.)
+}
+
+canvas {
+  max-width: 100%;
 }

@@ -6,7 +6,10 @@ import ReactRefreshWebpackPlugin from "@pmmmwh/react-refresh-webpack-plugin";
 import ForkTsCheckerWebpackPlugin from "fork-ts-checker-webpack-plugin";
 import CopyWebpackPlugin from "copy-webpack-plugin";
 import CircularDependencyPlugin from "circular-dependency-plugin";
+<<<<<<< HEAD
 import DotenvWebpackPlugin from "dotenv-webpack";
+=======
+>>>>>>> f1d426f (Delete dependency cruiser and replace it eslint plugin, fix circular dependencies, fix storybook and unit tests, finish theory block - fix pdf viewer, add adaptive for theory)
 import { BuildOptions } from "./types/config";
 
 export function buildPlugins({

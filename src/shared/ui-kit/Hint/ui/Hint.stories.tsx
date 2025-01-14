@@ -4,9 +4,6 @@ import { Hint } from './Hint';
 const meta = {
   title: 'Shared/UI-Kit/Hint',
   component: Hint,
-  parameters: {
-    layout: 'centered',
-  },
 } satisfies Meta<typeof Hint>;
 
 export default meta;
@@ -31,6 +28,7 @@ export const Right: Story = {
 <<<<<<< HEAD
 <<<<<<< HEAD
       `,
+<<<<<<< HEAD
 =======
       </span>
     ),
@@ -68,4 +66,18 @@ export const Top: Story = {
 >>>>>>> fed6419 (Add PDFViewer Component, UI-kit ErrorComponent and Theory basic functional.)
     textDirection: 'top',
   },
+=======
+  },
+};
+
+export const Top: React.FC = (): React.JSX.Element => {
+  return (
+    <div style={{ marginTop: 100, width: 250, position: 'relative' }}>
+      <Hint
+        textDirection="top"
+        text="Не ставь запятую между подлежащим и сказуемым."
+      />
+    </div>
+  );
+>>>>>>> f1d426f (Delete dependency cruiser and replace it eslint plugin, fix circular dependencies, fix storybook and unit tests, finish theory block - fix pdf viewer, add adaptive for theory)
 };
