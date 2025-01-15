@@ -5,11 +5,14 @@
     <title>Redirecting...</title>
     <script>
       const segment = '/SuncovRussian';
-      const path = window.location.pathname;
+      const l = window.location;
       
-      sessionStorage.setItem('redirect', path.replace(segment, ''));
-      
-      window.location.href = window.location.origin + segment;
+      const fullPath = l.pathname.includes(segment) 
+        ? l.pathname 
+        : segment + l.pathname;
+        
+      sessionStorage.setItem('redirect', fullPath);
+      window.location.href = l.origin + segment;
     </script>
   </head>
   <body>
