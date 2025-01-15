@@ -9,7 +9,7 @@ interface PDFViewerProps {
   url: string;
 }
 
-pdfjs.GlobalWorkerOptions.workerSrc = `/scripts/pdf.worker.min.mjs`;
+pdfjs.GlobalWorkerOptions.workerSrc = `${__IS_DEV__ ? '/' : ''}scripts/pdf.worker.min.mjs`;
 
 export const PDFViewer: React.FC<PDFViewerProps> = ({ url }) => {
   // Отображение PDF файла на сайте
@@ -17,7 +17,7 @@ export const PDFViewer: React.FC<PDFViewerProps> = ({ url }) => {
 
   return (
     <Document
-      error={<ErrorComponent />}
+      error={<ErrorComponent withHeader={false} />}
       loading={<PageLoading />}
       file={url}
       onLoadSuccess={(document) => setNumPages(document.numPages)}

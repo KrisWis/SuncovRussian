@@ -7,10 +7,29 @@
       content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0"
     />
     <meta http-equiv="X-UA-Compatible" content="ie=edge" />
-    <link rel="icon" type="image/x-icon" href="/favicon.ico">
+    <script>
+      const faviconPath = window.__IS_DEV ? '/favicon.ico' : `/SuncovRussian/favicon.ico`;
+      const linkElement = document.createElement('link');
+      linkElement.rel = 'icon';
+      linkElement.type = 'image/x-icon';
+      linkElement.href = faviconPath;
+      document.head.appendChild(linkElement);
+    </script>
     <title>Сунцов Никита, русский язык</title>
   </head>
   <body>
     <div id="root"></div>
+
+    <script>
+      (function() {
+        const redirect = sessionStorage.getItem('redirect');
+        if (redirect) {
+          sessionStorage.removeItem('redirect');
+          if (redirect !== window.location.pathname) {
+            window.history.replaceState(null, null, redirect);
+          }
+        }
+      })();
+    </script>
   </body>
 </html>

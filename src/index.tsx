@@ -6,7 +6,7 @@ import '@/app/styles/reset.scss';
 import '@/app/styles/index.scss';
 import { ErrorComponent } from '@/shared/ui/ErrorComponent';
 import { store } from '@/shared/lib/store';
-import { HashRouter } from 'react-router-dom';
+import { BrowserRouter } from 'react-router-dom';
 
 const container = document.getElementById('root');
 
@@ -18,12 +18,13 @@ if (!container) {
 
 const root = createRoot(container);
 
+// TODO: сделать так, чтобы подставлялось из глобальной переменной (везде)
 root.render(
-  <HashRouter basename="/">
+  <BrowserRouter basename="/SuncovRussian">
     <Provider store={store}>
       <ErrorBoundary fallback={<ErrorComponent />}>
         <App />
       </ErrorBoundary>
     </Provider>
-  </HashRouter>,
+  </BrowserRouter>,
 );

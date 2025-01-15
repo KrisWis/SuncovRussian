@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Перенаправление...</title>
+    <script>
+      const segment = '/SuncovRussian';
+      const l = window.location;
+      
+      const fullPath = l.pathname.includes(segment) 
+        ? l.pathname 
+        : segment + l.pathname;
+        
+      sessionStorage.setItem('redirect', fullPath);
+      window.location.href = l.origin + segment;
+    </script>
+  </head>
+  <body>
+    Перенаправление...
+  </body>
+</html>

@@ -17,7 +17,9 @@ export function buildWebpackConfig(
       filename: "[name].[contenthash].js",
       path: paths.build,
       clean: true,
-      publicPath: '/',
+      publicPath: options.isDev
+      ? '/'
+      : '/SuncovRussian/',
     },
     plugins: buildPlugins(options),
     module: {

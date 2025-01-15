@@ -23,6 +23,7 @@ export function buildPlugins({
     new webpack.ProgressPlugin(),
     new webpack.DefinePlugin({
       __IS_DEV__: JSON.stringify(isDev),
+      __PUBLIC_URL__: 'SuncovRussian',
     }),
     new ForkTsCheckerWebpackPlugin({
       typescript: {
@@ -33,11 +34,14 @@ export function buildPlugins({
         mode: "write-references",
       },
     }),
+
     new CopyWebpackPlugin({
       patterns: [
         { from: 'public/sounds', to: 'sounds' }, 
+        { from: 'public/scripts', to: 'scripts' }, 
         { from: 'public/gifs', to: 'gifs' }, 
         { from: 'public/favicon.ico', to: 'favicon.ico' },
+        { from: 'public/404.html', to: '404.html' },
       ],
     }),
 
