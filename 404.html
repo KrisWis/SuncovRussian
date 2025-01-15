@@ -2,7 +2,9 @@
 <html>
 <head>
   <script>
-    window.location.href = window.location.origin + `/SuncovRussian` + window.location.pathname;
+    if (!window.location.pathname.includes('SuncovRussian')) {
+      window.location.href = window.location.origin + '/SuncovRussian' + window.location.pathname;
+    }
   </script>
 </head>
 <body>
