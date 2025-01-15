@@ -2,8 +2,13 @@
 <html>
 <head>
   <script>
-    if (!window.location.pathname.includes('SuncovRussian')) {
-      window.location.href = window.location.origin + '/SuncovRussian' + window.location.pathname;
+    const path = window.location.pathname;
+    const segment = '/SuncovRussian';
+    
+    if (path.includes(segment)) {
+      window.location.href = window.location.origin + segment + '/index.html' + window.location.search + '#' + path.replace(segment, '');
+    } else {
+      window.location.href = window.location.origin + segment + path;
     }
   </script>
 </head>
