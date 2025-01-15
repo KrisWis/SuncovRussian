@@ -1,7 +1,3 @@
-<<<<<<< HEAD
-<<<<<<< HEAD
-=======
->>>>>>> f1d426f (Delete dependency cruiser and replace it eslint plugin, fix circular dependencies, fix storybook and unit tests, finish theory block - fix pdf viewer, add adaptive for theory)
 @use '@/app/styles/ScssVars' as *;
 
 .TheoryPage {
@@ -14,13 +10,5 @@
       right: 0;
       top: var(--theory-sidebar-height-mobile);
     }
-<<<<<<< HEAD
-=======
-.Theory {
-  &__content {
-    top: var(--header-height);
->>>>>>> 3736a6b (Add SideBar for Theory Block, add Theory Context and add functional of switching sections of theories.)
-=======
->>>>>>> f1d426f (Delete dependency cruiser and replace it eslint plugin, fix circular dependencies, fix storybook and unit tests, finish theory block - fix pdf viewer, add adaptive for theory)
   }
 }

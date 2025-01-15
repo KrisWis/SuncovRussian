@@ -4,19 +4,7 @@ import { HintProps } from '../model/types';
 import { Flex } from '@/shared/lib/Stack';
 
 export const Hint: React.FC<HintProps> = memo(
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-  ({ textClassName, text, textDirection = 'top' }): React.JSX.Element => {
-=======
-  ({ textClassName, children, textDirection = 'top' }): React.JSX.Element => {
->>>>>>> 3b93d38 (Fix header, add UI-Kit component -Hint, fix some other things.)
-=======
-  ({ textClassName, text, textDirection = 'top' }): React.JSX.Element => {
->>>>>>> fed6419 (Add PDFViewer Component, UI-kit ErrorComponent and Theory basic functional.)
-=======
   ({ textClassName, text, textDirection = 'right' }): React.JSX.Element => {
->>>>>>> f1d426f (Delete dependency cruiser and replace it eslint plugin, fix circular dependencies, fix storybook and unit tests, finish theory block - fix pdf viewer, add adaptive for theory)
     // Отображение подсказки
     const [isHintVisible, setIsHintVisible] = useState<boolean>(false);
 
@@ -37,15 +25,7 @@ export const Hint: React.FC<HintProps> = memo(
               ${styles[`Hint__text__${textDirection}`]}
               ${textClassName}`}
         >
-<<<<<<< HEAD
-<<<<<<< HEAD
           {text}
-=======
-          {children}
->>>>>>> 3b93d38 (Fix header, add UI-Kit component -Hint, fix some other things.)
-=======
-          {text}
->>>>>>> fed6419 (Add PDFViewer Component, UI-kit ErrorComponent and Theory basic functional.)
         </p>
       </Flex>
     );

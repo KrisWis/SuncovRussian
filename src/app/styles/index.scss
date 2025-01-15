@@ -22,18 +22,8 @@
   // Z-indexes
   --z-index-hidden: -1;
   --z-index-default: 0;
-<<<<<<< HEAD
-<<<<<<< HEAD
   --z-index-sidebar: 3;
   --z-index-header: 4;
-=======
-  --z-index-one: 1;
-  --z-index-sidebar: 3;
->>>>>>> 4fa07a1 (Replace yandex cloud api to uploadthingapi, rewrite api requests, add dotenvplugin for webpack. Theory is finished, but have some details to fix.)
-=======
-  --z-index-sidebar: 3;
-  --z-index-header: 4;
->>>>>>> 93ebe07 (Fully initialize router, add routing for all project, add unit and e2e tests for routing, refactore project - made sections as pages.)
 
   // Heights
   --header-height: 30px;

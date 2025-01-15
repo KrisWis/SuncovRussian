@@ -1,15 +1,8 @@
-<<<<<<< HEAD
-<<<<<<< HEAD
+import { memo } from 'react';
+import { Tip } from '@/shared/ui/Tip/ui/Tip';
 import { tips } from '../model/static/tips';
-=======
-import { tips } from '@/shared/assets/static/tips';
->>>>>>> 93ebe07 (Fully initialize router, add routing for all project, add unit and e2e tests for routing, refactore project - made sections as pages.)
-=======
-import { tips } from '../model/static/tips';
->>>>>>> 786c80e (Add new trainers.)
-import { Tip } from '@/shared/ui/Tip';
-import { memo, useMemo } from 'react';
 import { Page } from '@/widgets/Page';
+import { useMemo } from 'react';
 
 export const MainPage: React.FC = memo((): React.JSX.Element => {
   // Выбор случайного совета при загрузке страницы
@@ -19,54 +12,9 @@ export const MainPage: React.FC = memo((): React.JSX.Element => {
   );
 
   return (
-<<<<<<< HEAD
-    <HeaderContext.Provider value={{ headerCategory, setHeaderCategory }}>
-      <Header />
-
-      <main>
-        {headerCategory === null && (
-          <Tip id={randomTip.id} text={randomTip.text} />
-        )}
-
-<<<<<<< HEAD
-<<<<<<< HEAD
-        {headerCategory && (
-          <>
-            {headerCategory === 'Теория' && <Theory />}
-=======
-        {headerCategory &&
-          headerCategories.Тренажеры.includes(headerCategory) && (
-            <>
-              {headerCategory === 'Ударения' && (
-                <Trainer words={wordsForAccentsTests} />
-              )}
->>>>>>> 3b93d38 (Fix header, add UI-Kit component -Hint, fix some other things.)
-=======
-        {headerCategory && (
-          <>
-            {headerCategory === 'Теория' && <Theory />}
->>>>>>> fed6419 (Add PDFViewer Component, UI-kit ErrorComponent and Theory basic functional.)
-
-            {headerCategories.Тренажеры.includes(headerCategory) && (
-              <>
-                {headerCategory === 'Ударения' && (
-                  <Trainer words={wordsForAccentsTests} />
-                )}
-
-                {headerCategory === 'Виды союзов' && (
-                  <Trainer words={wordsForUnionsTests} />
-                )}
-              </>
-            )}
-          </>
-        )}
-      </main>
-    </HeaderContext.Provider>
-=======
     <Page data-testid="MainPage">
       <Tip id={randomTip.id} text={randomTip.text} />
     </Page>
->>>>>>> 93ebe07 (Fully initialize router, add routing for all project, add unit and e2e tests for routing, refactore project - made sections as pages.)
   );
 });
 

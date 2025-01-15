@@ -81,30 +81,10 @@ export const StrictModeSwitcher: React.FC = memo((): React.JSX.Element => {
 
       <Hint
         textClassName={styles.StrictModeSwitcher__hint}
-<<<<<<< HEAD
-        textDirection="right"
-<<<<<<< HEAD
-<<<<<<< HEAD
-=======
         textDirection="top"
->>>>>>> f1d426f (Delete dependency cruiser and replace it eslint plugin, fix circular dependencies, fix storybook and unit tests, finish theory block - fix pdf viewer, add adaptive for theory)
         text={`Обнуляет прогресс каждый раз,
           Когда вы покидаете сайт.`}
       ></Hint>
-=======
-      >
-        <p>
-          Обнуляет прогресс каждый раз,
-          <br />
-          Когда вы покидаете сайт.
-        </p>
-      </Hint>
->>>>>>> 3b93d38 (Fix header, add UI-Kit component -Hint, fix some other things.)
-=======
-        text={`Обнуляет прогресс каждый раз,
-          Когда вы покидаете сайт.`}
-      ></Hint>
->>>>>>> fed6419 (Add PDFViewer Component, UI-kit ErrorComponent and Theory basic functional.)
     </Flex>
   );
 });

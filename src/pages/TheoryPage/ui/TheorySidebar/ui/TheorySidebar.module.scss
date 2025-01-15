@@ -1,5 +1,3 @@
-<<<<<<< HEAD
-<<<<<<< HEAD
 @use '@/app/styles/ScssVars' as *;
 
 .TheorySidebar {
@@ -15,7 +13,6 @@
   top: 0;
   transition: margin-top var(--transition-duration-default) linear;
   z-index: var(--z-index-sidebar);
-<<<<<<< HEAD
 
   @media (max-width: $mobile-mediaquery-width) {
     border-right: none;
@@ -24,38 +21,6 @@
     height: var(--theory-sidebar-height-mobile);
     overflow: auto hidden;
   }
-=======
-=======
-@use '@/app/styles/ScssVars' as *;
-
->>>>>>> f1d426f (Delete dependency cruiser and replace it eslint plugin, fix circular dependencies, fix storybook and unit tests, finish theory block - fix pdf viewer, add adaptive for theory)
-.TheorySidebar {
-  $padding-y: 15px;
-
-  padding: $padding-y 10px;
-  border-right: 1px solid var(--color-black);
-<<<<<<< HEAD
->>>>>>> 3736a6b (Add SideBar for Theory Block, add Theory Context and add functional of switching sections of theories.)
-=======
-  max-height: 100%;
-  height: 100vh;
-  overflow-y: auto;
-  position: fixed;
-  background-color: var(--color-white);
-  top: 0;
-  transition: margin-top var(--transition-duration-default) linear;
-  z-index: var(--z-index-one);
-=======
->>>>>>> 4fa07a1 (Replace yandex cloud api to uploadthingapi, rewrite api requests, add dotenvplugin for webpack. Theory is finished, but have some details to fix.)
-
-  @media (max-width: $mobile-mediaquery-width) {
-    border-right: none;
-    border-bottom: 1px solid var(--color-black);
-    padding: 20px 10px;
-    height: var(--theory-sidebar-height-mobile);
-    overflow: auto hidden;
-  }
->>>>>>> f1d426f (Delete dependency cruiser and replace it eslint plugin, fix circular dependencies, fix storybook and unit tests, finish theory block - fix pdf viewer, add adaptive for theory)
 
   &__title {
     font-size: 14px;
@@ -67,13 +32,6 @@
       white-space: nowrap;
     }
 
-<<<<<<< HEAD
-    @media (max-width: $mobile-mediaquery-width) {
-      white-space: nowrap;
-    }
-
-=======
->>>>>>> 3736a6b (Add SideBar for Theory Block, add Theory Context and add functional of switching sections of theories.)
     &:hover,
     &__selected {
       color: var(--color-black);

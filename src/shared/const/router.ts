@@ -1,42 +1,21 @@
 // eslint-disable-next-line ulbi-tv-plugin/layer-imports
 import {
-  wordsForAccentsTests,
-  wordsForUnionsTests,
   WordsTypes,
-<<<<<<< HEAD
-<<<<<<< HEAD
-  wordsForNNTests,
+  wordsForAccentsTests,
   wordsForDictionaryTests,
+  wordsForUnionsTests,
   wordsForAdverbsTests,
-=======
->>>>>>> 93ebe07 (Fully initialize router, add routing for all project, add unit and e2e tests for routing, refactore project - made sections as pages.)
-=======
   wordsForNNTests,
-  wordsForDictionaryTests,
-  wordsForAdverbsTests,
->>>>>>> 786c80e (Add new trainers.)
+  wordsForMorphologicalTests,
 } from '@/pages/TrainerPage';
 
 type TrainerRouteSubcategories =
   | 'accents'
-<<<<<<< HEAD
-<<<<<<< HEAD
   | 'dictionary'
   | 'unions'
   | 'adverbs'
-=======
-  | 'paronyms'
-  | 'trops'
-  | 'dictionary'
-  | 'unions'
-  | 'subordinate'
->>>>>>> 93ebe07 (Fully initialize router, add routing for all project, add unit and e2e tests for routing, refactore project - made sections as pages.)
-=======
-  | 'dictionary'
-  | 'unions'
-  | 'adverbs'
->>>>>>> 786c80e (Add new trainers.)
-  | 'n/nn';
+  | 'n/nn'
+  | 'morphological';
 
 interface TrainerRoutes {
   subcategory: TrainerRouteSubcategories;
@@ -45,20 +24,11 @@ interface TrainerRoutes {
 
 export const trainerRoutes: TrainerRoutes[] = [
   { subcategory: 'accents', words: wordsForAccentsTests },
-<<<<<<< HEAD
-<<<<<<< HEAD
-=======
->>>>>>> 786c80e (Add new trainers.)
   { subcategory: 'dictionary', words: wordsForDictionaryTests },
   { subcategory: 'unions', words: wordsForUnionsTests },
   { subcategory: 'adverbs', words: wordsForAdverbsTests },
   { subcategory: 'n/nn', words: wordsForNNTests },
-<<<<<<< HEAD
-=======
-  { subcategory: 'unions', words: wordsForUnionsTests },
->>>>>>> 93ebe07 (Fully initialize router, add routing for all project, add unit and e2e tests for routing, refactore project - made sections as pages.)
-=======
->>>>>>> 786c80e (Add new trainers.)
+  { subcategory: 'morphological', words: wordsForMorphologicalTests },
 ];
 
 export const getRouteMain = () => '/';

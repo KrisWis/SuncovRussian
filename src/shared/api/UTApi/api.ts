@@ -2,15 +2,8 @@ import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
 
 export const UTApiURL: string = 'https://api.uploadthing.com';
 
-<<<<<<< HEAD
-<<<<<<< HEAD
 // TODO: когда появится бекенд, то сделать так, чтобы апи ключ брался не из .env, а отправлялся запрос на бекенд и брался уже оттуда.
-=======
-// TODO: сделать так, чтобы токен не попадал в сборку
->>>>>>> 4fa07a1 (Replace yandex cloud api to uploadthingapi, rewrite api requests, add dotenvplugin for webpack. Theory is finished, but have some details to fix.)
-=======
-// TODO: когда появится бекенд, то сделать так, чтобы апи ключ брался не из .env, а отправлялся запрос на бекенд и брался уже оттуда.
->>>>>>> 1df825a (Remove loki from project.)
+
 export const UTApi = createApi({
   reducerPath: 'UTApi',
   baseQuery: fetchBaseQuery({

@@ -1,21 +1,6 @@
-<<<<<<< HEAD
-<<<<<<< HEAD
-describe('Пользователь заходит в блок "Теория"', () => {
+describe('Пользователь заходит на страницу "Теория"', () => {
   beforeEach(() => {
     cy.visit('/theory');
-=======
-import { selectByTestId } from '../helpers/selectByTestId';
-
-describe('Пользователь заходит в блок "Теория"', () => {
-  beforeEach(() => {
-    cy.visit('/');
-    cy.get(selectByTestId('Header__Теория')).click();
->>>>>>> 04df36d (Add cypress, e2e tests for theory block.)
-=======
-describe('Пользователь заходит в блок "Теория"', () => {
-  beforeEach(() => {
-    cy.visit('/theory');
->>>>>>> 93ebe07 (Fully initialize router, add routing for all project, add unit and e2e tests for routing, refactore project - made sections as pages.)
   });
 
   it('И видит содержимое сайдбара, контента, отсутствие ошибки и быстро проходит загрузка', () => {

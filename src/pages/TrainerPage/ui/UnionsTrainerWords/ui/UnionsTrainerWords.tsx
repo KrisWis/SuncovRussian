@@ -11,14 +11,7 @@ import { useWords } from '../../../model/selectors/getTrainerWords/getTrainerWor
 export const UnionsTrainerWords: React.FC<UnionsTrainerWordsProps> = memo(
   ({ randomWord, wordOnSuccess, wordOnFail }): React.JSX.Element => {
     // Инициализация данных и контекста
-<<<<<<< HEAD
-<<<<<<< HEAD
     const storeWords = useWords();
-=======
->>>>>>> 93ebe07 (Fully initialize router, add routing for all project, add unit and e2e tests for routing, refactore project - made sections as pages.)
-=======
-    const storeWords = useWords();
->>>>>>> fb89821 (Made types for header, rebuild accents for trainer words to primary trainer words for reusing.)
     const { isIncorrect, isErrorWork } = useContext(TrainerPageContext);
 
     return (

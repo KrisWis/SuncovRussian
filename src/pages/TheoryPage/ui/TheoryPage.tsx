@@ -48,7 +48,7 @@ export const TheoryPage: React.FC = memo((): React.JSX.Element => {
 
   // Обработка ошибки загрузки файлов
   if (isError) {
-    return <ErrorComponent />;
+    return <ErrorComponent withHeader={false} />;
   }
 
   return (

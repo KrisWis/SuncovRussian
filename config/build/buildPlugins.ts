@@ -6,14 +6,7 @@ import ReactRefreshWebpackPlugin from "@pmmmwh/react-refresh-webpack-plugin";
 import ForkTsCheckerWebpackPlugin from "fork-ts-checker-webpack-plugin";
 import CopyWebpackPlugin from "copy-webpack-plugin";
 import CircularDependencyPlugin from "circular-dependency-plugin";
-<<<<<<< HEAD
-<<<<<<< HEAD
 import DotenvWebpackPlugin from "dotenv-webpack";
-=======
->>>>>>> f1d426f (Delete dependency cruiser and replace it eslint plugin, fix circular dependencies, fix storybook and unit tests, finish theory block - fix pdf viewer, add adaptive for theory)
-=======
-import DotenvWebpackPlugin from "dotenv-webpack";
->>>>>>> 4fa07a1 (Replace yandex cloud api to uploadthingapi, rewrite api requests, add dotenvplugin for webpack. Theory is finished, but have some details to fix.)
 import { BuildOptions } from "./types/config";
 
 export function buildPlugins({

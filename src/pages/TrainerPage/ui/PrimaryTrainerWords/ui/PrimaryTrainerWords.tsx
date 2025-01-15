@@ -1,29 +1,10 @@
 import { Flex } from '@/shared/lib/Stack';
 import { memo, useContext } from 'react';
 import { tabletMediaQueryWidth } from '@/shared/const/global';
-<<<<<<< HEAD
-=======
-<<<<<<<< HEAD:src/pages/TrainerPage/ui/AccentsTrainerWords/ui/AccentsTrainerWords.tsx
->>>>>>> c31c805 (bugfix)
-<<<<<<<< HEAD:src/pages/TrainerPage/ui/PrimaryTrainerWords/ui/PrimaryTrainerWords.tsx
 import { PrimaryTrainerWordsProps } from '../model/types';
 import { useWords } from '../../../model/selectors/getTrainerWords/getTrainerWords';
 import { TrainerPageContext } from '../../../model/context/TrainerPageContext';
 import { TrainerWord } from '@/shared/ui/TrainerWord';
-========
-import { AccentsTrainerWordsProps } from '../model/types';
-import { TrainerWord } from '@/shared/ui/TrainerWord';
-import { TrainerPageContext } from '../../../model/context/TrainerPageContext';
->>>>>>>> 93ebe07 (Fully initialize router, add routing for all project, add unit and e2e tests for routing, refactore project - made sections as pages.):src/pages/TrainerPage/ui/AccentsTrainerWords/ui/AccentsTrainerWords.tsx
-<<<<<<< HEAD
-=======
-========
-import { PrimaryTrainerWordsProps } from '../model/types';
-import { useWords } from '../../../model/selectors/getTrainerWords/getTrainerWords';
-import { TrainerPageContext } from '../../../model/context/TrainerPageContext';
-import { TrainerWord } from '@/shared/ui/TrainerWord';
->>>>>>>> c31c805 (bugfix):src/pages/TrainerPage/ui/PrimaryTrainerWords/ui/PrimaryTrainerWords.tsx
->>>>>>> c31c805 (bugfix)
 
 export const PrimaryTrainerWords: React.FC<PrimaryTrainerWordsProps> = memo(
   ({
@@ -31,27 +12,9 @@ export const PrimaryTrainerWords: React.FC<PrimaryTrainerWordsProps> = memo(
     randomWordsIsReverse,
     wordOnFail,
     wordOnSuccess,
-<<<<<<< HEAD
-    storeWords,
   }): React.JSX.Element => {
     // Инициализация данных и контекста
-=======
-  }): React.JSX.Element => {
-    // Инициализация данных и контекста
-<<<<<<<< HEAD:src/pages/TrainerPage/ui/AccentsTrainerWords/ui/AccentsTrainerWords.tsx
->>>>>>> c31c805 (bugfix)
-<<<<<<<< HEAD:src/pages/TrainerPage/ui/PrimaryTrainerWords/ui/PrimaryTrainerWords.tsx
     const storeWords = useWords();
-
-========
->>>>>>>> 93ebe07 (Fully initialize router, add routing for all project, add unit and e2e tests for routing, refactore project - made sections as pages.):src/pages/TrainerPage/ui/AccentsTrainerWords/ui/AccentsTrainerWords.tsx
-<<<<<<< HEAD
-=======
-========
-    const storeWords = useWords();
-
->>>>>>>> c31c805 (bugfix):src/pages/TrainerPage/ui/PrimaryTrainerWords/ui/PrimaryTrainerWords.tsx
->>>>>>> c31c805 (bugfix)
     const { isIncorrect, isErrorWork } = useContext(TrainerPageContext);
 
     return (

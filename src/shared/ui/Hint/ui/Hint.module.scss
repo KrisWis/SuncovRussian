@@ -18,38 +18,18 @@
     color: rgba(0 0 0 / 40%);
     opacity: 0;
     transition: var(--transition-duration-default) linear opacity;
-<<<<<<< HEAD
-<<<<<<< HEAD
     z-index: var(--z-index-hidden);
 
     &__top {
       position: absolute;
-=======
-=======
-    z-index: var(--z-index-hidden);
->>>>>>> f1d426f (Delete dependency cruiser and replace it eslint plugin, fix circular dependencies, fix storybook and unit tests, finish theory block - fix pdf viewer, add adaptive for theory)
-
-    &__top {
-      position: absolute;
-<<<<<<< HEAD
       z-index: var(--z-index-default);
->>>>>>> 3b93d38 (Fix header, add UI-Kit component -Hint, fix some other things.)
-=======
->>>>>>> f1d426f (Delete dependency cruiser and replace it eslint plugin, fix circular dependencies, fix storybook and unit tests, finish theory block - fix pdf viewer, add adaptive for theory)
       right: 0;
       top: -50px;
     }
 
     &__active {
       opacity: 1;
-<<<<<<< HEAD
-<<<<<<< HEAD
       z-index: var(--z-index-default);
-=======
->>>>>>> 3b93d38 (Fix header, add UI-Kit component -Hint, fix some other things.)
-=======
-      z-index: var(--z-index-default);
->>>>>>> f1d426f (Delete dependency cruiser and replace it eslint plugin, fix circular dependencies, fix storybook and unit tests, finish theory block - fix pdf viewer, add adaptive for theory)
     }
   }
 }

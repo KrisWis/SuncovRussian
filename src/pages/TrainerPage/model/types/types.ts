@@ -1,20 +1,12 @@
 import { UnionsWordsInterface } from '../static/wordsForUnionsTests';
 
-type TrainerWordsTypes =
+export type TrainerWordsTypes =
   | 'ударения'
   | 'виды союзов'
   | 'cловарные слова'
-<<<<<<< HEAD
-<<<<<<< HEAD
   | 'н/нн'
-  | 'наречия';
-=======
-  | 'н/нн';
->>>>>>> fb89821 (Made types for header, rebuild accents for trainer words to primary trainer words for reusing.)
-=======
-  | 'н/нн'
-  | 'наречия';
->>>>>>> 786c80e (Add new trainers.)
+  | 'наречия'
+  | 'морфологические нормы';
 
 export interface TrainerWordsInterface {
   id: number;

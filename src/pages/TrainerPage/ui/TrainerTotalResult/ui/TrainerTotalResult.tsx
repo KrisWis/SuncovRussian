@@ -3,46 +3,21 @@ import * as styles from './TrainerTotalResult.module.scss';
 import { memo, useCallback, useContext, useMemo } from 'react';
 import { TrainerTotalResultProps } from '../model/types';
 import { useWords } from '../../../model/selectors/getTrainerWords/getTrainerWords';
-<<<<<<< HEAD
-<<<<<<< HEAD
 import { PrimaryWordsInterface } from '../../../model/types/types';
 import { UnionsWordsInterface } from '../../../model/static/wordsForUnionsTests';
 import { TrainerPageContext } from '../../../model/context/TrainerPageContext';
 import { useTrainerActions } from '../../../model/slice/TrainerPageSlice';
 import { useInitializeWords } from '../../../model/hooks/useInitializeWords';
-<<<<<<< HEAD
-=======
-import { useTrainerActions } from '../../../model/slice/TrainerPageSlice';
-import { AccentsWordsInterface } from '../../../model/static/wordsForAccentsTests';
-import { UnionsWordsInterface } from '../../../model/static/wordsForUnionsTests';
-import { TrainerPageContext } from '../../../model/context/TrainerPageContext';
->>>>>>> 93ebe07 (Fully initialize router, add routing for all project, add unit and e2e tests for routing, refactore project - made sections as pages.)
-=======
-import { PrimaryWordsInterface } from '../../../model/types/types';
-import { UnionsWordsInterface } from '../../../model/static/wordsForUnionsTests';
-import { TrainerPageContext } from '../../../model/context/TrainerPageContext';
-import { useTrainerActions } from '../../../model/slice/TrainerPageSlice';
->>>>>>> fb89821 (Made types for header, rebuild accents for trainer words to primary trainer words for reusing.)
-=======
->>>>>>> 06f1d0e (Bugfix)
+import { trainersOfPrimaryType } from '../../../model/const/const';
 
 export const TrainerTotalResult: React.FC<TrainerTotalResultProps> = memo(
   ({ updateRandomWord, words }): React.JSX.Element => {
     // Инициализация хуков и контекста
     const storeWords = useWords();
     const { setWords } = useTrainerActions();
-<<<<<<< HEAD
-<<<<<<< HEAD
+
     const { totalTime, setTotalTime, isErrorWork, setIsErrorWork } =
       useContext(TrainerPageContext);
-=======
-    const { totalTime, setTotalTime } = useContext(TrainerPageContext);
-    const { isErrorWork, setIsErrorWork } = useContext(TrainerPageContext);
->>>>>>> 93ebe07 (Fully initialize router, add routing for all project, add unit and e2e tests for routing, refactore project - made sections as pages.)
-=======
-    const { totalTime, setTotalTime, isErrorWork, setIsErrorWork } =
-      useContext(TrainerPageContext);
->>>>>>> 06f1d0e (Bugfix)
 
     // Высчитывание данных для общего времени
     const totalTimeMinutes = useMemo(
@@ -127,7 +102,7 @@ export const TrainerTotalResult: React.FC<TrainerTotalResultProps> = memo(
                     className={styles.TrainerTotalResult__wordWithError}
                     key={word.id}
                   >
-                    {word.trainerType === 'ударения' && (
+                    {trainersOfPrimaryType.includes(word.trainerType) && (
                       <>
                         {(word as PrimaryWordsInterface).valid} -{' '}
                         {word.uncorrectTimes}{' '}

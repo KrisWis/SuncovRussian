@@ -65,15 +65,6 @@ const clickWordAndCheckUncorrectBar = (
   }
 };
 
-<<<<<<< HEAD
-<<<<<<< HEAD
-=======
-// Функция задержки для полного рендера компонента
-const delay = (ms: number) => new Promise((resolve) => setTimeout(resolve, ms));
-
->>>>>>> f1d426f (Delete dependency cruiser and replace it eslint plugin, fix circular dependencies, fix storybook and unit tests, finish theory block - fix pdf viewer, add adaptive for theory)
-=======
->>>>>>> 12d4b89 (Delete cnd package for pdf and add react alternative lib.)
 // Функция для очистки DOM и прогресса после каждого теста
 const afterEachClear = async (
   setupTest: () => RenderResult<typeof queries, HTMLElement, HTMLElement>,
