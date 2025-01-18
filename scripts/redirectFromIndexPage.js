@@ -1,0 +1,1 @@
+const redirect=sessionStorage.getItem("redirect");redirect&&(sessionStorage.removeItem("redirect"),redirect!==window.location.pathname&&window.history.replaceState(null,"",redirect));
