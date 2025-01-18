@@ -1,1 +1,19 @@
-<!doctype html><html lang="en"><head><meta charset="UTF-8"/><meta name="viewport" content="width=device-width,user-scalable=no,initial-scale=1,maximum-scale=1,minimum-scale=1"/><meta http-equiv="X-UA-Compatible" content="ie=edge"/><title>Сунцов Никита, русский язык</title><script defer="defer" src="/undefined/main.a97a9d23eee2192b8242.js"></script><link href="/undefined/css/main.9ffd7e0a.css" rel="stylesheet"></head><body><div id="root"></div><script defer="defer" src="scripts/addFavicon.js"></script><script defer="defer" src="scripts/redirectFromIndexPage.js"></script></body></html>
+<!doctype html><html lang="en"><head><meta charset="UTF-8"/><meta name="viewport" content="width=device-width,user-scalable=no,initial-scale=1,maximum-scale=1,minimum-scale=1"/><meta http-equiv="X-UA-Compatible" content="ie=edge"/><script>const timeout = setTimeout(() => {
+  const is_dev = Boolean(document.body.getAttribute('data-isdev'));
+
+  const faviconPath = is_dev ? '/favicon.ico' : `/SuncovRussian/favicon.ico`;
+  const linkElement = document.createElement('link');
+  linkElement.rel = 'icon';
+  linkElement.type = 'image/x-icon';
+  linkElement.href = faviconPath;
+  document.head.appendChild(linkElement);
+  clearTimeout(timeout);
+}, 1000);</script><title>Сунцов Никита, русский язык</title><script defer="defer" src="/undefined/main.a97a9d23eee2192b8242.js"></script><link href="/undefined/css/main.9ffd7e0a.css" rel="stylesheet"></head><body><div id="root"></div><script>(function() {
+        const redirect = sessionStorage.getItem('redirect');
+        if (redirect) {
+          sessionStorage.removeItem('redirect');
+          if (redirect !== window.location.pathname) {
+            window.history.replaceState(null, null, redirect);
+          }
+        }
+      })();</script></body></html>
