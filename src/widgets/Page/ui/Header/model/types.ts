@@ -7,6 +7,7 @@ export type TrainerSubcategories =
   | 'Морфологические нормы';
 
 export type HeaderMenu = {
+  Тесты: string[];
   Диктанты: string[];
   Пунктуация: string[];
   Теория: string[];
