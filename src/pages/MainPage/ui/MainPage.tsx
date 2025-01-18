@@ -12,7 +12,7 @@ export const MainPage: React.FC = memo((): React.JSX.Element => {
   );
 
   return (
-    <Page data-testid="MainPage">
+    <Page data-testid="MainPage" withHomeButton={false}>
       <Tip id={randomTip.id} text={randomTip.text} />
     </Page>
   );

@@ -15,7 +15,7 @@ export const Tip: React.FC<TipInterface> = memo(
         maxHeight
         gap="10"
         direction="column"
-        justify="center"
+        justify="end"
       >
         <h6 className={styles.Tip__caption}>Совет № {id + 1}.</h6>
 

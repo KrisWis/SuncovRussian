@@ -1,7 +1,7 @@
 import { useCallback, useState } from 'react';
 import { useRandomWord } from './useRandomWord';
-import { TrainerWordsInterface } from '../types/types';
-import { useTrainerActions } from '../slice/TrainerPageSlice';
+import { TrainerWordsInterface } from '../../model/types/types';
+import { useTrainerActions } from '../../model/slice/TrainerPageSlice';
 
 export type wordActionsFunctionType = (
   words: TrainerWordsInterface[],

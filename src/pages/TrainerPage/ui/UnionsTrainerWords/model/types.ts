@@ -1,4 +1,4 @@
-import { wordActionsFunctionType } from '../../../model/hooks/useWordActions';
+import { wordActionsFunctionType } from '../../../lib/hooks/useWordActions';
 import { UnionsWordsInterface } from '../../../model/static/wordsForUnionsTests';
 
 export interface UnionsTrainerWordsProps {

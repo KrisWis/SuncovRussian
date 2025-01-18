@@ -4,11 +4,11 @@ import { memo, useCallback, useContext, useMemo } from 'react';
 import { TrainerTotalResultProps } from '../model/types';
 import { useWords } from '../../../model/selectors/getTrainerWords/getTrainerWords';
 import { PrimaryWordsInterface } from '../../../model/types/types';
-import { UnionsWordsInterface } from '../../../model/static/wordsForUnionsTests';
 import { TrainerPageContext } from '../../../model/context/TrainerPageContext';
 import { useTrainerActions } from '../../../model/slice/TrainerPageSlice';
-import { useInitializeWords } from '../../../model/hooks/useInitializeWords';
 import { trainersOfPrimaryType } from '../../../model/const/const';
+import { useInitializeWords } from '../../../lib/hooks/useInitializeWords';
+import { UnionsWordsInterface } from '../../../model/static/wordsForUnionsTests';
 
 export const TrainerTotalResult: React.FC<TrainerTotalResultProps> = memo(
   ({ updateRandomWord, words }): React.JSX.Element => {

@@ -11,18 +11,18 @@ import { Hint } from '@/shared/ui/Hint';
 import { memo, useState, useContext, useEffect } from 'react';
 import { Page } from '@/widgets/Page';
 import { TrainerPageContext } from '../model/context/TrainerPageContext';
-import { useInitializeWords } from '../model/hooks/useInitializeWords';
-import { useRandomWord } from '../model/hooks/useRandomWord';
-import { useWordActions } from '../model/hooks/useWordActions';
 import { useWords } from '../model/selectors/getTrainerWords/getTrainerWords';
 import { TrainerReducer } from '../model/slice/TrainerPageSlice';
-import { UnionsWordsInterface } from '../model/static/wordsForUnionsTests';
 import { StrictModeSwitcher } from './StrictModeSwitcher/ui/StrictModeSwitcher';
 import { TrainerProgressBar } from './TrainerProgressBar/ui/TrainerProgressBar';
 import { TrainerTotalResult } from './TrainerTotalResult/ui/TrainerTotalResult';
 import { PrimaryTrainerWords } from './PrimaryTrainerWords/ui/PrimaryTrainerWords';
 import { UnionsTrainerWords } from './UnionsTrainerWords/ui/UnionsTrainerWords';
 import { trainersOfPrimaryType } from '../model/const/const';
+import { useRandomWord } from '../lib/hooks/useRandomWord';
+import { useWordActions } from '../lib/hooks/useWordActions';
+import { useInitializeWords } from '../lib/hooks/useInitializeWords';
+import { UnionsWordsInterface } from '../model/static/wordsForUnionsTests';
 
 const TrainerInner: React.FC<TrainerPageProps> = memo(
   ({ words }): React.JSX.Element => {

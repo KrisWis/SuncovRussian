@@ -1,7 +1,7 @@
 import { useCallback } from 'react';
 
-import { WordsTypes } from '../types/types';
-import { useTrainerActions } from '../slice/TrainerPageSlice';
+import { WordsTypes } from '../../model/types/types';
+import { useTrainerActions } from '../../model/slice/TrainerPageSlice';
 
 interface useInitializeWordsResult {
   initializeWords: () => void;

@@ -1,4 +1,4 @@
-import { wordActionsFunctionType } from '../../../model/hooks/useWordActions';
+import { wordActionsFunctionType } from '../../../lib/hooks/useWordActions';
 import { PrimaryWordsInterface } from '../../../model/types/types';
 
 export interface PrimaryTrainerWordsProps {

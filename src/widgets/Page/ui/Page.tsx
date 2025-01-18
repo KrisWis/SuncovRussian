@@ -3,10 +3,16 @@ import { PageProps } from '../model/types';
 import { Header } from './Header/ui/Header';
 
 export const Page: React.FC<PageProps> = memo(
-  ({ children, 'data-testid': dataTestId, className }): React.JSX.Element => {
+  ({
+    children,
+    withHomeButton = true,
+    'data-testid': dataTestId,
+    className,
+  }): React.JSX.Element => {
     return (
       <div data-testid={dataTestId}>
-        <Header />
+        <Header withHomeButton={withHomeButton} />
+
         <main
           style={{
             justifyContent: process.env.STORYBOOK ? 'center' : 'space-between',

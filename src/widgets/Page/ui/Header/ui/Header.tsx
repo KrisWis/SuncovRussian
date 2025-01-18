@@ -5,62 +5,74 @@ import { headerCategories, headerRoutesCategories } from '../model/data';
 import { HeaderCategoryType } from '../model/types';
 import { Link } from 'react-router-dom';
 
-export const Header: React.FC = memo((): React.JSX.Element => {
-  // Обработка наведения на категории
-  const [headerHoveredCategory, setHoveredHeaderCategory] = useState<
-    string | null
-  >(null);
+interface HeaderProps {
+  withHomeButton?: boolean;
+}
 
-  return (
-    <header className={styles.Header}>
-      {Object.entries(headerCategories).map(([category, submenu]) => (
-        <Flex
-          onMouseLeave={() => setHoveredHeaderCategory(null)}
-          key={category}
-          direction="column"
-          relative
-        >
+export const Header: React.FC<HeaderProps> = memo(
+  ({ withHomeButton = true }): React.JSX.Element => {
+    // Обработка наведения на категории
+    const [headerHoveredCategory, setHoveredHeaderCategory] = useState<
+      string | null
+    >(null);
+
+    return (
+      <header className={styles.Header}>
+        {withHomeButton && (
+          <Flex maxHeight justify="center" className={`${styles.Header__item} ${styles.Header__toHome}`}>
+            <Link to="/">Домой</Link>
+          </Flex>
+        )}
+
+        {Object.entries(headerCategories).map(([category, submenu]) => (
           <Flex
-            maxHeight
-            justify="center"
-            onMouseEnter={() => setHoveredHeaderCategory(category)}
-            className={styles.Header__item}
-            data-testid={`Header__${category}`}
+            onMouseLeave={() => setHoveredHeaderCategory(null)}
+            key={category}
+            direction="column"
+            relative
           >
-            {submenu.length > 0 ? (
-              <>{category}</>
-            ) : (
-              <Link
-                to={`/${headerRoutesCategories[category as HeaderCategoryType]}`}
+            <Flex
+              maxHeight
+              justify="center"
+              onMouseEnter={() => setHoveredHeaderCategory(category)}
+              className={styles.Header__item}
+              data-testid={`Header__${category}`}
+            >
+              {submenu.length > 0 ? (
+                <>{category}</>
+              ) : (
+                <Link
+                  to={`/${headerRoutesCategories[category as HeaderCategoryType]}`}
+                >
+                  {category}
+                </Link>
+              )}
+            </Flex>
+
+            {submenu.length > 0 && (
+              <Flex
+                gap="10"
+                align="start"
+                className={`${styles.Header__submenu} 
+            ${headerHoveredCategory === category && styles.Header__submenu__active}`}
+                direction="column"
               >
-                {category}
-              </Link>
+                {submenu.map((menuItem) => (
+                  <Link
+                    to={`/${headerRoutesCategories[category as HeaderCategoryType]}/${headerRoutesCategories[menuItem as HeaderCategoryType]}`}
+                    key={menuItem}
+                    className={styles.Header__submenu__item}
+                  >
+                    {menuItem}
+                  </Link>
+                ))}
+              </Flex>
             )}
           </Flex>
-
-          {submenu.length > 0 && (
-            <Flex
-              gap="10"
-              align="start"
-              className={`${styles.Header__submenu} 
-            ${headerHoveredCategory === category && styles.Header__submenu__active}`}
-              direction="column"
-            >
-              {submenu.map((menuItem) => (
-                <Link
-                  to={`/${headerRoutesCategories[category as HeaderCategoryType]}/${headerRoutesCategories[menuItem as HeaderCategoryType]}`}
-                  key={menuItem}
-                  className={styles.Header__submenu__item}
-                >
-                  {menuItem}
-                </Link>
-              ))}
-            </Flex>
-          )}
-        </Flex>
-      ))}
-    </header>
-  );
-});
+        ))}
+      </header>
+    );
+  },
+);
 
 Header.displayName = 'Header';
