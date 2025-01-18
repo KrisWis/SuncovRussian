@@ -5,11 +5,11 @@ import { ErrorComponent } from '@/shared/ui/ErrorComponent';
 import { Flex } from '@/shared/lib/Stack';
 import * as styles from './TheoryPage.module.scss';
 import { mobileMediaQueryWidth } from '@/shared/const/global';
-import { TheorySidebar } from './TheorySidebar/ui/TheorySidebar';
 import { UTAPIFileInList } from '@/shared/api/UTApi/types';
 import { TheoryPageContext } from '../model/context/TheoryPageContext';
-import { TheoryItem } from './TheoryItem/ui/TheoryItem';
 import { Page } from '@/widgets/Page';
+import { TheorySidebar } from './TheorySidebar/TheorySidebar';
+import { TheoryItem } from './TheoryItem/TheoryItem';
 
 export const TheoryPage: React.FC = memo((): React.JSX.Element => {
   // Получение всех pdf файлов с теорией с Яндекс Диска

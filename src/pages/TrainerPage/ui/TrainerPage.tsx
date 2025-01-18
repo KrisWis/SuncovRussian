@@ -1,8 +1,8 @@
 import { Flex } from '@/shared/lib/Stack';
 import {
   PrimaryWordsInterface,
-  TrainerPageProps,
   TrainerWordsInterface,
+  WordsTypes,
 } from '../model/types/types';
 import * as styles from './TrainerPage.module.scss';
 import { tabletMediaQueryWidth } from '@/shared/const/global';
@@ -13,16 +13,20 @@ import { Page } from '@/widgets/Page';
 import { TrainerPageContext } from '../model/context/TrainerPageContext';
 import { useWords } from '../model/selectors/getTrainerWords/getTrainerWords';
 import { TrainerReducer } from '../model/slice/TrainerPageSlice';
-import { StrictModeSwitcher } from './StrictModeSwitcher/ui/StrictModeSwitcher';
-import { TrainerProgressBar } from './TrainerProgressBar/ui/TrainerProgressBar';
-import { TrainerTotalResult } from './TrainerTotalResult/ui/TrainerTotalResult';
-import { PrimaryTrainerWords } from './PrimaryTrainerWords/ui/PrimaryTrainerWords';
-import { UnionsTrainerWords } from './UnionsTrainerWords/ui/UnionsTrainerWords';
+import { TrainerTotalResult } from './TrainerTotalResult/TrainerTotalResult';
+import { UnionsTrainerWords } from './UnionsTrainerWords/UnionsTrainerWords';
 import { trainersOfPrimaryType } from '../model/const/const';
 import { useRandomWord } from '../lib/hooks/useRandomWord';
 import { useWordActions } from '../lib/hooks/useWordActions';
 import { useInitializeWords } from '../lib/hooks/useInitializeWords';
 import { UnionsWordsInterface } from '../model/static/wordsForUnionsTests';
+import { PrimaryTrainerWords } from './PrimaryTrainerWords/PrimaryTrainerWords';
+import { TrainerProgressBar } from './TrainerProgressBar/TrainerProgressBar';
+import { StrictModeSwitcher } from './StrictModeSwitcher/StrictModeSwitcher';
+
+interface TrainerPageProps {
+  words: WordsTypes[];
+}
 
 const TrainerInner: React.FC<TrainerPageProps> = memo(
   ({ words }): React.JSX.Element => {

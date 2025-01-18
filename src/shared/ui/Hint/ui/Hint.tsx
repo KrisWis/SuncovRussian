@@ -1,7 +1,14 @@
 import * as styles from './Hint.module.scss';
 import { memo, useState } from 'react';
-import { HintProps } from '../model/types';
 import { Flex } from '@/shared/lib/Stack';
+
+type HintTextDirection = 'right' | 'top';
+
+interface HintProps {
+  textClassName?: string;
+  textDirection?: HintTextDirection;
+  text: string;
+}
 
 export const Hint: React.FC<HintProps> = memo(
   ({ textClassName, text, textDirection = 'right' }): React.JSX.Element => {

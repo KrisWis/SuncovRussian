@@ -26,7 +26,3 @@ export type WordsTypes =
   | TrainerWordsInterface
   | PrimaryWordsInterface
   | UnionsWordsInterface;
-
-export interface TrainerPageProps {
-  words: WordsTypes[];
-}

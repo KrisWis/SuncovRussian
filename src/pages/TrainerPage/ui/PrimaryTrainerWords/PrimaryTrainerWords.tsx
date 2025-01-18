@@ -1,10 +1,18 @@
 import { Flex } from '@/shared/lib/Stack';
 import { memo, useContext } from 'react';
 import { tabletMediaQueryWidth } from '@/shared/const/global';
-import { PrimaryTrainerWordsProps } from '../model/types';
-import { useWords } from '../../../model/selectors/getTrainerWords/getTrainerWords';
-import { TrainerPageContext } from '../../../model/context/TrainerPageContext';
+import { useWords } from '../../model/selectors/getTrainerWords/getTrainerWords';
+import { TrainerPageContext } from '../../model/context/TrainerPageContext';
 import { TrainerWord } from '@/shared/ui/TrainerWord';
+import { PrimaryWordsInterface } from '../../model/types/types';
+import { wordActionsFunctionType } from '../../lib/hooks/useWordActions';
+
+interface PrimaryTrainerWordsProps {
+  randomWord: PrimaryWordsInterface;
+  randomWordsIsReverse: boolean;
+  wordOnSuccess: wordActionsFunctionType;
+  wordOnFail: wordActionsFunctionType;
+}
 
 export const PrimaryTrainerWords: React.FC<PrimaryTrainerWordsProps> = memo(
   ({

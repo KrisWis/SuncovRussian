@@ -1,7 +1,7 @@
 import { Flex } from '@/shared/lib/Stack';
 import { memo, useContext, useEffect, useMemo, useRef } from 'react';
-import { useWords } from '../../../model/selectors/getTrainerWords/getTrainerWords';
-import { TrainerPageContext } from '../../../model/context/TrainerPageContext';
+import { useWords } from '../../model/selectors/getTrainerWords/getTrainerWords';
+import { TrainerPageContext } from '../../model/context/TrainerPageContext';
 import * as styles from './TrainerProgressBar.module.scss';
 
 export const TrainerProgressBar: React.FC = memo((): React.JSX.Element => {

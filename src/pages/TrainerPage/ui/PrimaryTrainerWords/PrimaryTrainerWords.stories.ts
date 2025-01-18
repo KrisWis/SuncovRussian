@@ -1,6 +1,6 @@
 import type { Meta, StoryObj } from '@storybook/react';
+import { wordsForAccentsTests } from '../../model/static/wordsForAccentsTests';
 import { PrimaryTrainerWords } from './PrimaryTrainerWords';
-import { wordsForAccentsTests } from '../../../model/static/wordsForAccentsTests';
 
 const meta = {
   title: 'Pages/Trainer/PrimaryTrainerWords',

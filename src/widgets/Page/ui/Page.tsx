@@ -1,6 +1,12 @@
 import { memo } from 'react';
-import { PageProps } from '../model/types';
 import { Header } from './Header/ui/Header';
+
+interface PageProps {
+  children: React.ReactNode;
+  withHomeButton?: boolean;
+  'data-testid'?: string;
+  className?: string;
+}
 
 export const Page: React.FC<PageProps> = memo(
   ({

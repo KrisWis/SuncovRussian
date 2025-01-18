@@ -2,7 +2,9 @@ import { memo } from 'react';
 import { Flex } from '@/shared/lib/Stack';
 // eslint-disable-next-line ulbi-tv-plugin/layer-imports
 import { Page } from '@/widgets/Page';
-import { ErrorComponentProps } from '../model/types';
+interface ErrorComponentProps {
+  withHeader?: boolean;
+}
 
 export const ErrorComponent: React.FC<ErrorComponentProps> = memo(
   ({ withHeader = true }): React.JSX.Element => {

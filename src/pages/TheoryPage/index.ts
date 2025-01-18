@@ -10,6 +10,6 @@ export const TheoryPage: React.LazyExoticComponent<React.FC> = lazy(() => {
   });
 });
 
-export { TheoryItem } from './ui/TheoryItem/ui/TheoryItem';
+export { TheoryItem } from './ui/TheoryItem/TheoryItem';
 
-export { TheorySidebar } from './ui/TheorySidebar/ui/TheorySidebar';
+export { TheorySidebar } from './ui/TheorySidebar/TheorySidebar';

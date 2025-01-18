@@ -28,7 +28,8 @@
       padding: 0 $item-padding-adaptive-x;
     }
 
-    &:hover {
+    &:hover,
+    &__active {
       color: var(--color-black);
       background: var(--color-white);
     }
@@ -68,7 +69,8 @@
       text-transform: lowercase;
       transition: var(--transition-duration-default) linear color;
 
-      &:hover {
+      &:hover,
+      &__active {
         color: var(--color-black);
       }
     }

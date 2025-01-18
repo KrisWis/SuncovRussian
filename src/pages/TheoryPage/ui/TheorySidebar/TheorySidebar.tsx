@@ -1,9 +1,12 @@
 import { Flex } from '@/shared/lib/Stack';
 import * as styles from './TheorySidebar.module.scss';
 import { memo, useContext, useEffect, useState } from 'react';
-import { TheorySidebarProps } from '../model/types';
 import { mobileMediaQueryWidth } from '@/shared/const/global';
-import { TheoryPageContext } from '../../../model/context/TheoryPageContext';
+import { TheoryPageContext } from '../../model/context/TheoryPageContext';
+
+interface TheorySidebarProps {
+  pdfFilesTitles: string[];
+}
 
 export const TheorySidebar: React.FC<TheorySidebarProps> = memo(
   ({ pdfFilesTitles }): React.JSX.Element => {

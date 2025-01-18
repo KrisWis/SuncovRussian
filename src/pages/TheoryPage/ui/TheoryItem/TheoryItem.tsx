@@ -1,9 +1,12 @@
-import { useGetTheoryQuery } from '../../../model/api/theoryApi';
-import { TheoryItemProps } from '../model/types';
+import { useGetTheoryQuery } from '../../model/api/theoryApi';
 import { memo } from 'react';
 import { PageLoading } from '@/shared/ui/PageLoading/PageLoading';
 import { ErrorComponent } from '@/shared/ui/ErrorComponent';
 import { PDFViewer } from '@/shared/lib/PDFViewer';
+
+interface TheoryItemProps {
+  fileKey: string;
+}
 
 export const TheoryItem: React.FC<TheoryItemProps> = memo(
   ({ fileKey }): React.JSX.Element => {

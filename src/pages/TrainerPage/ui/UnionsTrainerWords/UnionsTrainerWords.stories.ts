@@ -1,6 +1,6 @@
 import type { Meta, StoryObj } from '@storybook/react';
 import { UnionsTrainerWords } from './UnionsTrainerWords';
-import { wordsForUnionsTests } from '../../../model/static/wordsForUnionsTests';
+import { wordsForUnionsTests } from '../../model/static/wordsForUnionsTests';
 
 const meta = {
   title: 'Pages/Trainer/UnionsTrainerWords',

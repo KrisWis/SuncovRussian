@@ -1,12 +1,21 @@
 import { memo, useContext } from 'react';
-import { UnionsTrainerWordsProps } from '../model/types';
 import { Flex } from '@/shared/lib/Stack';
 import { tabletMediaQueryWidth } from '@/shared/const/global';
 import { TrainerWord } from '@/shared/ui/TrainerWord';
-import { unionTypes } from '../../../model/static/wordsForUnionsTests';
-import { TrainerPageContext } from '../../../model/context/TrainerPageContext';
+import {
+  UnionsWordsInterface,
+  unionTypes,
+} from '../../model/static/wordsForUnionsTests';
+import { TrainerPageContext } from '../../model/context/TrainerPageContext';
 import * as styles from './UnionsTrainerWords.module.scss';
-import { useWords } from '../../../model/selectors/getTrainerWords/getTrainerWords';
+import { useWords } from '../../model/selectors/getTrainerWords/getTrainerWords';
+import { wordActionsFunctionType } from '../../lib/hooks/useWordActions';
+
+interface UnionsTrainerWordsProps {
+  randomWord: UnionsWordsInterface;
+  wordOnSuccess: wordActionsFunctionType;
+  wordOnFail: wordActionsFunctionType;
+}
 
 export const UnionsTrainerWords: React.FC<UnionsTrainerWordsProps> = memo(
   ({ randomWord, wordOnSuccess, wordOnFail }): React.JSX.Element => {

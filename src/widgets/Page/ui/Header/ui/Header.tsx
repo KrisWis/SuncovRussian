@@ -19,57 +19,70 @@ export const Header: React.FC<HeaderProps> = memo(
     return (
       <header className={styles.Header}>
         {withHomeButton && (
-          <Flex maxHeight justify="center" className={`${styles.Header__item} ${styles.Header__toHome}`}>
+          <Flex
+            maxHeight
+            justify="center"
+            className={`${styles.Header__item} ${styles.Header__toHome}`}
+          >
             <Link to="/">Домой</Link>
           </Flex>
         )}
 
-        {Object.entries(headerCategories).map(([category, submenu]) => (
-          <Flex
-            onMouseLeave={() => setHoveredHeaderCategory(null)}
-            key={category}
-            direction="column"
-            relative
-          >
+        {Object.entries(headerCategories).map(([category, submenu]) => {
+          // Инициализация ссылки предмета навигации
+          const itemLink = `/${headerRoutesCategories[category as HeaderCategoryType]}`;
+
+          return (
             <Flex
-              maxHeight
-              justify="center"
-              onMouseEnter={() => setHoveredHeaderCategory(category)}
-              className={styles.Header__item}
-              data-testid={`Header__${category}`}
+              onMouseLeave={() => setHoveredHeaderCategory(null)}
+              key={category}
+              direction="column"
+              relative
             >
-              {submenu.length > 0 ? (
-                <>{category}</>
-              ) : (
-                <Link
-                  to={`/${headerRoutesCategories[category as HeaderCategoryType]}`}
+              <Flex
+                maxHeight
+                justify="center"
+                onMouseEnter={() => setHoveredHeaderCategory(category)}
+                className={`${styles.Header__item} 
+                ${window.location.pathname.startsWith(itemLink) && styles.Header__item__active}`}
+                data-testid={`Header__${category}`}
+              >
+                {submenu.length > 0 ? (
+                  <>{category}</>
+                ) : (
+                  <Link to={itemLink}>{category}</Link>
+                )}
+              </Flex>
+
+              {submenu.length > 0 && (
+                <Flex
+                  gap="10"
+                  align="start"
+                  className={`${styles.Header__submenu} 
+            ${headerHoveredCategory === category && styles.Header__submenu__active}`}
+                  direction="column"
                 >
-                  {category}
-                </Link>
+                  {submenu.map((menuItem) => {
+                    // Инициализация предмета подменю
+                    const submenuItemLink = `/${headerRoutesCategories[category as HeaderCategoryType]}/${headerRoutesCategories[menuItem as HeaderCategoryType]}`;
+
+                    return (
+                      <Link
+                        to={submenuItemLink}
+                        key={menuItem}
+                        className={`${styles.Header__submenu__item} 
+                        ${window.location.pathname === submenuItemLink && styles.Header__submenu__item__active}`}
+                        onClick={() => setHoveredHeaderCategory(null)}
+                      >
+                        {menuItem}
+                      </Link>
+                    );
+                  })}
+                </Flex>
               )}
             </Flex>
-
-            {submenu.length > 0 && (
-              <Flex
-                gap="10"
-                align="start"
-                className={`${styles.Header__submenu} 
-            ${headerHoveredCategory === category && styles.Header__submenu__active}`}
-                direction="column"
-              >
-                {submenu.map((menuItem) => (
-                  <Link
-                    to={`/${headerRoutesCategories[category as HeaderCategoryType]}/${headerRoutesCategories[menuItem as HeaderCategoryType]}`}
-                    key={menuItem}
-                    className={styles.Header__submenu__item}
-                  >
-                    {menuItem}
-                  </Link>
-                ))}
-              </Flex>
-            )}
-          </Flex>
-        ))}
+          );
+        })}
       </header>
     );
   },

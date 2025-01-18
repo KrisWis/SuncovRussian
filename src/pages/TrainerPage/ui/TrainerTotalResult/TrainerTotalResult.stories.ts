@@ -1,6 +1,6 @@
 import type { Meta, StoryObj } from '@storybook/react';
 import { TrainerTotalResult } from './TrainerTotalResult';
-import { wordsForAccentsTests } from '../../../model/static/wordsForAccentsTests';
+import { wordsForAccentsTests } from '../../model/static/wordsForAccentsTests';
 
 const meta = {
   title: 'Pages/Trainer/TrainerTotalResult',

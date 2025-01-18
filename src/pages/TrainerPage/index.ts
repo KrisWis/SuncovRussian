@@ -1,17 +1,17 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { lazy } from 'react';
-import { TrainerPageProps } from './model/types/types';
 
-export const TrainerPage: React.LazyExoticComponent<
-  React.FC<TrainerPageProps>
-> = lazy(() => {
-  return new Promise((resolve) => {
-    resolve(
-      import('./ui/TrainerPage').then(({ TrainerPage }) => ({
-        default: TrainerPage,
-      })),
-    );
-  });
-});
+export const TrainerPage: React.LazyExoticComponent<React.FC<any>> = lazy(
+  () => {
+    return new Promise((resolve) => {
+      resolve(
+        import('./ui/TrainerPage').then(({ TrainerPage }) => ({
+          default: TrainerPage,
+        })),
+      );
+    });
+  },
+);
 
 export { TrainerReducer } from './model/slice/TrainerPageSlice';
 
@@ -21,11 +21,11 @@ export type { WordsTypes } from './model/types/types';
 
 export { useWords } from './model/selectors/getTrainerWords/getTrainerWords';
 
-export { TrainerProgressBar } from './ui/TrainerProgressBar/ui/TrainerProgressBar';
+export { TrainerProgressBar } from './ui/TrainerProgressBar/TrainerProgressBar';
 
 export { TrainerPageContext } from './model/context/TrainerPageContext';
 
-export { StrictModeSwitcher } from './ui/StrictModeSwitcher/ui/StrictModeSwitcher';
+export { StrictModeSwitcher } from './ui/StrictModeSwitcher/StrictModeSwitcher';
 
 // Static
 export { wordsForAccentsTests } from './model/static/wordsForAccentsTests';

@@ -12,8 +12,16 @@ const meta = {
 export default meta;
 type Story = StoryObj<typeof meta>;
 
-export const Primary: Story = {
+export const WithHomeButton: Story = {
   args: {
     children: 'Hello World',
+    withHomeButton: true,
+  },
+};
+
+export const WithoutHomeButton: Story = {
+  args: {
+    children: 'Hello World',
+    withHomeButton: false,
   },
 };

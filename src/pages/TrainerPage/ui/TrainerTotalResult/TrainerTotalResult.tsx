@@ -1,14 +1,18 @@
 import { Flex } from '@/shared/lib/Stack';
 import * as styles from './TrainerTotalResult.module.scss';
 import { memo, useCallback, useContext, useMemo } from 'react';
-import { TrainerTotalResultProps } from '../model/types';
-import { useWords } from '../../../model/selectors/getTrainerWords/getTrainerWords';
-import { PrimaryWordsInterface } from '../../../model/types/types';
-import { TrainerPageContext } from '../../../model/context/TrainerPageContext';
-import { useTrainerActions } from '../../../model/slice/TrainerPageSlice';
-import { trainersOfPrimaryType } from '../../../model/const/const';
-import { useInitializeWords } from '../../../lib/hooks/useInitializeWords';
-import { UnionsWordsInterface } from '../../../model/static/wordsForUnionsTests';
+import { useWords } from '../../model/selectors/getTrainerWords/getTrainerWords';
+import { PrimaryWordsInterface, WordsTypes } from '../../model/types/types';
+import { TrainerPageContext } from '../../model/context/TrainerPageContext';
+import { useTrainerActions } from '../../model/slice/TrainerPageSlice';
+import { trainersOfPrimaryType } from '../../model/const/const';
+import { useInitializeWords } from '../../lib/hooks/useInitializeWords';
+import { UnionsWordsInterface } from '../../model/static/wordsForUnionsTests';
+
+interface TrainerTotalResultProps {
+  updateRandomWord: (words?: WordsTypes[]) => void;
+  words: WordsTypes[];
+}
 
 export const TrainerTotalResult: React.FC<TrainerTotalResultProps> = memo(
   ({ updateRandomWord, words }): React.JSX.Element => {
