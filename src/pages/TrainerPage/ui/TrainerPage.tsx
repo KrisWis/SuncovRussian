@@ -154,22 +154,26 @@ const TrainerInner: React.FC<TrainerPageProps> = memo(
             {!totalTime ? (
               <>
                 {trainersOfPrimaryType.includes(storeWords[0].trainerType) && (
-                  <Hint
-                    text={`Выбирайте ответ, а система будет предлагать новые слова или
+                  <Flex width="100">
+                    <Hint
+                      text={`Выбирайте ответ, а система будет предлагать новые слова или
                     те, в которых были допущены ошибки. Когда вы перестанете их
                     допускать, шкала полностью заполнится. Заполните шкалу
                     несколько раз, сделайте работу над ошибками - и вы готовы.`}
-                    textClassName={styles.TrainerPage__hint}
-                  />
+                      textClassName={styles.TrainerPage__hint}
+                    />
+                  </Flex>
                 )}
 
                 {storeWords[0].trainerType === 'виды союзов' && (
-                  <Hint
-                    text={`В этом тренажере под подчинительным союзом понимается любое
+                  <Flex width="100">
+                    <Hint
+                      text={`В этом тренажере под подчинительным союзом понимается любое
                     средство подчинительной связи, т.е. союз, союзное слово,
                     частица`}
-                    textClassName={styles.TrainerPage__hint}
-                  />
+                      textClassName={styles.TrainerPage__hint}
+                    />
+                  </Flex>
                 )}
 
                 {isIncorrect && (

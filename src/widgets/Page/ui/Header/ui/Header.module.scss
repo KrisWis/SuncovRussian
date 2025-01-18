@@ -5,6 +5,7 @@
   min-height: var(--header-height);
   display: flex;
   width: 100vw;
+  justify-content: space-between;
   background-color: var(--color-black);
 
   $item-padding-x: 10px;
@@ -74,9 +75,5 @@
         color: var(--color-black);
       }
     }
-  }
-
-  &__toHome {
-    margin-right: 20px;
   }
 }

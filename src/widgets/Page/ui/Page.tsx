@@ -1,5 +1,6 @@
 import { memo } from 'react';
 import { Header } from './Header/ui/Header';
+import { Flex } from '@/shared/lib/Stack';
 
 interface PageProps {
   children: React.ReactNode;
@@ -16,7 +17,7 @@ export const Page: React.FC<PageProps> = memo(
     className,
   }): React.JSX.Element => {
     return (
-      <div data-testid={dataTestId}>
+      <Flex direction="column" width="100" maxHeight data-testid={dataTestId}>
         <Header withHomeButton={withHomeButton} />
 
         <main
@@ -27,7 +28,7 @@ export const Page: React.FC<PageProps> = memo(
         >
           {children}
         </main>
-      </div>
+      </Flex>
     );
   },
 );
