@@ -1,1 +1,0 @@
-const segment="/SuncovRussian",l=window.location,fullPath=l.pathname.includes(segment)?l.pathname:segment+l.pathname;sessionStorage.setItem("redirect",fullPath),window.location.href=l.origin+segment;

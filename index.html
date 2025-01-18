@@ -1,1 +1,18 @@
-<!doctype html><html lang="en"><head><meta charset="UTF-8"/><meta name="viewport" content="width=device-width,user-scalable=no,initial-scale=1,maximum-scale=1,minimum-scale=1"/><meta http-equiv="X-UA-Compatible" content="ie=edge"/><title>Сунцов Никита, русский язык</title><script defer="defer" src="/SuncovRussian/main.6bc208073f0acc11633a.js"></script><link href="/SuncovRussian/css/main.609a199b.css" rel="stylesheet"></head><body><div id="root"></div><script defer="defer" src="scripts/addFavicon.js"></script><script defer="defer" src="scripts/redirectFromIndexPage.js"></script></body></html>
+<!doctype html><html lang="en"><head><meta charset="UTF-8"/><meta name="viewport" content="width=device-width,user-scalable=no,initial-scale=1,maximum-scale=1,minimum-scale=1"/><meta http-equiv="X-UA-Compatible" content="ie=edge"/><script>const timeout = setTimeout(() => {
+        const is_dev = JSON.parse(document.body.getAttribute('data-isdev'));
+        const publicUrl = JSON.parse(document.body.getAttribute('data-publicUrl'));
+
+        const faviconPath = is_dev ? '/favicon.ico' : `/${publicUrl}/favicon.ico`;
+        const linkElement = document.createElement('link');
+        linkElement.rel = 'icon';
+        linkElement.type = 'image/x-icon';
+        linkElement.href = faviconPath;
+        document.head.appendChild(linkElement);
+        clearTimeout(timeout);
+      }, 1000);</script><title>Сунцов Никита, русский язык</title><script defer="defer" src="/SuncovRussian/main.4e9f09b5f4223871acba.js"></script><link href="/SuncovRussian/css/main.609a199b.css" rel="stylesheet"></head><body><div id="root"></div><script>const redirect = sessionStorage.getItem('redirect');
+      if (redirect) {
+        sessionStorage.removeItem('redirect');
+        if (redirect !== window.location.pathname) {
+          window.history.replaceState(null, null, redirect);
+        }
+      }</script></body></html>

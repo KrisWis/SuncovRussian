@@ -3,10 +3,20 @@
   <head>
     <meta charset="utf-8">
     <title>Перенаправление...</title>
+    <script>
+      const publicUrl = JSON.parse(document.body.getAttribute('data-publicUrl'));
+      const segment = `/${publicUrl}`;
+      const l = window.location;
+      
+      const fullPath = l.pathname.includes(segment) 
+        ? l.pathname 
+        : segment + l.pathname;
+        
+      sessionStorage.setItem('redirect', fullPath);
+      window.location.href = l.origin + segment;
+    </script>
   </head>
   <body>
     Перенаправление...
-
-    <script defer src="/SuncovRussian/scripts/redirectFrom404Page.js"></script>
   </body>
 </html>
