@@ -8,12 +8,18 @@
     />
     <meta http-equiv="X-UA-Compatible" content="ie=edge" />
     <script>
-      const faviconPath = window.__IS_DEV ? '/favicon.ico' : `/SuncovRussian/favicon.ico`;
-      const linkElement = document.createElement('link');
-      linkElement.rel = 'icon';
-      linkElement.type = 'image/x-icon';
-      linkElement.href = faviconPath;
-      document.head.appendChild(linkElement);
+      const timeout = setTimeout(() => {
+        const is_dev = JSON.parse(document.body.getAttribute('data-isdev'));
+        const publicUrl = JSON.parse(document.body.getAttribute('data-publicUrl'));
+
+        const faviconPath = is_dev ? '/favicon.ico' : `/${publicUrl}/favicon.ico`;
+        const linkElement = document.createElement('link');
+        linkElement.rel = 'icon';
+        linkElement.type = 'image/x-icon';
+        linkElement.href = faviconPath;
+        document.head.appendChild(linkElement);
+        clearTimeout(timeout);
+      }, 1000);
     </script>
     <title>Сунцов Никита, русский язык</title>
   </head>
@@ -21,15 +27,13 @@
     <div id="root"></div>
 
     <script>
-      (function() {
-        const redirect = sessionStorage.getItem('redirect');
-        if (redirect) {
-          sessionStorage.removeItem('redirect');
-          if (redirect !== window.location.pathname) {
-            window.history.replaceState(null, null, redirect);
-          }
+      const redirect = sessionStorage.getItem('redirect');
+      if (redirect) {
+        sessionStorage.removeItem('redirect');
+        if (redirect !== window.location.pathname) {
+          window.history.replaceState(null, null, redirect);
         }
-      })();
+      }
     </script>
   </body>
 </html>

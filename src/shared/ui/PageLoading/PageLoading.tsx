@@ -6,7 +6,7 @@ export const PageLoading: React.FC = memo((): React.JSX.Element => {
   return (
     <Flex data-testid="Loading" justify="center" className={styles.PageLoading}>
       <img
-        src={`${__IS_DEV__ ? '/' : '/SuncovRussian/'}gifs/PageLoading.gif`}
+        src={`${__IS_DEV__ ? '/' : `/${process.env.PUBLIC_URL}/`}gifs/PageLoading.gif`}
         alt="Анимация загрузки страниц"
       />
     </Flex>

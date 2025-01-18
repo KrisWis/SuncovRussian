@@ -23,7 +23,6 @@ export function buildPlugins({
     new webpack.ProgressPlugin(),
     new webpack.DefinePlugin({
       __IS_DEV__: JSON.stringify(isDev),
-      __PUBLIC_URL__: 'SuncovRussian',
     }),
     new ForkTsCheckerWebpackPlugin({
       typescript: {

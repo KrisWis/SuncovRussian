@@ -1,9 +1,18 @@
-import { memo, Suspense } from 'react';
+import { memo, Suspense, useEffect } from 'react';
 import { Route, Routes } from 'react-router-dom';
 import { routeConfig } from '../config/routeConfig';
 import { PageLoading } from '@/shared/ui/PageLoading/PageLoading';
 
 export const AppRouter: React.FC = memo(() => {
+  // Добавление data-атрибута в body в зависимости от режима сборки
+  useEffect(() => {
+    document.body.setAttribute('data-isDev', JSON.stringify(__IS_DEV__));
+    document.body.setAttribute(
+      'data-publicUrl',
+      JSON.stringify(process.env.PUBLIC_URL),
+    );
+  }, []);
+
   return (
     <Suspense fallback={<PageLoading />}>
       <Routes>

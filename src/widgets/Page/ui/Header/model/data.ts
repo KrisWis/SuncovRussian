@@ -26,7 +26,7 @@ export const headerRoutesCategories: HeaderRoutes = {
   'Словарные слова': 'dictionary',
   'Виды союзов': 'unions',
   Наречия: 'adverbs',
-  'Н/НН': 'n/nn',
+  'Н/НН': 'nn',
   'Морфологические нормы': 'morphological',
 
   Сочинения: 'essays',

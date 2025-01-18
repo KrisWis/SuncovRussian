@@ -14,7 +14,7 @@ type TrainerRouteSubcategories =
   | 'dictionary'
   | 'unions'
   | 'adverbs'
-  | 'n/nn'
+  | 'nn'
   | 'morphological';
 
 interface TrainerRoutes {
@@ -27,7 +27,7 @@ export const trainerRoutes: TrainerRoutes[] = [
   { subcategory: 'dictionary', words: wordsForDictionaryTests },
   { subcategory: 'unions', words: wordsForUnionsTests },
   { subcategory: 'adverbs', words: wordsForAdverbsTests },
-  { subcategory: 'n/nn', words: wordsForNNTests },
+  { subcategory: 'nn', words: wordsForNNTests },
   { subcategory: 'morphological', words: wordsForMorphologicalTests },
 ];
 

@@ -19,7 +19,7 @@ export function buildWebpackConfig(
       clean: true,
       publicPath: options.isDev
       ? '/'
-      : '/SuncovRussian/',
+      : `/${options.publicURL}/`,
     },
     plugins: buildPlugins(options),
     module: {

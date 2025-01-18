@@ -18,9 +18,8 @@ if (!container) {
 
 const root = createRoot(container);
 
-// TODO: сделать так, чтобы подставлялось из глобальной переменной (везде)
 root.render(
-  <BrowserRouter basename="/SuncovRussian">
+  <BrowserRouter basename={__IS_DEV__ ? '/' : `/${process.env.PUBLIC_URL}`}>
     <Provider store={store}>
       <ErrorBoundary fallback={<ErrorComponent />}>
         <App />
