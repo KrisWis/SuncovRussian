@@ -31,6 +31,7 @@ export const Header: React.FC<HeaderProps> = memo(
         {Object.entries(headerCategories).map(([category, submenu]) => {
           // Инициализация ссылки предмета навигации
           const itemLink = `/${headerRoutesCategories[category as HeaderCategoryType]}`;
+          const regexForCategory = new RegExp(itemLink.replace(/\//g, '\\/'));
 
           return (
             <Flex
@@ -44,7 +45,7 @@ export const Header: React.FC<HeaderProps> = memo(
                 justify="center"
                 onMouseEnter={() => setHoveredHeaderCategory(category)}
                 className={`${styles.Header__item} 
-                ${window.location.pathname.startsWith(itemLink) && styles.Header__item__active}`}
+                ${regexForCategory.test(window.location.pathname) && styles.Header__item__active}`}
                 data-testid={`Header__${category}`}
               >
                 {submenu.length > 0 ? (
@@ -65,13 +66,16 @@ export const Header: React.FC<HeaderProps> = memo(
                   {submenu.map((menuItem) => {
                     // Инициализация предмета подменю
                     const submenuItemLink = `/${headerRoutesCategories[category as HeaderCategoryType]}/${headerRoutesCategories[menuItem as HeaderCategoryType]}`;
+                    const regexForSubmenu = new RegExp(
+                      submenuItemLink.replace(/\//g, '\\/'),
+                    );
 
                     return (
                       <Link
                         to={submenuItemLink}
                         key={menuItem}
                         className={`${styles.Header__submenu__item} 
-                        ${window.location.pathname === submenuItemLink && styles.Header__submenu__item__active}`}
+                        ${regexForSubmenu.test(window.location.pathname) && styles.Header__submenu__item__active}`}
                         onClick={() => setHoveredHeaderCategory(null)}
                       >
                         {menuItem}
