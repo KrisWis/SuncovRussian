@@ -1,514 +1,663 @@
 import { PrimaryWordsInterface } from '../types/types';
 
-export const wordsForDictionaryTests: PrimaryWordsInterface[] = [
+export interface DictionaryWordsInterface extends PrimaryWordsInterface {
+  differenceIndexes: number[];
+}
+
+export const wordsForDictionaryTests: DictionaryWordsInterface[] = [
   {
+    id: 0,
     valid: 'тишина',
     invalid: 'тишена',
-    id: 0,
+    differenceIndexes: [4],
     trainerType: 'cловарные слова',
   },
+
   {
+    id: 1,
     valid: 'белизна',
     invalid: 'белезна',
-    id: 1,
+    differenceIndexes: [4],
     trainerType: 'cловарные слова',
   },
+
   {
+    id: 2,
     valid: 'празднество',
     invalid: 'праздненство',
-    id: 2,
+    differenceIndexes: [8],
     trainerType: 'cловарные слова',
   },
+
   {
+    id: 3,
     valid: 'писатель',
     invalid: 'писатиль',
-    id: 3,
+    differenceIndexes: [6],
     trainerType: 'cловарные слова',
   },
+
   {
-    valid: 'маета',
-    invalid: 'маита',
     id: 4,
+    valid: 'маета',
+    invalid: 'маята',
+    differenceIndexes: [3],
     trainerType: 'cловарные слова',
   },
+
   {
-    valid: 'котловина',
-    invalid: 'котлавина',
     id: 5,
+    valid: 'котловина',
+    invalid: 'катловина',
+    differenceIndexes: [2],
     trainerType: 'cловарные слова',
   },
+
   {
+    id: 6,
     valid: 'сердцевина',
     invalid: 'сердцивина',
-    id: 6,
+    differenceIndexes: [6],
     trainerType: 'cловарные слова',
   },
+
   {
+    id: 7,
     valid: 'взимать',
     invalid: 'взымать',
-    id: 7,
+    differenceIndexes: [3],
     trainerType: 'cловарные слова',
   },
+
   {
+    id: 8,
     valid: 'фельдъегерь',
     invalid: 'фельдьегерь',
-    id: 8,
+    differenceIndexes: [6],
     trainerType: 'cловарные слова',
   },
+
   {
+    id: 9,
     valid: 'преступление',
     invalid: 'приступление',
-    id: 9,
+    differenceIndexes: [3],
     trainerType: 'cловарные слова',
   },
+
   {
+    id: 10,
     valid: 'пресечь',
     invalid: 'присечь',
-    id: 10,
+    differenceIndexes: [3],
     trainerType: 'cловарные слова',
   },
+
   {
+    id: 11,
     valid: 'адъютант',
     invalid: 'адьютант',
-    id: 11,
+    differenceIndexes: [3],
     trainerType: 'cловарные слова',
   },
+
   {
+    id: 12,
     valid: 'пригарь',
     invalid: 'пригорь',
-    id: 12,
+    differenceIndexes: [5],
     trainerType: 'cловарные слова',
   },
+
   {
+    id: 13,
     valid: 'выгарки',
     invalid: 'выгорки',
-    id: 13,
+    differenceIndexes: [4],
     trainerType: 'cловарные слова',
   },
+
   {
+    id: 14,
     valid: 'изгарь',
     invalid: 'изгорь',
-    id: 14,
+    differenceIndexes: [4],
     trainerType: 'cловарные слова',
   },
+
   {
+    id: 15,
     valid: 'зоревать',
     invalid: 'заревать',
-    id: 15,
+    differenceIndexes: [2],
     trainerType: 'cловарные слова',
   },
+
   {
+    id: 16,
     valid: 'пловец',
     invalid: 'плавец',
-    id: 16,
+    differenceIndexes: [3],
     trainerType: 'cловарные слова',
   },
+
   {
+    id: 17,
     valid: 'отрасль',
     invalid: 'отросль',
-    id: 17,
+    differenceIndexes: [4],
     trainerType: 'cловарные слова',
   },
+
   {
+    id: 18,
     valid: 'росток',
     invalid: 'расток',
-    id: 18,
+    differenceIndexes: [2],
     trainerType: 'cловарные слова',
   },
+
   {
+    id: 19,
     valid: 'вырост',
     invalid: 'выраст',
-    id: 19,
+    differenceIndexes: [4],
     trainerType: 'cловарные слова',
   },
+
   {
+    id: 20,
     valid: 'ростовщик',
     invalid: 'растовщик',
-    id: 20,
+    differenceIndexes: [2],
     trainerType: 'cловарные слова',
   },
+
   {
+    id: 21,
     valid: 'Ростов',
     invalid: 'Растов',
-    id: 21,
+    differenceIndexes: [2],
     trainerType: 'cловарные слова',
   },
+
   {
+    id: 22,
     valid: 'Ростислав',
     invalid: 'Растислав',
-    id: 22,
+    differenceIndexes: [2],
     trainerType: 'cловарные слова',
   },
+
   {
+    id: 23,
     valid: 'равнина',
     invalid: 'ровнина',
-    id: 23,
+    differenceIndexes: [2],
     trainerType: 'cловарные слова',
   },
+
   {
+    id: 24,
     valid: 'сочетать',
     invalid: 'сочитать',
-    id: 24,
+    differenceIndexes: [4],
     trainerType: 'cловарные слова',
   },
+
   {
+    id: 25,
     valid: 'аккомпанемент',
     invalid: 'аккомпонемент',
-    id: 25,
+    differenceIndexes: [7],
     trainerType: 'cловарные слова',
   },
+
   {
+    id: 26,
     valid: 'бюллетень',
     invalid: 'беллетень',
-    id: 26,
+    differenceIndexes: [2],
     trainerType: 'cловарные слова',
   },
+
   {
+    id: 27,
     valid: 'брошюра',
     invalid: 'брошура',
-    id: 27,
+    differenceIndexes: [5],
     trainerType: 'cловарные слова',
   },
+
   {
+    id: 28,
     valid: 'вестибюль',
     invalid: 'вистибюль',
-    id: 28,
+    differenceIndexes: [2],
     trainerType: 'cловарные слова',
   },
+
   {
+    id: 29,
     valid: 'винегрет',
     invalid: 'венегрет',
-    id: 29,
+    differenceIndexes: [2],
     trainerType: 'cловарные слова',
   },
+
   {
+    id: 30,
     valid: 'грамматика',
     invalid: 'граматика',
-    id: 30,
+    differenceIndexes: [4],
     trainerType: 'cловарные слова',
   },
+
   {
+    id: 31,
     valid: 'экстремальный',
     invalid: 'экстримальный',
-    id: 31,
+    differenceIndexes: [6],
     trainerType: 'cловарные слова',
   },
+
   {
+    id: 32,
     valid: 'укротить',
     invalid: 'укратить',
-    id: 32,
+    differenceIndexes: [4],
     trainerType: 'cловарные слова',
   },
+
   {
+    id: 33,
     valid: 'дирижёр',
     invalid: 'дерижёр',
-    id: 33,
+    differenceIndexes: [2],
     trainerType: 'cловарные слова',
   },
+
   {
+    id: 34,
     valid: 'иждивенец',
     invalid: 'иждевенец',
-    id: 34,
+    differenceIndexes: [4],
     trainerType: 'cловарные слова',
   },
+
   {
+    id: 35,
     valid: 'иллюзия',
     invalid: 'илюзия',
-    id: 35,
+    differenceIndexes: [2],
     trainerType: 'cловарные слова',
   },
+
   {
+    id: 36,
     valid: 'катастрофа',
     invalid: 'катострофа',
-    id: 36,
+    differenceIndexes: [4],
     trainerType: 'cловарные слова',
   },
+
   {
+    id: 37,
     valid: 'лелеять',
     invalid: 'лелееть',
-    id: 37,
+    differenceIndexes: [5],
     trainerType: 'cловарные слова',
   },
+
   {
+    id: 38,
     valid: 'палисадник',
     invalid: 'полисадник',
-    id: 38,
+    differenceIndexes: [2],
     trainerType: 'cловарные слова',
   },
+
   {
+    id: 39,
     valid: 'президиум',
     invalid: 'президеум',
-    id: 39,
+    differenceIndexes: [7],
     trainerType: 'cловарные слова',
   },
+
   {
+    id: 40,
     valid: 'преодолеть',
     invalid: 'приодолеть',
-    id: 40,
+    differenceIndexes: [3],
     trainerType: 'cловарные слова',
   },
+
   {
+    id: 41,
     valid: 'преобразовать',
     invalid: 'приобразовать',
-    id: 41,
+    differenceIndexes: [3],
     trainerType: 'cловарные слова',
   },
+
   {
+    id: 42,
     valid: 'прецедент',
     invalid: 'прицедент',
-    id: 42,
+    differenceIndexes: [3],
     trainerType: 'cловарные слова',
   },
+
   {
+    id: 43,
     valid: 'привилегия',
     invalid: 'превилегия',
-    id: 43,
+    differenceIndexes: [3],
     trainerType: 'cловарные слова',
   },
+
   {
-    valid: 'примитивный',
-    invalid: 'примитивный',
     id: 44,
+    valid: 'примитивный',
+    invalid: 'премитивный',
+    differenceIndexes: [3],
     trainerType: 'cловарные слова',
   },
+
   {
+    id: 45,
     valid: 'приоритет',
     invalid: 'преоритет',
-    id: 45,
+    differenceIndexes: [3],
     trainerType: 'cловарные слова',
   },
+
   {
+    id: 46,
     valid: 'резидент',
     invalid: 'резедент',
-    id: 46,
+    differenceIndexes: [4],
     trainerType: 'cловарные слова',
   },
+
   {
-    valid: 'спартакиада',
-    invalid: 'спартокиада',
     id: 47,
+    valid: 'спартакиада',
+    invalid: 'спортокиада',
+    differenceIndexes: [3, 6],
     trainerType: 'cловарные слова',
   },
+
   {
+    id: 48,
     valid: 'стипендия',
     invalid: 'степендия',
-    id: 48,
+    differenceIndexes: [3],
     trainerType: 'cловарные слова',
   },
+
   {
+    id: 49,
     valid: 'трясина',
     invalid: 'тресина',
-    id: 49,
+    differenceIndexes: [3],
     trainerType: 'cловарные слова',
   },
+
   {
+    id: 50,
     valid: 'университет',
     invalid: 'уневерситет',
-    id: 50,
+    differenceIndexes: [3],
     trainerType: 'cловарные слова',
   },
+
   {
+    id: 51,
     valid: 'веять',
     invalid: 'веить',
-    id: 51,
+    differenceIndexes: [3],
     trainerType: 'cловарные слова',
   },
+
   {
+    id: 52,
     valid: 'блеять',
     invalid: 'блеить',
-    id: 52,
+    differenceIndexes: [4],
     trainerType: 'cловарные слова',
   },
+
   {
+    id: 53,
     valid: 'лаять',
     invalid: 'лаить',
-    id: 53,
+    differenceIndexes: [3],
     trainerType: 'cловарные слова',
   },
+
   {
+    id: 54,
     valid: 'кашлять',
     invalid: 'кашлить',
-    id: 54,
+    differenceIndexes: [5],
     trainerType: 'cловарные слова',
   },
+
   {
+    id: 55,
     valid: 'каяться',
     invalid: 'каиться',
-    id: 55,
+    differenceIndexes: [3],
     trainerType: 'cловарные слова',
   },
+
   {
+    id: 56,
     valid: 'клеить',
     invalid: 'клееть',
-    id: 56,
+    differenceIndexes: [4],
     trainerType: 'cловарные слова',
   },
+
   {
+    id: 57,
     valid: 'вялить',
     invalid: 'вялеть',
-    id: 57,
+    differenceIndexes: [4],
     trainerType: 'cловарные слова',
   },
+
   {
-    valid: 'строить',
-    invalid: 'строять',
     id: 58,
-    trainerType: 'cловарные слова',
-  },
-  {
     valid: 'жа́лить',
     invalid: 'жа́леть',
-    id: 59,
+    differenceIndexes: [4],
     trainerType: 'cловарные слова',
   },
+
   {
+    id: 59,
     valid: 'метить',
     invalid: 'мететь',
-    id: 60,
+    differenceIndexes: [4],
     trainerType: 'cловарные слова',
   },
+
   {
+    id: 60,
     valid: 'молвить',
     invalid: 'молветь',
+    differenceIndexes: [5],
+    trainerType: 'cловарные слова',
+  },
+
+  {
     id: 61,
-    trainerType: 'cловарные слова',
-  },
-  {
-    valid: 'беспокоиться',
-    invalid: 'беспокоеться',
-    id: 62,
-    trainerType: 'cловарные слова',
-  },
-  {
     valid: 'осилить',
     invalid: 'осилеть',
-    id: 63,
+    differenceIndexes: [5],
     trainerType: 'cловарные слова',
   },
+
   {
+    id: 62,
     valid: 'ездить',
     invalid: 'ездеть',
-    id: 64,
+    differenceIndexes: [4],
     trainerType: 'cловарные слова',
   },
+
   {
-    valid: 'бросить',
-    invalid: 'бросеть',
-    id: 65,
-    trainerType: 'cловарные слова',
-  },
-  {
+    id: 63,
     valid: 'мучить',
     invalid: 'мучать',
-    id: 66,
+    differenceIndexes: [4],
     trainerType: 'cловарные слова',
   },
+
   {
+    id: 64,
     valid: 'приемлемый',
     invalid: 'приемлимый',
-    id: 67,
+    differenceIndexes: [7],
     trainerType: 'cловарные слова',
   },
+
   {
+    id: 65,
     valid: 'незыблемый',
     invalid: 'незыблимый',
-    id: 68,
+    differenceIndexes: [7],
     trainerType: 'cловарные слова',
   },
+
   {
+    id: 66,
     valid: 'неотъемлемый',
     invalid: 'неотъемлимый',
-    id: 69,
+    differenceIndexes: [9],
     trainerType: 'cловарные слова',
   },
+
   {
+    id: 67,
     valid: 'движимый',
     invalid: 'движемый',
-    id: 70,
+    differenceIndexes: [5],
     trainerType: 'cловарные слова',
   },
+
   {
+    id: 68,
     valid: 'юродивый',
     invalid: 'юродевый',
-    id: 71,
+    differenceIndexes: [5],
     trainerType: 'cловарные слова',
   },
+
   {
+    id: 69,
     valid: 'баеньки',
     invalid: 'баиньки',
-    id: 72,
+    differenceIndexes: [3],
     trainerType: 'cловарные слова',
   },
+
   {
+    id: 70,
     valid: 'заинька',
     invalid: 'заенька',
-    id: 73,
+    differenceIndexes: [3],
     trainerType: 'cловарные слова',
   },
+
   {
+    id: 71,
     valid: 'паинька',
     invalid: 'паенька',
-    id: 74,
+    differenceIndexes: [3],
     trainerType: 'cловарные слова',
   },
+
   {
+    id: 72,
     valid: 'претерпеть',
     invalid: 'притерпеть',
-    id: 75,
+    differenceIndexes: [3],
     trainerType: 'cловарные слова',
   },
+
   {
+    id: 73,
     valid: 'притерпеться',
     invalid: 'претерпеться',
-    id: 76,
+    differenceIndexes: [3],
     trainerType: 'cловарные слова',
   },
+
   {
+    id: 74,
     valid: 'привратник',
     invalid: 'превратник',
-    id: 77,
+    differenceIndexes: [3],
     trainerType: 'cловарные слова',
   },
+
   {
+    id: 75,
     valid: 'прообраз',
     invalid: 'праобраз',
-    id: 78,
+    differenceIndexes: [3],
     trainerType: 'cловарные слова',
   },
+
   {
+    id: 76,
     valid: 'панъевропейский',
     invalid: 'паневропейский',
-    id: 79,
+    differenceIndexes: [4],
     trainerType: 'cловарные слова',
   },
+
   {
+    id: 77,
     valid: 'продлевать',
     invalid: 'продливать',
-    id: 80,
+    differenceIndexes: [6],
     trainerType: 'cловарные слова',
   },
+
   {
+    id: 78,
     valid: 'затмевать',
     invalid: 'затмивать',
-    id: 81,
+    differenceIndexes: [5],
     trainerType: 'cловарные слова',
   },
+
   {
+    id: 79,
     valid: 'застревать',
     invalid: 'застрявать',
-    id: 82,
+    differenceIndexes: [6],
     trainerType: 'cловарные слова',
   },
+
   {
+    id: 80,
     valid: 'обуревать',
     invalid: 'обуривать',
-    id: 83,
+    differenceIndexes: [5],
     trainerType: 'cловарные слова',
   },
+
   {
+    id: 81,
     valid: 'встревать',
     invalid: 'встрявать',
-    id: 84,
+    differenceIndexes: [5],
     trainerType: 'cловарные слова',
   },
 ];

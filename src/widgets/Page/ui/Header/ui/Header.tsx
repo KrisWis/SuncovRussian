@@ -18,7 +18,7 @@ export const Header: React.FC<HeaderProps> = memo(
 
     return (
       <header className={styles.Header}>
-        <Flex maxHeight width="100">
+        <Flex maxHeight>
           {Object.entries(headerCategories).map(([category, submenu]) => {
             // Инициализация ссылки предмета навигации
             const itemLink = `/${headerRoutesCategories[category as HeaderCategoryType]}`;

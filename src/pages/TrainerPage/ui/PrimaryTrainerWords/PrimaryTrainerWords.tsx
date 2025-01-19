@@ -6,6 +6,7 @@ import { TrainerPageContext } from '../../model/context/TrainerPageContext';
 import { TrainerWord } from '@/shared/ui/TrainerWord';
 import { PrimaryWordsInterface } from '../../model/types/types';
 import { wordActionsFunctionType } from '../../lib/hooks/useWordActions';
+import { DictionaryWordsInterface } from '../../model/static/wordsForDictionaryTests';
 
 interface PrimaryTrainerWordsProps {
   randomWord: PrimaryWordsInterface;
@@ -24,6 +25,34 @@ export const PrimaryTrainerWords: React.FC<PrimaryTrainerWordsProps> = memo(
     // Инициализация данных и контекста
     const storeWords = useWords();
     const { isIncorrect, isErrorWork } = useContext(TrainerPageContext);
+
+    // Функция для показа слова
+    const printWord = (word: string): React.ReactNode => {
+      return (
+        <>
+          {randomWord.trainerType === 'cловарные слова' ? (
+            <Flex>
+              {word.split('').map((letter, index) => (
+                <span
+                  key={index + letter}
+                  style={{
+                    fontWeight: (
+                      randomWord as DictionaryWordsInterface
+                    ).differenceIndexes.includes(index + 1)
+                      ? 'bold'
+                      : 'normal',
+                  }}
+                >
+                  {letter}
+                </span>
+              ))}
+            </Flex>
+          ) : (
+            word
+          )}
+        </>
+      );
+    };
 
     return (
       <Flex
@@ -58,7 +87,7 @@ export const PrimaryTrainerWords: React.FC<PrimaryTrainerWordsProps> = memo(
             fontSize: randomWord.valid.length >= 10 ? 26 : 36,
           }}
         >
-          {randomWord.valid}
+          {printWord(randomWord.valid)}
         </TrainerWord>
 
         <TrainerWord
@@ -81,7 +110,7 @@ export const PrimaryTrainerWords: React.FC<PrimaryTrainerWordsProps> = memo(
             fontSize: randomWord.valid.length >= 10 ? 26 : 36,
           }}
         >
-          {randomWord.invalid}
+          {printWord(randomWord.invalid)}
         </TrainerWord>
       </Flex>
     );

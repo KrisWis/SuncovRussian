@@ -4,12 +4,17 @@
   height: var(--header-height);
   min-height: var(--header-height);
   display: flex;
-  width: 100vw;
+  width: 100%;
   justify-content: space-between;
   background-color: var(--color-black);
 
   $item-padding-x: 10px;
   $item-padding-adaptive-x: 5px;
+
+  @media (max-width: $mobile-mediaquery-width) {
+    height: var(--header-height-mobile);
+    min-height: var(--header-height-mobile);
+  }
 
   &__item {
     cursor: pointer;
@@ -25,7 +30,7 @@
     text-transform: lowercase;
 
     @media (max-width: $mobile-mediaquery-width) {
-      font-size: 14px;
+      font-size: 8px;
       padding: 0 $item-padding-adaptive-x;
     }
 
@@ -51,7 +56,8 @@
     padding: $submenu-padding-x;
 
     @media (max-width: $mobile-mediaquery-width) {
-      left: -50%;
+      left: -10%;
+      top: 20px;
     }
 
     &__active {
@@ -69,6 +75,10 @@
       white-space: nowrap;
       text-transform: lowercase;
       transition: var(--transition-duration-default) linear color;
+
+      @media (max-width: $mobile-mediaquery-width) {
+        font-size: 10px;
+      }
 
       &:hover,
       &__active {
