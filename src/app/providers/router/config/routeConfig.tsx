@@ -1,8 +1,10 @@
+import { DictantsPage, mockDictants } from '@/pages/DictantsPage';
 import { MainPage } from '@/pages/MainPage';
 import { NotFoundPage } from '@/pages/NotFoundPage';
 import { TheoryPage } from '@/pages/TheoryPage';
 import { TrainerPage } from '@/pages/TrainerPage';
 import {
+  getRouteDictant,
   getRouteMain,
   getRouteNotFound,
   getRouteTheory,
@@ -26,6 +28,11 @@ export const routeConfig: Record<AppRoutes, RouteProps> = {
   ...trainerRoutes.map((route) => ({
     path: getRouteTrainer(route.subcategory),
     element: <TrainerPage words={route.words} />,
+  })),
+
+  ...mockDictants.map((dictant) => ({
+    path: getRouteDictant(dictant.theme),
+    element: <DictantsPage dictant={dictant} />,
   })),
 
   notFound: {

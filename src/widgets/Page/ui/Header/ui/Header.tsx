@@ -4,6 +4,7 @@ import { memo, useState } from 'react';
 import { headerCategories, headerRoutesCategories } from '../model/data';
 import { HeaderCategoryType } from '../model/types';
 import { Link } from 'react-router-dom';
+import { transliterate } from '@/shared/utils/transliterate';
 
 interface HeaderProps {
   withHomeButton?: boolean;
@@ -57,7 +58,14 @@ export const Header: React.FC<HeaderProps> = memo(
                   >
                     {submenu.map((menuItem) => {
                       // Инициализация предмета подменю
-                      const submenuItemLink = `/${headerRoutesCategories[category as HeaderCategoryType]}/${headerRoutesCategories[menuItem as HeaderCategoryType]}`;
+                      let submenuItemLink: string;
+
+                      if (category === 'Диктанты') {
+                        submenuItemLink = `/${headerRoutesCategories[category as HeaderCategoryType]}/${transliterate(menuItem)}`;
+                      } else {
+                        submenuItemLink = `/${headerRoutesCategories[category as HeaderCategoryType]}/${headerRoutesCategories[menuItem as HeaderCategoryType]}`;
+                      }
+
                       const regexForSubmenu = new RegExp(
                         submenuItemLink.replace(/\//g, '\\/'),
                       );

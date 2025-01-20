@@ -1,0 +1,11 @@
+.DictantsPage {
+  margin-top: 100px;
+
+  &__title {
+    font-family: var(--font-family-bold);
+    font-size: 30px;
+    line-height: 100%;
+    color: #000;
+    text-transform: lowercase;
+  }
+}

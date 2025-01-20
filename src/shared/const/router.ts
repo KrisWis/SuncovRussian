@@ -8,6 +8,7 @@ import {
   wordsForNNTests,
   wordsForMorphologicalTests,
 } from '@/pages/TrainerPage';
+import { transliterate } from '../utils/transliterate/transliterate';
 
 type TrainerRouteSubcategories =
   | 'accents'
@@ -33,6 +34,8 @@ export const trainerRoutes: TrainerRoutes[] = [
 
 export const getRouteMain = () => '/';
 export const getRouteTheory = () => '/theory';
+export const getRouteDictant = (theme: string) =>
+  `/dictants/${transliterate(theme)}`;
 export const getRouteTrainer = (trainerType: TrainerRouteSubcategories) =>
   `/trainers/${trainerType}`;
 export const getRouteNotFound = () => '*';

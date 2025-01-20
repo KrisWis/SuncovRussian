@@ -1,8 +1,10 @@
+// eslint-disable-next-line ulbi-tv-plugin/layer-imports
+import { mockDictants } from '@/pages/DictantsPage';
 import { HeaderMenu, HeaderRoutes } from './types';
 
 export const headerCategories: HeaderMenu = {
   Тесты: [],
-  Диктанты: [],
+  Диктанты: [...mockDictants.map((dictant) => dictant.theme)],
   Пунктуация: [],
   Теория: [],
   Тренажеры: [
