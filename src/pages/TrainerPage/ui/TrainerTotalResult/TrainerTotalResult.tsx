@@ -8,6 +8,7 @@ import { useTrainerActions } from '../../model/slice/TrainerPageSlice';
 import { trainersOfPrimaryType } from '../../model/const/const';
 import { useInitializeWords } from '../../lib/hooks/useInitializeWords';
 import { UnionsWordsInterface } from '../../model/static/wordsForUnionsTests';
+import { Button } from '@/shared/ui/Button/ui/Button';
 
 interface TrainerTotalResultProps {
   updateRandomWord: (words?: WordsTypes[]) => void;
@@ -132,23 +133,15 @@ export const TrainerTotalResult: React.FC<TrainerTotalResultProps> = memo(
             </Flex>
 
             {!isErrorWork && (
-              <button
-                className={styles.TrainerTotalResult__button}
-                onClick={startErrorWork}
-                type="button"
-              >
+              <Button onClick={startErrorWork} type="button">
                 Работа над ошибками
-              </button>
+              </Button>
             )}
           </Flex>
         ) : (
-          <button
-            className={styles.TrainerTotalResult__button}
-            onClick={Retry}
-            type="button"
-          >
+          <Button onClick={Retry} type="button">
             Повторить
-          </button>
+          </Button>
         )}
       </Flex>
     );

@@ -11,10 +11,10 @@ const splitSymbol: string = '*';
 export const Dictant: React.FC<DictantProps> = memo(
   ({ text }): React.JSX.Element => {
     // Разделяем текст на массив
-    let splitText: string[] = useMemo(() => text.split(''), [text]);
+    const splitText: string[] = useMemo(() => text.split(''), [text]);
 
     return (
-      <Flex width="90" className={styles.Dictant}>
+      <Flex direction="column" width="90" className={styles.Dictant}>
         <p className={styles.Dictant__text}>
           {splitText.map(
             (
@@ -27,19 +27,12 @@ export const Dictant: React.FC<DictantProps> = memo(
                 letter === splitSymbol) ? (
                 ''
               ) : letter === splitSymbol ? ( // И если встречаем "*"
-                <button type="button" key={letter + letterIndex}>
-                  {(() => {
-                    // То вместо просто буквы отображаем кнопку с буквой
-
-                    // Получаем саму букву
-                    const missedLetter = splitText.find(
-                      (_, index) => index === letterIndex + 1,
-                    );
-
-                    // И возвращаем саму букву
-                    return missedLetter && missedLetter.toUpperCase();
-                  })()}
-                </button>
+                <input
+                  className={styles.Dictant__input}
+                  type="text"
+                  maxLength={1}
+                  key={letter + letterIndex}
+                />
               ) : (
                 letter
               ),

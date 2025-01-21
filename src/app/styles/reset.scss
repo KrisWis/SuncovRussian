@@ -20,3 +20,11 @@ a {
   text-decoration: none;
   color: currentcolor;
 }
+
+input {
+  border: none;
+
+  &:focus {
+    outline: none;
+  }
+}

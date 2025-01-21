@@ -1,7 +1,7 @@
 .Dictant {
-  border: 3px solid var(--color-black);
+  border: 1px solid var(--color-black);
   border-radius: 19px;
-  padding: 15px 30px;
+  padding: 10px 30px;
 
   &__text {
     font-weight: 600;
@@ -9,5 +9,23 @@
     line-height: 150%;
     letter-spacing: 0.01em;
     color: var(--color-black);
+  }
+
+  &__input {
+    text-align: center;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 15px;
+    height: 15px;
+    border-radius: 100%;
+    background-color: var(--color-black);
+    color: var(--color-white);
+    transition: background-color var(--transition-duration-default) linear;
+    font-size: 15px;
+
+    &:focus {
+      background-color: var(--color-gray);
+    }
   }
 }

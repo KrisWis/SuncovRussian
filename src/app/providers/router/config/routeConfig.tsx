@@ -25,15 +25,17 @@ export const routeConfig: Record<AppRoutes, RouteProps> = {
     element: <TheoryPage />,
   },
 
-  ...trainerRoutes.map((route) => ({
-    path: getRouteTrainer(route.subcategory),
-    element: <TrainerPage words={route.words} />,
-  })),
+  ...[
+    ...trainerRoutes.map((route) => ({
+      path: getRouteTrainer(route.subcategory),
+      element: <TrainerPage words={route.words} />,
+    })),
 
-  ...mockDictants.map((dictant) => ({
-    path: getRouteDictant(dictant.theme),
-    element: <DictantsPage dictant={dictant} />,
-  })),
+    ...mockDictants.map((dictant) => ({
+      path: getRouteDictant(dictant.theme),
+      element: <DictantsPage dictant={dictant} />,
+    })),
+  ],
 
   notFound: {
     path: getRouteNotFound(),
