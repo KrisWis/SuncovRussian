@@ -37,6 +37,7 @@ export const Dictant: React.FC<DictantProps> = memo(
     const [correctLetters, setCorrectLetters] = useState(0);
     const [maxCorrectLetters, setMaxCorrectLetters] = useState(0);
     const [isIncorrect, setIsIncorrect] = useState(false);
+    const [isMissed, setIsMissed] = useState(false);
 
     const checkCorrectness = useCallback(() => {
       const inputElements = document.querySelectorAll(
@@ -54,6 +55,7 @@ export const Dictant: React.FC<DictantProps> = memo(
 
         if (thisInputIsMissed) {
           isMissed = true;
+          setIsMissed(true);
 
           for (const inputElementForClear of inputElements) {
             clearClassesOnInput(inputElementForClear, false);
@@ -108,7 +110,7 @@ export const Dictant: React.FC<DictantProps> = memo(
                       type="text"
                       maxLength={1}
                       key={letter + letterIndex}
-                      readOnly={maxCorrectLetters > 0}
+                      readOnly={maxCorrectLetters > 0 && !isMissed}
                     />
                   ) : (
                     letter
