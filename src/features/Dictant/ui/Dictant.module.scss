@@ -2,6 +2,7 @@
   border: 1px solid var(--color-black);
   border-radius: 19px;
   padding: 10px 30px;
+  margin-bottom: 50px;
 
   &__text {
     font-weight: 600;
@@ -24,8 +25,51 @@
     transition: background-color var(--transition-duration-default) linear;
     font-size: 15px;
 
+    &__incorrect {
+      background-color: var(--color-warn);
+    }
+
+    &__correct {
+      background-color: var(--color-success);
+    }
+
+    &__missed {
+      animation: infinite input-missed-anim var(--animation-duration-default)
+        linear;
+
+      @keyframes input-missed-anim {
+        0% {
+          background-color: var(--color-black);
+        }
+
+        50% {
+          background-color: var(--color-gray);
+        }
+
+        100% {
+          background-color: var(--color-black);
+        }
+      }
+    }
+
     &:focus {
       background-color: var(--color-gray);
     }
+  }
+
+  &__total {
+    font-family: var(--font-family-bold);
+    font-size: 24px;
+    line-height: 150%;
+    color: var(--color-black);
+    position: absolute;
+    right: 25%;
+    bottom: 0;
+  }
+
+  &__mark {
+    position: absolute;
+    right: 10%;
+    margin-top: 50px;
   }
 }

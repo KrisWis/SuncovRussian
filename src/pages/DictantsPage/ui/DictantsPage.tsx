@@ -3,7 +3,6 @@ import { Page } from '@/widgets/Page';
 import { memo } from 'react';
 import * as styles from './DictantsPage.module.scss';
 import { DictantType } from '../model/types/types';
-import { Button } from '@/shared/ui/Button';
 import { Dictant } from '@/features/Dictant';
 
 export interface DictantsPageProps {
@@ -18,8 +17,6 @@ export const DictantsPage: React.FC<DictantsPageProps> = memo(
           <h1 className={styles.DictantsPage__title}>тема: {dictant.theme}</h1>
 
           <Dictant text={dictant.text} />
-
-          <Button type="button">Проверить</Button>
         </Flex>
       </Page>
     );

@@ -10,7 +10,18 @@ export type FlexJustify =
   | 'around';
 export type FlexAlign = 'start' | 'center' | 'end' | 'stretch';
 export type FlexDirection = 'row' | 'column' | 'rowReverse' | 'columnReverse';
-export type FlexGap = '0' | '3' | '5' | '10' | '15' | '20' | '30' | '40' | '50';
+export type FlexGap =
+  | '0'
+  | '3'
+  | '5'
+  | '10'
+  | '15'
+  | '20'
+  | '30'
+  | '40'
+  | '50'
+  | '70'
+  | '100';
 export type FlexWitdth =
   | '5'
   | '10'
@@ -66,6 +77,8 @@ const gapClasses: Record<FlexGap, string> = {
   30: styles.gap30,
   40: styles.gap40,
   50: styles.gap50,
+  70: styles.gap70,
+  100: styles.gap100,
 };
 
 const widthClasses: Record<FlexWitdth, string> = {

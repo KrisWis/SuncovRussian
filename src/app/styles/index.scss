@@ -16,10 +16,14 @@
   --color-white: #fff;
   --color-black: #000;
   --color-gray: rgba(0 0 0 / 40%);
-  --color-warn: red;
+  --color-warn: #f67180;
+  --color-success: #098e7f;
 
   // Transition
   --transition-duration-default: 0.3s;
+
+  // Animation
+  --animation-duration-default: 3s;
 
   // Z-indexes
   --z-index-hidden: -1;

@@ -4,5 +4,6 @@ export interface ButtonProps
     HTMLButtonElement
   > {
   className?: string;
+  variant?: 'big' | 'medium';
   children: React.ReactNode;
 }
