@@ -2,7 +2,7 @@ import type { Meta, StoryObj } from '@storybook/react';
 import { TheoryItem } from './TheoryItem';
 
 const meta = {
-  title: 'Pages/Theory/TheoryItem',
+  title: 'Entities/TheoryItem',
   component: TheoryItem,
   parameters: {
     layout: 'fullscreen',

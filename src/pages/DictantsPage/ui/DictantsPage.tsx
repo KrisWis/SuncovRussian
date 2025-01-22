@@ -2,9 +2,9 @@ import { Flex } from '@/shared/lib/Stack';
 import { Page } from '@/widgets/Page';
 import { memo } from 'react';
 import * as styles from './DictantsPage.module.scss';
-import { Dictant } from './Dictant/Dictant';
 import { DictantType } from '../model/types/types';
 import { Button } from '@/shared/ui/Button';
+import { Dictant } from '@/features/Dictant';
 
 export interface DictantsPageProps {
   dictant: DictantType;

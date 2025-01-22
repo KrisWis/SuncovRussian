@@ -1,5 +1,5 @@
 import { memo, useEffect, useMemo, useState } from 'react';
-import { useGetAllTheoriesMutation } from '../model/api/theoryApi';
+import { useGetAllTheoriesMutation } from '../model/api/theoryPageApi';
 import { PageLoading } from '@/shared/ui/PageLoading/PageLoading';
 import { ErrorComponent } from '@/shared/ui/ErrorComponent';
 import { Flex } from '@/shared/lib/Stack';
@@ -9,7 +9,7 @@ import { UTAPIFileInList } from '@/shared/api/UTApi/types';
 import { TheoryPageContext } from '../model/context/TheoryPageContext';
 import { Page } from '@/widgets/Page';
 import { TheorySidebar } from './TheorySidebar/TheorySidebar';
-import { TheoryItem } from './TheoryItem/TheoryItem';
+import { TheoryItem } from '@/entities/TheoryItem';
 
 export const TheoryPage: React.FC = memo((): React.JSX.Element => {
   // Получение всех pdf файлов с теорией с Яндекс Диска
