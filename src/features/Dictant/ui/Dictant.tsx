@@ -4,6 +4,7 @@ import { memo, useCallback, useMemo, useState } from 'react';
 import { Button } from '@/shared/ui/Button';
 import DislikeSVG from '@/shared/assets/icons/DictantsPage/DislikeSVG.svg';
 import LikeSVG from '@/shared/assets/icons/DictantsPage/LikeSVG.svg';
+import { playAudio } from '@/shared/utils/playAudio';
 
 interface DictantProps {
   text: string;
@@ -46,6 +47,7 @@ export const Dictant: React.FC<DictantProps> = memo(
 
       let correctLetters: number = inputElements.length;
       let isMissed: boolean = false;
+      let isIncorrect: boolean = false;
 
       for (let i = 0; i < inputElements.length; i++) {
         const inputElement = inputElements[i];
@@ -71,13 +73,22 @@ export const Dictant: React.FC<DictantProps> = memo(
           !(!inputElement.value && splitText[letterId] === splitSymbol)
         ) {
           inputElement.classList.add(styles.Dictant__input__incorrect);
-          setIsIncorrect(true);
           correctLetters--;
+
+          if (!isMissed) {
+            setIsIncorrect(true);
+            isIncorrect = true;
+          }
         } else if (!isMissed) {
           inputElement.classList.add(styles.Dictant__input__correct);
         }
       }
 
+      if (isIncorrect) {
+        playAudio('FailSound');
+      }
+
+      setIsMissed(isMissed);
       setCorrectLetters(correctLetters);
       setMaxCorrectLetters(inputElements.length);
     }, [clearClassesOnInput, splitText]);
@@ -102,6 +113,7 @@ export const Dictant: React.FC<DictantProps> = memo(
                     ''
                   ) : letter === splitSymbol ? ( // И если встречаем "*"
                     <input
+                      data-testid="Dictant__input"
                       onInput={(e) =>
                         clearClassesOnInput(e.target as HTMLInputElement, true)
                       }
@@ -119,7 +131,7 @@ export const Dictant: React.FC<DictantProps> = memo(
             </p>
           </Flex>
 
-          {maxCorrectLetters > 0 && (
+          {maxCorrectLetters > 0 && !isMissed && (
             <span className={styles.Dictant__total}>
               Итог: {correctLetters}/{maxCorrectLetters}
             </span>
@@ -127,19 +139,40 @@ export const Dictant: React.FC<DictantProps> = memo(
         </Flex>
 
         <Flex relative justify="center" width="100">
-          {!isIncorrect &&
+          {(!isIncorrect || isMissed) &&
             (maxCorrectLetters !== correctLetters || !maxCorrectLetters) && (
-              <Button onClick={checkCorrectness} variant="big" type="button">
+              <Button
+                data-testid="Dictant__check"
+                onClick={checkCorrectness}
+                variant="big"
+                type="button"
+              >
                 Проверить
               </Button>
             )}
 
-          {maxCorrectLetters > 0 && (
+          {maxCorrectLetters > 0 && !isMissed && (
             <>
               {correctLetters === maxCorrectLetters ? (
-                <LikeSVG className={styles.Dictant__mark} />
+                <>
+                  {process.env.NODE_ENV === 'test' ? (
+                    <div data-testid="Dictant__like">
+                      <LikeSVG className={styles.Dictant__mark} />
+                    </div>
+                  ) : (
+                    <LikeSVG className={styles.Dictant__mark} />
+                  )}
+                </>
               ) : (
-                <DislikeSVG className={styles.Dictant__mark} />
+                <>
+                  {process.env.NODE_ENV === 'test' ? (
+                    <div data-testid="Dictant__dislike">
+                      <DislikeSVG className={styles.Dictant__mark} />
+                    </div>
+                  ) : (
+                    <DislikeSVG className={styles.Dictant__mark} />
+                  )}
+                </>
               )}
             </>
           )}

@@ -2,6 +2,7 @@ import { useCallback, useState } from 'react';
 import { useRandomWord } from './useRandomWord';
 import { TrainerWordsInterface } from '../../model/types/types';
 import { useTrainerActions } from '../../model/slice/TrainerPageSlice';
+import { playAudio } from '@/shared/utils/playAudio';
 
 export type wordActionsFunctionType = (
   words: TrainerWordsInterface[],
@@ -106,12 +107,7 @@ export const useWordActions = (
     ) => {
       if (waitRepeatedClickInFail) return;
 
-      if (process.env.NODE_ENV !== 'test') {
-        const audio = new Audio(
-          `${__IS_DEV__ ? '/' : `/${process.env.PUBLIC_URL}/`}sounds/FailSound.mp3`,
-        );
-        audio.play();
-      }
+      playAudio('FailSound');
 
       setIsIncorrect(true);
 
