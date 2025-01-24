@@ -1,10 +1,12 @@
 import { Flex } from '@/shared/lib/Stack';
 import * as styles from './Dictant.module.scss';
-import { memo, useCallback, useMemo, useState } from 'react';
+import { memo, useCallback, useMemo } from 'react';
 import { Button } from '@/shared/ui/Button';
 import DislikeSVG from '@/shared/assets/icons/DictantsPage/DislikeSVG.svg';
 import LikeSVG from '@/shared/assets/icons/DictantsPage/LikeSVG.svg';
-import { playAudio } from '@/shared/utils/playAudio';
+import { clearClassesOnInput } from '../lib/helpers/clearClassesOnInput';
+import { goToNextInput } from '../lib/helpers/goToNextInput';
+import { useCheckCorrectness } from '../lib/hooks/useCheckCorrectness';
 
 interface DictantProps {
   text: string;
@@ -15,120 +17,80 @@ const splitSymbol: string = '*';
 export const Dictant: React.FC<DictantProps> = memo(
   ({ text }): React.JSX.Element => {
     // Разделяем текст на массив
-    const splitText: string[] = useMemo(() => text.split(''), [text]);
+    const splitText: string[] = useMemo(() => text.split(' '), [text]);
 
-    // Функция для того, чтобы сбрасывать классы правильности, если пользователь ввёл новое значение в инпут
-    const clearClassesOnInput = useCallback(
-      (input: HTMLInputElement, withIsMissed: boolean) => {
-        const classes = [
-          styles.Dictant__input__correct,
-          styles.Dictant__input__incorrect,
-        ];
-
-        if (withIsMissed) {
-          classes.push(styles.Dictant__input__missed);
-        }
-
-        input.classList.remove(...classes);
+    // Функция для объедения функций инпутов
+    const handleInput = useCallback(
+      (e: React.ChangeEvent<HTMLInputElement>) => {
+        clearClassesOnInput(e.target as HTMLInputElement, true);
+        goToNextInput(e);
       },
       [],
     );
 
-    // Функция для проверки введённых пользователем букв
-    const [correctLetters, setCorrectLetters] = useState(0);
-    const [maxCorrectLetters, setMaxCorrectLetters] = useState(0);
-    const [isIncorrect, setIsIncorrect] = useState(false);
-    const [isMissed, setIsMissed] = useState(false);
-
-    const checkCorrectness = useCallback(() => {
-      const inputElements = document.querySelectorAll(
-        '.Dictant__input',
-      ) as NodeListOf<HTMLInputElement>;
-
-      let correctLetters: number = inputElements.length;
-      let isMissed: boolean = false;
-      let isIncorrect: boolean = false;
-
-      for (let i = 0; i < inputElements.length; i++) {
-        const inputElement = inputElements[i];
-        const letterId: number = Number(inputElement.id.split('__')[1]);
-        const thisInputIsMissed: boolean =
-          !inputElement.value && splitText[letterId] !== splitSymbol;
-
-        if (thisInputIsMissed) {
-          isMissed = true;
-          setIsMissed(true);
-
-          for (const inputElementForClear of inputElements) {
-            clearClassesOnInput(inputElementForClear, false);
-          }
-        }
-
-        if (thisInputIsMissed) {
-          inputElement.classList.add(styles.Dictant__input__missed);
-          correctLetters--;
-        } else if (
-          !isMissed &&
-          inputElement.value !== splitText[letterId] &&
-          !(!inputElement.value && splitText[letterId] === splitSymbol)
-        ) {
-          inputElement.classList.add(styles.Dictant__input__incorrect);
-          correctLetters--;
-
-          if (!isMissed) {
-            setIsIncorrect(true);
-            isIncorrect = true;
-          }
-        } else if (!isMissed) {
-          inputElement.classList.add(styles.Dictant__input__correct);
-        }
-      }
-
-      if (isIncorrect) {
-        playAudio('FailSound');
-      }
-
-      setIsMissed(isMissed);
-      setCorrectLetters(correctLetters);
-      setMaxCorrectLetters(inputElements.length);
-    }, [clearClassesOnInput, splitText]);
+    // Получаем все нужные данные из хука
+    const {
+      checkCorrectness,
+      correctLetters,
+      maxCorrectLetters,
+      isIncorrect,
+      isMissed,
+    } = useCheckCorrectness(text, splitSymbol);
 
     return (
-      <Flex direction="column" gap="70" maxHeight width="100">
+      <Flex
+        className={styles.Dictant__wrapper}
+        direction="column"
+        gap="70"
+        maxHeight
+        width="100"
+      >
         <Flex relative direction="column" gap="10" width="100">
-          <Flex direction="column" width="90" className={styles.Dictant}>
-            <p className={styles.Dictant__text}>
-              {splitText.map(
-                (
-                  letter,
-                  letterIndex, // Проходимся циклом по всему тексту
-                ) =>
-                  (splitText[letterIndex - 1] === splitSymbol &&
-                    splitText[letterIndex + 1] === splitSymbol) ||
-                  ([
-                    splitText[letterIndex - 2],
-                    splitText[letterIndex - 1],
-                  ].includes(splitSymbol) &&
-                    letter === splitSymbol) ? (
-                    ''
-                  ) : letter === splitSymbol ? ( // И если встречаем "*"
-                    <input
-                      data-testid="Dictant__input"
-                      onInput={(e) =>
-                        clearClassesOnInput(e.target as HTMLInputElement, true)
-                      }
-                      id={`DictantInput__${letterIndex + 1}`}
-                      className={`${styles.Dictant__input} Dictant__input`}
-                      type="text"
-                      maxLength={1}
-                      key={letter + letterIndex}
-                      readOnly={maxCorrectLetters > 0 && !isMissed}
-                    />
-                  ) : (
-                    letter
-                  ),
-              )}
-            </p>
+          <Flex direction="column" width="80" className={styles.Dictant}>
+            <Flex wrap gap="10" className={styles.Dictant__text}>
+              {splitText.map((word, wordIndex) => {
+                const globalLetterIndex =
+                  splitText.slice(0, wordIndex).join(' ').length +
+                  (wordIndex > 0 ? 2 : 1);
+
+                return (
+                  <div key={word}>
+                    {word.split('').map(
+                      (
+                        letter,
+                        letterIndex, // Проходимся циклом по всему тексту
+                      ) => {
+                        const currentGlobalIndex =
+                          globalLetterIndex + letterIndex;
+
+                        return (word[letterIndex - 1] === splitSymbol &&
+                          word[letterIndex + 1] === splitSymbol) ||
+                          ([
+                            word[letterIndex - 2],
+                            word[letterIndex - 1],
+                          ].includes(splitSymbol) &&
+                            letter === splitSymbol) ? (
+                          ''
+                        ) : letter === splitSymbol ? ( // И если встречаем "*"
+                          <input
+                            data-testid="Dictant__input"
+                            onInput={handleInput}
+                            id={`DictantInput__${currentGlobalIndex}`}
+                            className={`${styles.Dictant__input} Dictant__input`}
+                            type="text"
+                            maxLength={1}
+                            key={letter + currentGlobalIndex}
+                            readOnly={maxCorrectLetters > 0 && !isMissed}
+                          />
+                        ) : (
+                          letter
+                        );
+                      },
+                    )}
+                  </div>
+                );
+              })}
+            </Flex>
           </Flex>
 
           {maxCorrectLetters > 0 && !isMissed && (
@@ -138,14 +100,22 @@ export const Dictant: React.FC<DictantProps> = memo(
           )}
         </Flex>
 
-        <Flex relative justify="center" width="100">
+        <Flex
+          maxHeight
+          align="start"
+          relative
+          justify="center"
+          width="100"
+          className={styles.Dictant__check}
+        >
           {(!isIncorrect || isMissed) &&
             (maxCorrectLetters !== correctLetters || !maxCorrectLetters) && (
               <Button
                 data-testid="Dictant__check"
                 onClick={checkCorrectness}
-                variant="big"
+                variant="medium"
                 type="button"
+                className={styles.Dictant__check}
               >
                 Проверить
               </Button>
