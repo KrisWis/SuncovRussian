@@ -6,4 +6,5 @@ export const trainersOfPrimaryType: TrainerWordsTypes[] = [
   'наречия',
   'н/нн',
   'морфологические нормы',
+  'пре-при',
 ];

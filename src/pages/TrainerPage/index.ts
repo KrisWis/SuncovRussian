@@ -41,3 +41,5 @@ export { wordsForAdverbsTests } from './model/static/wordsForAdverbsTests';
 export { wordsForUnionsTests } from './model/static/wordsForUnionsTests';
 
 export { wordsForMorphologicalTests } from './model/static/wordsForMorphologicalTests';
+
+export { wordsForPrePriTests } from './model/static/wordsForPrePriTests';

@@ -4,6 +4,7 @@ export type TrainerSubcategories =
   | 'Виды союзов'
   | 'Наречия'
   | 'Н/НН'
+  | 'Пре-При'
   | 'Морфологические нормы';
 
 export type HeaderMenu = {

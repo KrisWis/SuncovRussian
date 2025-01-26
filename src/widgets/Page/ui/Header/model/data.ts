@@ -13,6 +13,7 @@ export const headerCategories: HeaderMenu = {
     'Виды союзов',
     'Наречия',
     'Н/НН',
+    'Пре-При',
     'Морфологические нормы',
   ],
   Сочинения: [],
@@ -31,6 +32,7 @@ export const headerRoutesCategories: HeaderRoutes = {
   'Виды союзов': 'unions',
   Наречия: 'adverbs',
   'Н/НН': 'nn',
+  'Пре-При': 'pre-pri',
   'Морфологические нормы': 'morphological',
 
   Сочинения: 'essays',

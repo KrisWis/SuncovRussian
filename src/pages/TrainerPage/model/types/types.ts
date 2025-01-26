@@ -5,6 +5,7 @@ export type TrainerWordsTypes =
   | 'виды союзов'
   | 'cловарные слова'
   | 'н/нн'
+  | 'пре-при'
   | 'наречия'
   | 'морфологические нормы';
 
@@ -20,6 +21,7 @@ export interface TrainerWordsInterface {
 export interface PrimaryWordsInterface extends TrainerWordsInterface {
   valid: string;
   invalid: string;
+  differenceIndexes?: number[];
 }
 
 export type WordsTypes =

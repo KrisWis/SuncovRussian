@@ -7,6 +7,7 @@ import {
   wordsForAdverbsTests,
   wordsForNNTests,
   wordsForMorphologicalTests,
+  wordsForPrePriTests,
 } from '@/pages/TrainerPage';
 import { transliterate } from '../utils/transliterate/transliterate';
 
@@ -16,7 +17,8 @@ type TrainerRouteSubcategories =
   | 'unions'
   | 'adverbs'
   | 'nn'
-  | 'morphological';
+  | 'morphological'
+  | 'pre-pri';
 
 interface TrainerRoutes {
   subcategory: TrainerRouteSubcategories;
@@ -30,6 +32,7 @@ export const trainerRoutes: TrainerRoutes[] = [
   { subcategory: 'adverbs', words: wordsForAdverbsTests },
   { subcategory: 'nn', words: wordsForNNTests },
   { subcategory: 'morphological', words: wordsForMorphologicalTests },
+  { subcategory: 'pre-pri', words: wordsForPrePriTests },
 ];
 
 export const getRouteMain = () => '/';

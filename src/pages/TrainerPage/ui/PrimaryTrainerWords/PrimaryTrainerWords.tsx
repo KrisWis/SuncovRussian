@@ -6,7 +6,6 @@ import { TrainerPageContext } from '../../model/context/TrainerPageContext';
 import { TrainerWord } from '@/shared/ui/TrainerWord';
 import { PrimaryWordsInterface } from '../../model/types/types';
 import { wordActionsFunctionType } from '../../lib/hooks/useWordActions';
-import { DictionaryWordsInterface } from '../../model/static/wordsForDictionaryTests';
 
 interface PrimaryTrainerWordsProps {
   randomWord: PrimaryWordsInterface;
@@ -30,17 +29,17 @@ export const PrimaryTrainerWords: React.FC<PrimaryTrainerWordsProps> = memo(
     const printWord = (word: string): React.ReactNode => {
       return (
         <>
-          {randomWord.trainerType === 'cловарные слова' ? (
+          {['cловарные слова', 'пре-при'].includes(randomWord.trainerType) ? (
             <Flex>
               {word.split('').map((letter, index) => (
                 <span
                   key={index + letter}
                   style={{
-                    fontWeight: (
-                      randomWord as DictionaryWordsInterface
-                    ).differenceIndexes.includes(index + 1)
-                      ? 'bold'
-                      : 'normal',
+                    fontWeight:
+                      randomWord.differenceIndexes &&
+                      randomWord.differenceIndexes.includes(index + 1)
+                        ? 'bold'
+                        : 'normal',
                   }}
                 >
                   {letter}
