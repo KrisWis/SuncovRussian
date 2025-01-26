@@ -1,7 +1,5 @@
-import { Flex } from '@/shared/lib/Stack';
 import * as styles from './TheorySidebar.module.scss';
 import { memo, useContext, useEffect, useState } from 'react';
-import { mobileMediaQueryWidth } from '@/shared/const/global';
 import { TheoryPageContext } from '../../model/context/TheoryPageContext';
 
 interface TheorySidebarProps {
@@ -39,13 +37,8 @@ export const TheorySidebar: React.FC<TheorySidebarProps> = memo(
     }, []);
 
     return (
-      <Flex
+      <aside
         data-testid="Theory__Sidebar"
-        direction={mobileMediaQueryWidth.matches ? 'row' : 'column'}
-        maxHeight
-        align="start"
-        width={mobileMediaQueryWidth.matches ? '100' : '15'}
-        gap="15"
         className={styles.TheorySidebar}
         style={{ marginTop: marginTop }}
       >
@@ -59,7 +52,7 @@ export const TheorySidebar: React.FC<TheorySidebarProps> = memo(
             {title}
           </span>
         ))}
-      </Flex>
+      </aside>
     );
   },
 );
