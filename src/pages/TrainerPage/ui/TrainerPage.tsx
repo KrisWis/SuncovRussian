@@ -22,7 +22,7 @@ import { useInitializeWords } from '../lib/hooks/useInitializeWords';
 import { UnionsWordsInterface } from '../model/static/wordsForUnionsTests';
 import { PrimaryTrainerWords } from './PrimaryTrainerWords/PrimaryTrainerWords';
 import { TrainerProgressBar } from './TrainerProgressBar/TrainerProgressBar';
-import { StrictModeSwitcher } from './StrictModeSwitcher/StrictModeSwitcher';
+import { StrictModeSwitcher } from '@/features/StrictModeSwitcher';
 
 interface TrainerPageProps {
   words: WordsTypes[];

@@ -2,8 +2,8 @@ import { Flex } from '@/shared/lib/Stack';
 import * as styles from './StrictModeSwitcher.module.scss';
 import { memo, useCallback, useState } from 'react';
 import СheckmarkSVG from '@/shared/assets/icons/global/СheckmarkSVG.svg';
-import { useWords } from '../../model/selectors/getTrainerWords/getTrainerWords';
-import { useTrainerActions } from '../../model/slice/TrainerPageSlice';
+import { useWords } from '../../../pages/TrainerPage/model/selectors/getTrainerWords/getTrainerWords';
+import { useTrainerActions } from '../../../pages/TrainerPage/model/slice/TrainerPageSlice';
 import { Hint } from '@/shared/ui/Hint';
 
 export const StrictModeSwitcher: React.FC = memo((): React.JSX.Element => {

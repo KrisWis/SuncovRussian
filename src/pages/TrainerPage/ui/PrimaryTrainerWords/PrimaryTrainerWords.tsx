@@ -32,18 +32,24 @@ export const PrimaryTrainerWords: React.FC<PrimaryTrainerWordsProps> = memo(
           {['cловарные слова', 'пре-при'].includes(randomWord.trainerType) ? (
             <Flex>
               {word.split('').map((letter, index) => (
-                <span
-                  key={index + letter}
-                  style={{
-                    fontWeight:
-                      randomWord.differenceIndexes &&
-                      randomWord.differenceIndexes.includes(index + 1)
-                        ? 'bold'
-                        : 'normal',
-                  }}
-                >
-                  {letter}
-                </span>
+                <>
+                  {letter === ' ' ? (
+                    <span style={{ width: 7 }}></span>
+                  ) : (
+                    <span
+                      key={index + letter}
+                      style={{
+                        fontWeight:
+                          randomWord.differenceIndexes &&
+                          randomWord.differenceIndexes.includes(index + 1)
+                            ? 'bold'
+                            : 'normal',
+                      }}
+                    >
+                      {letter}
+                    </span>
+                  )}
+                </>
               ))}
             </Flex>
           ) : (
@@ -83,7 +89,7 @@ export const PrimaryTrainerWords: React.FC<PrimaryTrainerWordsProps> = memo(
                 ? 0
                 : 3,
 
-            fontSize: randomWord.valid.length >= 10 ? 26 : 36,
+            fontSize: randomWord.valid.length >= 10 ? 20 : 36,
           }}
         >
           {printWord(randomWord.valid)}
@@ -106,7 +112,7 @@ export const PrimaryTrainerWords: React.FC<PrimaryTrainerWordsProps> = memo(
                 ? 0
                 : 3,
 
-            fontSize: randomWord.valid.length >= 10 ? 26 : 36,
+            fontSize: randomWord.valid.length >= 10 ? 20 : 36,
           }}
         >
           {printWord(randomWord.invalid)}

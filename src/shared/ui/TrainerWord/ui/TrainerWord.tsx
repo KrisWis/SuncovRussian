@@ -1,5 +1,5 @@
 import * as styles from './TrainerWord.module.scss';
-import { memo, useState } from 'react';
+import { memo } from 'react';
 import { TrainerWordProps } from '../model/types';
 import { Flex } from '@/shared/lib/Stack';
 
@@ -12,16 +12,23 @@ export const TrainerWord: React.FC<TrainerWordProps> = memo(
     children,
     type = 'default',
   }): React.JSX.Element => {
-    // Добавление к переданному onClick функции, сброса hover-эффекта при клике на слово
-    const [hoveredIsPossible, setHoveredIsPossible] = useState(true);
-
+    // Добавление, к переданной onClick функции, пропадания transition при клике на слово
     const handleClick = () => {
-      setHoveredIsPossible(false);
+      const TrainerWords = document.querySelectorAll(
+        '.TrainerWord',
+      ) as NodeListOf<HTMLElement>;
 
-      const timeoutForHover = setTimeout(() => {
-        setHoveredIsPossible(true);
-        clearTimeout(timeoutForHover);
-      }, 0);
+      TrainerWords.forEach((word) => {
+        word.style.transitionDuration = '0ms';
+      });
+
+      const timeoutForTransition = setTimeout(() => {
+        clearTimeout(timeoutForTransition);
+
+        TrainerWords.forEach((word) => {
+          word.style.transitionDuration = 'var(--transition-duration-default)';
+        });
+      }, 100);
 
       if (onClick) {
         onClick();
@@ -35,7 +42,7 @@ export const TrainerWord: React.FC<TrainerWordProps> = memo(
         width="100"
         onClick={handleClick}
         className={`TrainerWord ${styles.TrainerWord} ${className} ${styles[`TrainerWord__${type}`]}`}
-        style={{ ...style, pointerEvents: hoveredIsPossible ? 'auto' : 'none' }}
+        style={style}
       >
         {children}
       </Flex>
