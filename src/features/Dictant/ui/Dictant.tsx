@@ -68,7 +68,7 @@ export const Dictant: React.FC<DictantProps> = memo(
                   (wordIndex > 0 ? 2 : 1);
 
                 return (
-                  <div key={word}>
+                  <div key={word + globalLetterIndex}>
                     {word.split('').map(
                       (
                         letter,
