@@ -41,48 +41,44 @@ export const TheoryPage: React.FC = memo((): React.JSX.Element => {
     [pdfFiles, selectedSection],
   );
 
-  // Обработка события загрузки файлов
-  if (isLoading) {
-    return <PageLoading />;
-  }
-
-  // Обработка ошибки загрузки файлов
-  if (isError) {
-    return <ErrorComponent />;
-  }
-
   return (
     <Page>
-      <TheoryPageContext.Provider
-        value={{ selectedSection, setSelectedSection }}
-      >
-        <Flex
-          direction={mobileMediaQueryWidth.matches ? 'column' : 'row'}
-          relative
-          maxHeight
-          width="100"
-          gap={mobileMediaQueryWidth.matches ? '20' : '0'}
+      {isLoading ? (
+        <PageLoading />
+      ) : isError ? (
+        <ErrorComponent />
+      ) : (
+        <TheoryPageContext.Provider
+          value={{ selectedSection, setSelectedSection }}
         >
-          {pdfFiles.length > 0 && (
-            <TheorySidebar
-              pdfFilesTitles={pdfFiles.map((item) => item.name.slice(0, -4))}
-            />
-          )}
+          <Flex
+            direction={mobileMediaQueryWidth.matches ? 'column' : 'row'}
+            relative
+            maxHeight
+            width="100"
+            gap={mobileMediaQueryWidth.matches ? '20' : '0'}
+          >
+            {pdfFiles.length > 0 && (
+              <TheorySidebar
+                pdfFilesTitles={pdfFiles.map((item) => item.name.slice(0, -4))}
+              />
+            )}
 
-          {selectedPdfFile && (
-            <Flex
-              className={styles.TheoryPage__content}
-              relative
-              maxHeight
-              width={mobileMediaQueryWidth.matches ? '100' : '85'}
-              justify="center"
-              align="start"
-            >
-              <TheoryItem fileKey={selectedPdfFile.key} />
-            </Flex>
-          )}
-        </Flex>
-      </TheoryPageContext.Provider>
+            {selectedPdfFile && (
+              <Flex
+                className={styles.TheoryPage__content}
+                relative
+                maxHeight
+                width={mobileMediaQueryWidth.matches ? '100' : '85'}
+                justify="center"
+                align="start"
+              >
+                <TheoryItem fileKey={selectedPdfFile.key} />
+              </Flex>
+            )}
+          </Flex>
+        </TheoryPageContext.Provider>
+      )}
     </Page>
   );
 });

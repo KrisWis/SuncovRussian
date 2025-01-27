@@ -6,7 +6,7 @@ export const NotFoundPage: React.FC = memo((): React.JSX.Element => {
   return (
     <Page data-testid="NotFoundPage">
       <Flex maxHeight width="100" justify="center">
-        Страница ещё находится в разработке или не существует!
+        Страница не существует!
       </Flex>
     </Page>
   );

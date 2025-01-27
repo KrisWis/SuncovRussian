@@ -1,11 +1,11 @@
 .Button {
-  background-color: var(--color-black);
-  color: var(--color-white);
   cursor: pointer;
   transition: var(--transition-duration-default) linear;
   transition-property: background-color, color;
   font-weight: 600;
   line-height: 150%;
+  color: var(--color-black);
+  background-color: var(--color-white);
 
   &__medium {
     padding: 31px 42px;
@@ -20,7 +20,7 @@
   }
 
   &:hover {
-    color: var(--color-black);
-    background-color: var(--color-white);
+    background-color: var(--color-black);
+    color: var(--color-white);
   }
 }

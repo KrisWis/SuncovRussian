@@ -6,10 +6,6 @@
   padding: 10px 30px;
   margin-bottom: 50px;
 
-  &__wrapper {
-    margin-bottom: 50px;
-  }
-
   &__text {
     font-weight: 600;
     font-size: 35px;
@@ -89,6 +85,7 @@
   }
 
   &__check {
+    margin-bottom: 50px;
     align-self: flex-end;
   }
 }

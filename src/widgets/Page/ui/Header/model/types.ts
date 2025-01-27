@@ -17,12 +17,9 @@ export interface HeaderSubMenu {
 }
 
 export type HeaderMenu = {
-  Тесты: string[];
   Диктанты: HeaderSubMenu[];
-  Пунктуация: string[];
   Теория: string[];
   Тренажеры: TrainerSubcategories[];
-  Сочинения: string[];
 };
 
 export type HeaderCategoryType = keyof HeaderMenu | TrainerSubcategories;

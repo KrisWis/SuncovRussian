@@ -52,13 +52,7 @@ export const Dictant: React.FC<DictantProps> = memo(
     }, [text]);
 
     return (
-      <Flex
-        className={styles.Dictant__wrapper}
-        direction="column"
-        gap="70"
-        maxHeight
-        width="100"
-      >
+      <Flex direction="column" gap="70" width="100">
         <Flex relative direction="column" gap="10" width="100">
           <Flex direction="column" width="80" className={styles.Dictant}>
             <Flex wrap gap="5" className={styles.Dictant__text}>
