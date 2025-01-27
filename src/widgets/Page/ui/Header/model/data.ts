@@ -4,7 +4,7 @@ import { HeaderMenu, HeaderRoutes } from './types';
 
 export const headerCategories: HeaderMenu = {
   Тесты: [],
-  Диктанты: [...mockDictants.map((dictant) => dictant.theme)],
+  Диктанты: [...mockDictants.map((dictant) => dictant)],
   Пунктуация: [],
   Теория: [],
   Тренажеры: [

@@ -7,9 +7,18 @@ export type TrainerSubcategories =
   | 'Пре-При'
   | 'Морфологические нормы';
 
+export interface HeaderSubItem {
+  subtheme: string;
+}
+
+export interface HeaderSubMenu {
+  items: HeaderSubItem[];
+  theme: string;
+}
+
 export type HeaderMenu = {
   Тесты: string[];
-  Диктанты: string[];
+  Диктанты: HeaderSubMenu[];
   Пунктуация: string[];
   Теория: string[];
   Тренажеры: TrainerSubcategories[];

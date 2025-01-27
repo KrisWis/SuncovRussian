@@ -28,13 +28,15 @@ export const routeConfig: Record<AppRoutes, RouteProps> = {
   ...[
     ...trainerRoutes.map((route) => ({
       path: getRouteTrainer(route.subcategory),
-      element: <TrainerPage words={route.words} />,
+      element: <TrainerPage key={route.subcategory} words={route.words} />,
     })),
 
-    ...mockDictants.map((dictant) => ({
-      path: getRouteDictant(dictant.theme),
-      element: <DictantsPage dictant={dictant} />,
-    })),
+    ...mockDictants.map((dictant) =>
+      dictant.items.map((item) => ({
+        path: getRouteDictant(dictant.theme, item.subtheme),
+        element: <DictantsPage key={item.subtheme} dictant={item} />,
+      })),
+    ),
   ],
 
   notFound: {

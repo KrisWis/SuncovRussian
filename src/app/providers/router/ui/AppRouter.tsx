@@ -16,9 +16,15 @@ export const AppRouter: React.FC = memo(() => {
   return (
     <Suspense fallback={<PageLoading />}>
       <Routes>
-        {Object.values(routeConfig).map((route) => (
-          <Route key={route.path} path={route.path} element={route.element} />
-        ))}
+        {Object.values(routeConfig).map((route) =>
+          'length' in route ? (
+            Object.values(route).map(({ path, element }) => (
+              <Route key={path} path={path} element={element} />
+            ))
+          ) : (
+            <Route key={route.path} path={route.path} element={route.element} />
+          ),
+        )}
       </Routes>
     </Suspense>
   );

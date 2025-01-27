@@ -1,6 +1,6 @@
 import { Flex } from '@/shared/lib/Stack';
 import * as styles from './Dictant.module.scss';
-import { memo, useCallback, useMemo } from 'react';
+import { memo, useCallback, useEffect, useMemo, useState } from 'react';
 import { Button } from '@/shared/ui/Button';
 import DislikeSVG from '@/shared/assets/icons/DictantsPage/DislikeSVG.svg';
 import LikeSVG from '@/shared/assets/icons/DictantsPage/LikeSVG.svg';
@@ -28,14 +28,28 @@ export const Dictant: React.FC<DictantProps> = memo(
       [],
     );
 
-    // Получаем все нужные данные из хука
-    const {
-      checkCorrectness,
-      correctLetters,
-      maxCorrectLetters,
-      isIncorrect,
-      isMissed,
-    } = useCheckCorrectness(text, splitSymbol);
+    // Функция для проверки введённых пользователем букв
+    const [correctLetters, setCorrectLetters] = useState(0);
+    const [maxCorrectLetters, setMaxCorrectLetters] = useState(0);
+    const [isIncorrect, setIsIncorrect] = useState(false);
+    const [isMissed, setIsMissed] = useState(false);
+
+    const { checkCorrectness } = useCheckCorrectness(
+      text,
+      splitSymbol,
+      setCorrectLetters,
+      setMaxCorrectLetters,
+      setIsIncorrect,
+      setIsMissed,
+    );
+
+    // Инициализация начальных значений
+    useEffect(() => {
+      setMaxCorrectLetters(0);
+      setCorrectLetters(0);
+      setIsIncorrect(false);
+      setIsMissed(false);
+    }, [text]);
 
     return (
       <Flex
@@ -47,7 +61,7 @@ export const Dictant: React.FC<DictantProps> = memo(
       >
         <Flex relative direction="column" gap="10" width="100">
           <Flex direction="column" width="80" className={styles.Dictant}>
-            <Flex wrap gap="10" className={styles.Dictant__text}>
+            <Flex wrap gap="5" className={styles.Dictant__text}>
               {splitText.map((word, wordIndex) => {
                 const globalLetterIndex =
                   splitText.slice(0, wordIndex).join(' ').length +

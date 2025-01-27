@@ -6,7 +6,8 @@ import { queries, RenderResult, waitFor } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 
 const mockDictantText: string = 'певц*ы*, творец**.';
-const mockDictantTheme = 'tsi-tsi';
+const mockDictantTheme = 'theme';
+const mockDictantSubtheme = 'subtheme';
 
 // Tests
 describe('Dictant', () => {
@@ -14,7 +15,10 @@ describe('Dictant', () => {
   const setupTest = () => {
     return renderWithProviders(
       <Dictant text={mockDictantText} />,
-      getRouteDictant(transliterate(mockDictantTheme)),
+      getRouteDictant(
+        transliterate(mockDictantTheme),
+        transliterate(mockDictantSubtheme),
+      ),
     );
   };
 

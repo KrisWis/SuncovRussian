@@ -37,8 +37,8 @@ export const trainerRoutes: TrainerRoutes[] = [
 
 export const getRouteMain = () => '/';
 export const getRouteTheory = () => '/theory';
-export const getRouteDictant = (theme: string) =>
-  `/dictants/${transliterate(theme)}`;
+export const getRouteDictant = (theme: string, subtheme: string) =>
+  `/dictants/${transliterate(theme)}/${transliterate(subtheme)}`;
 export const getRouteTrainer = (trainerType: TrainerRouteSubcategories) =>
   `/trainers/${trainerType}`;
 export const getRouteNotFound = () => '*';

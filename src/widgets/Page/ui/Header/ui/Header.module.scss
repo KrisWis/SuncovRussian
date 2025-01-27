@@ -85,5 +85,17 @@
         color: var(--color-black);
       }
     }
+
+    &__submenu {
+      opacity: 0;
+      transform: translateY(50px);
+      transition: var(--transition-duration-default) linear;
+      transition-property: transform, opacity;
+
+      &__visible {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
   }
 }

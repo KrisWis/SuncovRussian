@@ -1,6 +1,6 @@
 import { Flex } from '@/shared/lib/Stack';
 import * as styles from './Header.module.scss';
-import { memo, useState } from 'react';
+import { Fragment, memo, useState } from 'react';
 import { headerCategories, headerRoutesCategories } from '../model/data';
 import { HeaderCategoryType } from '../model/types';
 import { Link } from 'react-router-dom';
@@ -16,6 +16,9 @@ export const Header: React.FC<HeaderProps> = memo(
     const [headerHoveredCategory, setHoveredHeaderCategory] = useState<
       string | null
     >(null);
+
+    // Реализация показа подменю при наведении на категорию
+    const [isSubmenuVisible, setIsSubmenuVisible] = useState(false);
 
     return (
       <header className={styles.Header}>
@@ -57,29 +60,99 @@ export const Header: React.FC<HeaderProps> = memo(
                     direction="column"
                   >
                     {submenu.map((menuItem) => {
-                      // Инициализация предмета подменю
-                      let submenuItemLink: string;
-
-                      if (category === 'Диктанты') {
-                        submenuItemLink = `/${headerRoutesCategories[category as HeaderCategoryType]}/${transliterate(menuItem)}`;
-                      } else {
-                        submenuItemLink = `/${headerRoutesCategories[category as HeaderCategoryType]}/${headerRoutesCategories[menuItem as HeaderCategoryType]}`;
-                      }
-
-                      const regexForSubmenu = new RegExp(
-                        submenuItemLink.replace(/\//g, '\\/'),
-                      );
+                      const isUsual = typeof menuItem === 'string';
 
                       return (
-                        <Link
-                          to={submenuItemLink}
-                          key={menuItem}
-                          className={`${styles.Header__submenu__item} 
+                        <Fragment key={isUsual ? menuItem : menuItem.theme}>
+                          {isUsual
+                            ? (() => {
+                                // Инициализация предмета подменю
+                                const submenuItemLink: string = `/${headerRoutesCategories[category as HeaderCategoryType]}/${transliterate(headerRoutesCategories[menuItem as HeaderCategoryType])}`;
+
+                                const regexForSubmenu = new RegExp(
+                                  submenuItemLink.replace(/\//g, '\\/'),
+                                );
+
+                                return (
+                                  <Link
+                                    to={submenuItemLink}
+                                    className={`${styles.Header__submenu__item} 
                         ${regexForSubmenu.test(window.location.pathname) && styles.Header__submenu__item__active}`}
-                          onClick={() => setHoveredHeaderCategory(null)}
-                        >
-                          {menuItem}
-                        </Link>
+                                    onClick={() =>
+                                      setHoveredHeaderCategory(null)
+                                    }
+                                  >
+                                    {menuItem}
+                                  </Link>
+                                );
+                              })()
+                            : (() => {
+                                // Ссылка на подменю
+                                const submenuItemLink = (
+                                  subTheme: string,
+                                ): string =>
+                                  `/${headerRoutesCategories[category as HeaderCategoryType]}/${transliterate(menuItem.theme)}/${transliterate(subTheme)}`;
+
+                                // Разбитие подменю на слайсы по 10 штук
+                                const submenuItems = menuItem.items.reduce<
+                                  Array<typeof menuItem.items>
+                                >((acc, item, index) => {
+                                  const chunkIndex = Math.floor(index / 10);
+
+                                  if (!acc[chunkIndex]) {
+                                    acc[chunkIndex] = [];
+                                  }
+
+                                  acc[chunkIndex].push(item);
+                                  return acc;
+                                }, []);
+
+                                return (
+                                  <Flex gap="15" align="start">
+                                    <span
+                                      className={styles.Header__submenu__item}
+                                      onMouseEnter={() =>
+                                        setIsSubmenuVisible(true)
+                                      }
+                                    >
+                                      {menuItem.theme}
+                                    </span>
+
+                                    <Flex
+                                      align="start"
+                                      onMouseLeave={() =>
+                                        setIsSubmenuVisible(false)
+                                      }
+                                      className={`${styles.Header__submenu__submenu} 
+                                        ${isSubmenuVisible && styles.Header__submenu__submenu__visible}`}
+                                      gap="20"
+                                    >
+                                      {submenuItems.map((items) => (
+                                        <Flex
+                                          key={items[0].subtheme}
+                                          direction="column"
+                                          align="start"
+                                        >
+                                          {items.map((item) => (
+                                            <Link
+                                              className={
+                                                styles.Header__submenu__item
+                                              }
+                                              to={submenuItemLink(
+                                                item.subtheme,
+                                              )}
+                                              key={item.subtheme}
+                                            >
+                                              {item.subtheme}
+                                            </Link>
+                                          ))}
+                                        </Flex>
+                                      ))}
+                                    </Flex>
+                                  </Flex>
+                                );
+                              })()}
+                        </Fragment>
                       );
                     })}
                   </Flex>

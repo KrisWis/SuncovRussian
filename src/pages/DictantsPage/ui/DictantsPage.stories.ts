@@ -15,6 +15,6 @@ type Story = StoryObj<typeof meta>;
 
 export const Primary: Story = {
   args: {
-    dictant: mockDictants[0],
+    dictant: mockDictants[0].items[0],
   },
 };

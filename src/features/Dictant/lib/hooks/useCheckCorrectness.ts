@@ -1,26 +1,19 @@
 import { playAudio } from '@/shared/utils/playAudio';
-import { useState } from 'react';
 import { clearClassesOnInput } from '../helpers/clearClassesOnInput';
 import * as styles from '../../ui/Dictant.module.scss';
 
 interface useCheckCorrectnessResult {
   checkCorrectness: () => void;
-  correctLetters: number;
-  maxCorrectLetters: number;
-  isIncorrect: boolean;
-  isMissed: boolean;
 }
 
 export const useCheckCorrectness = (
   text: string,
   splitSymbol: string,
+  setCorrectLetters: React.Dispatch<React.SetStateAction<number>>,
+  setMaxCorrectLetters: React.Dispatch<React.SetStateAction<number>>,
+  setIsIncorrect: React.Dispatch<React.SetStateAction<boolean>>,
+  setIsMissed: React.Dispatch<React.SetStateAction<boolean>>,
 ): useCheckCorrectnessResult => {
-  // Функция для проверки введённых пользователем букв
-  const [correctLetters, setCorrectLetters] = useState(0);
-  const [maxCorrectLetters, setMaxCorrectLetters] = useState(0);
-  const [isIncorrect, setIsIncorrect] = useState(false);
-  const [isMissed, setIsMissed] = useState(false);
-
   const checkCorrectness = () => {
     const inputElements = document.querySelectorAll(
       '.Dictant__input',
@@ -79,9 +72,5 @@ export const useCheckCorrectness = (
 
   return {
     checkCorrectness,
-    correctLetters,
-    maxCorrectLetters,
-    isIncorrect,
-    isMissed,
   };
 };
