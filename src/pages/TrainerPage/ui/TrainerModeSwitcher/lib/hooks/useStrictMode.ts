@@ -1,5 +1,5 @@
-import { useTrainerActions } from '../../../model/slice/TrainerPageSlice';
-import { useWords } from '../../../model/selectors/getTrainerWords/getTrainerWords';
+import { useTrainerActions } from '../../../../model/slice/TrainerPageSlice';
+import { useWords } from '../../../../model/selectors/getTrainerWords/getTrainerWords';
 import { useCallback } from 'react';
 import { ModeSwitcherItemProps } from '@/widgets/ModeSwitcher';
 
@@ -45,19 +45,18 @@ export const useStrictMode = (
   const strictModeToggle = useCallback(() => {
     if (!strictModeIsOn) {
       clearProgress();
-      setStrictModeIsOn(true);
       document.onvisibilitychange = strictModeFunction;
     } else {
-      setStrictModeIsOn(false);
       document.onvisibilitychange = null;
     }
-  }, [clearProgress, setStrictModeIsOn, strictModeFunction, strictModeIsOn]);
+  }, [clearProgress, strictModeFunction, strictModeIsOn]);
 
   const strictModeItem = {
     name: 'Строгий',
     onClick: strictModeToggle,
     modeIsOn: strictModeIsOn,
     setModeIsOn: setStrictModeIsOn,
+    hintText: 'Обнуляет прогресс каждый раз, когда вы покидаете сайт.',
   };
 
   return {

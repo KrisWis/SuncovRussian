@@ -95,10 +95,13 @@ const TrainerInner: React.FC<TrainerPageProps> = memo(
 
           if (!randomWordsIsReverse)
             (wordElements[NotReverseIndex] as HTMLElement).click();
-          else
-            (
-              wordElements[NotReverseIndex === 0 ? 1 : 0] as HTMLElement
-            ).click();
+          else {
+            const element = wordElements[
+              NotReverseIndex === 0 ? 1 : 0
+            ] as HTMLElement;
+
+            if (element) element.click();
+          }
         };
 
         if (!tabletMediaQueryWidth.matches) {
@@ -233,6 +236,8 @@ export const TrainerPage: React.FC<TrainerPageProps> = memo(
     const [totalTime, setTotalTime] = useState<number>(0);
     const [isIncorrect, setIsIncorrect] = useState<boolean>(false);
     const [isErrorWork, setIsErrorWork] = useState<boolean>(false);
+    const [isOneLifeMode, setIsOneLifeMode] = useState<boolean>(false);
+    const [isCheckMode, setIsCheckMode] = useState<boolean>(false);
 
     return (
       <TrainerPageContext.Provider
@@ -243,6 +248,10 @@ export const TrainerPage: React.FC<TrainerPageProps> = memo(
           setIsIncorrect,
           isErrorWork,
           setIsErrorWork,
+          isOneLifeMode,
+          setIsOneLifeMode,
+          isCheckMode,
+          setIsCheckMode,
         }}
       >
         <DynamicModuleLoader

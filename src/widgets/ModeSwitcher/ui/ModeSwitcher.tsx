@@ -1,11 +1,9 @@
 import { Flex } from '@/shared/lib/Stack';
 import { memo } from 'react';
-import { Hint } from '@/shared/ui/Hint';
 import {
   ModeSwitcherItem,
   ModeSwitcherItemProps,
 } from './ModeSwitcherItem/ModeSwitcherItem';
-import * as styles from './ModeSwitcher.module.scss';
 
 interface ModeSwitcherProps {
   items: ModeSwitcherItemProps[];
@@ -21,23 +19,11 @@ export const ModeSwitcher: React.FC<ModeSwitcherProps> = memo(
         gap="10"
         relative
       >
-        <Flex direction="column" gap="20">
+        <Flex direction="column" gap="10">
           {items.map((item) => (
-            <ModeSwitcherItem
-              key={item.name}
-              name={item.name}
-              onClick={item.onClick}
-              modeIsOn={item.modeIsOn}
-              setModeIsOn={item.setModeIsOn}
-            />
+            <ModeSwitcherItem key={item.name} {...item} />
           ))}
         </Flex>
-
-        <Hint
-          textClassName={styles.ModeSwitcher__hint}
-          textDirection="top"
-          text={`Выберите один из режимов`}
-        ></Hint>
       </Flex>
     );
   },

@@ -21,13 +21,9 @@ export const useRandomWord = (
 
   const updateRandomWord = useCallback(
     (words?: WordsTypes[]) => {
-      let storeWordsCopy;
-
-      if (words) {
-        storeWordsCopy = words.filter((word) => word.id !== randomWordId);
-      } else {
-        storeWordsCopy = storeWords.filter((word) => word.id !== randomWordId);
-      }
+      const storeWordsCopy = (words ? words : storeWords).filter(
+        (word) => word.id !== randomWordId && word.probability !== 0,
+      );
 
       const randomIsReverse = [true, false][Math.floor(Math.random() * 2)];
 

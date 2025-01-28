@@ -12,8 +12,22 @@ const meta = {
 export default meta;
 type Story = StoryObj<typeof meta>;
 
-export const Primary: Story = {
+export const Active: Story = {
   args: {
     name: 'Строгий',
+    onClick: () => {},
+    modeIsOn: true,
+    setModeIsOn: () => {},
+    hintText: 'Строгий режим',
+  },
+};
+
+export const InActive: Story = {
+  args: {
+    name: 'Строгий',
+    onClick: () => {},
+    modeIsOn: false,
+    setModeIsOn: () => {},
+    hintText: 'Строгий режим',
   },
 };

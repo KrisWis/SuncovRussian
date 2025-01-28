@@ -30,6 +30,7 @@
     text-align: center;
     width: 65%;
     text-transform: lowercase;
+    cursor: pointer;
   }
 
   &__active {
@@ -37,6 +38,30 @@
 
     .ModeSwitcherItem__switcher__checkmark {
       opacity: 1;
+    }
+  }
+
+  &__hint {
+    font-weight: 500;
+    font-size: 16px;
+    line-height: 120%;
+    color: rgba(0 0 0 / 40%);
+    opacity: 0;
+    transition: var(--transition-duration-default) linear;
+    transition-property: opacity, max-height, padding, z-index;
+    position: absolute;
+    z-index: var(--z-index-hidden);
+    background-color: var(--color-white);
+    border-radius: 10px;
+    transform: translateY(-80px);
+    pointer-events: none;
+    max-height: 0;
+
+    &__active {
+      opacity: 1;
+      z-index: var(--z-index-hint);
+      max-height: 120px;
+      padding: 10px;
     }
   }
 }

@@ -7,6 +7,10 @@ export interface TrainerPageContext {
   setIsIncorrect: React.Dispatch<React.SetStateAction<boolean>>;
   isErrorWork: boolean;
   setIsErrorWork: React.Dispatch<React.SetStateAction<boolean>>;
+  isOneLifeMode: boolean;
+  setIsOneLifeMode: React.Dispatch<React.SetStateAction<boolean>>;
+  isCheckMode: boolean;
+  setIsCheckMode: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
 export const TrainerPageContext = createContext<TrainerPageContext>({
@@ -16,4 +20,8 @@ export const TrainerPageContext = createContext<TrainerPageContext>({
   setIsIncorrect: () => {},
   isErrorWork: false,
   setIsErrorWork: () => {},
+  isOneLifeMode: false,
+  setIsOneLifeMode: () => {},
+  isCheckMode: false,
+  setIsCheckMode: () => {},
 });

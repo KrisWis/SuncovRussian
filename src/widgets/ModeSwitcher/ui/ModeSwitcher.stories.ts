@@ -21,6 +21,13 @@ export const Primary: Story = {
         modeIsOn: false,
         setModeIsOn: () => {},
       },
+
+      {
+        name: 'Одна жизнь',
+        onClick: () => {},
+        modeIsOn: true,
+        setModeIsOn: () => {},
+      },
     ],
   },
 };

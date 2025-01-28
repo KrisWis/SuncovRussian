@@ -1,8 +1,11 @@
-import { useCallback, useState } from 'react';
+import { useCallback, useContext, useState } from 'react';
 import { useRandomWord } from './useRandomWord';
 import { TrainerWordsInterface } from '../../model/types/types';
 import { useTrainerActions } from '../../model/slice/TrainerPageSlice';
 import { playAudio } from '@/shared/utils/playAudio';
+import { useInitializeWords } from './useInitializeWords';
+import { useWords } from '../../model/selectors/getTrainerWords/getTrainerWords';
+import { TrainerPageContext } from '../../model/context/TrainerPageContext';
 
 export type wordActionsFunctionType = (
   words: TrainerWordsInterface[],
@@ -30,6 +33,12 @@ export const useWordActions = (
     changeWordConsecutivelyTimes,
     changeWordInProgressStatus,
   } = useTrainerActions();
+
+  const storeWords = useWords();
+
+  const { initializeWords } = useInitializeWords(storeWords);
+
+  const { isOneLifeMode, isCheckMode } = useContext(TrainerPageContext);
 
   // Изменение вероятности при неправильном ответе
   const [waitRepeatedClickInFail, setWaitRepeatedClickInFail] =
@@ -77,6 +86,18 @@ export const useWordActions = (
         inProgress: false,
       });
 
+      if (isCheckMode) {
+        changeWordProbability({
+          id: currentRandomWord.id,
+          probability: 0,
+        });
+
+        changeWordInProgressStatus({
+          id: currentRandomWord.id,
+          inProgress: true,
+        });
+      }
+
       updateRandomWord();
 
       const main: HTMLElement = document.querySelector('main')!;
@@ -92,8 +113,8 @@ export const useWordActions = (
       changeWordInProgressStatus,
       changeWordProbability,
       changeWordUncorrectTimes,
+      isCheckMode,
       setIsIncorrect,
-      setWaitRepeatedClickInFail,
       updateRandomWord,
     ],
   );
@@ -106,6 +127,10 @@ export const useWordActions = (
       randomWordId: number | null,
     ) => {
       if (waitRepeatedClickInFail) return;
+
+      if (isOneLifeMode) {
+        initializeWords();
+      }
 
       playAudio('FailSound');
 
@@ -125,8 +150,9 @@ export const useWordActions = (
       }, 0);
     },
     [
+      initializeWords,
+      isOneLifeMode,
       setIsIncorrect,
-      setWaitRepeatedClickInFail,
       showNewWord,
       waitRepeatedClickInFail,
     ],
@@ -189,12 +215,25 @@ export const useWordActions = (
         }
       }
 
+      if (isCheckMode) {
+        changeWordProbability({
+          id: currentRandomWord.id,
+          probability: 0,
+        });
+
+        changeWordInProgressStatus({
+          id: currentRandomWord.id,
+          inProgress: true,
+        });
+      }
+
       updateRandomWord();
     },
     [
       changeWordConsecutivelyTimes,
       changeWordInProgressStatus,
       changeWordProbability,
+      isCheckMode,
       updateRandomWord,
       waitRepeatedClickInFail,
     ],
