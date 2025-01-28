@@ -2,7 +2,7 @@ import type { Meta, StoryObj } from '@storybook/react';
 import { NotFoundPage } from './NotFoundPage';
 
 const meta = {
-  title: 'Pages/NotFoundPage',
+  title: 'Pages/NotFound',
   component: NotFoundPage,
   parameters: {
     layout: 'fullscreen',

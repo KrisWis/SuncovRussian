@@ -13,11 +13,7 @@ interface DictantFooterProps {
 }
 
 export const DictantFooter: React.FC<DictantFooterProps> = memo(
-  ({
-    text,
-
-    splitSymbol,
-  }): React.JSX.Element => {
+  ({ text, splitSymbol }): React.JSX.Element => {
     // Получение данных из контекста
     const {
       correctLetters,

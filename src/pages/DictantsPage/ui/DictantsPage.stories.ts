@@ -6,7 +6,7 @@ const meta = {
   title: 'Pages/Dictants',
   component: DictantsPage,
   parameters: {
-    layout: 'centered',
+    layout: 'fullscreen',
   },
 } satisfies Meta<typeof DictantsPage>;
 

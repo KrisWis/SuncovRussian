@@ -2,7 +2,7 @@ import type { Meta, StoryObj } from '@storybook/react';
 import { Dictant } from './Dictant';
 
 const meta = {
-  title: 'Pages/Dictants/Dictant',
+  title: 'Features/Dictant',
   component: Dictant,
   parameters: {
     layout: 'centered',
