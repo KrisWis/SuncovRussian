@@ -22,7 +22,7 @@ import { useInitializeWords } from '../lib/hooks/useInitializeWords';
 import { UnionsWordsInterface } from '../model/static/wordsForUnionsTests';
 import { PrimaryTrainerWords } from './PrimaryTrainerWords/PrimaryTrainerWords';
 import { TrainerProgressBar } from './TrainerProgressBar/TrainerProgressBar';
-import { StrictModeSwitcher } from '@/features/StrictModeSwitcher';
+import { TrainerModeSwitcher } from './TrainerModeSwitcher/TrainerModeSwitcher';
 
 interface TrainerPageProps {
   words: WordsTypes[];
@@ -210,7 +210,7 @@ const TrainerInner: React.FC<TrainerPageProps> = memo(
                 )}
 
                 <TrainerProgressBar />
-                <StrictModeSwitcher />
+                <TrainerModeSwitcher />
               </>
             ) : (
               <TrainerTotalResult

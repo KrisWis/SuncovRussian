@@ -7,10 +7,20 @@ const meta = {
   parameters: {
     layout: 'centered',
   },
-
 } satisfies Meta<typeof ModeSwitcher>;
 
 export default meta;
 type Story = StoryObj<typeof meta>;
 
-export const Primary: Story = {};
+export const Primary: Story = {
+  args: {
+    items: [
+      {
+        name: 'Строгий',
+        onClick: () => {},
+        modeIsOn: false,
+        setModeIsOn: () => {},
+      },
+    ],
+  },
+};

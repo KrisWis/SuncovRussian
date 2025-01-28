@@ -1,13 +1,13 @@
 import type { Meta, StoryObj } from '@storybook/react';
-import { StrictModeSwitcher } from './StrictModeSwitcher';
+import { TrainerModeSwitcher } from './TrainerModeSwitcher';
 
 const meta = {
-  title: 'Pages/Trainer/StrictModeSwitcher',
-  component: StrictModeSwitcher,
+  title: 'Pages/Trainer/ModeSwitcher',
+  component: TrainerModeSwitcher,
   parameters: {
     layout: 'centered',
   },
-} satisfies Meta<typeof StrictModeSwitcher>;
+} satisfies Meta<typeof TrainerModeSwitcher>;
 
 export default meta;
 type Story = StoryObj<typeof meta>;

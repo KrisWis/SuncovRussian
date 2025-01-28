@@ -1,3 +1,7 @@
 .ModeSwitcher {
-
+  &__hint {
+    min-width: 150px;
+    top: -45px;
+    text-align: right;
+  }
 }

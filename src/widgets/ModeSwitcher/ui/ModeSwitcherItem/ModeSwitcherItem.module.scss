@@ -1,0 +1,42 @@
+.ModeSwitcherItem {
+  border-radius: 50px;
+  height: 43px;
+  width: 149px;
+  padding-left: 5px;
+  transition: var(--transition-duration-default) linear background-color;
+  background-color: var(--color-black);
+
+  &__switcher {
+    border-radius: 100%;
+    min-width: 30px;
+    min-height: 30px;
+    background: var(--color-white);
+    transition: var(--transition-duration-default) linear border-width;
+    cursor: pointer;
+
+    &__checkmark {
+      opacity: 0;
+      transition: var(--transition-duration-default) linear opacity;
+    }
+  }
+
+  &__text {
+    font-weight: 500;
+    font-size: 16px;
+    line-height: 150%;
+    color: var(--color-white);
+    transition: var(--transition-duration-default) linear color;
+    white-space: nowrap;
+    text-align: center;
+    width: 65%;
+    text-transform: lowercase;
+  }
+
+  &__active {
+    background-color: var(--color-black);
+
+    .ModeSwitcherItem__switcher__checkmark {
+      opacity: 1;
+    }
+  }
+}

@@ -25,8 +25,6 @@ export { TrainerProgressBar } from './ui/TrainerProgressBar/TrainerProgressBar';
 
 export { TrainerPageContext } from './model/context/TrainerPageContext';
 
-export { StrictModeSwitcher } from '../../features/StrictModeSwitcher/ui/StrictModeSwitcher';
-
 // Static
 export { wordsForAccentsTests } from './model/static/wordsForAccentsTests';
 
