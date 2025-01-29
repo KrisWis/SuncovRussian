@@ -96,6 +96,16 @@ export const TrainerTotalResult: React.FC<TrainerTotalResultProps> = memo(
           {`${totalTimeSeconds < 10 ? '0' : ''}${totalTimeSeconds}`}
         </span>
 
+        <span className={styles.TrainerTotalResult__extraText}>
+          Тема: {words[0].trainerType}
+        </span>
+
+        {(isCheckMode || isOneLifeMode) && (
+          <span className={styles.TrainerTotalResult__extraText}>
+            Режим: «{isCheckMode ? 'Проверка' : 'Одна жизнь'}»
+          </span>
+        )}
+
         {wordsWithUncorrectTimes.length > 0 ? (
           <Flex
             className={styles.TrainerTotalResult__textWrapper}
@@ -137,13 +147,6 @@ export const TrainerTotalResult: React.FC<TrainerTotalResultProps> = memo(
                     )}
                   </span>
                 ))}
-
-                {(isCheckMode || isOneLifeMode) && (
-                  <span className={styles.TrainerTotalResult__currentMode}>
-                    Режим, который использовался при прохождении: «
-                    {isCheckMode ? 'Проверка' : 'Одна жизнь'}»
-                  </span>
-                )}
               </Flex>
             </Flex>
 

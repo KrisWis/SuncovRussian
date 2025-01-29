@@ -14,12 +14,12 @@
     color: var(--color-black);
   }
 
-  &__currentMode {
-    font-size: 16px;
-    font-weight: 500;
+  &__extraText {
+    font-size: 30px;
     line-height: 150%;
     text-align: center;
     color: var(--color-black);
+    font-family: var(--font-family-bold);
   }
 
   &__textWrapper {
