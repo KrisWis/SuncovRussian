@@ -3,15 +3,20 @@
   height: 43px;
   width: 149px;
   padding-left: 5px;
-  transition: var(--transition-duration-default) linear background-color;
+  transition: var(--transition-duration-default) linear;
+  transition-property: background-color, color, border-width;
   background-color: var(--color-black);
+  color: var(--color-white);
+  border: 1px solid var(--color-black);
+  border-width: 0;
 
   &__switcher {
     border-radius: 100%;
     min-width: 30px;
     min-height: 30px;
     background: var(--color-white);
-    transition: var(--transition-duration-default) linear border-width;
+    transition: var(--transition-duration-default) linear;
+    transition-property: background-color, border-width;
     cursor: pointer;
 
     &__checkmark {
@@ -24,7 +29,6 @@
     font-weight: 500;
     font-size: 16px;
     line-height: 150%;
-    color: var(--color-white);
     transition: var(--transition-duration-default) linear color;
     white-space: nowrap;
     text-align: center;
@@ -34,14 +38,22 @@
   }
 
   &__active {
-    background-color: var(--color-black);
+    background-color: var(--color-white);
+    color: var(--color-black);
+    border-width: 1px;
 
     .ModeSwitcherItem__switcher__checkmark {
       opacity: 1;
     }
+
+    .ModeSwitcherItem__switcher {
+      background-color: var(--color-black);
+    }
   }
 
   &__hint {
+    $hint-height: 100px;
+
     font-weight: 500;
     font-size: 16px;
     line-height: 120%;
@@ -53,14 +65,15 @@
     z-index: var(--z-index-hidden);
     background-color: var(--color-white);
     border-radius: 10px;
-    transform: translateY(-80px);
+    transform: translateY(-100px);
     pointer-events: none;
     max-height: 0;
+    height: $hint-height;
 
     &__active {
       opacity: 1;
       z-index: var(--z-index-hint);
-      max-height: 120px;
+      max-height: $hint-height;
       padding: 10px;
     }
   }

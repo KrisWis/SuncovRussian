@@ -6,7 +6,7 @@ import { useCheckMode } from './lib/hooks/useCheckMode';
 
 export const TrainerModeSwitcher: React.FC = memo((): React.JSX.Element => {
   // Строгий режим
-  const [strictModeIsOn, setStrictModeIsOn] = useState<boolean>(false);
+  const [strictModeIsOn, setStrictModeIsOn] = useState<boolean>(true);
   const { strictModeItem } = useStrictMode(strictModeIsOn, setStrictModeIsOn);
 
   // Режим одной жизни

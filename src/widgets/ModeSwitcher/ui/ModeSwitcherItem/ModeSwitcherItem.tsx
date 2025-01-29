@@ -48,12 +48,13 @@ export const ModeSwitcherItem: React.FC<ModeSwitcherItemProps> = memo(
         </Flex>
 
         {hintText && (
-          <span
+          <Flex
+            justify="center"
             className={`${styles.ModeSwitcherItem__hint} 
         ${isHintVisible && styles.ModeSwitcherItem__hint__active}`}
           >
             {hintText}
-          </span>
+          </Flex>
         )}
       </Flex>
     );

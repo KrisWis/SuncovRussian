@@ -1,6 +1,7 @@
 import { Flex } from '@/shared/lib/Stack';
 import * as styles from './Dictant.module.scss';
 import {
+  Fragment,
   memo,
   useCallback,
   useContext,
@@ -48,42 +49,48 @@ export const DictantInner: React.FC<DictantProps> = memo(
                   (wordIndex > 0 ? 2 : 1);
 
                 return (
-                  <div key={word + globalLetterIndex}>
-                    {word.split('').map(
-                      (
-                        letter,
-                        letterIndex, // Проходимся циклом по всему тексту
-                      ) => {
-                        const currentGlobalIndex =
-                          globalLetterIndex + letterIndex;
+                  <Fragment key={word + globalLetterIndex}>
+                    <div>
+                      {word.split('').map(
+                        (
+                          letter,
+                          letterIndex, // Проходимся циклом по всему тексту
+                        ) => {
+                          const currentGlobalIndex =
+                            globalLetterIndex + letterIndex;
 
-                        return (word[letterIndex - 1] === splitSymbol &&
-                          word[letterIndex + 1] === splitSymbol) ||
-                          ([
-                            word[letterIndex - 2],
-                            word[letterIndex - 1],
-                          ].includes(splitSymbol) &&
-                            letter === splitSymbol) ? (
-                          ''
-                        ) : letter === splitSymbol ? ( // И если встречаем "*"
-                          <input
-                            data-testid="Dictant__input"
-                            onInput={handleInput}
-                            onKeyDown={goToPrevInput}
-                            id={`DictantInput__${currentGlobalIndex}`}
-                            className={`${styles.Dictant__input} Dictant__input`}
-                            type="text"
-                            maxLength={1}
-                            key={letter + currentGlobalIndex}
-                            readOnly={maxCorrectLetters > 0 && !isMissed}
-                            autoComplete="off"
-                          />
-                        ) : (
-                          letter
-                        );
-                      },
+                          return (word[letterIndex - 1] === splitSymbol &&
+                            word[letterIndex + 1] === splitSymbol) ||
+                            ([
+                              word[letterIndex - 2],
+                              word[letterIndex - 1],
+                            ].includes(splitSymbol) &&
+                              letter === splitSymbol) ? (
+                            ''
+                          ) : letter === splitSymbol ? ( // И если встречаем "*"
+                            <input
+                              data-testid="Dictant__input"
+                              onInput={handleInput}
+                              onKeyDown={goToPrevInput}
+                              id={`DictantInput__${currentGlobalIndex}`}
+                              className={`${styles.Dictant__input} Dictant__input`}
+                              type="text"
+                              maxLength={1}
+                              key={letter + currentGlobalIndex}
+                              readOnly={maxCorrectLetters > 0 && !isMissed}
+                              autoComplete="off"
+                            />
+                          ) : (
+                            letter
+                          );
+                        },
+                      )}
+                    </div>
+
+                    {word.endsWith('.') && (
+                      <div className={styles.Dictant__sentenceSeaparator}></div>
                     )}
-                  </div>
+                  </Fragment>
                 );
               })}
             </Flex>
