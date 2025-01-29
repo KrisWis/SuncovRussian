@@ -12,13 +12,7 @@ interface ModeSwitcherProps {
 export const ModeSwitcher: React.FC<ModeSwitcherProps> = memo(
   ({ items }): React.JSX.Element => {
     return (
-      <Flex
-        data-testid="Trainer__StrictModeSwitcher"
-        justify="end"
-        width="100"
-        gap="10"
-        relative
-      >
+      <Flex justify="end" width="100" gap="10" relative>
         <Flex direction="column" gap="10">
           {items.map((item) => (
             <ModeSwitcherItem key={item.name} {...item} />

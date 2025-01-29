@@ -37,7 +37,8 @@ export const PrimaryTrainerWords: React.FC<PrimaryTrainerWordsProps> = memo(
                     <span style={{ width: 7 }}></span>
                   ) : (
                     <span
-                      key={index + letter}
+                      // eslint-disable-next-line react/no-array-index-key
+                      key={word + index + letter}
                       style={{
                         fontWeight:
                           randomWord.differenceIndexes &&

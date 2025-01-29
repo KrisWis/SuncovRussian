@@ -79,8 +79,17 @@ export const TrainerTotalResult: React.FC<TrainerTotalResultProps> = memo(
       setIsErrorWork(false);
     }, [initializeWords, setIsErrorWork, setTotalTime]);
 
+    // Получение режимов, с которыми пользователь прошёл тренажёр
+    const { isCheckMode, isOneLifeMode } = useContext(TrainerPageContext);
+
     return (
-      <Flex justify="between" direction="column" width="100" maxHeight>
+      <Flex
+        className={styles.TrainerTotalResult__wrapper}
+        justify="between"
+        direction="column"
+        width="100"
+        maxHeight
+      >
         <span className={styles.TrainerTotalResult__totalTime}>
           Общее время:{' '}
           {`${totalTimeMinutes < 10 ? '0' : ''}${totalTimeMinutes}`}:
@@ -88,7 +97,13 @@ export const TrainerTotalResult: React.FC<TrainerTotalResultProps> = memo(
         </span>
 
         {wordsWithUncorrectTimes.length > 0 ? (
-          <Flex maxHeight justify="between" direction="column">
+          <Flex
+            className={styles.TrainerTotalResult__textWrapper}
+            gap="20"
+            maxHeight
+            justify="between"
+            direction="column"
+          >
             <Flex direction="column">
               <span className={styles.TrainerTotalResult__totalTime}>
                 Ошибки:
@@ -97,13 +112,6 @@ export const TrainerTotalResult: React.FC<TrainerTotalResultProps> = memo(
               <Flex direction="column" gap="3" width="100">
                 {wordsWithUncorrectTimes.map((word) => (
                   <span
-                    style={{
-                      fontSize:
-                        24 -
-                        (wordsWithUncorrectTimes.length / 2 >= 21
-                          ? 21
-                          : wordsWithUncorrectTimes.length / 2),
-                    }}
                     className={styles.TrainerTotalResult__wordWithError}
                     key={word.id}
                   >
@@ -129,6 +137,13 @@ export const TrainerTotalResult: React.FC<TrainerTotalResultProps> = memo(
                     )}
                   </span>
                 ))}
+
+                {(isCheckMode || isOneLifeMode) && (
+                  <span className={styles.TrainerTotalResult__currentMode}>
+                    Режим, который использовался при прохождении: «
+                    {isCheckMode ? 'Проверка' : 'Одна жизнь'}»
+                  </span>
+                )}
               </Flex>
             </Flex>
 

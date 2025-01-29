@@ -7,9 +7,26 @@
   }
 
   &__wordWithError {
+    font-size: 24px;
     font-weight: 500;
     line-height: 150%;
     text-align: center;
     color: var(--color-black);
+  }
+
+  &__currentMode {
+    font-size: 16px;
+    font-weight: 500;
+    line-height: 150%;
+    text-align: center;
+    color: var(--color-black);
+  }
+
+  &__textWrapper {
+    margin-bottom: 30px;
+  }
+
+  &__wrapper {
+    min-height: 90vh;
   }
 }
