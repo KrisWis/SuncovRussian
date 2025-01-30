@@ -10,6 +10,7 @@ const TrainerModeSwitcherWrapper: React.FC = () => {
   const [isErrorWork, setIsErrorWork] = useState<boolean>(false);
   const [isOneLifeMode, setIsOneLifeMode] = useState<boolean>(false);
   const [isCheckMode, setIsCheckMode] = useState<boolean>(false);
+  const [allAttemptsCount, setAllAttemptsCount] = useState<number>(0);
 
   return (
     <TrainerPageContext.Provider
@@ -24,6 +25,8 @@ const TrainerModeSwitcherWrapper: React.FC = () => {
         setIsOneLifeMode,
         isCheckMode,
         setIsCheckMode,
+        allAttemptsCount,
+        setAllAttemptsCount,
       }}
     >
       <TrainerModeSwitcher />

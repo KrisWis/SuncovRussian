@@ -17,6 +17,14 @@ interface TrainerTotalResultProps {
 
 export const TrainerTotalResult: React.FC<TrainerTotalResultProps> = memo(
   ({ updateRandomWord, words }): React.JSX.Element => {
+    // Получение режимов, с которыми пользователь прошёл тренажёр и кол-ва ошибок
+    const {
+      isCheckMode,
+      isOneLifeMode,
+      allAttemptsCount,
+      setAllAttemptsCount,
+    } = useContext(TrainerPageContext);
+
     // Инициализация хуков и контекста
     const storeWords = useWords();
     const { setWords } = useTrainerActions();
@@ -60,9 +68,11 @@ export const TrainerTotalResult: React.FC<TrainerTotalResultProps> = memo(
 
       setWords(UpdatedWordsWithUncorrectTimes);
       setTotalTime(0);
+      setAllAttemptsCount(0);
 
       updateRandomWord(UpdatedWordsWithUncorrectTimes);
     }, [
+      setAllAttemptsCount,
       setIsErrorWork,
       setTotalTime,
       setWords,
@@ -77,10 +87,8 @@ export const TrainerTotalResult: React.FC<TrainerTotalResultProps> = memo(
       initializeWords();
       setTotalTime(0);
       setIsErrorWork(false);
-    }, [initializeWords, setIsErrorWork, setTotalTime]);
-
-    // Получение режимов, с которыми пользователь прошёл тренажёр
-    const { isCheckMode, isOneLifeMode } = useContext(TrainerPageContext);
+      setAllAttemptsCount(0);
+    }, [initializeWords, setAllAttemptsCount, setIsErrorWork, setTotalTime]);
 
     return (
       <Flex
@@ -95,6 +103,12 @@ export const TrainerTotalResult: React.FC<TrainerTotalResultProps> = memo(
           {`${totalTimeMinutes < 10 ? '0' : ''}${totalTimeMinutes}`}:
           {`${totalTimeSeconds < 10 ? '0' : ''}${totalTimeSeconds}`}
         </span>
+
+        {isOneLifeMode && (
+          <span className={styles.TrainerTotalResult__extraText}>
+            Количество попыток: {allAttemptsCount}
+          </span>
+        )}
 
         <span className={styles.TrainerTotalResult__extraText}>
           Тема: {words[0].trainerType}

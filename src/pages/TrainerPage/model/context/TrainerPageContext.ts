@@ -11,6 +11,8 @@ export interface TrainerPageContext {
   setIsOneLifeMode: React.Dispatch<React.SetStateAction<boolean>>;
   isCheckMode: boolean;
   setIsCheckMode: React.Dispatch<React.SetStateAction<boolean>>;
+  allAttemptsCount: number;
+  setAllAttemptsCount: React.Dispatch<React.SetStateAction<number>>;
 }
 
 export const TrainerPageContext = createContext<TrainerPageContext>({
@@ -24,4 +26,6 @@ export const TrainerPageContext = createContext<TrainerPageContext>({
   setIsOneLifeMode: () => {},
   isCheckMode: false,
   setIsCheckMode: () => {},
+  allAttemptsCount: 0,
+  setAllAttemptsCount: () => {},
 });

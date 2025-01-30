@@ -14,7 +14,7 @@ export const useInitializeWords = (
 
   // Инициализация слов
   const initializeWords = useCallback(() => {
-    const wordsCopy = JSON.parse(JSON.stringify(words));
+    const wordsCopy: WordsTypes[] = JSON.parse(JSON.stringify(words));
 
     for (const word of wordsCopy) {
       word.probability = 1;

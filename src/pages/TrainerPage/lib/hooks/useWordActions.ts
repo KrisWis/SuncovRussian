@@ -38,7 +38,8 @@ export const useWordActions = (
 
   const { initializeWords } = useInitializeWords(storeWords);
 
-  const { isOneLifeMode, isCheckMode } = useContext(TrainerPageContext);
+  const { isOneLifeMode, isCheckMode, setAllAttemptsCount } =
+    useContext(TrainerPageContext);
 
   // Изменение вероятности при неправильном ответе
   const [waitRepeatedClickInFail, setWaitRepeatedClickInFail] =
@@ -138,6 +139,10 @@ export const useWordActions = (
 
       setWaitRepeatedClickInFail(true);
 
+      if (isOneLifeMode) {
+        setAllAttemptsCount((prev) => prev + 1);
+      }
+
       const main: HTMLElement = document.querySelector('main')!;
 
       const eventTimeout = setTimeout(() => {
@@ -152,6 +157,7 @@ export const useWordActions = (
     [
       initializeWords,
       isOneLifeMode,
+      setAllAttemptsCount,
       setIsIncorrect,
       showNewWord,
       waitRepeatedClickInFail,
