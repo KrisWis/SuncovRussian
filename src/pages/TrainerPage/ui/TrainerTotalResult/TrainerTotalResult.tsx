@@ -120,7 +120,7 @@ export const TrainerTotalResult: React.FC<TrainerTotalResultProps> = memo(
           </span>
         )}
 
-        {wordsWithUncorrectTimes.length > 0 ? (
+        {wordsWithUncorrectTimes.length > 0 && !isOneLifeMode ? (
           <Flex
             className={styles.TrainerTotalResult__textWrapper}
             gap="20"

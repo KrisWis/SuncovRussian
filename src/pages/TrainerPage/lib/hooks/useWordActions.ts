@@ -131,6 +131,7 @@ export const useWordActions = (
 
       if (isOneLifeMode) {
         initializeWords();
+        setAllAttemptsCount((prev) => prev + 1);
       }
 
       playAudio('FailSound');
@@ -138,10 +139,6 @@ export const useWordActions = (
       setIsIncorrect(true);
 
       setWaitRepeatedClickInFail(true);
-
-      if (isOneLifeMode) {
-        setAllAttemptsCount((prev) => prev + 1);
-      }
 
       const main: HTMLElement = document.querySelector('main')!;
 
@@ -211,7 +208,7 @@ export const useWordActions = (
         } else {
           changeWordProbability({
             id: currentRandomWord.id,
-            probability: 0.01,
+            probability: isOneLifeMode ? 0 : 0.01,
           });
 
           changeWordInProgressStatus({
@@ -240,6 +237,7 @@ export const useWordActions = (
       changeWordInProgressStatus,
       changeWordProbability,
       isCheckMode,
+      isOneLifeMode,
       updateRandomWord,
       waitRepeatedClickInFail,
     ],
