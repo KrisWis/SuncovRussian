@@ -1,7 +1,6 @@
 import { renderWithProviders } from '@/shared/tests/renderWithProviders';
 import {
   cleanup,
-  fireEvent,
   queries,
   RenderResult,
   waitFor,
@@ -10,6 +9,7 @@ import { TrainerPage } from './TrainerPage';
 import { getRouteTrainer } from '@/shared/const/router';
 import { wordsForTrainers } from '../model/static/wordsForTrainers';
 import { UnionsWordsInterface, unionTypes } from '../model/types/unions';
+import userEvent from '@testing-library/user-event';
 
 // Types
 type ComparisonType = 'equal' | 'greaterThan';
@@ -44,24 +44,26 @@ const checkProgressBarValue = (
 };
 
 // Функция для имитации клика на слова и проверки появления плашки "Неверно"
-const clickWordAndCheckUncorrectBar = (
+const clickWordAndCheckUncorrectBar = async (
   elementTestID: WordsTestIDs,
   isUncorrectIsExpected: boolean,
   component: RenderResult<typeof queries, HTMLElement, HTMLElement>,
 ) => {
-  const element = component.getByTestId(elementTestID);
+  await waitFor(async () => {
+    const element = component.getByTestId(elementTestID);
 
-  expect(element).toBeInTheDocument();
+    expect(element).toBeInTheDocument();
 
-  fireEvent.click(element);
+    await userEvent.click(element);
 
-  if (isUncorrectIsExpected) {
-    expect(component.queryByTestId('Trainer__uncorrect')).toBeInTheDocument();
-  } else {
-    expect(
-      component.queryByTestId('Trainer__uncorrect'),
-    ).not.toBeInTheDocument();
-  }
+    if (isUncorrectIsExpected) {
+      expect(component.queryByTestId('Trainer__uncorrect')).toBeInTheDocument();
+    } else {
+      expect(
+        component.queryByTestId('Trainer__uncorrect'),
+      ).not.toBeInTheDocument();
+    }
+  });
 };
 
 // Tests
@@ -74,10 +76,10 @@ describe('TrainerModeSwitcher', () => {
     );
   };
 
-  const clickMode = (mode: ModeTypes) => {
+  const clickMode = async (mode: ModeTypes) => {
     const modeItem = component.getByTestId(`ModeSwitcherItem__${mode}`);
 
-    fireEvent.click(modeItem);
+    await userEvent.click(modeItem);
 
     // Проверяем, что режим действительно выбран
     expect(modeItem).toHaveAttribute('data-selected', 'true');
@@ -93,31 +95,31 @@ describe('TrainerModeSwitcher', () => {
   });
 
   // Tests
-  test('Click one life mode, check progress bar', () => {
+  test('Click one life mode, check progress bar', async () => {
     // Выбираем режим "Одна жизнь"
-    clickMode('Одна жизнь');
+    await clickMode('Одна жизнь');
 
     // Кликаем на правильные слова
-    clickWordAndCheckUncorrectBar(
+    await clickWordAndCheckUncorrectBar(
       'PrimaryTrainerWords__valid',
       false,
       component,
     );
 
-    clickWordAndCheckUncorrectBar(
+    await clickWordAndCheckUncorrectBar(
       'PrimaryTrainerWords__valid',
       false,
       component,
     );
 
-    clickWordAndCheckUncorrectBar(
+    await clickWordAndCheckUncorrectBar(
       'PrimaryTrainerWords__valid',
       false,
       component,
     );
 
     // Но один раз кликаем на неправильное
-    clickWordAndCheckUncorrectBar(
+    await clickWordAndCheckUncorrectBar(
       'PrimaryTrainerWords__invalid',
       true,
       component,
@@ -127,37 +129,36 @@ describe('TrainerModeSwitcher', () => {
     checkProgressBarValue(0, component);
   });
 
-  test('Click check mode, check progress bar', () => {
+  test('Click check mode, check progress bar', async () => {
     // Выбираем режим "Проверка"
-    clickMode('Проверка');
+    await clickMode('Проверка');
 
     // Кликаем на неправильные слова
-    // TODO: убрать этот valid и чтобы работало и чекнуть почему тест иногда не срабатывает
-    clickWordAndCheckUncorrectBar(
+    await clickWordAndCheckUncorrectBar(
       'PrimaryTrainerWords__invalid',
       true,
       component,
     );
 
-    clickWordAndCheckUncorrectBar(
+    await clickWordAndCheckUncorrectBar(
       'PrimaryTrainerWords__invalid',
       true,
       component,
     );
 
-    clickWordAndCheckUncorrectBar(
+    await clickWordAndCheckUncorrectBar(
       'PrimaryTrainerWords__invalid',
       true,
       component,
     );
 
-    clickWordAndCheckUncorrectBar(
+    await clickWordAndCheckUncorrectBar(
       'PrimaryTrainerWords__invalid',
       true,
       component,
     );
 
-    // И прогресс бар должен быть не равен 0
+    // И прогресс бар должен быть больше 0
     checkProgressBarValue(0, component, 'greaterThan');
   });
 
@@ -185,21 +186,21 @@ describe('PrimaryTrainerWords', () => {
 
   // Tests
   test('Click valid words and not get an error, check progress bar', async () => {
-    await waitFor(() => {
+    await waitFor(async () => {
       // Click valid words
-      clickWordAndCheckUncorrectBar(
+      await clickWordAndCheckUncorrectBar(
         'PrimaryTrainerWords__valid',
         false,
         component,
       );
 
-      clickWordAndCheckUncorrectBar(
+      await clickWordAndCheckUncorrectBar(
         'PrimaryTrainerWords__valid',
         false,
         component,
       );
 
-      clickWordAndCheckUncorrectBar(
+      await clickWordAndCheckUncorrectBar(
         'PrimaryTrainerWords__valid',
         false,
         component,
@@ -211,16 +212,16 @@ describe('PrimaryTrainerWords', () => {
   });
 
   test('Click invalid word and valid word and get an error, check progress bar', async () => {
-    await waitFor(() => {
+    await waitFor(async () => {
       // Click valid word
-      clickWordAndCheckUncorrectBar(
+      await clickWordAndCheckUncorrectBar(
         'PrimaryTrainerWords__valid',
         false,
         component,
       );
 
       // Click invalid word
-      clickWordAndCheckUncorrectBar(
+      await clickWordAndCheckUncorrectBar(
         'PrimaryTrainerWords__invalid',
         true,
         component,
@@ -231,21 +232,21 @@ describe('PrimaryTrainerWords', () => {
     });
   });
 
-  test('Click invalid words, check progress bar', () => {
+  test('Click invalid words, check progress bar', async () => {
     // Click invalid words
-    clickWordAndCheckUncorrectBar(
+    await clickWordAndCheckUncorrectBar(
       'PrimaryTrainerWords__invalid',
       true,
       component,
     );
 
-    clickWordAndCheckUncorrectBar(
+    await clickWordAndCheckUncorrectBar(
       'PrimaryTrainerWords__invalid',
       true,
       component,
     );
 
-    clickWordAndCheckUncorrectBar(
+    await clickWordAndCheckUncorrectBar(
       'PrimaryTrainerWords__invalid',
       true,
       component,
@@ -296,7 +297,7 @@ describe('UnionsTrainerWords', () => {
 
   // Tests
   test('Click invalid words, check progress bar', async () => {
-    await waitFor(() => {
+    await waitFor(async () => {
       // Get type of current word
       const wordCurrentType = getTypeOfCurrentWord();
 
@@ -307,19 +308,19 @@ describe('UnionsTrainerWords', () => {
           : 'Подчинительный';
 
       // Click invalid words
-      clickWordAndCheckUncorrectBar(
+      await clickWordAndCheckUncorrectBar(
         `UnionsTrainerWords__${wordOppositeType}`,
         true,
         component,
       );
 
-      clickWordAndCheckUncorrectBar(
+      await clickWordAndCheckUncorrectBar(
         `UnionsTrainerWords__${wordOppositeType}`,
         true,
         component,
       );
 
-      clickWordAndCheckUncorrectBar(
+      await clickWordAndCheckUncorrectBar(
         `UnionsTrainerWords__${wordOppositeType}`,
         true,
         component,
@@ -331,24 +332,24 @@ describe('UnionsTrainerWords', () => {
   });
 
   test('Click valid words and not get an error, check progress bar', async () => {
-    await waitFor(() => {
+    await waitFor(async () => {
       // Get type of current word
       const wordCurrentType = getTypeOfCurrentWord();
 
       // Click valid words
-      clickWordAndCheckUncorrectBar(
+      await clickWordAndCheckUncorrectBar(
         `UnionsTrainerWords__${wordCurrentType}`,
         false,
         component,
       );
 
-      clickWordAndCheckUncorrectBar(
+      await clickWordAndCheckUncorrectBar(
         `UnionsTrainerWords__${wordCurrentType}`,
         false,
         component,
       );
 
-      clickWordAndCheckUncorrectBar(
+      await clickWordAndCheckUncorrectBar(
         `UnionsTrainerWords__${wordCurrentType}`,
         false,
         component,
@@ -360,12 +361,12 @@ describe('UnionsTrainerWords', () => {
   });
 
   test('Click invalid word and valid word and get an error, check progress bar', async () => {
-    await waitFor(() => {
+    await waitFor(async () => {
       // Get type of current word
       const wordCurrentType = getTypeOfCurrentWord();
 
       // Click valid word
-      clickWordAndCheckUncorrectBar(
+      await clickWordAndCheckUncorrectBar(
         `UnionsTrainerWords__${wordCurrentType}`,
         false,
         component,
@@ -378,7 +379,7 @@ describe('UnionsTrainerWords', () => {
           : 'Подчинительный';
 
       // Click invalid word
-      clickWordAndCheckUncorrectBar(
+      await clickWordAndCheckUncorrectBar(
         `UnionsTrainerWords__${wordOppositeType}`,
         true,
         component,
