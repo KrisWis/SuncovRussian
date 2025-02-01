@@ -4,7 +4,6 @@ import {
   WordsForTrainersItem,
 } from '../model/types/types';
 import * as styles from './TrainerPage.module.scss';
-import { tabletMediaQueryWidth } from '@/shared/const/global';
 import { DynamicModuleLoader } from '@/shared/lib/DynamicModuleLoader';
 import { Hint } from '@/shared/ui/Hint';
 import { memo, useState, useContext, useEffect } from 'react';
@@ -21,13 +20,12 @@ import { UnionsWordsInterface } from '../model/types/unions';
 import { PrimaryTrainerWords } from './PrimaryTrainerWords/PrimaryTrainerWords';
 import { TrainerProgressBar } from './TrainerProgressBar/TrainerProgressBar';
 import { TrainerModeSwitcher } from './TrainerModeSwitcher/TrainerModeSwitcher';
+import { useArrowsActions } from '../lib/hooks/useArrowsActions';
 
 export interface TrainerPageProps {
   words: WordsForTrainersItem;
   theme: string;
 }
-
-// TODO: вынести всё в отдельный компонент
 
 const TrainerInner: React.FC<TrainerPageProps> = memo(
   ({ words, theme }): React.JSX.Element => {
@@ -47,7 +45,6 @@ const TrainerInner: React.FC<TrainerPageProps> = memo(
       totalTime,
       setIsIncorrect,
       isIncorrect,
-      isErrorWork,
       setIsErrorWork,
       setTotalTime,
     } = useContext(TrainerPageContext);
@@ -57,13 +54,12 @@ const TrainerInner: React.FC<TrainerPageProps> = memo(
     }, [randomWord, randomWordId]);
 
     // Появление плашки "Неверно"
-    const { wordOnFail, wordOnSuccess, showNewWord, waitRepeatedClickInFail } =
-      useWordActions(
-        randomWordId,
-        setRandomWordsIsReverse,
-        setRandomWordId,
-        setIsIncorrect,
-      );
+    const { wordOnFail, wordOnSuccess } = useWordActions(
+      randomWordId,
+      setRandomWordsIsReverse,
+      setRandomWordId,
+      setIsIncorrect,
+    );
 
     // Получение случайного слова
     const storeWords = useWords();
@@ -75,69 +71,21 @@ const TrainerInner: React.FC<TrainerPageProps> = memo(
     }, [randomWordId, storeWords, updateRandomWord]);
 
     // При нажатии на стрелочки, фокус падает на соответствующее слово
+    const { checkArrowsPress } = useArrowsActions(
+      randomWordId,
+      setRandomWordId,
+      setRandomWordsIsReverse,
+      setIsIncorrect,
+      randomWordsIsReverse,
+    );
+
     useEffect(() => {
-      const checkArrowsPress = (
-        event: KeyboardEvent,
-        words: WordsForTrainersItem,
-      ): void => {
-        if (totalTime) return;
-
-        if (waitRepeatedClickInFail && isIncorrect) {
-          showNewWord(words.items, isErrorWork, randomWordId);
-        }
-
-        const wordElements = document.querySelectorAll('.TrainerWord');
-
-        const clickElements = (NotReverseIndex: number): void => {
-          if (words.type === 'unions') {
-            (wordElements[NotReverseIndex] as HTMLElement).click();
-            return;
-          }
-
-          if (!randomWordsIsReverse)
-            (wordElements[NotReverseIndex] as HTMLElement).click();
-          else {
-            const element = wordElements[
-              NotReverseIndex === 0 ? 1 : 0
-            ] as HTMLElement;
-
-            if (element) element.click();
-          }
-        };
-
-        if (!tabletMediaQueryWidth.matches) {
-          if (event.key === 'ArrowLeft') {
-            clickElements(0);
-          } else if (event.key === 'ArrowRight') {
-            clickElements(1);
-          }
-        } else {
-          if (event.key === 'ArrowUp') {
-            clickElements(0);
-          } else if (event.key === 'ArrowDown') {
-            clickElements(1);
-          }
-        }
-      };
-
       document.onkeydown = (e) => checkArrowsPress(e, words);
 
       return () => {
         document.onkeydown = null;
       };
-    }, [
-      isErrorWork,
-      isIncorrect,
-      randomWordId,
-      randomWordsIsReverse,
-      showNewWord,
-      storeWords,
-      totalTime,
-      waitRepeatedClickInFail,
-      wordOnFail,
-      wordOnSuccess,
-      words,
-    ]);
+    }, [checkArrowsPress, words]);
 
     // Инициализация слов
     const { initializeWords } = useInitializeWords(words.items);

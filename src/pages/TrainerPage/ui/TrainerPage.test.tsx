@@ -134,8 +134,8 @@ describe('TrainerModeSwitcher', () => {
     // Кликаем на неправильные слова
     // TODO: убрать этот valid и чтобы работало и чекнуть почему тест иногда не срабатывает
     clickWordAndCheckUncorrectBar(
-      'PrimaryTrainerWords__valid',
-      false,
+      'PrimaryTrainerWords__invalid',
+      true,
       component,
     );
 
