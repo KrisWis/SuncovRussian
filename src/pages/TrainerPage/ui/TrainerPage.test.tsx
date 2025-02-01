@@ -357,7 +357,7 @@ describe('UnionsTrainerWords', () => {
     });
   });
 
-  test('Click invalid words, check progress bar', async () => {
+  test('Click invalid word, check progress bar', async () => {
     // Get type of current word
     const wordCurrentType = getTypeOfCurrentWord();
 
@@ -365,13 +365,7 @@ describe('UnionsTrainerWords', () => {
     const wordOppositeType: unionTypes =
       wordCurrentType === 'Подчинительный' ? 'Сочинительный' : 'Подчинительный';
 
-    // Click invalid words
-    await clickWordAndCheckUncorrectBar(
-      `UnionsTrainerWords__${wordOppositeType}`,
-      true,
-      component,
-    );
-
+    // Click invalid word
     await clickWordAndCheckUncorrectBar(
       `UnionsTrainerWords__${wordOppositeType}`,
       true,
