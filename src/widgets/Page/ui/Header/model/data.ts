@@ -1,8 +1,11 @@
-// eslint-disable-next-line ulbi-tv-plugin/layer-imports
+/* eslint-disable ulbi-tv-plugin/layer-imports */
+
 import { mockDictants } from '@/pages/DictantsPage';
 import { HeaderMenu, HeaderRoutes } from './types';
+import { mockTests } from '@/pages/TestsPage';
 
 export const headerCategories: HeaderMenu = {
+  Тесты: [...Object.keys(mockTests)],
   Диктанты: [...mockDictants.map((dictant) => dictant)],
   Теория: [],
   Тренажеры: [
@@ -17,6 +20,7 @@ export const headerCategories: HeaderMenu = {
 };
 
 export const headerRoutesCategories: HeaderRoutes = {
+  Тесты: 'tests',
   Диктанты: 'dictants',
   Теория: 'theory',
 

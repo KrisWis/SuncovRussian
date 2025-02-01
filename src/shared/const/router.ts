@@ -11,6 +11,8 @@ import {
 } from '@/pages/TrainerPage';
 import { transliterate } from '../utils/transliterate/transliterate';
 
+// TODO: переписать тренажеры на новый лад
+
 type TrainerRouteSubcategories =
   | 'accents'
   | 'dictionary'
@@ -36,9 +38,15 @@ export const trainerRoutes: TrainerRoutes[] = [
 ];
 
 export const getRouteMain = () => '/';
+
 export const getRouteTheory = () => '/theory';
+
 export const getRouteDictant = (theme: string, subtheme: string) =>
   `/dictants/${transliterate(theme)}/${transliterate(subtheme)}`;
+
 export const getRouteTrainer = (trainerType: TrainerRouteSubcategories) =>
   `/trainers/${trainerType}`;
+
+export const getRouteTests = (test: string) => `/tests/${transliterate(test)}`;
+
 export const getRouteNotFound = () => '*';

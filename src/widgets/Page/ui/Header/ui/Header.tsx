@@ -67,7 +67,7 @@ export const Header: React.FC<HeaderProps> = memo(
                           {isUsual
                             ? (() => {
                                 // Инициализация предмета подменю
-                                const submenuItemLink: string = `/${headerRoutesCategories[category as HeaderCategoryType]}/${transliterate(headerRoutesCategories[menuItem as HeaderCategoryType])}`;
+                                const submenuItemLink: string = `/${headerRoutesCategories[category as HeaderCategoryType]}/${transliterate(menuItem)}`;
 
                                 const regexForSubmenu = new RegExp(
                                   submenuItemLink.replace(/\//g, '\\/'),
