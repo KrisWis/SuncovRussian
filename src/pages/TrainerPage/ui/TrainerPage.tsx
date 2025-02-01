@@ -1,8 +1,7 @@
 import { Flex } from '@/shared/lib/Stack';
 import {
   PrimaryWordsInterface,
-  TrainerWordsInterface,
-  WordsTypes,
+  WordsForTrainersItem,
 } from '../model/types/types';
 import * as styles from './TrainerPage.module.scss';
 import { tabletMediaQueryWidth } from '@/shared/const/global';
@@ -15,21 +14,23 @@ import { useWords } from '../model/selectors/getTrainerWords/getTrainerWords';
 import { TrainerReducer } from '../model/slice/TrainerPageSlice';
 import { TrainerTotalResult } from './TrainerTotalResult/TrainerTotalResult';
 import { UnionsTrainerWords } from './UnionsTrainerWords/UnionsTrainerWords';
-import { trainersOfPrimaryType } from '../model/const/const';
 import { useRandomWord } from '../lib/hooks/useRandomWord';
 import { useWordActions } from '../lib/hooks/useWordActions';
 import { useInitializeWords } from '../lib/hooks/useInitializeWords';
-import { UnionsWordsInterface } from '../model/static/wordsForUnionsTests';
+import { UnionsWordsInterface } from '../model/types/unions';
 import { PrimaryTrainerWords } from './PrimaryTrainerWords/PrimaryTrainerWords';
 import { TrainerProgressBar } from './TrainerProgressBar/TrainerProgressBar';
 import { TrainerModeSwitcher } from './TrainerModeSwitcher/TrainerModeSwitcher';
 
-interface TrainerPageProps {
-  words: WordsTypes[];
+export interface TrainerPageProps {
+  words: WordsForTrainersItem;
+  theme: string;
 }
 
+// TODO: вынести всё в отдельный компонент
+
 const TrainerInner: React.FC<TrainerPageProps> = memo(
-  ({ words }): React.JSX.Element => {
+  ({ words, theme }): React.JSX.Element => {
     // Инициализация данных, хуков, контекста
     const [randomWordId, setRandomWordId] = useState<number | null>(null);
 
@@ -77,18 +78,18 @@ const TrainerInner: React.FC<TrainerPageProps> = memo(
     useEffect(() => {
       const checkArrowsPress = (
         event: KeyboardEvent,
-        words: TrainerWordsInterface[],
+        words: WordsForTrainersItem,
       ): void => {
         if (totalTime) return;
 
         if (waitRepeatedClickInFail && isIncorrect) {
-          showNewWord(words, isErrorWork, randomWordId);
+          showNewWord(words.items, isErrorWork, randomWordId);
         }
 
         const wordElements = document.querySelectorAll('.TrainerWord');
 
         const clickElements = (NotReverseIndex: number): void => {
-          if (words[0].trainerType === 'виды союзов') {
+          if (words.type === 'unions') {
             (wordElements[NotReverseIndex] as HTMLElement).click();
             return;
           }
@@ -119,7 +120,7 @@ const TrainerInner: React.FC<TrainerPageProps> = memo(
         }
       };
 
-      document.onkeydown = (e) => checkArrowsPress(e, storeWords);
+      document.onkeydown = (e) => checkArrowsPress(e, words);
 
       return () => {
         document.onkeydown = null;
@@ -135,10 +136,11 @@ const TrainerInner: React.FC<TrainerPageProps> = memo(
       waitRepeatedClickInFail,
       wordOnFail,
       wordOnSuccess,
+      words,
     ]);
 
     // Инициализация слов
-    const { initializeWords } = useInitializeWords(words);
+    const { initializeWords } = useInitializeWords(words.items);
 
     useEffect(() => {
       const timeoutForInitializeWords = setTimeout(() => {
@@ -156,7 +158,7 @@ const TrainerInner: React.FC<TrainerPageProps> = memo(
           <>
             {!totalTime ? (
               <>
-                {trainersOfPrimaryType.includes(storeWords[0].trainerType) && (
+                {words.type === 'primary' && (
                   <Flex width="100">
                     <Hint
                       text={`Выбирайте ответ, а система будет предлагать новые слова или
@@ -168,7 +170,7 @@ const TrainerInner: React.FC<TrainerPageProps> = memo(
                   </Flex>
                 )}
 
-                {storeWords[0].trainerType === 'виды союзов' && (
+                {words.type === 'unions' && (
                   <Flex width="100">
                     <Hint
                       text={`В этом тренажере под подчинительным союзом понимается любое
@@ -191,9 +193,7 @@ const TrainerInner: React.FC<TrainerPageProps> = memo(
 
                 {randomWord && (
                   <>
-                    {trainersOfPrimaryType.includes(
-                      storeWords[0].trainerType,
-                    ) && (
+                    {words.type === 'primary' && (
                       <PrimaryTrainerWords
                         randomWord={randomWord as PrimaryWordsInterface}
                         randomWordsIsReverse={randomWordsIsReverse}
@@ -202,7 +202,7 @@ const TrainerInner: React.FC<TrainerPageProps> = memo(
                       />
                     )}
 
-                    {words[0].trainerType === 'виды союзов' && (
+                    {words.type === 'unions' && (
                       <UnionsTrainerWords
                         randomWord={randomWord as UnionsWordsInterface}
                         wordOnSuccess={wordOnSuccess}
@@ -219,6 +219,7 @@ const TrainerInner: React.FC<TrainerPageProps> = memo(
               <TrainerTotalResult
                 words={words}
                 updateRandomWord={updateRandomWord}
+                theme={theme}
               />
             )}
           </>
@@ -231,7 +232,7 @@ const TrainerInner: React.FC<TrainerPageProps> = memo(
 TrainerInner.displayName = 'TrainerInner';
 
 export const TrainerPage: React.FC<TrainerPageProps> = memo(
-  ({ words }): React.JSX.Element => {
+  ({ words, theme }): React.JSX.Element => {
     // Настройка контекста
     const [totalTime, setTotalTime] = useState<number>(0);
     const [isIncorrect, setIsIncorrect] = useState<boolean>(false);
@@ -261,7 +262,7 @@ export const TrainerPage: React.FC<TrainerPageProps> = memo(
           removeAfterUnmount={false}
           reducers={{ Trainer: TrainerReducer }}
         >
-          <TrainerInner words={words} />
+          <TrainerInner words={words} theme={theme} />
         </DynamicModuleLoader>
       </TrainerPageContext.Provider>
     );

@@ -2,14 +2,11 @@ import { memo, useContext } from 'react';
 import { Flex } from '@/shared/lib/Stack';
 import { tabletMediaQueryWidth } from '@/shared/const/global';
 import { TrainerWord } from '@/shared/ui/TrainerWord';
-import {
-  UnionsWordsInterface,
-  unionTypes,
-} from '../../model/static/wordsForUnionsTests';
 import { TrainerPageContext } from '../../model/context/TrainerPageContext';
 import * as styles from './UnionsTrainerWords.module.scss';
 import { useWords } from '../../model/selectors/getTrainerWords/getTrainerWords';
 import { wordActionsFunctionType } from '../../lib/hooks/useWordActions';
+import { UnionsWordsInterface, unionTypes } from '../../model/types/unions';
 
 interface UnionsTrainerWordsProps {
   randomWord: UnionsWordsInterface;

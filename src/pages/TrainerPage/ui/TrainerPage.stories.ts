@@ -1,5 +1,6 @@
 import type { Meta, StoryObj } from '@storybook/react';
-import { wordsForAccentsTests, TrainerPage, wordsForUnionsTests } from '..';
+import { TrainerPage } from './TrainerPage';
+import { wordsForTrainers } from '../model/static/wordsForTrainers';
 
 const meta = {
   title: 'Pages/Trainer',
@@ -14,12 +15,14 @@ type Story = StoryObj<typeof meta>;
 
 export const PrimaryTrainerWords: Story = {
   args: {
-    words: wordsForAccentsTests,
+    words: wordsForTrainers['Ударения'],
+    theme: 'Ударения',
   },
 };
 
 export const UnionsTrainerWords: Story = {
   args: {
-    words: wordsForUnionsTests,
+    words: wordsForTrainers['Виды союзов'],
+    theme: 'Виды союзов',
   },
 };

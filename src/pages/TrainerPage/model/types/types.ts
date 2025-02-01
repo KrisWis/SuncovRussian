@@ -1,17 +1,9 @@
-import { UnionsWordsInterface } from '../static/wordsForUnionsTests';
+import { UnionsWordsInterface } from './unions';
 
-export type TrainerWordsTypes =
-  | 'ударения'
-  | 'виды союзов'
-  | 'cловарные слова'
-  | 'н/нн'
-  | 'пре-при'
-  | 'наречия'
-  | 'морфологические нормы';
+type TrainerWordsType = 'unions' | 'primary';
 
 export interface TrainerWordsInterface {
   id: number;
-  trainerType: TrainerWordsTypes;
   probability?: number;
   uncorrectTimes?: number;
   consecutivelyTimes?: number;
@@ -24,7 +16,30 @@ export interface PrimaryWordsInterface extends TrainerWordsInterface {
   differenceIndexes?: number[];
 }
 
-export type WordsTypes =
+export type WordsForTrainersTypes =
   | TrainerWordsInterface
   | PrimaryWordsInterface
   | UnionsWordsInterface;
+
+interface WordsForTrainersGeneralItem {
+  type: TrainerWordsType;
+  items: WordsForTrainersTypes[];
+}
+
+interface PrimaryWordsForTrainersItem extends WordsForTrainersGeneralItem {
+  type: 'primary';
+  items: PrimaryWordsInterface[];
+}
+
+interface UnionsWordsForTrainersItem {
+  type: 'unions';
+  items: UnionsWordsInterface[];
+}
+
+export type WordsForTrainersItem =
+  | PrimaryWordsForTrainersItem
+  | UnionsWordsForTrainersItem;
+
+export type WordsForTrainers = {
+  [key in string]: WordsForTrainersItem;
+};

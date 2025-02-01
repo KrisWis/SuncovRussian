@@ -2,21 +2,25 @@ import { Flex } from '@/shared/lib/Stack';
 import * as styles from './TrainerTotalResult.module.scss';
 import { memo, useCallback, useContext, useMemo } from 'react';
 import { useWords } from '../../model/selectors/getTrainerWords/getTrainerWords';
-import { PrimaryWordsInterface, WordsTypes } from '../../model/types/types';
+import {
+  PrimaryWordsInterface,
+  WordsForTrainersItem,
+  WordsForTrainersTypes,
+} from '../../model/types/types';
 import { TrainerPageContext } from '../../model/context/TrainerPageContext';
 import { useTrainerActions } from '../../model/slice/TrainerPageSlice';
-import { trainersOfPrimaryType } from '../../model/const/const';
 import { useInitializeWords } from '../../lib/hooks/useInitializeWords';
-import { UnionsWordsInterface } from '../../model/static/wordsForUnionsTests';
+import { UnionsWordsInterface } from '../../model/types/unions';
 import { Button } from '@/shared/ui/Button/ui/Button';
 
 interface TrainerTotalResultProps {
-  updateRandomWord: (words?: WordsTypes[]) => void;
-  words: WordsTypes[];
+  updateRandomWord: (words?: WordsForTrainersTypes[]) => void;
+  words: WordsForTrainersItem;
+  theme: string;
 }
 
 export const TrainerTotalResult: React.FC<TrainerTotalResultProps> = memo(
-  ({ updateRandomWord, words }): React.JSX.Element => {
+  ({ updateRandomWord, words, theme }): React.JSX.Element => {
     // Получение режимов, с которыми пользователь прошёл тренажёр и кол-ва ошибок
     const {
       isCheckMode,
@@ -81,7 +85,7 @@ export const TrainerTotalResult: React.FC<TrainerTotalResultProps> = memo(
     ]);
 
     // Очистка результатов при нажатии "Повторить"
-    const { initializeWords } = useInitializeWords(words);
+    const { initializeWords } = useInitializeWords(words.items);
 
     const Retry = useCallback(() => {
       initializeWords();
@@ -111,7 +115,7 @@ export const TrainerTotalResult: React.FC<TrainerTotalResultProps> = memo(
         )}
 
         <span className={styles.TrainerTotalResult__extraText}>
-          Тема: {words[0].trainerType}
+          Тема: {theme}
         </span>
 
         {(isCheckMode || isOneLifeMode) && (
@@ -139,7 +143,7 @@ export const TrainerTotalResult: React.FC<TrainerTotalResultProps> = memo(
                     className={styles.TrainerTotalResult__wordWithError}
                     key={word.id}
                   >
-                    {trainersOfPrimaryType.includes(word.trainerType) && (
+                    {words.type === 'primary' && (
                       <>
                         {(word as PrimaryWordsInterface).valid} -{' '}
                         {word.uncorrectTimes}{' '}
@@ -149,7 +153,7 @@ export const TrainerTotalResult: React.FC<TrainerTotalResultProps> = memo(
                       </>
                     )}
 
-                    {word.trainerType === 'виды союзов' && (
+                    {words.type === 'unions' && (
                       <>
                         {(word as UnionsWordsInterface).word} -{' '}
                         {word.uncorrectTimes}{' '}

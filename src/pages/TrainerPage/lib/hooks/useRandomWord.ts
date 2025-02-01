@@ -1,10 +1,10 @@
 import { useCallback, useMemo } from 'react';
-import { WordsTypes } from '../../model/types/types';
+import { WordsForTrainersTypes } from '../../model/types/types';
 import { useWords } from '../../model/selectors/getTrainerWords/getTrainerWords';
 
 interface UseRandomWordResult {
-  updateRandomWord: (words?: WordsTypes[]) => void;
-  randomWord?: WordsTypes;
+  updateRandomWord: (words?: WordsForTrainersTypes[]) => void;
+  randomWord?: WordsForTrainersTypes;
 }
 
 export const useRandomWord = (
@@ -20,7 +20,7 @@ export const useRandomWord = (
   );
 
   const updateRandomWord = useCallback(
-    (words?: WordsTypes[]) => {
+    (words?: WordsForTrainersTypes[]) => {
       const storeWordsCopy = (words ? words : storeWords).filter(
         (word) => word.id !== randomWordId && word.probability !== 0,
       );

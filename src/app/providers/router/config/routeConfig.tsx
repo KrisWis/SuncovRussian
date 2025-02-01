@@ -3,7 +3,7 @@ import { MainPage } from '@/pages/MainPage';
 import { NotFoundPage } from '@/pages/NotFoundPage';
 import { mockTests, TestsPage } from '@/pages/TestsPage';
 import { TheoryPage } from '@/pages/TheoryPage';
-import { TrainerPage } from '@/pages/TrainerPage';
+import { TrainerPage, wordsForTrainers } from '@/pages/TrainerPage';
 import {
   getRouteDictant,
   getRouteMain,
@@ -11,7 +11,6 @@ import {
   getRouteTests,
   getRouteTheory,
   getRouteTrainer,
-  trainerRoutes,
 } from '@/shared/const/router';
 import { AppRoutes } from '@/shared/types/router';
 import { RouteProps } from 'react-router-dom';
@@ -28,9 +27,9 @@ export const routeConfig: Record<AppRoutes, RouteProps> = {
   },
 
   ...[
-    ...trainerRoutes.map((route) => ({
-      path: getRouteTrainer(route.subcategory),
-      element: <TrainerPage key={route.subcategory} words={route.words} />,
+    ...Object.entries(wordsForTrainers).map(([theme, words]) => ({
+      path: getRouteTrainer(theme),
+      element: <TrainerPage theme={theme} key={theme} words={words} />,
     })),
 
     ...mockDictants.map((dictant) =>

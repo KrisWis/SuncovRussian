@@ -1,6 +1,6 @@
 import { useCallback } from 'react';
 
-import { WordsTypes } from '../../model/types/types';
+import { WordsForTrainersTypes } from '../../model/types/types';
 import { useTrainerActions } from '../../model/slice/TrainerPageSlice';
 
 interface useInitializeWordsResult {
@@ -8,13 +8,15 @@ interface useInitializeWordsResult {
 }
 
 export const useInitializeWords = (
-  words: WordsTypes[],
+  words: WordsForTrainersTypes[],
 ): useInitializeWordsResult => {
   const { setWords } = useTrainerActions();
 
   // Инициализация слов
   const initializeWords = useCallback(() => {
-    const wordsCopy: WordsTypes[] = JSON.parse(JSON.stringify(words));
+    const wordsCopy: WordsForTrainersTypes[] = JSON.parse(
+      JSON.stringify(words),
+    );
 
     for (const word of wordsCopy) {
       word.probability = 1;

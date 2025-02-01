@@ -1,7 +1,7 @@
-import { WordsTypes } from './types';
+import { WordsForTrainersTypes } from './types';
 
 export interface TrainerPageSliceSchema {
-  words: WordsTypes[];
+  words: WordsForTrainersTypes[];
 }
 
 export interface changeWordProbabilityPayload {

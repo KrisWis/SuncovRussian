@@ -7,7 +7,7 @@ import {
   TrainerPageSliceSchema,
 } from '../types/sliceTypes';
 import { PayloadAction } from '@reduxjs/toolkit';
-import { WordsTypes } from '../types/types';
+import { WordsForTrainersTypes } from '../types/types';
 
 const initialState: TrainerPageSliceSchema = {
   words: [],
@@ -19,7 +19,7 @@ export const TrainerPageSlice = buildSlice({
   reducers: {
     setWords: (
       state: TrainerPageSliceSchema,
-      { payload }: PayloadAction<WordsTypes[]>,
+      { payload }: PayloadAction<WordsForTrainersTypes[]>,
     ) => {
       state.words = payload;
     },

@@ -6,13 +6,10 @@ import {
   RenderResult,
   waitFor,
 } from '@testing-library/react';
-import {
-  unionTypes,
-  wordsForUnionsTests,
-} from '../model/static/wordsForUnionsTests';
 import { TrainerPage } from './TrainerPage';
-import { wordsForAccentsTests } from '../model/static/wordsForAccentsTests';
 import { getRouteTrainer } from '@/shared/const/router';
+import { wordsForTrainers } from '../model/static/wordsForTrainers';
+import { UnionsWordsInterface, unionTypes } from '../model/types/unions';
 
 // Types
 type ComparisonType = 'equal' | 'greaterThan';
@@ -72,8 +69,8 @@ describe('TrainerModeSwitcher', () => {
   // Helpers
   const setupTest = () => {
     return renderWithProviders(
-      <TrainerPage words={wordsForAccentsTests} />,
-      getRouteTrainer('accents'),
+      <TrainerPage theme="Ударения" words={wordsForTrainers['Ударения']} />,
+      getRouteTrainer('udareniya'),
     );
   };
 
@@ -135,7 +132,7 @@ describe('TrainerModeSwitcher', () => {
     clickMode('Проверка');
 
     // Кликаем на неправильные слова
-    // TODO: убрать этот valid и чтобы работало
+    // TODO: убрать этот valid и чтобы работало и чекнуть почему тест иногда не срабатывает
     clickWordAndCheckUncorrectBar(
       'PrimaryTrainerWords__valid',
       false,
@@ -173,8 +170,8 @@ describe('PrimaryTrainerWords', () => {
   // Helpers
   const setupTest = () => {
     return renderWithProviders(
-      <TrainerPage words={wordsForAccentsTests} />,
-      getRouteTrainer('accents'),
+      <TrainerPage theme="Ударения" words={wordsForTrainers['Ударения']} />,
+      getRouteTrainer('udareniya'),
     );
   };
 
@@ -267,8 +264,11 @@ describe('UnionsTrainerWords', () => {
   // Helpers
   const setupTest = () => {
     return renderWithProviders(
-      <TrainerPage words={wordsForUnionsTests} />,
-      getRouteTrainer('unions'),
+      <TrainerPage
+        theme="Виды союзов"
+        words={wordsForTrainers['Виды союзов']}
+      />,
+      getRouteTrainer('vidy-soyuzov'),
     );
   };
 
@@ -287,9 +287,9 @@ describe('UnionsTrainerWords', () => {
 
     const currentWord = (word as HTMLElement).textContent;
 
-    const wordCurrentType = wordsForUnionsTests.find(
-      (word) => word.word === currentWord,
-    )!.unionType;
+    const wordCurrentType = (
+      wordsForTrainers['Виды союзов'].items as UnionsWordsInterface[]
+    ).find((word) => word.word === currentWord)!.unionType;
 
     return wordCurrentType;
   };

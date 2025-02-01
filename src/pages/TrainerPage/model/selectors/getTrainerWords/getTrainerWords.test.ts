@@ -1,27 +1,26 @@
-import { wordsForAccentsTests } from '../../static/wordsForAccentsTests';
+import { wordsForTrainers } from '../../static/wordsForTrainers';
 import { getWords } from './getTrainerWords';
-import { wordsForUnionsTests } from '../../static/wordsForUnionsTests';
 import { StateSchema } from '@/shared/lib/store';
 
 describe('getWords', () => {
   test('should return trainer test words', () => {
     const initialStateWithPrimaryTests: DeepPartial<StateSchema> = {
       Trainer: {
-        words: wordsForAccentsTests,
+        words: wordsForTrainers['Ударения'].items,
       },
     };
 
     const initialStateWithUnionsTests: DeepPartial<StateSchema> = {
       Trainer: {
-        words: wordsForUnionsTests,
+        words: wordsForTrainers['Виды союзов'].items,
       },
     };
 
     expect(getWords(initialStateWithPrimaryTests as StateSchema)).toBe(
-      wordsForAccentsTests,
+      wordsForTrainers['Ударения'].items,
     );
     expect(getWords(initialStateWithUnionsTests as StateSchema)).toBe(
-      wordsForUnionsTests,
+      wordsForTrainers['Виды союзов'].items,
     );
   });
 });

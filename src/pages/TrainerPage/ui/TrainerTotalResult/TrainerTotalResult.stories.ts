@@ -1,6 +1,6 @@
 import type { Meta, StoryObj } from '@storybook/react';
 import { TrainerTotalResult } from './TrainerTotalResult';
-import { wordsForAccentsTests } from '../../model/static/wordsForAccentsTests';
+import { wordsForTrainers } from '../../model/static/wordsForTrainers';
 
 const meta = {
   title: 'Pages/Trainer/TrainerTotalResult',
@@ -15,7 +15,8 @@ type Story = StoryObj<typeof meta>;
 
 export const Primary: Story = {
   args: {
-    words: wordsForAccentsTests,
+    words: wordsForTrainers['Ударения'],
     updateRandomWord: () => {},
+    theme: 'Ударения',
   },
 };

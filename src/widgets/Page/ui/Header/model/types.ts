@@ -1,12 +1,3 @@
-export type TrainerSubcategories =
-  | 'Ударения'
-  | 'Словарные слова'
-  | 'Виды союзов'
-  | 'Наречия'
-  | 'Н/НН'
-  | 'Пре-При'
-  | 'Морфологические нормы';
-
 export interface HeaderSubItem {
   subtheme: string;
 }
@@ -20,10 +11,10 @@ export type HeaderMenu = {
   Тесты: string[];
   Диктанты: HeaderSubMenu[];
   Теория: string[];
-  Тренажеры: TrainerSubcategories[];
+  Тренажеры: string[];
 };
 
-export type HeaderCategoryType = keyof HeaderMenu | TrainerSubcategories;
+export type HeaderCategoryType = keyof HeaderMenu;
 
 export type HeaderRoutes = {
   [key in HeaderCategoryType]: string;

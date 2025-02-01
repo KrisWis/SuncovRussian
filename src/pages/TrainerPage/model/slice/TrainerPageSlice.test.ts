@@ -5,11 +5,9 @@ import { TrainerActions } from './TrainerPageSlice';
 const mockWords: TrainerWordsInterface[] = [
   {
     id: 0,
-    trainerType: 'ударения',
   },
   {
     id: 1,
-    trainerType: 'виды союзов',
   },
 ];
 

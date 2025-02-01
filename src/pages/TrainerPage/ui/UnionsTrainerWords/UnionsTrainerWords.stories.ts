@@ -1,6 +1,7 @@
 import type { Meta, StoryObj } from '@storybook/react';
 import { UnionsTrainerWords } from './UnionsTrainerWords';
-import { wordsForUnionsTests } from '../../model/static/wordsForUnionsTests';
+import { wordsForTrainers } from '../../model/static/wordsForTrainers';
+import { UnionsWordsInterface } from '../../model/types/unions';
 
 const meta = {
   title: 'Pages/Trainer/UnionsTrainerWords',
@@ -15,7 +16,9 @@ type Story = StoryObj<typeof meta>;
 
 export const Primary: Story = {
   args: {
-    randomWord: wordsForUnionsTests[0],
+    randomWord: (
+      wordsForTrainers['виды союзов'].items as UnionsWordsInterface[]
+    )[0],
     wordOnSuccess: () => {},
     wordOnFail: () => {},
   },

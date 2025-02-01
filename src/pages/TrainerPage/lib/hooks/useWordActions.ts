@@ -1,6 +1,6 @@
 import { useCallback, useContext, useState } from 'react';
 import { useRandomWord } from './useRandomWord';
-import { TrainerWordsInterface } from '../../model/types/types';
+import { WordsForTrainersTypes } from '../../model/types/types';
 import { useTrainerActions } from '../../model/slice/TrainerPageSlice';
 import { playAudio } from '@/shared/utils/playAudio';
 import { useInitializeWords } from './useInitializeWords';
@@ -8,7 +8,7 @@ import { useWords } from '../../model/selectors/getTrainerWords/getTrainerWords'
 import { TrainerPageContext } from '../../model/context/TrainerPageContext';
 
 export type wordActionsFunctionType = (
-  words: TrainerWordsInterface[],
+  words: WordsForTrainersTypes[],
   isErrorWork: boolean,
   randomWordId: number | null,
 ) => void;
@@ -54,7 +54,7 @@ export const useWordActions = (
   // Показ нового слова
   const showNewWord = useCallback(
     (
-      words: TrainerWordsInterface[],
+      words: WordsForTrainersTypes[],
       isErrorWork: boolean,
       randomWordId: number | null,
     ) => {
@@ -123,7 +123,7 @@ export const useWordActions = (
   // Изменение вероятности при правильном ответе
   const wordOnFail = useCallback(
     (
-      words: TrainerWordsInterface[],
+      words: WordsForTrainersTypes[],
       isErrorWork: boolean,
       randomWordId: number | null,
     ) => {
@@ -164,7 +164,7 @@ export const useWordActions = (
   // Изменение вероятности при правильном ответе
   const wordOnSuccess = useCallback(
     (
-      words: TrainerWordsInterface[],
+      words: WordsForTrainersTypes[],
       isErrorWork: boolean,
       randomWordId: number | null,
     ) => {

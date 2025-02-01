@@ -1,5 +1,5 @@
 import { Flex } from '@/shared/lib/Stack';
-import { memo, useContext } from 'react';
+import { Fragment, memo, useContext } from 'react';
 import { tabletMediaQueryWidth } from '@/shared/const/global';
 import { useWords } from '../../model/selectors/getTrainerWords/getTrainerWords';
 import { TrainerPageContext } from '../../model/context/TrainerPageContext';
@@ -29,16 +29,17 @@ export const PrimaryTrainerWords: React.FC<PrimaryTrainerWordsProps> = memo(
     const printWord = (word: string): React.ReactNode => {
       return (
         <>
-          {['cловарные слова', 'пре-при'].includes(randomWord.trainerType) ? (
+          {randomWord.differenceIndexes ? (
             <Flex>
               {word.split('').map((letter, index) => (
-                <>
+                // eslint-disable-next-line react/no-array-index-key
+                <Fragment key={word + letter + index}>
                   {letter === ' ' ? (
                     <span style={{ width: 7 }}></span>
                   ) : (
                     <span
                       // eslint-disable-next-line react/no-array-index-key
-                      key={word + index + letter}
+                      key={word + letter + index}
                       style={{
                         fontWeight:
                           randomWord.differenceIndexes &&
@@ -50,7 +51,7 @@ export const PrimaryTrainerWords: React.FC<PrimaryTrainerWordsProps> = memo(
                       {letter}
                     </span>
                   )}
-                </>
+                </Fragment>
               ))}
             </Flex>
           ) : (
