@@ -44,46 +44,62 @@ export const DictantInner: React.FC<DictantProps> = memo(
                       splitTextBySentences.slice(0, sentenceIndex).join('. ')
                         .length + (sentenceIndex > 0 ? 2 : 0);
 
+                    // Определяем, является ли первое слово темой
+                    const firstWordIsTheme = /&(.+?)&/g.test(sentenceWords[0]);
+
                     return (
                       <Flex
                         gap="5"
                         width="100"
-                        wrap
+                        justify="center"
+                        direction="column"
                         key={previousSentencesLength}
                       >
-                        {sentenceWords.map((word, localWordIndex) => {
-                          let currentPosition = 0;
+                        {firstWordIsTheme && (
+                          <span className={styles.Dictant__sentenceTheme}>
+                            {sentenceWords[0].replace(/&/g, '')}
+                          </span>
+                        )}
 
-                          for (
-                            let i = 0;
-                            i < splitTextBySentences.length;
-                            i++
-                          ) {
-                            const currentSentence =
-                              splitTextBySentences[i].trim();
+                        <Flex gap="5" wrap>
+                          {sentenceWords.map((word, localWordIndex) => {
+                            if (firstWordIsTheme && localWordIndex === 0)
+                              return;
 
-                            if (i < sentenceIndex) {
-                              currentPosition += currentSentence.length + 2; // +2 для учета '. '
-                            } else if (i === sentenceIndex) {
-                              break;
+                            let currentPosition = 0;
+
+                            for (
+                              let i = 0;
+                              i < splitTextBySentences.length;
+                              i++
+                            ) {
+                              const currentSentence =
+                                splitTextBySentences[i].trim();
+
+                              if (i < sentenceIndex) {
+                                currentPosition += currentSentence.length + 2; // +2 для учета '. '
+                              } else if (i === sentenceIndex) {
+                                break;
+                              }
                             }
-                          }
 
-                          const globalLetterIndex =
-                            text.split('').slice(0, currentPosition).length +
-                            sentenceWords.slice(0, localWordIndex).join(' ')
-                              .length +
-                            (localWordIndex === 0 ? 2 : 3);
+                            const globalLetterIndex =
+                              text.split('').slice(0, currentPosition).length +
+                              sentenceWords.slice(0, localWordIndex).join(' ')
+                                .length +
+                              (localWordIndex === 0 ? 2 : 3);
 
-                          return generateLetter(
-                            localWordIndex,
-                            globalLetterIndex,
-                            word,
-                            splitSymbol,
-                            maxCorrectLetters,
-                            isMissed,
-                          );
-                        })}
+                            return generateLetter(
+                              localWordIndex,
+                              globalLetterIndex,
+                              word,
+                              splitSymbol,
+                              maxCorrectLetters,
+                              isMissed,
+                              firstWordIsTheme,
+                            );
+                          })}
+                        </Flex>
                       </Flex>
                     );
                   })}
@@ -102,6 +118,7 @@ export const DictantInner: React.FC<DictantProps> = memo(
                       splitSymbol,
                       maxCorrectLetters,
                       isMissed,
+                      false,
                     );
                   })}
                 </>

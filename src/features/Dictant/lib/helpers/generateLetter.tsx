@@ -10,6 +10,7 @@ export const generateLetter = (
   splitSymbol: string,
   maxCorrectLetters: number,
   isMissed: boolean,
+  firstWordIsTheme: boolean,
 ): React.JSX.Element => {
   // Функция для объедения функций инпутов
   const handleInput = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -19,7 +20,11 @@ export const generateLetter = (
 
   return (
     <span
-      className={localWordIndex === 0 ? styles.Dictant__firstWord : ''}
+      className={
+        localWordIndex === (firstWordIsTheme ? 1 : 0)
+          ? styles.Dictant__firstWord
+          : ''
+      }
       key={word + globalLetterIndex}
     >
       {word.split('').map((letter, letterIndex) => {

@@ -82,4 +82,16 @@
   &__firstWord {
     margin-left: 20px;
   }
+
+  &__sentenceTheme {
+    font-family: var(--font-family-bold);
+    font-size: 42px;
+    line-height: 130%;
+    letter-spacing: 0.01em;
+    color: var(--color-black);
+
+    @media (max-width: $laptop-mediaquery-width) {
+      font-size: 25px;
+    }
+  }
 }
