@@ -1,19 +1,10 @@
 import { Flex } from '@/shared/lib/Stack';
 import * as styles from './Dictant.module.scss';
-import {
-  Fragment,
-  memo,
-  useCallback,
-  useContext,
-  useEffect,
-  useMemo,
-  useState,
-} from 'react';
-import { clearClassesOnInput } from '../lib/helpers/clearClassesOnInput';
-import { goToNextInput } from '../lib/helpers/goToNextInput';
+import { memo, useContext, useEffect, useMemo, useState } from 'react';
 import { DictantContext } from '../model/context/DictantContext';
 import { DictantFooter } from './DictantFooter/DictantFooter';
-import { goToPrevInput } from '../lib/helpers/goToPrevInput';
+import { generateLetter } from '../lib/helpers/generateLetter';
+
 interface DictantProps {
   text: string;
 }
@@ -23,15 +14,11 @@ const splitSymbol: string = '*';
 export const DictantInner: React.FC<DictantProps> = memo(
   ({ text }): React.JSX.Element => {
     // Разделяем текст на массив
-    const splitText: string[] = useMemo(() => text.split(' '), [text]);
+    const splitTextByWords: string[] = useMemo(() => text.split(' '), [text]);
 
-    // Функция для объедения функций инпутов
-    const handleInput = useCallback(
-      (e: React.ChangeEvent<HTMLInputElement>) => {
-        clearClassesOnInput(e.target as HTMLInputElement, true);
-        goToNextInput(e);
-      },
-      [],
+    const splitTextBySentences: string[] = useMemo(
+      () => text.split('.').filter((sentence) => sentence.trim()),
+      [text],
     );
 
     // Получение данных из контекста
@@ -42,57 +29,83 @@ export const DictantInner: React.FC<DictantProps> = memo(
       <Flex direction="column" gap="70" width="100">
         <Flex relative direction="column" gap="10" width="100">
           <Flex direction="column" width="80" className={styles.Dictant}>
-            <Flex wrap gap="5" className={styles.Dictant__text}>
-              {splitText.map((word, wordIndex) => {
-                const globalLetterIndex =
-                  splitText.slice(0, wordIndex).join(' ').length +
-                  (wordIndex > 0 ? 2 : 1);
+            <Flex
+              wrap
+              gap={splitTextBySentences.length > 1 ? '15' : '5'}
+              className={styles.Dictant__text}
+            >
+              {splitTextBySentences.length > 1 ? (
+                <>
+                  {splitTextBySentences.map((sentence, sentenceIndex) => {
+                    const sentenceWords = sentence.trim().split(' ');
 
-                return (
-                  <Fragment key={word + globalLetterIndex}>
-                    <div>
-                      {word.split('').map(
-                        (
-                          letter,
-                          letterIndex, // Проходимся циклом по всему тексту
-                        ) => {
-                          const currentGlobalIndex =
-                            globalLetterIndex + letterIndex;
+                    // Вычисляем смещение для текущего предложения
+                    const previousSentencesLength =
+                      splitTextBySentences.slice(0, sentenceIndex).join('. ')
+                        .length + (sentenceIndex > 0 ? 2 : 0);
 
-                          return (word[letterIndex - 1] === splitSymbol &&
-                            word[letterIndex + 1] === splitSymbol) ||
-                            ([
-                              word[letterIndex - 2],
-                              word[letterIndex - 1],
-                            ].includes(splitSymbol) &&
-                              letter === splitSymbol) ? (
-                            ''
-                          ) : letter === splitSymbol ? ( // И если встречаем "*"
-                            <input
-                              data-testid="Dictant__input"
-                              onInput={handleInput}
-                              onKeyDown={goToPrevInput}
-                              id={`DictantInput__${currentGlobalIndex}`}
-                              className={`${styles.Dictant__input} Dictant__input`}
-                              type="text"
-                              maxLength={1}
-                              key={letter + currentGlobalIndex}
-                              readOnly={maxCorrectLetters > 0 && !isMissed}
-                              autoComplete="off"
-                            />
-                          ) : (
-                            letter
+                    return (
+                      <Flex
+                        gap="5"
+                        width="100"
+                        wrap
+                        key={previousSentencesLength}
+                      >
+                        {sentenceWords.map((word, localWordIndex) => {
+                          let currentPosition = 0;
+
+                          for (
+                            let i = 0;
+                            i < splitTextBySentences.length;
+                            i++
+                          ) {
+                            const currentSentence =
+                              splitTextBySentences[i].trim();
+
+                            if (i < sentenceIndex) {
+                              currentPosition += currentSentence.length + 2; // +2 для учета '. '
+                            } else if (i === sentenceIndex) {
+                              break;
+                            }
+                          }
+
+                          const globalLetterIndex =
+                            text.split('').slice(0, currentPosition).length +
+                            sentenceWords.slice(0, localWordIndex).join(' ')
+                              .length +
+                            (localWordIndex === 0 ? 2 : 3);
+
+                          return generateLetter(
+                            localWordIndex,
+                            globalLetterIndex,
+                            word,
+                            splitSymbol,
+                            maxCorrectLetters,
+                            isMissed,
                           );
-                        },
-                      )}
-                    </div>
+                        })}
+                      </Flex>
+                    );
+                  })}
+                </>
+              ) : (
+                <>
+                  {splitTextByWords.map((word, wordIndex) => {
+                    const globalLetterIndex =
+                      splitTextByWords.slice(0, wordIndex).join(' ').length +
+                      (wordIndex > 0 ? 2 : 1);
 
-                    {word.endsWith('.') && (
-                      <div className={styles.Dictant__sentenceSeaparator}></div>
-                    )}
-                  </Fragment>
-                );
-              })}
+                    return generateLetter(
+                      wordIndex,
+                      globalLetterIndex,
+                      word,
+                      splitSymbol,
+                      maxCorrectLetters,
+                      isMissed,
+                    );
+                  })}
+                </>
+              )}
             </Flex>
           </Flex>
 

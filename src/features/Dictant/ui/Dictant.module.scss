@@ -37,6 +37,10 @@
       height: 15px;
     }
 
+    &:focus {
+      background-color: var(--color-gray);
+    }
+
     &__incorrect {
       background-color: var(--color-warn);
     }
@@ -63,10 +67,6 @@
         }
       }
     }
-
-    &:focus {
-      background-color: var(--color-gray);
-    }
   }
 
   &__total {
@@ -79,8 +79,7 @@
     bottom: -50px;
   }
 
-  &__sentenceSeaparator {
-    width: 100%;
-    height: 5px;
+  &__firstWord {
+    margin-left: 20px;
   }
 }
