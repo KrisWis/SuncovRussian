@@ -1,7 +1,7 @@
 import { memo, Suspense, useEffect } from 'react';
 import { Route, Routes } from 'react-router-dom';
 import { routeConfig } from '../config/routeConfig';
-import { PageLoading } from '@/shared/ui/PageLoading/PageLoading';
+import { PageLoading } from '@/shared/ui/PageLoading/ui/PageLoading';
 
 export const AppRouter: React.FC = memo(() => {
   // Добавление data-атрибута в body в зависимости от режима сборки

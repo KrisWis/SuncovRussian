@@ -1,6 +1,6 @@
 import { memo, useEffect, useMemo, useState } from 'react';
 import { useGetAllTheoriesMutation } from '../model/api/theoryPageApi';
-import { PageLoading } from '@/shared/ui/PageLoading/PageLoading';
+import { PageLoading } from '@/shared/ui/PageLoading/ui/PageLoading';
 import { ErrorComponent } from '@/shared/ui/ErrorComponent';
 import { Flex } from '@/shared/lib/Stack';
 import * as styles from './TheoryPage.module.scss';

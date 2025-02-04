@@ -8,6 +8,8 @@ import { ErrorComponent } from '@/shared/ui/ErrorComponent';
 import { store } from '@/shared/lib/store';
 import { BrowserRouter } from 'react-router-dom';
 
+// TODO: сделать сниппеты под этот проект
+
 const container = document.getElementById('root');
 
 if (!container) {

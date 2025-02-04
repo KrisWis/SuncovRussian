@@ -1,4 +1,4 @@
-import { DictantType } from '../types/types';
+import { DictantType } from '../../../../features/Dictant/model/types/types';
 
 // TODO: удалить потом mockDictants и брать данные с бека
 export const mockDictants: DictantType[] = [

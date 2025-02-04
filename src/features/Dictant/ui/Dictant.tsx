@@ -2,11 +2,13 @@ import { Flex } from '@/shared/lib/Stack';
 import * as styles from './Dictant.module.scss';
 import { memo, useContext, useEffect, useMemo, useState } from 'react';
 import { DictantContext } from '../model/context/DictantContext';
-import { DictantFooter } from './DictantFooter/DictantFooter';
 import { generateLetter } from '../lib/helpers/generateLetter';
+import { TemplateForTests } from '@/shared/ui/TemplateForTests';
+import { useCheckCorrectness } from '../lib/hooks/useCheckCorrectness';
 
 interface DictantProps {
   text: string;
+  theme?: string;
 }
 
 const splitSymbol: string = '*';
@@ -22,8 +24,7 @@ export const DictantInner: React.FC<DictantProps> = memo(
     );
 
     // Получение данных из контекста
-    const { correctLetters, maxCorrectLetters, isMissed } =
-      useContext(DictantContext);
+    const { maxCorrectLetters, isMissed } = useContext(DictantContext);
 
     return (
       <Flex direction="column" gap="70" width="100">
@@ -125,15 +126,7 @@ export const DictantInner: React.FC<DictantProps> = memo(
               )}
             </Flex>
           </Flex>
-
-          {maxCorrectLetters > 0 && !isMissed && (
-            <span className={styles.Dictant__total}>
-              Итог: {correctLetters}/{maxCorrectLetters}
-            </span>
-          )}
         </Flex>
-
-        <DictantFooter splitSymbol={splitSymbol} text={text} />
       </Flex>
     );
   },
@@ -142,7 +135,7 @@ export const DictantInner: React.FC<DictantProps> = memo(
 DictantInner.displayName = 'DictantInner';
 
 export const Dictant: React.FC<DictantProps> = memo(
-  ({ text }): React.JSX.Element => {
+  ({ theme, text }): React.JSX.Element => {
     // Настройка контекста
     const [correctLetters, setCorrectLetters] = useState(0);
     const [maxCorrectLetters, setMaxCorrectLetters] = useState(0);
@@ -157,6 +150,16 @@ export const Dictant: React.FC<DictantProps> = memo(
       setIsMissed(false);
     }, [text]);
 
+    // Получаем функцию проверки из хука
+    const { checkCorrectness } = useCheckCorrectness(
+      text,
+      splitSymbol,
+      setCorrectLetters,
+      setMaxCorrectLetters,
+      setIsIncorrect,
+      setIsMissed,
+    );
+
     return (
       <DictantContext.Provider
         value={{
@@ -170,7 +173,18 @@ export const Dictant: React.FC<DictantProps> = memo(
           maxCorrectLetters,
         }}
       >
-        <DictantInner text={text} />
+        <TemplateForTests
+          testElement={<DictantInner text={text} />}
+          checkButtonOnClick={checkCorrectness}
+          correctAnswersCount={correctLetters}
+          maxCorrectAnswersCount={maxCorrectLetters}
+          testIsFailed={isIncorrect}
+          testHasMissedAnswers={isMissed}
+          theme={theme}
+          dataTestIdForCheckButton={'Dictant__check'}
+          dataTestIdForLike={'Dictant__like'}
+          dataTestIdForDislike={'Dictant__dislike'}
+        />
       </DictantContext.Provider>
     );
   },

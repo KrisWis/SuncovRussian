@@ -1,8 +1,15 @@
-.DictantFooter {
+.TemplateForTests {
+  &__title {
+    font-family: var(--font-family-bold);
+    font-size: 30px;
+    line-height: 100%;
+    color: #000;
+    text-transform: lowercase;
+  }
+
   &__mark {
     position: absolute;
     right: 15%;
-    height: 300px;
   }
 
   &__check {
