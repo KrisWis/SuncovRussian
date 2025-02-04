@@ -1,12 +1,13 @@
 import { memo } from 'react';
 import { Header } from './Header/ui/Header';
 import { Flex } from '@/shared/lib/Stack';
-
+import * as styles from './Page.module.scss';
 interface PageProps {
   children: React.ReactNode;
   withHomeButton?: boolean;
   'data-testid'?: string;
   className?: string;
+  withMarginTop?: boolean;
 }
 
 export const Page: React.FC<PageProps> = memo(
@@ -15,6 +16,7 @@ export const Page: React.FC<PageProps> = memo(
     withHomeButton = true,
     'data-testid': dataTestId,
     className,
+    withMarginTop = false,
   }): React.JSX.Element => {
     return (
       <Flex direction="column" width="100" maxHeight data-testid={dataTestId}>
@@ -24,7 +26,9 @@ export const Page: React.FC<PageProps> = memo(
           style={{
             justifyContent: process.env.STORYBOOK ? 'center' : 'space-between',
           }}
-          className={className}
+          className={`${className} ${
+            withMarginTop ? styles.Page__withMarginTop : ''
+          }`}
         >
           {children}
         </main>

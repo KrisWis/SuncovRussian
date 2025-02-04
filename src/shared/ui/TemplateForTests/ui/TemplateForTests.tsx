@@ -16,6 +16,7 @@ interface TemplateForTestsProps {
   testHasMissedAnswers: boolean;
 
   // Optional props
+  className?: string;
   theme?: string;
   dataTestIdForCheckButton?: string;
   dataTestIdForLike?: string;
@@ -24,6 +25,7 @@ interface TemplateForTestsProps {
 
 export const TemplateForTests: React.FC<TemplateForTestsProps> = memo(
   ({
+    className,
     theme,
     testElement,
     dataTestIdForCheckButton,
@@ -36,8 +38,16 @@ export const TemplateForTests: React.FC<TemplateForTestsProps> = memo(
     testHasMissedAnswers,
   }): React.JSX.Element => {
     return (
-      <Flex direction="column" gap="50" maxHeight width="100">
-        <h1 className={styles.TemplateForTests__title}>тема: {theme}</h1>
+      <Flex
+        direction="column"
+        gap="50"
+        maxHeight
+        width="100"
+        className={className}
+      >
+        {theme && (
+          <h1 className={styles.TemplateForTests__title}>тема: {theme}</h1>
+        )}
 
         {testElement}
 

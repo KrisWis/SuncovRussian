@@ -6,10 +6,65 @@ export const mockTests: TestsType = {
     {
       type: 'radioButtons',
       caption: 'Укажите существительное 1 склонения',
+      hasOneCorrectAnswer: true,
       items: [
         {
           value: 'перо',
           isCorrect: false,
+        },
+
+        {
+          value: 'утюг',
+          isCorrect: false,
+        },
+
+        {
+          value: 'река',
+          isCorrect: true,
+        },
+
+        {
+          value: 'дом',
+          isCorrect: false,
+        },
+      ],
+    },
+
+    {
+      type: 'radioButtons',
+      caption: 'Укажите существительное 2 склонения',
+      hasOneCorrectAnswer: true,
+      items: [
+        {
+          value: 'перо',
+          isCorrect: false,
+        },
+
+        {
+          value: 'утюг',
+          isCorrect: false,
+        },
+
+        {
+          value: 'река',
+          isCorrect: true,
+        },
+
+        {
+          value: 'дом',
+          isCorrect: false,
+        },
+      ],
+    },
+
+    {
+      type: 'radioButtons',
+      caption: 'Укажите существительное 3 склонения',
+      hasOneCorrectAnswer: false,
+      items: [
+        {
+          value: 'перо',
+          isCorrect: true,
         },
 
         {

@@ -1,0 +1,33 @@
+.RadioButtonsTest {
+  padding: 10px 30px;
+  padding-bottom: 25px;
+  border: 1.5px solid var(--color-black);
+  border-radius: 20px;
+  line-height: 100%;
+  color: #000;
+
+  &__caption {
+    font-size: 20px;
+    font-weight: 600;
+  }
+
+  &__itemLabel {
+    font-size: 18px;
+    font-weight: 900;
+  }
+
+  &__itemRadio {
+    appearance: none;
+    width: 15px;
+    height: 15px;
+    border: 2px solid var(--color-black);
+    border-radius: 50%;
+    cursor: pointer;
+    background-color: var(--color-white);
+    transition: background-color var(--transition-duration-default) linear;
+
+    &:checked {
+      background-color: var(--color-black);
+    }
+  }
+}
