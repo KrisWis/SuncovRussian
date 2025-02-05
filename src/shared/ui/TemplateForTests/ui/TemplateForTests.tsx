@@ -52,7 +52,6 @@ export const TemplateForTests: React.FC<TemplateForTestsProps> = memo(
         {testElement}
 
         <Flex
-          maxHeight
           align="start"
           relative
           justify="center"

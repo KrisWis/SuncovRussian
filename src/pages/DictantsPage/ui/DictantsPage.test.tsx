@@ -1,18 +1,30 @@
 import { getRouteDictant } from '@/shared/const/router';
 import { renderWithProviders } from '@/shared/tests/renderWithProviders';
 import { transliterate } from '@/shared/utils/transliterate';
-import { Dictant } from './Dictant';
 import { queries, RenderResult, waitFor } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
+import { DictantsPage } from './DictantsPage';
+import { DictantItem } from '@/features/Dictant';
 
 // Mocks
-const mockDictantText: string = 'певц*ы*, творец**.';
-const mockDictantTextWithSentences: string = `
+const mockDictant: DictantItem = {
+  subtheme: 'Тема',
+  text: 'певц*ы*, творец**.',
+};
+
+const mockDictantWithSentences: DictantItem = {
+  subtheme: 'Тема',
+  text: `
 певц*ы*, творец**.
-рыб*ы*, шутка**.`;
-const mockDictantTextWithSentencesAndThemes: string = `
+рыб*ы*, шутка**.`,
+};
+
+const mockDictantWithSentencesAndThemes: DictantItem = {
+  subtheme: 'Тема',
+  text: `
 &Тема& певц*ы*, творец**.
-&Тема& рыб*ы*, шутка**.`;
+&Тема& рыб*ы*, шутка**.`,
+};
 
 const mockDictantTheme = 'theme';
 const mockDictantSubtheme = 'subtheme';
@@ -22,7 +34,7 @@ describe('Dictant with Words', () => {
   // Helpers
   const setupTest = () => {
     return renderWithProviders(
-      <Dictant text={mockDictantText} />,
+      <DictantsPage dictant={mockDictant} />,
       getRouteDictant(
         transliterate(mockDictantTheme),
         transliterate(mockDictantSubtheme),
@@ -80,7 +92,7 @@ describe('Dictant with Sentences', () => {
   // Helpers
   const setupTest = () => {
     return renderWithProviders(
-      <Dictant text={mockDictantTextWithSentences} />,
+      <DictantsPage dictant={mockDictantWithSentences} />,
       getRouteDictant(
         transliterate(mockDictantTheme),
         transliterate(mockDictantSubtheme),
@@ -134,7 +146,7 @@ describe('Dictant with Sentences and Themes', () => {
   // Helpers
   const setupTest = () => {
     return renderWithProviders(
-      <Dictant text={mockDictantTextWithSentencesAndThemes} />,
+      <DictantsPage dictant={mockDictantWithSentencesAndThemes} />,
       getRouteDictant(
         transliterate(mockDictantTheme),
         transliterate(mockDictantSubtheme),

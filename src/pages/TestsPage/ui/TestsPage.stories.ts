@@ -5,7 +5,7 @@ const meta = {
   title: 'Pages/Tests',
   component: TestsPage,
   parameters: {
-    layout: 'centered',
+    layout: 'fullscreen',
   },
 } satisfies Meta<typeof TestsPage>;
 

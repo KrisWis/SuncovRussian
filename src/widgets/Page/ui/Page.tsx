@@ -23,10 +23,7 @@ export const Page: React.FC<PageProps> = memo(
         <Header withHomeButton={withHomeButton} />
 
         <main
-          style={{
-            justifyContent: process.env.STORYBOOK ? 'center' : 'space-between',
-          }}
-          className={`${className} ${
+          className={`${className ? className : ''} ${
             withMarginTop ? styles.Page__withMarginTop : ''
           }`}
         >

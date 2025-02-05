@@ -1,19 +1,16 @@
 import { Flex } from '@/shared/lib/Stack';
 import * as styles from './Dictant.module.scss';
-import { memo, useContext, useEffect, useMemo, useState } from 'react';
+import { memo, useContext, useMemo } from 'react';
 import { DictantContext } from '../model/context/DictantContext';
 import { generateLetter } from '../lib/helpers/generateLetter';
-import { TemplateForTests } from '@/shared/ui/TemplateForTests';
-import { useCheckCorrectness } from '../lib/hooks/useCheckCorrectness';
 
-interface DictantProps {
+export interface DictantProps {
   text: string;
-  theme?: string;
 }
 
-const splitSymbol: string = '*';
+export const splitSymbolForDictant: string = '*';
 
-export const DictantInner: React.FC<DictantProps> = memo(
+export const Dictant: React.FC<DictantProps> = memo(
   ({ text }): React.JSX.Element => {
     // Разделяем текст на массив
     const splitTextByWords: string[] = useMemo(() => text.split(' '), [text]);
@@ -94,7 +91,7 @@ export const DictantInner: React.FC<DictantProps> = memo(
                               localWordIndex,
                               globalLetterIndex,
                               word,
-                              splitSymbol,
+                              splitSymbolForDictant,
                               maxCorrectLetters,
                               isMissed,
                               firstWordIsTheme,
@@ -116,7 +113,7 @@ export const DictantInner: React.FC<DictantProps> = memo(
                       wordIndex,
                       globalLetterIndex,
                       word,
-                      splitSymbol,
+                      splitSymbolForDictant,
                       maxCorrectLetters,
                       isMissed,
                       false,
@@ -128,64 +125,6 @@ export const DictantInner: React.FC<DictantProps> = memo(
           </Flex>
         </Flex>
       </Flex>
-    );
-  },
-);
-
-DictantInner.displayName = 'DictantInner';
-
-export const Dictant: React.FC<DictantProps> = memo(
-  ({ theme, text }): React.JSX.Element => {
-    // Настройка контекста
-    const [correctLetters, setCorrectLetters] = useState(0);
-    const [maxCorrectLetters, setMaxCorrectLetters] = useState(0);
-    const [isIncorrect, setIsIncorrect] = useState(false);
-    const [isMissed, setIsMissed] = useState(false);
-
-    // Инициализация начальных значений
-    useEffect(() => {
-      setMaxCorrectLetters(0);
-      setCorrectLetters(0);
-      setIsIncorrect(false);
-      setIsMissed(false);
-    }, [text]);
-
-    // Получаем функцию проверки из хука
-    const { checkCorrectness } = useCheckCorrectness(
-      text,
-      splitSymbol,
-      setCorrectLetters,
-      setMaxCorrectLetters,
-      setIsIncorrect,
-      setIsMissed,
-    );
-
-    return (
-      <DictantContext.Provider
-        value={{
-          isMissed,
-          setIsMissed,
-          isIncorrect,
-          setIsIncorrect,
-          setCorrectLetters,
-          setMaxCorrectLetters,
-          correctLetters,
-          maxCorrectLetters,
-        }}
-      >
-        <TemplateForTests
-          testElement={<DictantInner text={text} />}
-          checkButtonOnClick={checkCorrectness}
-          correctAnswersCount={correctLetters}
-          maxCorrectAnswersCount={maxCorrectLetters}
-          testIsFailed={isIncorrect}
-          testHasMissedAnswers={isMissed}
-          theme={theme}
-          dataTestIdForCheckButton={'Dictant__check'}
-          dataTestIdForLike={'Dictant__like'}
-          dataTestIdForDislike={'Dictant__dislike'}
-        />
-      </DictantContext.Provider>
     );
   },
 );
