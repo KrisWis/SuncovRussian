@@ -35,7 +35,7 @@ export const useArrowsActions = (
       showNewWord(words.items, isErrorWork, randomWordId);
     }
 
-    const wordElements = document.querySelectorAll('.TrainerWord');
+    const wordElements = document.querySelectorAll('[data-name="TrainerWord"]');
 
     const clickElements = (NotReverseIndex: number): void => {
       if (words.type === 'unions') {

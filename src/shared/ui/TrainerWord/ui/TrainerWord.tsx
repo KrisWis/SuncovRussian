@@ -15,7 +15,7 @@ export const TrainerWord: React.FC<TrainerWordProps> = memo(
     // Добавление, к переданной onClick функции, пропадания transition при клике на слово
     const handleClick = () => {
       const TrainerWords = document.querySelectorAll(
-        '.TrainerWord',
+        '[data-name="TrainerWord"]',
       ) as NodeListOf<HTMLElement>;
 
       TrainerWords.forEach((word) => {
@@ -41,8 +41,9 @@ export const TrainerWord: React.FC<TrainerWordProps> = memo(
         data-testid={dataTestId}
         width="100"
         onClick={handleClick}
-        className={`TrainerWord ${styles.TrainerWord} ${className} ${styles[`TrainerWord__${type}`]}`}
+        className={`${styles.TrainerWord} ${className} ${styles[`TrainerWord__${type}`]}`}
         style={style}
+        data-name="TrainerWord"
       >
         {children}
       </Flex>

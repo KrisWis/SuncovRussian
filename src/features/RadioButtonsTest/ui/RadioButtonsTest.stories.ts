@@ -20,6 +20,92 @@ export const WithOneCorrectAnswer: Story = {
       { value: 'утюг', isCorrect: false },
     ],
     hasOneCorrectAnswer: true,
+    index: 0,
+    tests: {
+      Склонение: [
+        {
+          type: 'radioButtons',
+          caption: 'Укажите существительное 1 склонения',
+          hasOneCorrectAnswer: true,
+          items: [
+            {
+              value: 'перо',
+              isCorrect: false,
+            },
+
+            {
+              value: 'утюг',
+              isCorrect: false,
+            },
+
+            {
+              value: 'река',
+              isCorrect: true,
+            },
+
+            {
+              value: 'дом',
+              isCorrect: false,
+            },
+          ],
+        },
+
+        {
+          type: 'radioButtons',
+          caption: 'Укажите существительное 2 склонения',
+          hasOneCorrectAnswer: true,
+          items: [
+            {
+              value: 'перо',
+              isCorrect: false,
+            },
+
+            {
+              value: 'утюг',
+              isCorrect: false,
+            },
+
+            {
+              value: 'река',
+              isCorrect: true,
+            },
+
+            {
+              value: 'дом',
+              isCorrect: false,
+            },
+          ],
+        },
+
+        {
+          type: 'radioButtons',
+          caption: 'Укажите существительное 3 склонения',
+          hasOneCorrectAnswer: false,
+          items: [
+            {
+              value: 'перо',
+              isCorrect: true,
+            },
+
+            {
+              value: 'утюг',
+              isCorrect: false,
+            },
+
+            {
+              value: 'река',
+              isCorrect: true,
+            },
+
+            {
+              value: 'дом',
+              isCorrect: false,
+            },
+          ],
+        },
+      ],
+    },
+    theme: 'test',
   },
 };
 
@@ -33,5 +119,91 @@ export const WithSomeCorrectAnswers: Story = {
       { value: 'дом', isCorrect: false },
     ],
     hasOneCorrectAnswer: false,
+    index: 0,
+    tests: {
+      Склонение: [
+        {
+          type: 'radioButtons',
+          caption: 'Укажите существительное 1 склонения',
+          hasOneCorrectAnswer: true,
+          items: [
+            {
+              value: 'перо',
+              isCorrect: false,
+            },
+
+            {
+              value: 'утюг',
+              isCorrect: false,
+            },
+
+            {
+              value: 'река',
+              isCorrect: true,
+            },
+
+            {
+              value: 'дом',
+              isCorrect: false,
+            },
+          ],
+        },
+
+        {
+          type: 'radioButtons',
+          caption: 'Укажите существительное 2 склонения',
+          hasOneCorrectAnswer: true,
+          items: [
+            {
+              value: 'перо',
+              isCorrect: false,
+            },
+
+            {
+              value: 'утюг',
+              isCorrect: false,
+            },
+
+            {
+              value: 'река',
+              isCorrect: true,
+            },
+
+            {
+              value: 'дом',
+              isCorrect: false,
+            },
+          ],
+        },
+
+        {
+          type: 'radioButtons',
+          caption: 'Укажите существительное 3 склонения',
+          hasOneCorrectAnswer: false,
+          items: [
+            {
+              value: 'перо',
+              isCorrect: true,
+            },
+
+            {
+              value: 'утюг',
+              isCorrect: false,
+            },
+
+            {
+              value: 'река',
+              isCorrect: true,
+            },
+
+            {
+              value: 'дом',
+              isCorrect: false,
+            },
+          ],
+        },
+      ],
+    },
+    theme: 'test',
   },
 };

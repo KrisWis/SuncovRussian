@@ -1,7 +1,7 @@
 // Функция для того, чтобы перебрасывать пользователя на следующий инпут при вводе символа
 export const goToNextInput = (e: React.ChangeEvent<HTMLInputElement>) => {
   const inputs = document.querySelectorAll(
-    '.Dictant__input',
+    '[data-name="Dictant__input"]',
   ) as NodeListOf<HTMLInputElement>;
 
   const currentInputIndex = Array.from(inputs).indexOf(e.target);

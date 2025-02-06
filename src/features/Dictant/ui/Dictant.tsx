@@ -1,17 +1,18 @@
 import { Flex } from '@/shared/lib/Stack';
 import * as styles from './Dictant.module.scss';
-import { memo, useContext, useMemo } from 'react';
-import { DictantContext } from '../model/context/DictantContext';
+import { memo, useMemo } from 'react';
 import { generateLetter } from '../lib/helpers/generateLetter';
 
 export interface DictantProps {
   text: string;
+  maxCorrectLetters: number;
+  isMissed: boolean;
 }
 
 export const splitSymbolForDictant: string = '*';
 
 export const Dictant: React.FC<DictantProps> = memo(
-  ({ text }): React.JSX.Element => {
+  ({ text, maxCorrectLetters, isMissed }): React.JSX.Element => {
     // Разделяем текст на массив
     const splitTextByWords: string[] = useMemo(() => text.split(' '), [text]);
 
@@ -19,9 +20,6 @@ export const Dictant: React.FC<DictantProps> = memo(
       () => text.split('.').filter((sentence) => sentence.trim()),
       [text],
     );
-
-    // Получение данных из контекста
-    const { maxCorrectLetters, isMissed } = useContext(DictantContext);
 
     return (
       <Flex direction="column" gap="70" width="100">

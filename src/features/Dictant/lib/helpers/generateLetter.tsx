@@ -1,5 +1,5 @@
 import * as styles from '../../ui/Dictant.module.scss';
-import { clearClassesOnInput } from './clearClassesOnInput';
+
 import { goToNextInput } from './goToNextInput';
 import { goToPrevInput } from './goToPrevInput';
 
@@ -14,7 +14,7 @@ export const generateLetter = (
 ): React.JSX.Element => {
   // Функция для объедения функций инпутов
   const handleInput = (e: React.ChangeEvent<HTMLInputElement>) => {
-    clearClassesOnInput(e.target as HTMLInputElement, true);
+    e.target.classList.remove(styles.Dictant__input__missed);
     goToNextInput(e);
   };
 
@@ -43,7 +43,8 @@ export const generateLetter = (
             onInput={handleInput}
             onKeyDown={goToPrevInput}
             id={`DictantInput__${currentGlobalIndex}`}
-            className={`${styles.Dictant__input} Dictant__input`}
+            className={styles.Dictant__input}
+            data-name="Dictant__input"
             type="text"
             maxLength={1}
             key={letter + currentGlobalIndex}

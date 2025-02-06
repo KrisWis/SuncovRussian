@@ -1,7 +1,10 @@
 import { Page } from '@/widgets/Page';
-import { memo } from 'react';
+import { memo, useState } from 'react';
 import { mockTests } from '../model/static/mockTests';
-import { RadioButtonsTest } from '@/features/RadioButtonsTest';
+import {
+  RadioButtonsTest,
+  useCheckRadioButtonsTestCorrectness,
+} from '@/features/RadioButtonsTest';
 import { TemplateForTests } from '@/shared/ui/TemplateForTests';
 import { Flex } from '@/shared/lib/Stack';
 
@@ -13,13 +16,24 @@ export interface TestsPageProps {
 
 export const TestsPage: React.FC<TestsPageProps> = memo(
   ({ theme }): React.JSX.Element => {
-    console.log(mockTests[theme]);
+    // Инициализация начальных значений
+    const [maxCorrectAnswersCount, setMaxCorrectAnswersCount] =
+      useState<number>(0);
+    const [correctAnswersCount, setCorrectAnswersCount] = useState<number>(0);
+    const [testIsFailed, setTestIsFailed] = useState<boolean>(false);
+    const [testHasMissedAnswers, setTestHasMissedAnswers] =
+      useState<boolean>(false);
+
+    // Получение функции проверки
+    const { checkRadioButtonsTestCorrectness } =
+      useCheckRadioButtonsTestCorrectness(theme, mockTests);
+
     return (
       <Page withMarginTop>
         <TemplateForTests
           testElement={
             <>
-              {mockTests[theme].map((test) => (
+              {mockTests[theme].map((test, index) => (
                 <Flex
                   width="100"
                   key={test.caption}
@@ -31,6 +45,9 @@ export const TestsPage: React.FC<TestsPageProps> = memo(
                       hasOneCorrectAnswer={test.hasOneCorrectAnswer}
                       caption={test.caption}
                       items={test.items}
+                      index={index}
+                      tests={mockTests}
+                      theme={theme}
                     />
                   ) : (
                     <></>
@@ -39,11 +56,11 @@ export const TestsPage: React.FC<TestsPageProps> = memo(
               ))}
             </>
           }
-          checkButtonOnClick={() => {}}
-          correctAnswersCount={0}
-          maxCorrectAnswersCount={0}
-          testIsFailed={false}
-          testHasMissedAnswers={false}
+          checkButtonOnClick={checkRadioButtonsTestCorrectness}
+          correctAnswersCount={correctAnswersCount}
+          maxCorrectAnswersCount={maxCorrectAnswersCount}
+          testIsFailed={testIsFailed}
+          testHasMissedAnswers={testHasMissedAnswers}
           theme={theme}
         />
       </Page>
