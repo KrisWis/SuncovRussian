@@ -2351,8 +2351,8 @@ export const wordsForTrainers: WordsForTrainers = {
         id: 27,
       },
       {
-        valid: 'названыйбрат',
-        invalid: 'названныйбрат',
+        valid: 'названый брат',
+        invalid: 'названный брат',
         id: 28,
       },
       {
@@ -2411,8 +2411,8 @@ export const wordsForTrainers: WordsForTrainers = {
         id: 39,
       },
       {
-        valid: 'посажёныйотец',
-        invalid: 'посажённыйотец',
+        valid: 'посажёный отец',
+        invalid: 'посажённый отец',
         id: 40,
       },
       {
@@ -2431,8 +2431,8 @@ export const wordsForTrainers: WordsForTrainers = {
         id: 43,
       },
       {
-        valid: 'прощёноевоскресенье',
-        invalid: 'прощённоевоскресенье',
+        valid: 'прощёное воскресенье',
+        invalid: 'прощённое воскресенье',
         id: 44,
       },
       {
@@ -2446,8 +2446,8 @@ export const wordsForTrainers: WordsForTrainers = {
         id: 46,
       },
       {
-        valid: 'раненныйвбою',
-        invalid: 'раненыйвбою',
+        valid: 'раненный в бою',
+        invalid: 'раненый в бою',
         id: 47,
       },
       {

@@ -236,7 +236,7 @@ export const useWordActions = (
           updateRandomWord();
           clearTimeout(timeoutForUpdate);
         },
-        mobileMediaQueryWidth.matches ? 0 : 500,
+        mobileMediaQueryWidth.matches ? 150 : 0,
       );
     },
     [
