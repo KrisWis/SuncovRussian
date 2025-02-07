@@ -51,6 +51,12 @@ export const useFocusMode = (
     }
   }, [clearProgress, focusModeFunction, focusModeIsOn]);
 
+  // Включаем по-умолчанию
+  if (focusModeIsOn) {
+    document.onvisibilitychange = focusModeFunction;
+  }
+
+  // Гененерируем айтем
   const focusModeItem = {
     name: 'Фокусировка',
     onClick: focusModeToggle,
