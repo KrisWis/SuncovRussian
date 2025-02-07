@@ -35,9 +35,11 @@
     cursor: pointer;
     user-select: none;
 
-    &:hover {
-      color: var(--color-white);
-      background-color: var(--color-black);
+    @media (hover: hover) {
+      &:hover {
+        color: var(--color-white);
+        background-color: var(--color-black);
+      }
     }
   }
 }
