@@ -3,14 +3,14 @@ import { useWords } from '../../../../model/selectors/getTrainerWords/getTrainer
 import { useCallback } from 'react';
 import { ModeSwitcherItemProps } from '@/widgets/ModeSwitcher';
 
-interface useStrictModeResult {
-  strictModeItem: ModeSwitcherItemProps;
+interface useFocusModeResult {
+  focusModeItem: ModeSwitcherItemProps;
 }
 
-export const useStrictMode = (
-  strictModeIsOn: boolean,
-  setStrictModeIsOn: (strictModeIsOn: boolean) => void,
-): useStrictModeResult => {
+export const useFocusMode = (
+  focusModeIsOn: boolean,
+  setFocusModeIsOn: (focusModeIsOn: boolean) => void,
+): useFocusModeResult => {
   // Строгий режим
   const storeWords = useWords();
 
@@ -35,31 +35,31 @@ export const useStrictMode = (
   ]);
 
   // Функция очистки прогресса когда юзер выходит с вкладки
-  const strictModeFunction = useCallback(() => {
+  const focusModeFunction = useCallback(() => {
     if (document.hidden) {
       clearProgress();
     }
   }, [clearProgress]);
 
   // Функция включения строгого режима
-  const strictModeToggle = useCallback(() => {
-    if (!strictModeIsOn) {
+  const focusModeToggle = useCallback(() => {
+    if (!focusModeIsOn) {
       clearProgress();
-      document.onvisibilitychange = strictModeFunction;
+      document.onvisibilitychange = focusModeFunction;
     } else {
       document.onvisibilitychange = null;
     }
-  }, [clearProgress, strictModeFunction, strictModeIsOn]);
+  }, [clearProgress, focusModeFunction, focusModeIsOn]);
 
-  const strictModeItem = {
-    name: 'Строгий',
-    onClick: strictModeToggle,
-    modeIsOn: strictModeIsOn,
-    setModeIsOn: setStrictModeIsOn,
+  const focusModeItem = {
+    name: 'Фокусировка',
+    onClick: focusModeToggle,
+    modeIsOn: focusModeIsOn,
+    setModeIsOn: setFocusModeIsOn,
     hintText: 'Обнуляет прогресс каждый раз, когда вы покидаете сайт.',
   };
 
   return {
-    strictModeItem,
+    focusModeItem,
   };
 };

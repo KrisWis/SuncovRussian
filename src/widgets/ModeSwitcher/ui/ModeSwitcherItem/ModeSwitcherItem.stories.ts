@@ -14,20 +14,20 @@ type Story = StoryObj<typeof meta>;
 
 export const Active: Story = {
   args: {
-    name: 'Строгий',
+    name: 'Фокусировка',
     onClick: () => {},
     modeIsOn: true,
     setModeIsOn: () => {},
-    hintText: 'Строгий режим',
+    hintText: 'Режим "Фокусировка"',
   },
 };
 
 export const InActive: Story = {
   args: {
-    name: 'Строгий',
+    name: 'Фокусировка',
     onClick: () => {},
     modeIsOn: false,
     setModeIsOn: () => {},
-    hintText: 'Строгий режим',
+    hintText: 'Режим "Фокусировка"',
   },
 };

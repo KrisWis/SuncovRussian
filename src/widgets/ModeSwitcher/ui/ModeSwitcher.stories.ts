@@ -16,7 +16,7 @@ export const Primary: Story = {
   args: {
     items: [
       {
-        name: 'Строгий',
+        name: 'Фокусировка',
         onClick: () => {},
         modeIsOn: false,
         setModeIsOn: () => {},

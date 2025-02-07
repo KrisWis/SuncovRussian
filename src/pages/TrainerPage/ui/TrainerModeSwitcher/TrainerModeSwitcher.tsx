@@ -1,13 +1,13 @@
 import { ModeSwitcher } from '@/widgets/ModeSwitcher';
 import { memo, useState } from 'react';
-import { useStrictMode } from './lib/hooks/useStrictMode';
+import { useFocusMode } from './lib/hooks/useFocusMode';
 import { useOneLifeMode } from './lib/hooks/useOneLifeMode';
 import { useCheckMode } from './lib/hooks/useCheckMode';
 
 export const TrainerModeSwitcher: React.FC = memo((): React.JSX.Element => {
-  // Строгий режим
-  const [strictModeIsOn, setStrictModeIsOn] = useState<boolean>(true);
-  const { strictModeItem } = useStrictMode(strictModeIsOn, setStrictModeIsOn);
+  // Режим "Фокусировка"
+  const [focusModeIsOn, setFocusModeIsOn] = useState<boolean>(true);
+  const { focusModeItem } = useFocusMode(focusModeIsOn, setFocusModeIsOn);
 
   // Режим одной жизни
   const { OneLifeModeItem } = useOneLifeMode();
@@ -16,7 +16,7 @@ export const TrainerModeSwitcher: React.FC = memo((): React.JSX.Element => {
   const { CheckModeItem } = useCheckMode();
 
   // Формирование режимов
-  const items = [strictModeItem, OneLifeModeItem, CheckModeItem];
+  const items = [focusModeItem, OneLifeModeItem, CheckModeItem];
 
   return <ModeSwitcher items={items} />;
 });
