@@ -6,6 +6,7 @@ import { playAudio } from '@/shared/utils/playAudio';
 import { useInitializeWords } from './useInitializeWords';
 import { useWords } from '../../model/selectors/getTrainerWords/getTrainerWords';
 import { TrainerPageContext } from '../../model/context/TrainerPageContext';
+import { mobileMediaQueryWidth } from '@/shared/const/global';
 
 export type wordActionsFunctionType = (
   words: WordsForTrainersTypes[],
@@ -230,7 +231,13 @@ export const useWordActions = (
         });
       }
 
-      updateRandomWord();
+      const timeoutForUpdate = setTimeout(
+        () => {
+          updateRandomWord();
+          clearTimeout(timeoutForUpdate);
+        },
+        mobileMediaQueryWidth.matches ? 0 : 500,
+      );
     },
     [
       changeWordConsecutivelyTimes,
