@@ -52,7 +52,6 @@
     left: 0;
     transition: var(--transition-duration-default) linear;
     transition-property: transform, opacity;
-    background-color: var(--color-white);
     padding: $submenu-padding-x;
 
     @media (max-width: $mobile-mediaquery-width) {
@@ -71,10 +70,13 @@
       font-size: 16px;
       line-height: 100%;
       color: var(--color-gray);
+      padding: 5px;
+      width: 100%;
       cursor: pointer;
       white-space: nowrap;
       text-transform: lowercase;
       transition: var(--transition-duration-default) linear color;
+      background-color: var(--color-white);
 
       @media (max-width: $mobile-mediaquery-width) {
         font-size: 10px;
@@ -89,8 +91,10 @@
     &__submenu {
       opacity: 0;
       transform: translateY(50px);
+      background-color: var(--color-white);
       transition: var(--transition-duration-default) linear;
       transition-property: transform, opacity;
+      padding-bottom: 5px;
 
       &__visible {
         opacity: 1;

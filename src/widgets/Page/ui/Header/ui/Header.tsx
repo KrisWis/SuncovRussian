@@ -53,7 +53,6 @@ export const Header: React.FC<HeaderProps> = memo(
 
                 {submenu.length > 0 && (
                   <Flex
-                    gap="10"
                     align="start"
                     className={`${styles.Header__submenu} 
             ${headerHoveredCategory === category && styles.Header__submenu__active}`}
