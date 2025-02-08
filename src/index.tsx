@@ -8,6 +8,8 @@ import { ErrorComponent } from '@/shared/ui/ErrorComponent';
 import { store } from '@/shared/lib/store';
 import { BrowserRouter } from 'react-router-dom';
 
+// TODO: расписать "Прочие особенности" и сущности с фичами в README.md. Мб ещё доку для shared. Вообщем, всё как по прод.реакту
+
 const container = document.getElementById('root');
 
 if (!container) {

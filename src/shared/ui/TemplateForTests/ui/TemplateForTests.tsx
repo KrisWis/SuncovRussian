@@ -15,7 +15,7 @@ export interface CheckButtonOnClickResult {
 interface TemplateForTestsProps {
   // Required props
   testElement: React.ReactNode;
-  checkButtonOnClick: () => CheckButtonOnClickResult;
+  buttonOnClick: () => CheckButtonOnClickResult;
   correctAnswersCount: number;
   maxCorrectAnswersCount: number;
   testIsFailed: boolean;
@@ -24,6 +24,9 @@ interface TemplateForTestsProps {
   // Optional props
   className?: string;
   theme?: string;
+  hasResult?: boolean;
+
+  // For Tests
   dataTestIdForCheckButton?: string;
   dataTestIdForLike?: string;
   dataTestIdForDislike?: string;
@@ -34,18 +37,19 @@ export const TemplateForTests: React.FC<TemplateForTestsProps> = memo(
     className,
     theme,
     testElement,
-    dataTestIdForCheckButton,
-    dataTestIdForLike,
-    dataTestIdForDislike,
-    checkButtonOnClick,
+    buttonOnClick,
     correctAnswersCount,
     maxCorrectAnswersCount,
     testIsFailed,
     testHasMissedAnswers,
+    hasResult = true,
+    dataTestIdForCheckButton,
+    dataTestIdForLike,
+    dataTestIdForDislike,
   }): React.JSX.Element => {
     // Если тест провален, то проигрываем соответствующий звук
     const checkButtonHandleClick = () => {
-      const { testIsFailed, testHasMissedAnswers } = checkButtonOnClick();
+      const { testIsFailed, testHasMissedAnswers } = buttonOnClick();
 
       if (testIsFailed && !testHasMissedAnswers) {
         playSound('FailSound');
@@ -86,33 +90,35 @@ export const TemplateForTests: React.FC<TemplateForTestsProps> = memo(
                   type="button"
                   className={styles.TemplateForTests__check}
                 >
-                  Проверить
+                  {hasResult ? 'Проверить' : 'Продолжить'}
                 </Button>
               )}
 
-            <Flex align="center" direction="column" gap="10">
-              {maxCorrectAnswersCount > 0 && !testHasMissedAnswers && (
-                <span className={styles.TemplateForTests__totalText}>
-                  Итог: {correctAnswersCount}/{maxCorrectAnswersCount}
-                </span>
-              )}
+            {hasResult && (
+              <Flex align="center" direction="column" gap="10">
+                {maxCorrectAnswersCount > 0 && !testHasMissedAnswers && (
+                  <span className={styles.TemplateForTests__totalText}>
+                    Итог: {correctAnswersCount}/{maxCorrectAnswersCount}
+                  </span>
+                )}
 
-              {maxCorrectAnswersCount > 0 && !testHasMissedAnswers && (
-                <>
-                  {correctAnswersCount === maxCorrectAnswersCount ? (
-                    <TemplateForTestsMark
-                      markElement={<LikeSVG />}
-                      dataTestIDForMark={dataTestIdForLike}
-                    />
-                  ) : (
-                    <TemplateForTestsMark
-                      markElement={<DislikeSVG />}
-                      dataTestIDForMark={dataTestIdForDislike}
-                    />
-                  )}
-                </>
-              )}
-            </Flex>
+                {maxCorrectAnswersCount > 0 && !testHasMissedAnswers && (
+                  <>
+                    {correctAnswersCount === maxCorrectAnswersCount ? (
+                      <TemplateForTestsMark
+                        markElement={<LikeSVG />}
+                        dataTestIDForMark={dataTestIdForLike}
+                      />
+                    ) : (
+                      <TemplateForTestsMark
+                        markElement={<DislikeSVG />}
+                        dataTestIDForMark={dataTestIdForDislike}
+                      />
+                    )}
+                  </>
+                )}
+              </Flex>
+            )}
           </Flex>
         </Flex>
       </Flex>

@@ -159,7 +159,3 @@ Cборщик адаптирован под основные фичи прило
 [DynamicModuleLoader](src/shared/ui/DynamicModuleLoader/ui/DynamicModuleLoader.tsx)
 
 ---
-
-## Прочие особенности:
-
-TODO: расписать здесь особенности (и как в TeleWorks)
