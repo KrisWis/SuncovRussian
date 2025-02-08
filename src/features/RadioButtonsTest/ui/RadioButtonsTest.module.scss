@@ -6,7 +6,7 @@
   border: 1.5px solid var(--color-black);
   border-radius: $border-radius;
   line-height: 100%;
-  color: #000;
+  color: var(--color-black);
   box-shadow: 0 0 20px transparent;
   transition: var(--transition-duration-default) linear;
   transition-property: box-shadow, border-color;

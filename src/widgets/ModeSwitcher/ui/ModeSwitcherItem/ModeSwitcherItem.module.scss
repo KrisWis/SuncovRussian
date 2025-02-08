@@ -57,7 +57,7 @@
     font-weight: 500;
     font-size: 16px;
     line-height: 120%;
-    color: rgba(0 0 0 / 40%);
+    color: var(--color-gray);
     opacity: 0;
     transition: var(--transition-duration-default) linear;
     transition-property: opacity, max-height, padding, z-index;
