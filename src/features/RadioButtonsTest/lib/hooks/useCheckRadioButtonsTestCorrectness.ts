@@ -84,10 +84,9 @@ export const useCheckRadioButtonsTestCorrectness = (
             JSON.stringify(correctAnswerIndexes.sort());
         }
 
-        // В зависимости от того, правильный или нет, добавляем соответствующие классы на фон
+        // В зависимости от того, правильный или нет, делаем соответствующие действия
         if (testIsCorrect) {
           correctAnswersCount += 1;
-          bgElem.classList.add(styles.RadioButtonsTest__bg__correct);
         } else {
           minOneTestIsFailed = true;
           bgElem.classList.add(styles.RadioButtonsTest__bg__incorrect);
