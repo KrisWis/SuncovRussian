@@ -103,7 +103,7 @@ export const Header: React.FC<HeaderProps> = memo(
                                 }, []);
 
                                 return (
-                                  <Flex gap="15" align="start">
+                                  <Flex align="start">
                                     <span
                                       className={`${styles.Header__submenu__item} 
                                     ${
