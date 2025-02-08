@@ -2,7 +2,7 @@ import { useCallback, useContext, useState } from 'react';
 import { useRandomWord } from './useRandomWord';
 import { WordsForTrainersTypes } from '../../model/types/types';
 import { useTrainerActions } from '../../model/slice/TrainerPageSlice';
-import { playAudio } from '@/shared/utils/playAudio';
+import { playSound } from '@/shared/utils/playSound';
 import { useInitializeWords } from './useInitializeWords';
 import { useWords } from '../../model/selectors/getTrainerWords/getTrainerWords';
 import { TrainerPageContext } from '../../model/context/TrainerPageContext';
@@ -135,7 +135,7 @@ export const useWordActions = (
         setAllAttemptsCount((prev) => prev + 1);
       }
 
-      playAudio('FailSound');
+      playSound('FailSound');
 
       setIsIncorrect(true);
 

@@ -69,15 +69,11 @@ export const Header: React.FC<HeaderProps> = memo(
                                 // Инициализация предмета подменю
                                 const submenuItemLink: string = `/${headerRoutesCategories[category as HeaderCategoryType]}/${transliterate(menuItem)}`;
 
-                                const regexForSubmenu = new RegExp(
-                                  submenuItemLink.replace(/\//g, '\\/'),
-                                );
-
                                 return (
                                   <Link
                                     to={submenuItemLink}
                                     className={`${styles.Header__submenu__item} 
-                        ${regexForSubmenu.test(window.location.pathname) && styles.Header__submenu__item__active}`}
+                                    ${submenuItemLink === window.location.pathname && styles.Header__submenu__item__active}`}
                                     onClick={() =>
                                       setHoveredHeaderCategory(null)
                                     }
@@ -110,7 +106,12 @@ export const Header: React.FC<HeaderProps> = memo(
                                 return (
                                   <Flex gap="15" align="start">
                                     <span
-                                      className={styles.Header__submenu__item}
+                                      className={`${styles.Header__submenu__item} 
+                                    ${
+                                      window.location.pathname.startsWith(
+                                        `/${headerRoutesCategories[category as HeaderCategoryType]}/${transliterate(menuItem.theme)}/`,
+                                      ) && styles.Header__submenu__item__active
+                                    }`}
                                       onMouseEnter={() =>
                                         setIsSubmenuVisible(true)
                                       }
@@ -135,9 +136,14 @@ export const Header: React.FC<HeaderProps> = memo(
                                         >
                                           {items.map((item) => (
                                             <Link
-                                              className={
-                                                styles.Header__submenu__item
-                                              }
+                                              className={`${styles.Header__submenu__item} 
+                                              ${
+                                                submenuItemLink(
+                                                  item.subtheme,
+                                                ) ===
+                                                  window.location.pathname &&
+                                                styles.Header__submenu__item__active
+                                              }`}
                                               to={submenuItemLink(
                                                 item.subtheme,
                                               )}

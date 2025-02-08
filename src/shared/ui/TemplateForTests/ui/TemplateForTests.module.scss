@@ -7,13 +7,8 @@
     text-transform: lowercase;
   }
 
-  &__mark {
-    position: absolute;
-    right: 15%;
-  }
-
   &__check {
-    margin-bottom: 50px;
+    margin: 50px 0;
     align-self: flex-end;
   }
 
@@ -22,8 +17,5 @@
     font-size: 40px;
     line-height: 150%;
     color: var(--color-black);
-    position: absolute;
-    right: 25%;
-    top: -85px;
   }
 }

@@ -43,8 +43,7 @@
     position: absolute;
     inset: 0;
     z-index: var(--z-index-hidden);
-    animation: infinite radio-button-missed-anim
-      var(--animation-duration-default) linear;
+    pointer-events: none;
     transition: opacity var(--transition-duration-default) linear;
     border-radius: $border-radius;
 
@@ -65,8 +64,30 @@
       }
     }
 
-    &__active {
+    @mixin active-state {
       opacity: 1;
+      z-index: var(--z-index-default);
+    }
+
+    &__active {
+      @include active-state;
+
+      animation: infinite radio-button-missed-anim
+        var(--animation-duration-default) linear;
+    }
+
+    &__correct {
+      @include active-state;
+
+      border-color: var(--color-success);
+      box-shadow: 0 0 20px var(--color-success);
+    }
+
+    &__incorrect {
+      @include active-state;
+
+      border-color: var(--color-warn);
+      box-shadow: 0 0 20px var(--color-warn);
     }
   }
 }

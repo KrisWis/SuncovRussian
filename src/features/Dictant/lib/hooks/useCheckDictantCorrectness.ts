@@ -1,8 +1,7 @@
-import { playAudio } from '@/shared/utils/playAudio';
 import * as styles from '../../ui/Dictant.module.scss';
-
+import { CheckButtonOnClickResult } from '@/shared/ui/TemplateForTests';
 interface useCheckDictantCorrectnessResult {
-  checkDictantCorrectness: () => void;
+  checkDictantCorrectness: () => CheckButtonOnClickResult;
 }
 
 export const useCheckDictantCorrectness = (
@@ -13,7 +12,7 @@ export const useCheckDictantCorrectness = (
   setIsIncorrect: React.Dispatch<React.SetStateAction<boolean>>,
   setIsMissed: React.Dispatch<React.SetStateAction<boolean>>,
 ): useCheckDictantCorrectnessResult => {
-  const checkDictantCorrectness = () => {
+  const checkDictantCorrectness = (): CheckButtonOnClickResult => {
     const inputElements = document.querySelectorAll(
       '[data-name="Dictant__input"]',
     ) as NodeListOf<HTMLInputElement>;
@@ -74,10 +73,6 @@ export const useCheckDictantCorrectness = (
       }
     }
 
-    if (isIncorrect && !minOneInputIsMissed) {
-      playAudio('FailSound');
-    }
-
     setIsMissed(isMissed);
     setCorrectLetters(correctLetters);
     setMaxCorrectLetters(inputElements.length);
@@ -88,6 +83,12 @@ export const useCheckDictantCorrectness = (
         .filter((input) => isInputMissed(input))[0]
         .focus();
     }
+
+    // Возвращаем значения
+    return {
+      testIsFailed: isIncorrect,
+      testHasMissedAnswers: isMissed,
+    };
   };
 
   return {

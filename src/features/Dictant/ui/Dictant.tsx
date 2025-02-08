@@ -24,7 +24,7 @@ export const Dictant: React.FC<DictantProps> = memo(
     return (
       <Flex direction="column" gap="70" width="100">
         <Flex relative direction="column" gap="10" width="100">
-          <Flex direction="column" width="80" className={styles.Dictant}>
+          <Flex direction="column" className={styles.Dictant}>
             <Flex
               wrap
               gap={splitTextBySentences.length > 1 ? '15' : '5'}

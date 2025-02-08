@@ -1,5 +1,5 @@
 import { Page } from '@/widgets/Page';
-import { memo, useState } from 'react';
+import { memo, useState, Fragment, useEffect } from 'react';
 import { mockTests } from '../model/static/mockTests';
 import {
   RadioButtonsTest,
@@ -24,22 +24,33 @@ export const TestsPage: React.FC<TestsPageProps> = memo(
     const [testHasMissedAnswers, setTestHasMissedAnswers] =
       useState<boolean>(false);
 
+    // Обнуление значений при вмонтировании компонента
+    useEffect(() => {
+      // Обнуляем значения
+      setMaxCorrectAnswersCount(0);
+      setCorrectAnswersCount(0);
+      setTestIsFailed(false);
+      setTestHasMissedAnswers(false);
+    }, [theme]);
+
     // Получение функции проверки
     const { checkRadioButtonsTestCorrectness } =
-      useCheckRadioButtonsTestCorrectness(theme, mockTests);
+      useCheckRadioButtonsTestCorrectness(
+        theme,
+        mockTests,
+        setMaxCorrectAnswersCount,
+        setCorrectAnswersCount,
+        setTestIsFailed,
+        setTestHasMissedAnswers,
+      );
 
     return (
       <Page withMarginTop>
         <TemplateForTests
           testElement={
-            <>
+            <Flex width="100" direction="column" gap="50">
               {mockTests[theme].map((test, index) => (
-                <Flex
-                  width="100"
-                  key={test.caption}
-                  direction="column"
-                  gap="50"
-                >
+                <Fragment key={test.caption}>
                   {test.type === 'radioButtons' ? (
                     <RadioButtonsTest
                       hasOneCorrectAnswer={test.hasOneCorrectAnswer}
@@ -52,9 +63,9 @@ export const TestsPage: React.FC<TestsPageProps> = memo(
                   ) : (
                     <></>
                   )}
-                </Flex>
+                </Fragment>
               ))}
-            </>
+            </Flex>
           }
           checkButtonOnClick={checkRadioButtonsTestCorrectness}
           correctAnswersCount={correctAnswersCount}

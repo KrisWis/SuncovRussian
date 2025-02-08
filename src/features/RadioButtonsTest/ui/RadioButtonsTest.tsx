@@ -36,13 +36,13 @@ export const RadioButtonsTest: React.FC<RadioButtonsTestProps> = memo(
 
     return (
       <Flex
-        width="80"
         direction="column"
         className={styles.RadioButtonsTest}
         justify="center"
         gap="20"
         relative
         data-name="RadioButtonsTest"
+        width="100"
         id={`RadioButtonsTest__${index}`}
       >
         <div
@@ -55,14 +55,14 @@ export const RadioButtonsTest: React.FC<RadioButtonsTestProps> = memo(
         </h2>
 
         <Flex width="100" align="start" direction="column" gap="10">
-          {items.map((item, index) => (
+          {items.map((item, itemIndex) => (
             <Flex key={item.value} gap="10">
               <input
-                id={`RadioButtonsTest__input__${index}`}
                 className={styles.RadioButtonsTest__itemRadio}
                 type="radio"
                 onClick={handleRadioButton}
                 data-name="RadioButtonsTest__radioButton"
+                data-index={itemIndex}
               />
 
               <label

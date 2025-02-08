@@ -15,7 +15,10 @@ type Story = StoryObj<typeof meta>;
 export const Primary: Story = {
   args: {
     testElement: <>Компонент теста</>,
-    checkButtonOnClick: () => {},
+    checkButtonOnClick: () => ({
+      testIsFailed: false,
+      testHasMissedAnswers: false,
+    }),
     correctAnswersCount: 0,
     maxCorrectAnswersCount: 0,
     testIsFailed: false,

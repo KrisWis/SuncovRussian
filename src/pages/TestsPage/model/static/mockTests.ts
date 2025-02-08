@@ -84,4 +84,87 @@ export const mockTests: TestsType = {
       ],
     },
   ],
+
+  Склонение2: [
+    {
+      type: 'radioButtons',
+      caption: 'Укажите существительное 4 склонения',
+      hasOneCorrectAnswer: true,
+      items: [
+        {
+          value: 'перо',
+          isCorrect: false,
+        },
+
+        {
+          value: 'утюг',
+          isCorrect: true,
+        },
+
+        {
+          value: 'река',
+          isCorrect: false,
+        },
+
+        {
+          value: 'дом',
+          isCorrect: false,
+        },
+      ],
+    },
+
+    {
+      type: 'radioButtons',
+      caption: 'Укажите существительное 5 склонения',
+      hasOneCorrectAnswer: false,
+      items: [
+        {
+          value: 'перо',
+          isCorrect: true,
+        },
+
+        {
+          value: 'утюг',
+          isCorrect: false,
+        },
+
+        {
+          value: 'река',
+          isCorrect: true,
+        },
+
+        {
+          value: 'дом',
+          isCorrect: false,
+        },
+      ],
+    },
+
+    {
+      type: 'radioButtons',
+      caption: 'Укажите существительное 6 склонения',
+      hasOneCorrectAnswer: false,
+      items: [
+        {
+          value: 'перо',
+          isCorrect: true,
+        },
+
+        {
+          value: 'утюг',
+          isCorrect: false,
+        },
+
+        {
+          value: 'река',
+          isCorrect: true,
+        },
+
+        {
+          value: 'дом',
+          isCorrect: false,
+        },
+      ],
+    },
+  ],
 };
