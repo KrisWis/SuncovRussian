@@ -8,8 +8,6 @@ import { TemplateForTests } from '@/shared/ui/TemplateForTests';
 import { Flex } from '@/shared/lib/Stack';
 import { TestsItem } from '../model/types/types';
 
-// TODO: написать тесты
-
 export interface TestsPageProps {
   theme: string;
   item: TestsItem;
@@ -57,7 +55,8 @@ export const TestsPage: React.FC<TestsPageProps> = memo(
                       caption={test.caption}
                       items={test.items}
                       index={index}
-                      tests={item.items}
+                      maxCorrectAnswersCount={maxCorrectAnswersCount}
+                      testHasMissedAnswers={testHasMissedAnswers}
                     />
                   ) : (
                     <></>

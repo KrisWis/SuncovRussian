@@ -21,22 +21,14 @@ export const useCheckRadioButtonsTestCorrectness = (
     ) as NodeListOf<HTMLInputElement>;
 
     // Проверяем есть ли в тестах хотя-бы один блок с пропущенным ответом
-    const isMinOneTestMissed = Array.from(allTests).some((test, index) => {
+    const isMinOneTestMissed = Array.from(allTests).some((test) => {
       const testRadioButtons = test.querySelectorAll(
         '[data-name="RadioButtonsTest__radioButton"]',
       );
 
-      if (tests[index].hasOneCorrectAnswer) {
-        return Array.from(testRadioButtons).every(
-          (radioButton) => !(radioButton as HTMLInputElement).checked,
-        );
-      } else {
-        return (
-          Array.from(testRadioButtons).filter(
-            (radioButton) => (radioButton as HTMLInputElement).checked,
-          ).length < 2
-        );
-      }
+      return Array.from(testRadioButtons).every(
+        (radioButton) => !(radioButton as HTMLInputElement).checked,
+      );
     });
 
     // Устанавливаем счетчик правильных ответов и то, есть ли хотя бы один неправильный тест
@@ -65,12 +57,7 @@ export const useCheckRadioButtonsTestCorrectness = (
           Number((radioButton as HTMLInputElement).getAttribute('data-index')),
         );
 
-      if (
-        (testValues.hasOneCorrectAnswer &&
-          checkedRadioButtonIndexes.length === 0) ||
-        (!testValues.hasOneCorrectAnswer &&
-          checkedRadioButtonIndexes.length < 2)
-      ) {
+      if (checkedRadioButtonIndexes.length === 0) {
         bgElem.classList.add(styles.RadioButtonsTest__bg__active);
         continue;
       }

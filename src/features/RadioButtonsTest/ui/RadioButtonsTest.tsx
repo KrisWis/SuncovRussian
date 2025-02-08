@@ -4,15 +4,14 @@ import * as styles from './RadioButtonsTest.module.scss';
 import { memo, useCallback } from 'react';
 import { radioButtonSwitching } from '../lib/helpers/radioButtonSwitching';
 import { deleteClassOfMissing } from '../lib/helpers/deleteClassOfMissing';
-// eslint-disable-next-line ulbi-tv-plugin/layer-imports
-import { TestsItemProps } from '@/pages/TestsPage';
 
 interface RadioButtonsTestProps {
   caption: string;
   items: RadioButtonsTestItem[];
   hasOneCorrectAnswer: boolean;
   index: number;
-  tests: TestsItemProps[];
+  maxCorrectAnswersCount: number;
+  testHasMissedAnswers: boolean;
 }
 
 export const RadioButtonsTest: React.FC<RadioButtonsTestProps> = memo(
@@ -21,21 +20,23 @@ export const RadioButtonsTest: React.FC<RadioButtonsTestProps> = memo(
     items,
     hasOneCorrectAnswer,
     index,
-    tests,
+    maxCorrectAnswersCount,
+    testHasMissedAnswers,
   }): React.JSX.Element => {
     // Функция для объедения функций инпутов
     const handleRadioButton = useCallback(
       (e: React.MouseEvent<HTMLInputElement, MouseEvent>) => {
-        deleteClassOfMissing(e, tests);
+        deleteClassOfMissing(e);
         radioButtonSwitching(hasOneCorrectAnswer, e);
       },
-      [hasOneCorrectAnswer, tests],
+      [hasOneCorrectAnswer],
     );
 
     return (
       <Flex
         direction="column"
-        className={styles.RadioButtonsTest}
+        className={`${styles.RadioButtonsTest} 
+        ${maxCorrectAnswersCount > 0 && !testHasMissedAnswers ? styles.RadioButtonsTest__unactive : ''}`}
         justify="center"
         gap="20"
         relative

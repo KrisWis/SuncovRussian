@@ -11,6 +11,10 @@
   transition: var(--transition-duration-default) linear;
   transition-property: box-shadow, border-color;
 
+  &__unactive {
+    pointer-events: none;
+  }
+
   &__caption {
     font-size: 20px;
     font-weight: 600;
@@ -37,6 +41,8 @@
   }
 
   &__bg {
+    $box-shadow-size: 10px;
+
     width: 100%;
     height: 100%;
     opacity: 0;
@@ -50,17 +56,17 @@
     @keyframes radio-button-missed-anim {
       0% {
         border-color: var(--color-black);
-        box-shadow: 0 0 20px var(--color-black);
+        box-shadow: 0 0 $box-shadow-size var(--color-black);
       }
 
       50% {
         border-color: var(--color-white);
-        box-shadow: 0 0 20px var(--color-white);
+        box-shadow: 0 0 $box-shadow-size var(--color-white);
       }
 
       100% {
         border-color: var(--color-black);
-        box-shadow: 0 0 20px var(--color-black);
+        box-shadow: 0 0 $box-shadow-size var(--color-black);
       }
     }
 
@@ -80,14 +86,14 @@
       @include active-state;
 
       border-color: var(--color-success);
-      box-shadow: 0 0 20px var(--color-success);
+      box-shadow: 0 0 $box-shadow-size var(--color-success);
     }
 
     &__incorrect {
       @include active-state;
 
       border-color: var(--color-warn);
-      box-shadow: 0 0 20px var(--color-warn);
+      box-shadow: 0 0 $box-shadow-size var(--color-warn);
     }
   }
 }
