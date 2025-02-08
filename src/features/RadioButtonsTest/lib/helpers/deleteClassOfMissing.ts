@@ -1,15 +1,14 @@
 // eslint-disable-next-line ulbi-tv-plugin/layer-imports
-import { TestsType } from '@/pages/TestsPage';
+import { TestsItemProps } from '@/pages/TestsPage';
 import * as styles from '../../ui/RadioButtonsTest.module.scss';
 
 export const deleteClassOfMissing = (
   e: React.MouseEvent<HTMLInputElement, MouseEvent>,
-  tests: TestsType,
-  theme: string,
+  tests: TestsItemProps[],
 ) => {
   // Получаем родительский элемент
   const parentElement = (e.target as HTMLElement).closest(
-    `.${styles.RadioButtonsTest}`,
+    `[data-name="RadioButtonsTest"]`,
   );
 
   // Получаем элемент фона
@@ -21,7 +20,7 @@ export const deleteClassOfMissing = (
   const testIndex: number = Number(parentElement!.id.split('__')[1]);
 
   // Получаем сам тест
-  const test = tests[theme][testIndex];
+  const test = tests[testIndex];
 
   if (test.hasOneCorrectAnswer) {
     // Удаляем класс у фона

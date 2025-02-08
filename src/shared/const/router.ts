@@ -10,6 +10,7 @@ export const getRouteDictant = (theme: string, subtheme: string) =>
 export const getRouteTrainer = (theme: string) =>
   `/trainers/${transliterate(theme)}`;
 
-export const getRouteTests = (test: string) => `/tests/${transliterate(test)}`;
+export const getRouteTests = (theme: string) =>
+  `/tests/${transliterate(theme)}`;
 
 export const getRouteNotFound = () => '*';

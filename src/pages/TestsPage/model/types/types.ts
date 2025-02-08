@@ -1,13 +1,14 @@
 import { RadioButtonsTestType } from '@/features/RadioButtonsTest';
 
-type TestsItemType = 'radioButtons';
+export type TestsItemType = 'radioButtons';
 
-type TestsItemProps = RadioButtonsTestType;
+export type TestsItemProps = RadioButtonsTestType;
 
 export interface TestsItem {
   type: TestsItemType;
+  items: TestsItemProps[];
 }
 
-export type TestsType = {
-  [key: string]: TestsItemProps[];
-};
+export interface TestsType {
+  [key: string]: TestsItem;
+}

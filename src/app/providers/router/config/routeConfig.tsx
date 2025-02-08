@@ -41,7 +41,7 @@ export const routeConfig: Record<AppRoutes, RouteProps> = {
 
     ...Object.entries(mockTests).map(([theme]) => ({
       path: getRouteTests(theme),
-      element: <TestsPage theme={theme} />,
+      element: <TestsPage theme={theme} item={mockTests[theme]} />,
     })),
   ],
 

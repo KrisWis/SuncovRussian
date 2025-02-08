@@ -17,7 +17,7 @@ type Story = StoryObj<typeof meta>;
 export const Primary: Story = {
   args: {
     randomWord: (
-      wordsForTrainers['виды союзов'].items as UnionsWordsInterface[]
+      wordsForTrainers['Виды союзов'].items as UnionsWordsInterface[]
     )[0],
     wordOnSuccess: () => {},
     wordOnFail: () => {},

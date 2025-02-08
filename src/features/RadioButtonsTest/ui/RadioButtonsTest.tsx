@@ -5,15 +5,14 @@ import { memo, useCallback } from 'react';
 import { radioButtonSwitching } from '../lib/helpers/radioButtonSwitching';
 import { deleteClassOfMissing } from '../lib/helpers/deleteClassOfMissing';
 // eslint-disable-next-line ulbi-tv-plugin/layer-imports
-import { TestsType } from '@/pages/TestsPage';
+import { TestsItemProps } from '@/pages/TestsPage';
 
 interface RadioButtonsTestProps {
   caption: string;
   items: RadioButtonsTestItem[];
   hasOneCorrectAnswer: boolean;
   index: number;
-  tests: TestsType;
-  theme: string;
+  tests: TestsItemProps[];
 }
 
 export const RadioButtonsTest: React.FC<RadioButtonsTestProps> = memo(
@@ -23,15 +22,14 @@ export const RadioButtonsTest: React.FC<RadioButtonsTestProps> = memo(
     hasOneCorrectAnswer,
     index,
     tests,
-    theme,
   }): React.JSX.Element => {
     // Функция для объедения функций инпутов
     const handleRadioButton = useCallback(
       (e: React.MouseEvent<HTMLInputElement, MouseEvent>) => {
-        deleteClassOfMissing(e, tests, theme);
+        deleteClassOfMissing(e, tests);
         radioButtonSwitching(hasOneCorrectAnswer, e);
       },
-      [hasOneCorrectAnswer, tests, theme],
+      [hasOneCorrectAnswer, tests],
     );
 
     return (
@@ -44,6 +42,7 @@ export const RadioButtonsTest: React.FC<RadioButtonsTestProps> = memo(
         data-name="RadioButtonsTest"
         width="100"
         id={`RadioButtonsTest__${index}`}
+        data-testid="RadioButtonsTest"
       >
         <div
           data-name="RadioButtonsTest__bg"
@@ -63,11 +62,12 @@ export const RadioButtonsTest: React.FC<RadioButtonsTestProps> = memo(
                 onClick={handleRadioButton}
                 data-name="RadioButtonsTest__radioButton"
                 data-index={itemIndex}
+                data-testid={`RadioButtonsTest__radioButton__${index}`}
               />
 
               <label
                 className={styles.RadioButtonsTest__itemLabel}
-                htmlFor={item.value}
+                htmlFor={item.value + itemIndex}
               >
                 {item.value}
               </label>

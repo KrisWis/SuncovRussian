@@ -1,5 +1,3 @@
-import * as styles from '../../ui/RadioButtonsTest.module.scss';
-
 // Реализация выбора радио-кнопок
 export const radioButtonSwitching = (
   hasOneCorrectAnswer: boolean,
@@ -14,7 +12,7 @@ export const radioButtonSwitching = (
   if (hasOneCorrectAnswer) {
     // Если может иметь только один ответ, то со всех остальных снимаем выделение
     const parentElement = (e.target as HTMLElement).closest(
-      `.${styles.RadioButtonsTest}`,
+      `[data-name="RadioButtonsTest"]`,
     );
 
     // Находим все radio inputs в той же группе

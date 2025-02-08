@@ -1,21 +1,22 @@
 import { Page } from '@/widgets/Page';
 import { memo, useState, Fragment, useEffect } from 'react';
-import { mockTests } from '../model/static/mockTests';
 import {
   RadioButtonsTest,
   useCheckRadioButtonsTestCorrectness,
 } from '@/features/RadioButtonsTest';
 import { TemplateForTests } from '@/shared/ui/TemplateForTests';
 import { Flex } from '@/shared/lib/Stack';
+import { TestsItem } from '../model/types/types';
 
 // TODO: написать тесты
 
 export interface TestsPageProps {
   theme: string;
+  item: TestsItem;
 }
 
 export const TestsPage: React.FC<TestsPageProps> = memo(
-  ({ theme }): React.JSX.Element => {
+  ({ theme, item }): React.JSX.Element => {
     // Инициализация начальных значений
     const [maxCorrectAnswersCount, setMaxCorrectAnswersCount] =
       useState<number>(0);
@@ -36,8 +37,7 @@ export const TestsPage: React.FC<TestsPageProps> = memo(
     // Получение функции проверки
     const { checkRadioButtonsTestCorrectness } =
       useCheckRadioButtonsTestCorrectness(
-        theme,
-        mockTests,
+        item.items,
         setMaxCorrectAnswersCount,
         setCorrectAnswersCount,
         setTestIsFailed,
@@ -49,16 +49,15 @@ export const TestsPage: React.FC<TestsPageProps> = memo(
         <TemplateForTests
           testElement={
             <Flex width="100" direction="column" gap="50">
-              {mockTests[theme].map((test, index) => (
+              {item.items.map((test, index) => (
                 <Fragment key={test.caption}>
-                  {test.type === 'radioButtons' ? (
+                  {item.type === 'radioButtons' ? (
                     <RadioButtonsTest
                       hasOneCorrectAnswer={test.hasOneCorrectAnswer}
                       caption={test.caption}
                       items={test.items}
                       index={index}
-                      tests={mockTests}
-                      theme={theme}
+                      tests={item.items}
                     />
                   ) : (
                     <></>
@@ -73,6 +72,9 @@ export const TestsPage: React.FC<TestsPageProps> = memo(
           testIsFailed={testIsFailed}
           testHasMissedAnswers={testHasMissedAnswers}
           theme={theme}
+          dataTestIdForCheckButton={`TestsPage__${item.type}__checkButton`}
+          dataTestIdForDislike={`TestsPage__${item.type}__dislike`}
+          dataTestIdForLike={`TestsPage__${item.type}__like`}
         />
       </Page>
     );

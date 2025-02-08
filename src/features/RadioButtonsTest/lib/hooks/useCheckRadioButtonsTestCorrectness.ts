@@ -1,5 +1,5 @@
 // eslint-disable-next-line ulbi-tv-plugin/layer-imports
-import { TestsType } from '@/pages/TestsPage';
+import { TestsItemProps } from '@/pages/TestsPage';
 import * as styles from '../../ui/RadioButtonsTest.module.scss';
 import { CheckButtonOnClickResult } from '@/shared/ui/TemplateForTests';
 
@@ -8,8 +8,7 @@ interface useCheckRadioButtonsTestCorrectnessResult {
 }
 
 export const useCheckRadioButtonsTestCorrectness = (
-  theme: string,
-  tests: TestsType,
+  tests: TestsItemProps[],
   setMaxCorrectAnswersCount: React.Dispatch<React.SetStateAction<number>>,
   setCorrectAnswersCount: React.Dispatch<React.SetStateAction<number>>,
   setTestIsFailed: React.Dispatch<React.SetStateAction<boolean>>,
@@ -27,7 +26,7 @@ export const useCheckRadioButtonsTestCorrectness = (
         '[data-name="RadioButtonsTest__radioButton"]',
       );
 
-      if (tests[theme][index].hasOneCorrectAnswer) {
+      if (tests[index].hasOneCorrectAnswer) {
         return Array.from(testRadioButtons).every(
           (radioButton) => !(radioButton as HTMLInputElement).checked,
         );
@@ -57,7 +56,7 @@ export const useCheckRadioButtonsTestCorrectness = (
       ) as HTMLDivElement;
 
       // Получаем сами значения теста
-      const testValues = tests[theme][i];
+      const testValues = tests[i];
 
       // Проверяем, что в тесте есть хотя-бы одна нажатая кнопка (если тест имеет один ответ), а если имеет несколько, то чтобы было нажато более одной
       const checkedRadioButtonIndexes: number[] = Array.from(testRadioButtons)
