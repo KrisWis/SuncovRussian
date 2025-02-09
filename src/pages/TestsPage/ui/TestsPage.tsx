@@ -1,9 +1,8 @@
 import { Page } from '@/widgets/Page';
-import { memo, useState, useEffect } from 'react';
-import { RadioButtonsTestType } from '@/features/RadioButtonsTest';
+import { memo, useState, useEffect, Fragment } from 'react';
 import { TestsItem } from '../model/types/types';
 import { TestsPageContext } from '../model/context/TestsPageContext';
-import { RadioButtonsTestTemplate } from './RadioButtonsTestTemplate/RadioButtonsTestTemplate';
+import { TestsPageConfig } from '../model/config/TestsPageConfig';
 
 export interface TestsPageProps {
   theme: string;
@@ -42,15 +41,14 @@ export const TestsPage: React.FC<TestsPageProps> = memo(
             testHasMissedAnswers,
             setTestHasMissedAnswers,
             theme,
+            items: item.items,
           }}
         >
-          {item.type === 'radioButtons' ? (
-            <RadioButtonsTestTemplate
-              items={item.items as RadioButtonsTestType[]}
-            />
-          ) : (
-            <></>
-          )}
+          {TestsPageConfig.map((configItem) => (
+            <Fragment key={configItem.type}>
+              {item.type === configItem.type && configItem.element}
+            </Fragment>
+          ))}
         </TestsPageContext.Provider>
       </Page>
     );

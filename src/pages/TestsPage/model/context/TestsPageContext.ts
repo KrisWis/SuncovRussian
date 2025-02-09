@@ -1,4 +1,5 @@
 import { createContext } from 'react';
+import { TestsItemProps } from '../types/types';
 
 export interface TestsPageContext {
   maxCorrectAnswersCount: number;
@@ -10,6 +11,7 @@ export interface TestsPageContext {
   testHasMissedAnswers: boolean;
   setTestHasMissedAnswers: React.Dispatch<React.SetStateAction<boolean>>;
   theme: string;
+  items: TestsItemProps[];
 }
 
 export const TestsPageContext = createContext<TestsPageContext>({
@@ -22,4 +24,5 @@ export const TestsPageContext = createContext<TestsPageContext>({
   testHasMissedAnswers: false,
   setTestHasMissedAnswers: () => {},
   theme: '',
+  items: [],
 });

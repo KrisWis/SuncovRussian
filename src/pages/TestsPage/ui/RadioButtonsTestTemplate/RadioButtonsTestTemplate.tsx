@@ -8,12 +8,8 @@ import { TemplateForTests } from '@/shared/ui/TemplateForTests';
 import { Flex } from '@/shared/lib/Stack';
 import { TestsPageContext } from '../../model/context/TestsPageContext';
 
-export interface RadioButtonsTestTemplateProps {
-  items: RadioButtonsTestType[];
-}
-
-export const RadioButtonsTestTemplate: React.FC<RadioButtonsTestTemplateProps> =
-  memo(({ items }): React.JSX.Element => {
+export const RadioButtonsTestTemplate: React.FC = memo(
+  (): React.JSX.Element => {
     // Получаем данные из контекста
     const {
       maxCorrectAnswersCount,
@@ -25,12 +21,13 @@ export const RadioButtonsTestTemplate: React.FC<RadioButtonsTestTemplateProps> =
       testHasMissedAnswers,
       setTestHasMissedAnswers,
       theme,
+      items,
     } = useContext(TestsPageContext);
 
     // Получение функции проверки
     const { checkRadioButtonsTestCorrectness } =
       useCheckRadioButtonsTestCorrectness(
-        items,
+        items as RadioButtonsTestType[],
         setMaxCorrectAnswersCount,
         setCorrectAnswersCount,
         setTestIsFailed,
@@ -41,7 +38,7 @@ export const RadioButtonsTestTemplate: React.FC<RadioButtonsTestTemplateProps> =
       <TemplateForTests
         testElement={
           <Flex width="100" direction="column" gap="50">
-            {items.map((test, index) => (
+            {(items as RadioButtonsTestType[]).map((test, index) => (
               <Fragment key={test.caption}>
                 <RadioButtonsTest
                   hasOneCorrectAnswer={
@@ -68,6 +65,7 @@ export const RadioButtonsTestTemplate: React.FC<RadioButtonsTestTemplateProps> =
         dataTestIdForLike={`RadioButtonsTestTemplate__radioButtons__like`}
       />
     );
-  });
+  },
+);
 
 RadioButtonsTestTemplate.displayName = 'RadioButtonsTestTemplate';
