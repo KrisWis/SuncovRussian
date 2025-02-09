@@ -42,7 +42,7 @@ export const DictantsPage: React.FC<DictantsPageProps> = memo(
                 text={dictant.text}
               />
             }
-            checkButtonOnClick={checkDictantCorrectness}
+            buttonOnClick={checkDictantCorrectness}
             correctAnswersCount={correctLetters}
             maxCorrectAnswersCount={maxCorrectLetters}
             testIsFailed={isIncorrect}

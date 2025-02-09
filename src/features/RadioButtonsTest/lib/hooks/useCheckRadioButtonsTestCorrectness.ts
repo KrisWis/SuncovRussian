@@ -1,14 +1,13 @@
-// eslint-disable-next-line ulbi-tv-plugin/layer-imports
-import { TestsItemProps } from '@/pages/TestsPage';
 import * as styles from '../../ui/RadioButtonsTest.module.scss';
 import { CheckButtonOnClickResult } from '@/shared/ui/TemplateForTests';
+import { RadioButtonsTestType } from '../../model/types';
 
 interface useCheckRadioButtonsTestCorrectnessResult {
   checkRadioButtonsTestCorrectness: () => CheckButtonOnClickResult;
 }
 
 export const useCheckRadioButtonsTestCorrectness = (
-  tests: TestsItemProps[],
+  tests: RadioButtonsTestType[],
   setMaxCorrectAnswersCount: React.Dispatch<React.SetStateAction<number>>,
   setCorrectAnswersCount: React.Dispatch<React.SetStateAction<number>>,
   setTestIsFailed: React.Dispatch<React.SetStateAction<boolean>>,

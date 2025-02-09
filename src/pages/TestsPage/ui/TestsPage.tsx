@@ -1,12 +1,9 @@
 import { Page } from '@/widgets/Page';
-import { memo, useState, Fragment, useEffect } from 'react';
-import {
-  RadioButtonsTest,
-  useCheckRadioButtonsTestCorrectness,
-} from '@/features/RadioButtonsTest';
-import { TemplateForTests } from '@/shared/ui/TemplateForTests';
-import { Flex } from '@/shared/lib/Stack';
+import { memo, useState, useEffect } from 'react';
+import { RadioButtonsTestType } from '@/features/RadioButtonsTest';
 import { TestsItem } from '../model/types/types';
+import { TestsPageContext } from '../model/context/TestsPageContext';
+import { RadioButtonsTestTemplate } from './RadioButtonsTestTemplate/RadioButtonsTestTemplate';
 
 export interface TestsPageProps {
   theme: string;
@@ -32,49 +29,29 @@ export const TestsPage: React.FC<TestsPageProps> = memo(
       setTestHasMissedAnswers(false);
     }, [theme]);
 
-    // Получение функции проверки
-    const { checkRadioButtonsTestCorrectness } =
-      useCheckRadioButtonsTestCorrectness(
-        item.items,
-        setMaxCorrectAnswersCount,
-        setCorrectAnswersCount,
-        setTestIsFailed,
-        setTestHasMissedAnswers,
-      );
-
     return (
       <Page withMarginTop>
-        <TemplateForTests
-          testElement={
-            <Flex width="100" direction="column" gap="50">
-              {item.items.map((test, index) => (
-                <Fragment key={test.caption}>
-                  {item.type === 'radioButtons' ? (
-                    <RadioButtonsTest
-                      hasOneCorrectAnswer={test.hasOneCorrectAnswer}
-                      caption={test.caption}
-                      items={test.items}
-                      index={index}
-                      maxCorrectAnswersCount={maxCorrectAnswersCount}
-                      testHasMissedAnswers={testHasMissedAnswers}
-                    />
-                  ) : (
-                    <></>
-                  )}
-                </Fragment>
-              ))}
-            </Flex>
-          }
-          checkButtonOnClick={checkRadioButtonsTestCorrectness}
-          correctAnswersCount={correctAnswersCount}
-          maxCorrectAnswersCount={maxCorrectAnswersCount}
-          testIsFailed={testIsFailed}
-          testHasMissedAnswers={testHasMissedAnswers}
-          theme={theme}
-          dataTestIdForCheckButton={`TestsPage__${item.type}__checkButton`}
-          dataTestIdForDislike={`TestsPage__${item.type}__dislike`}
-          dataTestIdForLike={`TestsPage__${item.type}__like`}
-        />
+        <TestsPageContext.Provider
+          value={{
+            maxCorrectAnswersCount,
+            setMaxCorrectAnswersCount,
+            correctAnswersCount,
+            setCorrectAnswersCount,
+            testIsFailed,
+            setTestIsFailed,
+            testHasMissedAnswers,
+            setTestHasMissedAnswers,
+            theme,
+          }}
+        >
+          {item.type === 'radioButtons' ? (
+            <RadioButtonsTestTemplate
+              items={item.items as RadioButtonsTestType[]}
+            />
+          ) : (
+            <></>
+          )}
+        </TestsPageContext.Provider>
       </Page>
     );
   },
