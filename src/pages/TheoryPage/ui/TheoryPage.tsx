@@ -46,7 +46,7 @@ export const TheoryPage: React.FC = memo((): React.JSX.Element => {
       {isLoading ? (
         <PageLoading />
       ) : isError ? (
-        <ErrorComponent />
+        <ErrorComponent withHeader={false} />
       ) : (
         <TheoryPageContext.Provider
           value={{ selectedSection, setSelectedSection }}

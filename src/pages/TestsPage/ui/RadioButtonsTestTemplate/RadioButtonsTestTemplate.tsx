@@ -1,4 +1,4 @@
-import { memo, Fragment, useContext } from 'react';
+import { memo, useContext } from 'react';
 import {
   RadioButtonsTest,
   RadioButtonsTestType,
@@ -39,18 +39,17 @@ export const RadioButtonsTestTemplate: React.FC = memo(
         testElement={
           <Flex width="100" direction="column" gap="50">
             {(items as RadioButtonsTestType[]).map((test, index) => (
-              <Fragment key={test.caption}>
-                <RadioButtonsTest
-                  hasOneCorrectAnswer={
-                    (test as RadioButtonsTestType).hasOneCorrectAnswer
-                  }
-                  caption={(test as RadioButtonsTestType).caption}
-                  items={(test as RadioButtonsTestType).items}
-                  index={index}
-                  maxCorrectAnswersCount={maxCorrectAnswersCount}
-                  testHasMissedAnswers={testHasMissedAnswers}
-                />
-              </Fragment>
+              <RadioButtonsTest
+                key={test.caption}
+                hasOneCorrectAnswer={
+                  (test as RadioButtonsTestType).hasOneCorrectAnswer
+                }
+                caption={(test as RadioButtonsTestType).caption}
+                items={(test as RadioButtonsTestType).items}
+                index={index}
+                maxCorrectAnswersCount={maxCorrectAnswersCount}
+                testHasMissedAnswers={testHasMissedAnswers}
+              />
             ))}
           </Flex>
         }
