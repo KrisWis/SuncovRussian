@@ -9,9 +9,4 @@ export const TestsPage: React.LazyExoticComponent<React.FC<TestsPageProps>> =
   );
 
 export { mockTests } from './model/static/mockTests';
-export type {
-  TestsType,
-  TestsItemProps,
-  TestsItemType,
-  TestsItem,
-} from './model/types/types';
+export type { TestsType, TestsItem } from './model/types/types';

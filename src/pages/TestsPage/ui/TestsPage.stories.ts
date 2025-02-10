@@ -15,7 +15,6 @@ type Story = StoryObj<typeof meta>;
 
 const mockTests: TestsType = {
   Склонение: {
-    type: 'radioButtons',
     items: [
       {
         caption: 'Укажите существительное 1 склонения',

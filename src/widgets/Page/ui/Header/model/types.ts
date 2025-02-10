@@ -8,6 +8,7 @@ export interface HeaderSubMenu {
 }
 
 export type HeaderMenu = {
+  'Части речи': string[];
   Тесты: string[];
   Диктанты: HeaderSubMenu[];
   Теория: string[];

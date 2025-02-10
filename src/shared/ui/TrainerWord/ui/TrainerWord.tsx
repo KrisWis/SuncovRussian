@@ -1,6 +1,6 @@
 import * as styles from './TrainerWord.module.scss';
 import { memo } from 'react';
-import { TrainerWordProps } from '../model/types';
+import { TrainerWordProps } from '../model/types/types';
 import { Flex } from '@/shared/lib/Stack';
 
 export const TrainerWord: React.FC<TrainerWordProps> = memo(

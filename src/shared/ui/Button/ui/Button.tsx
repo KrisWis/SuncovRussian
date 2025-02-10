@@ -1,6 +1,6 @@
 import * as styles from './Button.module.scss';
 import { memo } from 'react';
-import { ButtonProps } from '../model/types';
+import { ButtonProps } from '../model/types/types';
 
 export const Button: React.FC<ButtonProps> = memo(
   ({

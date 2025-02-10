@@ -10,7 +10,6 @@ const mockTheme = 'Склонение';
 
 const mockTests: TestsType = {
   [mockTheme]: {
-    type: 'radioButtons',
     items: [
       {
         caption: 'Укажите существительное 1 склонения',
@@ -108,11 +107,11 @@ describe('Test With Radio Buttons', () => {
     defaultIndexForClick: number,
     extraIndexForClick: number,
   ) => {
-    const allTests = component.getAllByTestId('RadioButtonsTest');
+    const allTests = component.getAllByTestId('Test');
 
     for (const [index] of allTests.entries()) {
       const radioButtons = component.getAllByTestId(
-        `RadioButtonsTest__radioButton__${index}`,
+        `Test__radioButton__${index}`,
       );
 
       await userEvent.click(radioButtons[defaultIndexForClick]);

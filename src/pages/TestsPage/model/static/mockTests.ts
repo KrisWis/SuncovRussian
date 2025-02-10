@@ -3,7 +3,6 @@ import { TestsType } from '../types/types';
 // TODO: удалить потом mockTests и брать данные с бека
 export const mockTests: TestsType = {
   Склонение: {
-    type: 'radioButtons',
     items: [
       {
         caption: 'Укажите существительное 1 склонения',
@@ -86,7 +85,6 @@ export const mockTests: TestsType = {
   },
 
   Склонение2: {
-    type: 'radioButtons',
     items: [
       {
         caption: 'Укажите существительное 4 склонения',
@@ -164,15 +162,6 @@ export const mockTests: TestsType = {
             isCorrect: false,
           },
         ],
-      },
-    ],
-  },
-
-  'Вводное слово': {
-    type: 'wordsButtons',
-    items: [
-      {
-        text: 'Мама, видимо, поняла моё состояние. Она бросила шитье и задумалась. Я заметил, как слёзы выступили у неё на глазах и потекли по щекам.',
       },
     ],
   },

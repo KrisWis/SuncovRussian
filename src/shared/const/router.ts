@@ -13,4 +13,7 @@ export const getRouteTrainer = (theme: string) =>
 export const getRouteTests = (theme: string) =>
   `/tests/${transliterate(theme)}`;
 
+export const getRoutePartsOfSpeach = (theme: string) =>
+  `/parts-of-speech/${transliterate(theme)}`;
+
 export const getRouteNotFound = () => '*';
