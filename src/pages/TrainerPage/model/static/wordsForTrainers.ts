@@ -782,7 +782,7 @@ export const wordsForTrainers: WordsForTrainers = {
         id: 40,
       },
       {
-        valid: ' вбок',
+        valid: 'вбок',
         invalid: 'в бок',
         id: 41,
       },
@@ -803,7 +803,7 @@ export const wordsForTrainers: WordsForTrainers = {
       },
       {
         valid: 'вдалеке',
-        invalid: ' в далеке',
+        invalid: 'в далеке',
         id: 45,
       },
       {
@@ -843,7 +843,7 @@ export const wordsForTrainers: WordsForTrainers = {
       },
       {
         valid: 'внутрь',
-        invalid: 'внутрь',
+        invalid: 'в нутрь',
         id: 53,
       },
       {
@@ -853,7 +853,7 @@ export const wordsForTrainers: WordsForTrainers = {
       },
       {
         valid: 'во вре́мя',
-        invalid: ' вовре́мя ',
+        invalid: 'вовре́мя',
         id: 55,
       },
       {
@@ -868,7 +868,7 @@ export const wordsForTrainers: WordsForTrainers = {
       },
       {
         valid: 'впервы́е',
-        invalid: ' в первы́е ',
+        invalid: 'в первы́е',
         id: 58,
       },
       {
@@ -883,32 +883,32 @@ export const wordsForTrainers: WordsForTrainers = {
       },
       {
         valid: 'вполголоса',
-        invalid: ' в пол голоса ',
+        invalid: 'в пол голоса',
         id: 61,
       },
       {
         valid: 'вполоборота',
-        invalid: ' в пол оборота ',
+        invalid: 'в пол оборота',
         id: 62,
       },
       {
         valid: 'вполсилы',
-        invalid: ' в пол силы ',
+        invalid: 'в пол силы',
         id: 63,
       },
       {
         valid: 'впоследствии',
-        invalid: ' в последствии ',
+        invalid: 'в последствии',
         id: 64,
       },
       {
         valid: 'впотьмах',
-        invalid: ' впотьмах',
+        invalid: 'в потьмах',
         id: 65,
       },
       {
         valid: 'вправду',
-        invalid: ' в правду ',
+        invalid: 'в правду',
         id: 66,
       },
       {
@@ -928,17 +928,17 @@ export const wordsForTrainers: WordsForTrainers = {
       },
       {
         valid: 'врассыпную',
-        invalid: ' в рассыпную ',
+        invalid: 'в рассыпную',
         id: 70,
       },
       {
         valid: 'врастяжку',
-        invalid: ' в растяжку ',
+        invalid: 'в растяжку',
         id: 71,
       },
       {
         valid: 'всерьёз',
-        invalid: ' в серьёз ',
+        invalid: 'в серьёз',
         id: 72,
       },
       {
@@ -957,8 +957,8 @@ export const wordsForTrainers: WordsForTrainers = {
         id: 75,
       },
       {
-        valid: ' всплошную',
-        invalid: ' в сплошную',
+        valid: 'всплошную',
+        invalid: 'в сплошную',
         id: 76,
       },
       {
@@ -1038,7 +1038,7 @@ export const wordsForTrainers: WordsForTrainers = {
       },
       {
         valid: 'изнутри',
-        invalid: 'изнутри',
+        invalid: 'из нутри',
         id: 92,
       },
       {
