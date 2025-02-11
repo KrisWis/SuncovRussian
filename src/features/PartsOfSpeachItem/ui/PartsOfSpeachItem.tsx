@@ -1,27 +1,57 @@
 import { Flex } from '@/shared/lib/Stack';
-import { PartsOfSpeachItemType } from '../model/types/types';
 import * as styles from './PartsOfSpeachItem.module.scss';
-import { memo, useMemo } from 'react';
+import { memo, useMemo, useState } from 'react';
+import { wordOnClick } from '../lib/helpers/wordOnClick';
+import { isWordCorrect } from '../lib/helpers/isWordCorrect';
 
 // TODO: написать тесты
 
-export const PartsOfSpeachItem: React.FC<PartsOfSpeachItemType> = memo(
-  ({ text }): React.JSX.Element => {
+interface PartsOfSpeachItemProps {
+  text: string;
+  maxCorrectAnswersCount: number;
+}
+
+export const PartsOfSpeachItem: React.FC<PartsOfSpeachItemProps> = memo(
+  ({ text, maxCorrectAnswersCount }): React.JSX.Element => {
     // Разделяем текст на слова
     const textSplitByWords = useMemo(() => text.split(' '), [text]);
 
+    // Функционал выбора слова
+    const [selectedWords, setSelectedWords] = useState<number[]>([]);
+
     return (
-      <Flex className={styles.PartsOfSpeachItem} wrap>
-        {textSplitByWords.map((word, index) => (
-          <button
-            className={styles.PartsOfSpeachItem__word}
-            // eslint-disable-next-line react/no-array-index-key
-            key={index}
-            type="button"
-          >
-            {word}
-          </button>
-        ))}
+      <Flex
+        gap="3"
+        className={`${styles.PartsOfSpeachItem} 
+      ${maxCorrectAnswersCount > 0 ? styles.PartsOfSpeachItem__finished : ''}`}
+        wrap
+      >
+        {textSplitByWords.map((word, index) => {
+          // Если слово правильное, то убираем вокруг него звездочки
+          const wordIsCorrect = isWordCorrect(word);
+          const modifiedWord = word.replace(/\*/g, '');
+
+          // Переменная для определения того, что слово выбрано
+          const wordIsSelected: boolean = selectedWords.includes(index);
+
+          return (
+            <button
+              onClick={() =>
+                wordOnClick(selectedWords, setSelectedWords, index)
+              }
+              className={`${styles.PartsOfSpeachItem__word} 
+            ${wordIsSelected ? styles.PartsOfSpeachItem__word__selected : ''}`}
+              // eslint-disable-next-line react/no-array-index-key
+              key={index}
+              type="button"
+              data-selected={wordIsSelected}
+              data-index={index}
+              data-name="PartsOfSpeachItem__word"
+            >
+              {wordIsCorrect ? modifiedWord : word}
+            </button>
+          );
+        })}
       </Flex>
     );
   },

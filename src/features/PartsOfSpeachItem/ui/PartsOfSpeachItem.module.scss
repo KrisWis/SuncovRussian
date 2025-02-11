@@ -10,12 +10,27 @@
     font-size: 18px;
     font-weight: 700;
     cursor: pointer;
-    transition: background-color linear var(--transition-duration-default);
+    transition: linear var(--transition-duration-default);
+    transition-property: background-color, color;
     border-radius: 10px;
-    padding: 0 5px;
+    padding: 0 1.5px;
 
-    &:hover {
+    &:hover:not(.PartsOfSpeachItem__word__selected) {
       background-color: var(--color-gray);
     }
+
+    &__selected {
+      color: var(--color-white);
+      background-color: var(--color-black);
+    }
+
+    &__error {
+      background-color: var(--color-warn);
+      color: var(--color-black);
+    }
+  }
+
+  &__finished {
+    pointer-events: none;
   }
 }

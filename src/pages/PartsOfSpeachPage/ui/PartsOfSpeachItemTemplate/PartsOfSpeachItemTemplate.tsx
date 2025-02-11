@@ -5,6 +5,7 @@ import {
   PartsOfSpeachItemType,
 } from '@/features/PartsOfSpeachItem';
 import { ProviderForTestsContext } from '@/shared/lib/ProviderForTests';
+import { useCheckPartsOfSpeachItemCorrectness } from '@/features/PartsOfSpeachItem';
 
 export const PartsOfSpeachItemTemplate: React.FC = memo(
   (): React.JSX.Element => {
@@ -13,26 +14,35 @@ export const PartsOfSpeachItemTemplate: React.FC = memo(
       maxCorrectAnswersCount,
       correctAnswersCount,
       testIsFailed,
-      testHasMissedAnswers,
       theme,
       items,
+      setMaxCorrectAnswersCount,
+      setCorrectAnswersCount,
+      setTestIsFailed,
     } = useContext(ProviderForTestsContext);
+
+    // Получаем функцию проверки
+    const { checkPartsOfSpeachItemCorrectness } =
+      useCheckPartsOfSpeachItemCorrectness(
+        (items as PartsOfSpeachItemType[])[0].text,
+        setMaxCorrectAnswersCount,
+        setCorrectAnswersCount,
+        setTestIsFailed,
+      );
 
     return (
       <TemplateForTests
         testElement={
           <PartsOfSpeachItem
             text={(items as PartsOfSpeachItemType[])[0].text}
+            maxCorrectAnswersCount={maxCorrectAnswersCount}
           />
         }
-        buttonOnClick={() => ({
-          testHasMissedAnswers: false,
-          testIsFailed: false,
-        })}
+        buttonOnClick={checkPartsOfSpeachItemCorrectness}
         correctAnswersCount={correctAnswersCount}
         maxCorrectAnswersCount={maxCorrectAnswersCount}
         testIsFailed={testIsFailed}
-        testHasMissedAnswers={testHasMissedAnswers}
+        testHasMissedAnswers={false} // Всегда false, так как нет проверки на пропущенные слова
         theme={theme}
       />
     );
