@@ -25,6 +25,11 @@
     }
 
     &__error {
+      background-color: var(--color-error);
+      color: var(--color-black);
+    }
+
+    &__uncorrect {
       background-color: var(--color-warn);
       color: var(--color-black);
     }

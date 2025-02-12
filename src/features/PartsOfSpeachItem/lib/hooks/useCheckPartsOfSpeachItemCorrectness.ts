@@ -38,7 +38,7 @@ export const useCheckPartsOfSpeachItemCorrectness = (
 
       if (!correctWordsIndexes.includes(wordIndex)) {
         // Если выделенное слово неверное, то помечаем как ошибку
-        word.classList.add(styles.PartsOfSpeachItem__word__error);
+        word.classList.add(styles.PartsOfSpeachItem__word__uncorrect);
         testIsFailed = true;
       }
     });

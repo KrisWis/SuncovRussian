@@ -126,7 +126,8 @@ export const TemplateForTests: React.FC<TemplateForTestsProps> = memo(
 
               {maxCorrectAnswersCount > 0 && !testHasMissedAnswers && (
                 <>
-                  {correctAnswersCount === maxCorrectAnswersCount ? (
+                  {correctAnswersCount === maxCorrectAnswersCount &&
+                  !testIsFailed ? (
                     <TemplateForTestsMark
                       markElement={<LikeSVG />}
                       dataTestIDForMark={dataTestIdForLike}
