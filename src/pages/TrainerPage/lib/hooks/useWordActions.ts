@@ -7,6 +7,7 @@ import { useInitializeWords } from './useInitializeWords';
 import { useWords } from '../../model/selectors/getTrainerWords/getTrainerWords';
 import { TrainerPageContext } from '../../model/context/TrainerPageContext';
 import { mobileMediaQueryWidth } from '@/shared/const/global';
+import { isInJest } from '@/shared/tests/isInJest';
 
 export type wordActionsFunctionType = (
   words: WordsForTrainersTypes[],
@@ -104,7 +105,7 @@ export const useWordActions = (
 
       const main: HTMLElement = document.querySelector('main')!;
 
-      if (process.env.NODE_ENV !== 'test') {
+      if (!isInJest()) {
         main.style.pointerEvents = 'all';
       }
 
@@ -144,7 +145,7 @@ export const useWordActions = (
       const main: HTMLElement = document.querySelector('main')!;
 
       const eventTimeout = setTimeout(() => {
-        if (process.env.NODE_ENV !== 'test') {
+        if (!isInJest()) {
           main.style.pointerEvents = 'none';
         }
 

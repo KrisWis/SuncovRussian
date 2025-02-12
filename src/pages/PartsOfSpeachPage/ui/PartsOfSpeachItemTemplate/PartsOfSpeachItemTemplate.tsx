@@ -46,9 +46,6 @@ export const PartsOfSpeachItemTemplate: React.FC = memo(
 
     // Соединяем её с функцией очистки
     const continueButtonOnClick = useCallback(() => {
-      // Вызываем функцию продолжения
-      continuePartsOfSpeachItem();
-
       // Очищаем все данные
       clearWords(
         setMaxCorrectAnswersCount,
@@ -56,6 +53,12 @@ export const PartsOfSpeachItemTemplate: React.FC = memo(
         setTestIsFailed,
         setSelectedWords,
       );
+
+      const timeoutForClearing = setTimeout(() => {
+        // Вызываем функцию продолжения
+        continuePartsOfSpeachItem();
+        clearTimeout(timeoutForClearing);
+      }, 300);
     }, [
       continuePartsOfSpeachItem,
       setCorrectAnswersCount,

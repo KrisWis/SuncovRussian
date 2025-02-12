@@ -5,6 +5,7 @@ import { headerCategories, headerRoutesCategories } from '../model/data';
 import { HeaderCategoryType } from '../model/types';
 import { Link } from 'react-router-dom';
 import { transliterate } from '@/shared/utils/transliterate';
+import { isInJest } from '@/shared/tests/isInJest';
 
 interface HeaderProps {
   withHomeButton?: boolean;
@@ -19,6 +20,14 @@ export const Header: React.FC<HeaderProps> = memo(
 
     // Реализация показа подменю при наведении на категорию
     const [isSubmenuVisible, setIsSubmenuVisible] = useState(false);
+
+    // Получение дата-атрибутов из html
+    const publicUrl = isInJest()
+      ? ''
+      : document.body.getAttribute('data-publicUrl');
+
+    const isDev = JSON.parse(document.body.getAttribute('data-isdev')!);
+    const startPath = isDev ? '' : `/${publicUrl}`;
 
     return (
       <header className={styles.Header}>
@@ -66,7 +75,7 @@ export const Header: React.FC<HeaderProps> = memo(
                           {isUsual
                             ? (() => {
                                 // Инициализация предмета подменю
-                                const submenuItemLink: string = `/${headerRoutesCategories[category as HeaderCategoryType]}/${transliterate(menuItem)}`;
+                                const submenuItemLink: string = `${startPath}/${headerRoutesCategories[category as HeaderCategoryType]}/${transliterate(menuItem)}`;
 
                                 return (
                                   <Link
@@ -86,7 +95,7 @@ export const Header: React.FC<HeaderProps> = memo(
                                 const submenuItemLink = (
                                   subTheme: string,
                                 ): string =>
-                                  `/${headerRoutesCategories[category as HeaderCategoryType]}/${transliterate(menuItem.theme)}/${transliterate(subTheme)}`;
+                                  `${startPath}/${headerRoutesCategories[category as HeaderCategoryType]}/${transliterate(menuItem.theme)}/${transliterate(subTheme)}`;
 
                                 // Разбитие подменю на слайсы по 10 штук
                                 const submenuItems = menuItem.items.reduce<
@@ -108,7 +117,7 @@ export const Header: React.FC<HeaderProps> = memo(
                                       className={`${styles.Header__submenu__item} 
                                     ${
                                       window.location.pathname.startsWith(
-                                        `/${headerRoutesCategories[category as HeaderCategoryType]}/${transliterate(menuItem.theme)}/`,
+                                        `${startPath}/${headerRoutesCategories[category as HeaderCategoryType]}/${transliterate(menuItem.theme)}/`,
                                       ) && styles.Header__submenu__item__active
                                     }`}
                                       onMouseEnter={() =>

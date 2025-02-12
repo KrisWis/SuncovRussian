@@ -62,7 +62,7 @@ export const useCheckPartsOfSpeachItemCorrectness = (
 
     // Возвращаем значения
     return {
-      testIsFailed: false,
+      testIsFailed: testIsFailed,
       testHasMissedAnswers: false,
     };
   };
