@@ -9,6 +9,8 @@ export interface ProviderForTestsContext {
   setTestIsFailed: React.Dispatch<React.SetStateAction<boolean>>;
   testHasMissedAnswers: boolean;
   setTestHasMissedAnswers: React.Dispatch<React.SetStateAction<boolean>>;
+  currentItemIndex: number;
+  setCurrentItemIndex: React.Dispatch<React.SetStateAction<number>>;
   theme: string;
   items: unknown[];
 }
@@ -22,6 +24,8 @@ export const ProviderForTestsContext = createContext<ProviderForTestsContext>({
   setTestIsFailed: () => {},
   testHasMissedAnswers: false,
   setTestHasMissedAnswers: () => {},
+  currentItemIndex: 0,
+  setCurrentItemIndex: () => {},
   theme: '',
   items: [],
 });

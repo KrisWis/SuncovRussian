@@ -18,4 +18,9 @@
     line-height: 150%;
     color: var(--color-black);
   }
+
+  &__resultsWrapper {
+    position: absolute;
+    right: 0;
+  }
 }

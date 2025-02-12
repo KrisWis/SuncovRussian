@@ -16,14 +16,15 @@ export const ProviderForTests: React.FC<ProviderForTestsProps> = memo(
     const [testIsFailed, setTestIsFailed] = useState<boolean>(false);
     const [testHasMissedAnswers, setTestHasMissedAnswers] =
       useState<boolean>(false);
+    const [currentItemIndex, setCurrentItemIndex] = useState<number>(0);
 
     // Обнуление значений при вмонтировании компонента
     useEffect(() => {
-      // Обнуляем значения
       setMaxCorrectAnswersCount(0);
       setCorrectAnswersCount(0);
       setTestIsFailed(false);
       setTestHasMissedAnswers(false);
+      setCurrentItemIndex(0);
     }, [theme]);
 
     return (
@@ -39,6 +40,8 @@ export const ProviderForTests: React.FC<ProviderForTestsProps> = memo(
           setTestHasMissedAnswers,
           theme,
           items: items || [],
+          currentItemIndex,
+          setCurrentItemIndex,
         }}
       >
         {children}

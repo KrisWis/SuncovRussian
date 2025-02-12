@@ -45,7 +45,7 @@ export const TestTemplate: React.FC = memo((): React.JSX.Element => {
           ))}
         </Flex>
       }
-      buttonOnClick={checkTestCorrectness}
+      checkButtonOnClick={checkTestCorrectness}
       correctAnswersCount={correctAnswersCount}
       maxCorrectAnswersCount={maxCorrectAnswersCount}
       testIsFailed={testIsFailed}

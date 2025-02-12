@@ -45,7 +45,7 @@ export const DictantTemplate: React.FC<DictantTemplateProps> = memo(
             text={text}
           />
         }
-        buttonOnClick={checkDictantCorrectness}
+        checkButtonOnClick={checkDictantCorrectness}
         correctAnswersCount={correctAnswersCount}
         maxCorrectAnswersCount={maxCorrectAnswersCount}
         testIsFailed={testIsFailed}

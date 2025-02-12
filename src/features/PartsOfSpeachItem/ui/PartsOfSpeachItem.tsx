@@ -29,7 +29,9 @@ export const PartsOfSpeachItem: React.FC<PartsOfSpeachItemProps> = memo(
         {textSplitByWords.map((word, index) => {
           // Если слово правильное, то убираем вокруг него звездочки
           const wordIsCorrect = isWordCorrect(word);
-          const modifiedWord = word.replace(/\*/g, '');
+          const modifiedWord = (
+            wordIsCorrect ? word.replace(/\*/g, '') : word
+          ).replace('&', ' ');
 
           // Переменная для определения того, что слово выбрано
           const wordIsSelected: boolean = selectedWords.includes(index);
@@ -48,7 +50,7 @@ export const PartsOfSpeachItem: React.FC<PartsOfSpeachItemProps> = memo(
               data-index={index}
               data-name="PartsOfSpeachItem__word"
             >
-              {wordIsCorrect ? modifiedWord : word}
+              {modifiedWord}
             </button>
           );
         })}
