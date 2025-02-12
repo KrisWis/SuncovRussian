@@ -1,4 +1,4 @@
-import { memo, useCallback, useContext, useEffect } from 'react';
+import { memo, useCallback, useContext, useEffect, useState } from 'react';
 import { TemplateForTests } from '@/shared/ui/TemplateForTests';
 import {
   clearWords,
@@ -24,6 +24,9 @@ export const PartsOfSpeachItemTemplate: React.FC = memo(
       currentItemIndex,
       setCurrentItemIndex,
     } = useContext(ProviderForTestsContext);
+
+    // Функционал выбора слова
+    const [selectedWords, setSelectedWords] = useState<number[]>([]);
 
     // Получаем функцию проверки
     const { checkPartsOfSpeachItemCorrectness } =
@@ -51,11 +54,13 @@ export const PartsOfSpeachItemTemplate: React.FC = memo(
         setMaxCorrectAnswersCount,
         setCorrectAnswersCount,
         setTestIsFailed,
+        setSelectedWords,
       );
     }, [
       continuePartsOfSpeachItem,
       setCorrectAnswersCount,
       setMaxCorrectAnswersCount,
+      setSelectedWords,
       setTestIsFailed,
     ]);
 
@@ -65,11 +70,13 @@ export const PartsOfSpeachItemTemplate: React.FC = memo(
         setMaxCorrectAnswersCount,
         setCorrectAnswersCount,
         setTestIsFailed,
+        setSelectedWords,
       );
     }, [
       theme,
       setCorrectAnswersCount,
       setMaxCorrectAnswersCount,
+      setSelectedWords,
       setTestIsFailed,
     ]);
 
@@ -79,6 +86,8 @@ export const PartsOfSpeachItemTemplate: React.FC = memo(
           <PartsOfSpeachItem
             text={(items as PartsOfSpeachItemType[])[currentItemIndex].text}
             maxCorrectAnswersCount={maxCorrectAnswersCount}
+            setSelectedWords={setSelectedWords}
+            selectedWords={selectedWords}
           />
         }
         checkButtonOnClick={checkPartsOfSpeachItemCorrectness}
@@ -88,6 +97,9 @@ export const PartsOfSpeachItemTemplate: React.FC = memo(
         testHasMissedAnswers={false} // Всегда false, так как нет проверки на пропущенные слова
         theme={theme}
         continueButtonOnClick={continueButtonOnClick}
+        dataTestIdForButton={`PartsOfSpeachPage__button`}
+        dataTestIdForDislike={`PartsOfSpeachPage__dislike`}
+        dataTestIdForLike={`PartsOfSpeachPage__like`}
       />
     );
   },

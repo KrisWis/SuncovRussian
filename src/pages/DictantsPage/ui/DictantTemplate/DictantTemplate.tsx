@@ -51,7 +51,7 @@ export const DictantTemplate: React.FC<DictantTemplateProps> = memo(
         testIsFailed={testIsFailed}
         testHasMissedAnswers={testHasMissedAnswers}
         theme={theme}
-        dataTestIdForCheckButton={'Dictant__check'}
+        dataTestIdForButton={'Dictant__check'}
         dataTestIdForLike={'Dictant__like'}
         dataTestIdForDislike={'Dictant__dislike'}
       />

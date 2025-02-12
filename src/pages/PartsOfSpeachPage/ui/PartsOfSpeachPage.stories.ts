@@ -6,7 +6,7 @@ const meta = {
   title: 'Pages/PartsOfSpeachPage',
   component: PartsOfSpeachPage,
   parameters: {
-    layout: 'centered',
+    layout: 'fullscreen',
   },
 } satisfies Meta<typeof PartsOfSpeachPage>;
 

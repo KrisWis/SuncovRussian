@@ -51,9 +51,9 @@ export const TestTemplate: React.FC = memo((): React.JSX.Element => {
       testIsFailed={testIsFailed}
       testHasMissedAnswers={testHasMissedAnswers}
       theme={theme}
-      dataTestIdForCheckButton={`TestTemplate__radioButtons__checkButton`}
-      dataTestIdForDislike={`TestTemplate__radioButtons__dislike`}
-      dataTestIdForLike={`TestTemplate__radioButtons__like`}
+      dataTestIdForButton={`TestsPage__checkButton`}
+      dataTestIdForDislike={`TestsPage__dislike`}
+      dataTestIdForLike={`TestsPage__like`}
     />
   );
 });

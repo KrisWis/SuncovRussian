@@ -2,7 +2,7 @@ import { Flex } from '@/shared/lib/Stack';
 import { TestItem } from '../model/types/types';
 import * as styles from './Test.module.scss';
 import { memo, useCallback } from 'react';
-import { radioButtonSwitching } from '../lib/helpers/TestSwitching';
+import { testSwitching } from '../lib/helpers/TestSwitching';
 import { deleteClassOfMissing } from '../lib/helpers/deleteClassOfMissing';
 
 interface TestProps {
@@ -27,7 +27,7 @@ export const Test: React.FC<TestProps> = memo(
     const handleRadioButton = useCallback(
       (e: React.MouseEvent<HTMLInputElement, MouseEvent>) => {
         deleteClassOfMissing(e);
-        radioButtonSwitching(hasOneCorrectAnswer, e);
+        testSwitching(hasOneCorrectAnswer, e);
       },
       [hasOneCorrectAnswer],
     );

@@ -1,6 +1,6 @@
 import { Flex } from '@/shared/lib/Stack';
 import * as styles from './PartsOfSpeachItem.module.scss';
-import { memo, useMemo, useState } from 'react';
+import { memo, useMemo } from 'react';
 import { wordOnClick } from '../lib/helpers/wordOnClick';
 import { isWordCorrect } from '../lib/helpers/isWordCorrect';
 
@@ -9,15 +9,19 @@ import { isWordCorrect } from '../lib/helpers/isWordCorrect';
 interface PartsOfSpeachItemProps {
   text: string;
   maxCorrectAnswersCount: number;
+  setSelectedWords: React.Dispatch<React.SetStateAction<number[]>>;
+  selectedWords: number[];
 }
 
 export const PartsOfSpeachItem: React.FC<PartsOfSpeachItemProps> = memo(
-  ({ text, maxCorrectAnswersCount }): React.JSX.Element => {
+  ({
+    text,
+    maxCorrectAnswersCount,
+    setSelectedWords,
+    selectedWords,
+  }): React.JSX.Element => {
     // Разделяем текст на слова
     const textSplitByWords = useMemo(() => text.split(' '), [text]);
-
-    // Функционал выбора слова
-    const [selectedWords, setSelectedWords] = useState<number[]>([]);
 
     return (
       <Flex
@@ -49,6 +53,7 @@ export const PartsOfSpeachItem: React.FC<PartsOfSpeachItemProps> = memo(
               data-selected={wordIsSelected}
               data-index={index}
               data-name="PartsOfSpeachItem__word"
+              data-testid="PartsOfSpeachItem__word"
             >
               {modifiedWord}
             </button>

@@ -124,18 +124,14 @@ describe('Test With Radio Buttons', () => {
 
   // Функция для проверки правильности ответов
   const checkAnswers = async (isCorrect: boolean) => {
-    const checkButton = component.getByTestId(
-      'TestsPage__radioButtons__checkButton',
-    );
+    const checkButton = component.getByTestId('TestsPage__checkButton');
 
     await userEvent.click(checkButton);
 
     await waitFor(() => {
       expect(
         component.getByTestId(
-          isCorrect
-            ? 'TestsPage__radioButtons__like'
-            : 'TestsPage__radioButtons__dislike',
+          isCorrect ? 'TestsPage__like' : 'TestsPage__dislike',
         ),
       ).toBeInTheDocument();
     });

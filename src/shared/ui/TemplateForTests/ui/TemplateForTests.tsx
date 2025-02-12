@@ -27,7 +27,7 @@ interface TemplateForTestsProps {
   continueButtonOnClick?: () => void;
 
   // For Tests
-  dataTestIdForCheckButton?: string;
+  dataTestIdForButton?: string;
   dataTestIdForLike?: string;
   dataTestIdForDislike?: string;
 }
@@ -43,7 +43,7 @@ export const TemplateForTests: React.FC<TemplateForTestsProps> = memo(
     testIsFailed,
     testHasMissedAnswers,
     continueButtonOnClick,
-    dataTestIdForCheckButton,
+    dataTestIdForButton,
     dataTestIdForLike,
     dataTestIdForDislike,
   }): React.JSX.Element => {
@@ -98,7 +98,7 @@ export const TemplateForTests: React.FC<TemplateForTestsProps> = memo(
           >
             {(hasNotResult || continueButtonOnClick) && (
               <Button
-                data-testid={dataTestIdForCheckButton}
+                data-testid={dataTestIdForButton}
                 onClick={
                   !hasNotResult && continueButtonOnClick
                     ? continueButtonOnClick

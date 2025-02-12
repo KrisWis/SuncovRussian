@@ -62,64 +62,70 @@ export const PrimaryTrainerWords: React.FC<PrimaryTrainerWordsProps> = memo(
     };
 
     return (
-      <Flex
-        justify="center"
-        direction={
-          tabletMediaQueryWidth.matches
-            ? randomWordsIsReverse
-              ? 'columnReverse'
-              : 'column'
-            : randomWordsIsReverse
-              ? 'rowReverse'
-              : 'row'
-        }
-        width="100"
-      >
-        <TrainerWord
-          dataTestId="PrimaryTrainerWords__valid"
-          onClick={() => wordOnSuccess(storeWords, isErrorWork, randomWord.id)}
-          style={{
-            borderRightWidth: tabletMediaQueryWidth.matches
-              ? 3
-              : !randomWordsIsReverse && !isIncorrect
-                ? 0
-                : 3,
+      <>
+        {randomWord.valid && (
+          <Flex
+            justify="center"
+            direction={
+              tabletMediaQueryWidth.matches
+                ? randomWordsIsReverse
+                  ? 'columnReverse'
+                  : 'column'
+                : randomWordsIsReverse
+                  ? 'rowReverse'
+                  : 'row'
+            }
+            width="100"
+          >
+            <TrainerWord
+              dataTestId="PrimaryTrainerWords__valid"
+              onClick={() =>
+                wordOnSuccess(storeWords, isErrorWork, randomWord.id)
+              }
+              style={{
+                borderRightWidth: tabletMediaQueryWidth.matches
+                  ? 3
+                  : !randomWordsIsReverse && !isIncorrect
+                    ? 0
+                    : 3,
 
-            borderBottomWidth: !tabletMediaQueryWidth.matches
-              ? 3
-              : !randomWordsIsReverse && !isIncorrect
-                ? 0
-                : 3,
+                borderBottomWidth: !tabletMediaQueryWidth.matches
+                  ? 3
+                  : !randomWordsIsReverse && !isIncorrect
+                    ? 0
+                    : 3,
 
-            fontSize: randomWord.valid.length >= 10 ? 20 : 36,
-          }}
-        >
-          {printWord(randomWord.valid)}
-        </TrainerWord>
+                fontSize: randomWord.valid.length >= 10 ? 20 : 36,
+              }}
+            >
+              {printWord(randomWord.valid)}
+            </TrainerWord>
 
-        <TrainerWord
-          dataTestId="PrimaryTrainerWords__invalid"
-          onClick={() => wordOnFail(storeWords, isErrorWork, randomWord.id)}
-          type={isIncorrect ? 'invalid' : 'default'}
-          style={{
-            borderRightWidth: tabletMediaQueryWidth.matches
-              ? 3
-              : randomWordsIsReverse
-                ? 0
-                : 3,
+            <TrainerWord
+              dataTestId="PrimaryTrainerWords__invalid"
+              onClick={() => wordOnFail(storeWords, isErrorWork, randomWord.id)}
+              type={isIncorrect ? 'invalid' : 'default'}
+              style={{
+                borderRightWidth: tabletMediaQueryWidth.matches
+                  ? 3
+                  : randomWordsIsReverse
+                    ? 0
+                    : 3,
 
-            borderBottomWidth: !tabletMediaQueryWidth.matches
-              ? 3
-              : randomWordsIsReverse
-                ? 0
-                : 3,
+                borderBottomWidth: !tabletMediaQueryWidth.matches
+                  ? 3
+                  : randomWordsIsReverse
+                    ? 0
+                    : 3,
 
-            fontSize: randomWord.valid.length >= 10 ? 20 : 36,
-          }}
-        >
-          {printWord(randomWord.invalid)}
-        </TrainerWord>
-      </Flex>
+                fontSize: randomWord.valid.length >= 10 ? 20 : 36,
+              }}
+            >
+              {printWord(randomWord.invalid)}
+            </TrainerWord>
+          </Flex>
+        )}
+      </>
     );
   },
 );

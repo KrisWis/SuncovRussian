@@ -1,5 +1,5 @@
 // Реализация выбора радио-кнопок
-export const radioButtonSwitching = (
+export const testSwitching = (
   hasOneCorrectAnswer: boolean,
   e: React.MouseEvent<HTMLInputElement, MouseEvent>,
 ) => {
