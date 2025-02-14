@@ -16,19 +16,20 @@
   }
 
   &__caption {
-    font-size: 20px;
+    font-size: 30px;
+    line-height: 120%;
     font-weight: 600;
   }
 
   &__itemLabel {
-    font-size: 18px;
+    font-size: 28px;
     font-weight: 900;
   }
 
   &__itemRadio {
     appearance: none;
-    width: 15px;
-    height: 15px;
+    width: 20px;
+    height: 20px;
     border: 2px solid var(--color-black);
     border-radius: 50%;
     cursor: pointer;

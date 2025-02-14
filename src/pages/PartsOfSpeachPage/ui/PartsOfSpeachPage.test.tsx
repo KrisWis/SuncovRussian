@@ -32,11 +32,9 @@ describe('Test with Parts Of Speach', () => {
     );
   };
 
-  type toCheckVariants = 'like' | 'dislike';
-
   const clickWordsAndCheck = async (
     indexToClick: number,
-    toCheck: toCheckVariants,
+    withLike: boolean,
   ) => {
     // Получаем все слова
     const allWords = component.getAllByTestId('PartsOfSpeachItem__word');
@@ -53,10 +51,16 @@ describe('Test with Parts Of Speach', () => {
     const button = component.getByTestId('PartsOfSpeachPage__button');
     await userEvent.click(button);
 
-    // Проверяем, что появился лайк
-    expect(
-      component.getByTestId(`PartsOfSpeachPage__${toCheck}`),
-    ).toBeInTheDocument();
+    // Проверяем, что появился/не появился лайк
+    if (withLike) {
+      expect(
+        component.getByTestId('PartsOfSpeachPage__like'),
+      ).toBeInTheDocument();
+    } else {
+      expect(
+        component.queryByTestId('PartsOfSpeachPage__like'),
+      ).not.toBeInTheDocument();
+    }
   };
 
   // BeforeEach
@@ -71,34 +75,34 @@ describe('Test with Parts Of Speach', () => {
   // Tests
   test('Click right words, get like, continue and get like again', async () => {
     // Кликаем на правильное слово и проверяем, что появился лайк
-    await clickWordsAndCheck(1, 'like');
+    await clickWordsAndCheck(1, true);
 
     // Кликаем вновь на кнопку, теперь для продолжения
     await userEvent.click(component.getByTestId('PartsOfSpeachPage__button'));
 
     // Кликаем на правильное слово и проверяем, что появился лайк
-    await clickWordsAndCheck(1, 'like');
+    await clickWordsAndCheck(1, true);
   });
 
-  test('Not click words, get dislike', async () => {
+  test('Not click words, not get like', async () => {
     // Кликаем на кнопку проверки
     const button = component.getByTestId('PartsOfSpeachPage__button');
     await userEvent.click(button);
 
-    // Проверяем, что появился дизлайк
+    // Проверяем, что не появился лайк
     expect(
-      component.getByTestId(`PartsOfSpeachPage__dislike`),
-    ).toBeInTheDocument();
+      component.queryByTestId('PartsOfSpeachPage__like'),
+    ).not.toBeInTheDocument();
   });
 
-  test('Click wrong words, get dislike, continue and get dislike again', async () => {
+  test('Click wrong words, not get like, continue and not get like again', async () => {
     // Кликаем на неправильное слово и проверяем, что появился дизлайк
-    await clickWordsAndCheck(2, 'dislike');
+    await clickWordsAndCheck(2, false);
 
     // Кликаем вновь на кнопку, теперь для продолжения
     await userEvent.click(component.getByTestId('PartsOfSpeachPage__button'));
 
     // Кликаем на неправильное слово и проверяем, что появился дизлайк
-    await clickWordsAndCheck(2, 'dislike');
+    await clickWordsAndCheck(2, false);
   });
 });

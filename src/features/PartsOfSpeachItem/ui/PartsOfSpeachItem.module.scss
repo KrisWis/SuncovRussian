@@ -5,9 +5,15 @@
   padding-bottom: 60px;
   border-radius: 15px;
 
+  &__punctuationMark {
+    color: var(--color-black);
+    font-size: 30px;
+    font-weight: 700;
+  }
+
   &__word {
     color: var(--color-black);
-    font-size: 18px;
+    font-size: 30px;
     font-weight: 700;
     cursor: pointer;
     transition: linear var(--transition-duration-default);
@@ -17,6 +23,7 @@
 
     &:hover:not(.PartsOfSpeachItem__word__selected) {
       background-color: var(--color-gray);
+      color: var(--color-white);
     }
 
     &__selected {

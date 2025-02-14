@@ -100,6 +100,9 @@ export const PartsOfSpeachItemTemplate: React.FC = memo(
         testHasMissedAnswers={false} // Всегда false, так как нет проверки на пропущенные слова
         theme={theme}
         continueButtonOnClick={continueButtonOnClick}
+        withDislike={false}
+        withLike
+        withResults={false}
         dataTestIdForButton={`PartsOfSpeachPage__button`}
         dataTestIdForDislike={`PartsOfSpeachPage__dislike`}
         dataTestIdForLike={`PartsOfSpeachPage__like`}

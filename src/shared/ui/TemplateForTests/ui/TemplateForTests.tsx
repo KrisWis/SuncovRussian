@@ -25,6 +25,9 @@ interface TemplateForTestsProps {
   className?: string;
   theme?: string;
   continueButtonOnClick?: () => void;
+  withDislike?: boolean;
+  withResults?: boolean;
+  withLike?: boolean;
 
   // For Tests
   dataTestIdForButton?: string;
@@ -43,6 +46,9 @@ export const TemplateForTests: React.FC<TemplateForTestsProps> = memo(
     testIsFailed,
     testHasMissedAnswers,
     continueButtonOnClick,
+    withDislike = true,
+    withLike = true,
+    withResults = true,
     dataTestIdForButton,
     dataTestIdForLike,
     dataTestIdForDislike,
@@ -82,7 +88,7 @@ export const TemplateForTests: React.FC<TemplateForTestsProps> = memo(
           <h1 className={styles.TemplateForTests__title}>тема: {theme}</h1>
         )}
 
-        <Flex width="80" gap="30" justify="center" direction="column">
+        <Flex width="60" gap="30" justify="center" direction="column">
           {testElement}
 
           <Flex
@@ -118,25 +124,35 @@ export const TemplateForTests: React.FC<TemplateForTestsProps> = memo(
               direction="column"
               gap="10"
             >
-              {maxCorrectAnswersCount > 0 && !testHasMissedAnswers && (
-                <span className={styles.TemplateForTests__totalText}>
-                  Итог: {correctAnswersCount}/{maxCorrectAnswersCount}
-                </span>
-              )}
+              {withResults &&
+                maxCorrectAnswersCount > 0 &&
+                !testHasMissedAnswers && (
+                  <span className={styles.TemplateForTests__totalText}>
+                    Итог: {correctAnswersCount}/{maxCorrectAnswersCount}
+                  </span>
+                )}
 
               {maxCorrectAnswersCount > 0 && !testHasMissedAnswers && (
                 <>
                   {correctAnswersCount === maxCorrectAnswersCount &&
                   !testIsFailed ? (
-                    <TemplateForTestsMark
-                      markElement={<LikeSVG />}
-                      dataTestIDForMark={dataTestIdForLike}
-                    />
+                    <>
+                      {withLike && (
+                        <TemplateForTestsMark
+                          markElement={<LikeSVG />}
+                          dataTestIDForMark={dataTestIdForLike}
+                        />
+                      )}
+                    </>
                   ) : (
-                    <TemplateForTestsMark
-                      markElement={<DislikeSVG />}
-                      dataTestIDForMark={dataTestIdForDislike}
-                    />
+                    <>
+                      {withDislike && (
+                        <TemplateForTestsMark
+                          markElement={<DislikeSVG />}
+                          dataTestIDForMark={dataTestIdForDislike}
+                        />
+                      )}
+                    </>
                   )}
                 </>
               )}
