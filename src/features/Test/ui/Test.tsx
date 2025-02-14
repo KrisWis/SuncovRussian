@@ -1,5 +1,5 @@
 import { Flex } from '@/shared/lib/Stack';
-import { TestItem } from '../model/types/types';
+import { Answer } from '../model/types/types';
 import * as styles from './Test.module.scss';
 import { memo, useCallback } from 'react';
 import { testSwitching } from '../lib/helpers/TestSwitching';
@@ -7,7 +7,7 @@ import { deleteClassOfMissing } from '../lib/helpers/deleteClassOfMissing';
 
 interface TestProps {
   caption: string;
-  items: TestItem[];
+  answers: Answer[];
   hasOneCorrectAnswer: boolean;
   index: number;
   maxCorrectAnswersCount: number;
@@ -17,7 +17,7 @@ interface TestProps {
 export const Test: React.FC<TestProps> = memo(
   ({
     caption,
-    items,
+    answers,
     hasOneCorrectAnswer,
     index,
     maxCorrectAnswersCount,
@@ -52,23 +52,18 @@ export const Test: React.FC<TestProps> = memo(
         </h2>
 
         <Flex width="100" align="start" direction="column" gap="10">
-          {items.map((item, itemIndex) => (
-            <Flex key={item.value} gap="10">
+          {answers.map((answer, answerIndex) => (
+            <Flex key={answer.id} gap="10">
               <input
                 className={styles.Test__itemRadio}
                 type="radio"
                 onClick={handleRadioButton}
                 data-name="Test__radioButton"
-                data-index={itemIndex}
+                data-index={answerIndex}
                 data-testid={`Test__radioButton__${index}`}
               />
 
-              <label
-                className={styles.Test__itemLabel}
-                htmlFor={item.value + itemIndex}
-              >
-                {item.value}
-              </label>
+              <label className={styles.Test__itemLabel}>{answer.text}</label>
             </Flex>
           ))}
         </Flex>

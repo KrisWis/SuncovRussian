@@ -1,168 +1,83 @@
-import { TestsType } from '../types/types';
+/* eslint-disable camelcase */
+import { TestInterface } from '@/features/Test';
 
 // TODO: удалить потом mockTests и брать данные с бека
-export const mockTests: TestsType = {
-  Склонение: {
-    items: [
+export const mockTests: TestInterface[] = [
+  {
+    id: 1,
+    title: 'Склонение',
+    questions: [
       {
-        caption: 'Укажите существительное 1 склонения',
-        hasOneCorrectAnswer: true,
-        items: [
+        id: 1,
+        text: 'Укажите существительное 1 склонения',
+        has_one_correct_answer: true,
+        test: 1,
+        answers: [
           {
-            value: 'перо',
-            isCorrect: false,
+            id: 1,
+            text: 'перо',
+            is_correct: false,
+            question: 1,
           },
 
           {
-            value: 'утюг',
-            isCorrect: false,
+            id: 2,
+            text: 'утюг',
+            is_correct: false,
+            question: 1,
           },
 
           {
-            value: 'река',
-            isCorrect: true,
+            id: 3,
+            text: 'река',
+            is_correct: true,
+            question: 1,
           },
 
           {
-            value: 'дом',
-            isCorrect: false,
+            id: 4,
+            text: 'дом',
+            is_correct: false,
+            question: 1,
           },
         ],
       },
 
       {
-        caption: 'Укажите существительное 2 склонения',
-        hasOneCorrectAnswer: true,
-        items: [
+        id: 2,
+        text: 'Укажите существительное 1 склонения',
+        has_one_correct_answer: true,
+        test: 1,
+        answers: [
           {
-            value: 'перо',
-            isCorrect: false,
+            id: 1,
+            text: 'перо',
+            is_correct: false,
+            question: 2,
           },
 
           {
-            value: 'утюг',
-            isCorrect: false,
+            id: 2,
+            text: 'утюг',
+            is_correct: false,
+            question: 2,
           },
 
           {
-            value: 'река',
-            isCorrect: true,
+            id: 3,
+            text: 'река',
+            is_correct: true,
+            question: 2,
           },
 
           {
-            value: 'дом',
-            isCorrect: false,
-          },
-        ],
-      },
-
-      {
-        caption: 'Укажите существительное 3 склонения',
-        hasOneCorrectAnswer: false,
-        items: [
-          {
-            value: 'перо',
-            isCorrect: true,
-          },
-
-          {
-            value: 'утюг',
-            isCorrect: false,
-          },
-
-          {
-            value: 'река',
-            isCorrect: true,
-          },
-
-          {
-            value: 'дом',
-            isCorrect: false,
+            id: 4,
+            text: 'дом',
+            is_correct: false,
+            question: 2,
           },
         ],
       },
     ],
   },
-
-  Склонение2: {
-    items: [
-      {
-        caption: 'Укажите существительное 4 склонения',
-        hasOneCorrectAnswer: true,
-        items: [
-          {
-            value: 'перо',
-            isCorrect: false,
-          },
-
-          {
-            value: 'утюг',
-            isCorrect: false,
-          },
-
-          {
-            value: 'река',
-            isCorrect: true,
-          },
-
-          {
-            value: 'дом',
-            isCorrect: false,
-          },
-        ],
-      },
-
-      {
-        caption: 'Укажите существительное 5 склонения',
-        hasOneCorrectAnswer: false,
-        items: [
-          {
-            value: 'перо',
-            isCorrect: true,
-          },
-
-          {
-            value: 'утюг',
-            isCorrect: false,
-          },
-
-          {
-            value: 'река',
-            isCorrect: true,
-          },
-
-          {
-            value: 'дом',
-            isCorrect: false,
-          },
-        ],
-      },
-
-      {
-        caption: 'Укажите существительное 6 склонения',
-        hasOneCorrectAnswer: false,
-        items: [
-          {
-            value: 'перо',
-            isCorrect: true,
-          },
-
-          {
-            value: 'утюг',
-            isCorrect: false,
-          },
-
-          {
-            value: 'река',
-            isCorrect: true,
-          },
-
-          {
-            value: 'дом',
-            isCorrect: false,
-          },
-        ],
-      },
-    ],
-  },
-};
+];

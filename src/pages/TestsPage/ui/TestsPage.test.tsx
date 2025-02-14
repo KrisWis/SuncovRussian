@@ -1,95 +1,126 @@
+/* eslint-disable camelcase */
 import { renderWithProviders } from '@/shared/tests/renderWithProviders';
 import { TestsPage } from './TestsPage';
 import { getRouteTests } from '@/shared/const/router';
 import { queries, RenderResult, waitFor } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
-import { TestsType } from '../model/types/types';
+import { TestInterface } from '@/features/Test';
 
 // Mocks
 const mockTheme = 'Склонение';
 
-const mockTests: TestsType = {
-  [mockTheme]: {
-    items: [
-      {
-        caption: 'Укажите существительное 1 склонения',
-        hasOneCorrectAnswer: true,
-        items: [
-          {
-            value: 'перо',
-            isCorrect: false,
-          },
+const mockTests: TestInterface = {
+  id: 1,
+  title: 'Склонение',
+  questions: [
+    {
+      id: 1,
+      text: 'Укажите существительное 1 склонения',
+      has_one_correct_answer: true,
+      test: 1,
+      answers: [
+        {
+          id: 1,
+          text: 'перо',
+          is_correct: false,
+          question: 1,
+        },
 
-          {
-            value: 'утюг',
-            isCorrect: false,
-          },
+        {
+          id: 2,
+          text: 'утюг',
+          is_correct: false,
+          question: 1,
+        },
 
-          {
-            value: 'река',
-            isCorrect: true,
-          },
+        {
+          id: 3,
+          text: 'река',
+          is_correct: true,
+          question: 1,
+        },
 
-          {
-            value: 'дом',
-            isCorrect: false,
-          },
-        ],
-      },
+        {
+          id: 4,
+          text: 'дом',
+          is_correct: false,
+          question: 1,
+        },
+      ],
+    },
 
-      {
-        caption: 'Укажите существительное 2 склонения',
-        hasOneCorrectAnswer: true,
-        items: [
-          {
-            value: 'перо',
-            isCorrect: false,
-          },
+    {
+      id: 2,
+      text: 'Укажите существительное 2 склонения',
+      has_one_correct_answer: true,
+      test: 2,
+      answers: [
+        {
+          id: 1,
+          text: 'перо',
+          is_correct: false,
+          question: 2,
+        },
 
-          {
-            value: 'утюг',
-            isCorrect: false,
-          },
+        {
+          id: 2,
+          text: 'утюг',
+          is_correct: false,
+          question: 2,
+        },
 
-          {
-            value: 'река',
-            isCorrect: true,
-          },
+        {
+          id: 3,
+          text: 'река',
+          is_correct: true,
+          question: 2,
+        },
 
-          {
-            value: 'дом',
-            isCorrect: false,
-          },
-        ],
-      },
+        {
+          id: 4,
+          text: 'дом',
+          is_correct: false,
+          question: 2,
+        },
+      ],
+    },
 
-      {
-        caption: 'Укажите существительное 3 склонения',
-        hasOneCorrectAnswer: false,
-        items: [
-          {
-            value: 'перо',
-            isCorrect: true,
-          },
+    {
+      id: 3,
+      text: 'Укажите существительное 3 склонения',
+      has_one_correct_answer: false,
+      test: 3,
+      answers: [
+        {
+          id: 1,
+          text: 'перо',
+          is_correct: true,
+          question: 3,
+        },
 
-          {
-            value: 'утюг',
-            isCorrect: false,
-          },
+        {
+          id: 2,
+          text: 'утюг',
+          is_correct: false,
+          question: 3,
+        },
 
-          {
-            value: 'река',
-            isCorrect: true,
-          },
+        {
+          id: 3,
+          text: 'река',
+          is_correct: true,
+          question: 3,
+        },
 
-          {
-            value: 'дом',
-            isCorrect: false,
-          },
-        ],
-      },
-    ],
-  },
+        {
+          id: 4,
+          text: 'дом',
+          is_correct: false,
+          question: 3,
+        },
+      ],
+    },
+  ],
 };
 
 // Tests
@@ -97,7 +128,7 @@ describe('Test With Radio Buttons', () => {
   // Helpers
   const setupTest = () => {
     return renderWithProviders(
-      <TestsPage theme={mockTheme} item={mockTests[mockTheme]} />,
+      <TestsPage theme={mockTheme} questions={mockTests.questions} />,
       getRouteTests(mockTheme),
     );
   };

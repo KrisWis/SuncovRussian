@@ -1,3 +1,4 @@
+/* eslint-disable camelcase */
 import type { Meta, StoryObj } from '@storybook/react';
 import { Test } from './Test';
 
@@ -15,9 +16,9 @@ type Story = StoryObj<typeof meta>;
 export const WithOneCorrectAnswer: Story = {
   args: {
     caption: 'Укажите существительное 1 склонения',
-    items: [
-      { value: 'перо', isCorrect: true },
-      { value: 'утюг', isCorrect: false },
+    answers: [
+      { text: 'перо', is_correct: true, id: 1, question: 1 },
+      { text: 'утюг', is_correct: false, id: 2, question: 1 },
     ],
     hasOneCorrectAnswer: true,
     index: 0,
@@ -29,11 +30,11 @@ export const WithOneCorrectAnswer: Story = {
 export const WithSomeCorrectAnswers: Story = {
   args: {
     caption: 'Укажите существительное 2 склонения',
-    items: [
-      { value: 'перо', isCorrect: true },
-      { value: 'утюг', isCorrect: false },
-      { value: 'река', isCorrect: true },
-      { value: 'дом', isCorrect: false },
+    answers: [
+      { text: 'перо', is_correct: true, id: 1, question: 1 },
+      { text: 'утюг', is_correct: false, id: 2, question: 1 },
+      { text: 'река', is_correct: true, id: 3, question: 1 },
+      { text: 'дом', is_correct: false, id: 4, question: 1 },
     ],
     hasOneCorrectAnswer: false,
     index: 0,

@@ -42,9 +42,9 @@ export const routeConfig: Record<AppRoutes, RouteProps> = {
       })),
     ),
 
-    ...Object.entries(mockTests).map(([theme]) => ({
-      path: getRouteTests(theme),
-      element: <TestsPage theme={theme} item={mockTests[theme]} />,
+    ...mockTests.map((test) => ({
+      path: getRouteTests(test.title),
+      element: <TestsPage theme={test.title} questions={test.questions} />,
     })),
 
     ...Object.entries(mockPartsOfSpeach).map(([theme]) => ({

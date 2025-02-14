@@ -1,5 +1,5 @@
 import { memo, useContext } from 'react';
-import { Test, TestType, useCheckTestCorrectness } from '@/features/Test';
+import { Question, Test, useCheckTestCorrectness } from '@/features/Test';
 import { TemplateForTests } from '@/shared/ui/TemplateForTests';
 import { Flex } from '@/shared/lib/Stack';
 import { ProviderForTestsContext } from '@/shared/lib/ProviderForTests';
@@ -21,7 +21,7 @@ export const TestTemplate: React.FC = memo((): React.JSX.Element => {
 
   // Получение функции проверки
   const { checkTestCorrectness } = useCheckTestCorrectness(
-    items as TestType[],
+    items as Question[],
     setMaxCorrectAnswersCount,
     setCorrectAnswersCount,
     setTestIsFailed,
@@ -32,12 +32,12 @@ export const TestTemplate: React.FC = memo((): React.JSX.Element => {
     <TemplateForTests
       testElement={
         <Flex width="100" direction="column" gap="50">
-          {(items as TestType[]).map((test, index) => (
+          {(items as Question[]).map((test, index) => (
             <Test
-              key={test.caption}
-              hasOneCorrectAnswer={(test as TestType).hasOneCorrectAnswer}
-              caption={(test as TestType).caption}
-              items={(test as TestType).items}
+              key={test.id}
+              hasOneCorrectAnswer={test.has_one_correct_answer}
+              caption={test.text}
+              answers={test.answers}
               index={index}
               maxCorrectAnswersCount={maxCorrectAnswersCount}
               testHasMissedAnswers={testHasMissedAnswers}
