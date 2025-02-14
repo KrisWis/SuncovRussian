@@ -1,5 +1,5 @@
 import { memo, useEffect, useMemo, useState } from 'react';
-import { useGetAllTheoriesMutation } from '../model/api/theoryPageApi';
+import { useGetAllTheoriesMutation } from '../api/theoryPageApi';
 import { PageLoading } from '@/shared/ui/PageLoading/ui/PageLoading';
 import { ErrorComponent } from '@/shared/ui/ErrorComponent';
 import { Flex } from '@/shared/lib/Stack';

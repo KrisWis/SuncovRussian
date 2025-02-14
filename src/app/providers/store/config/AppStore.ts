@@ -4,13 +4,14 @@ import { createReducerManager, ReducerManager } from './AppReducerManager';
 import { RootReducer } from './AppReducer';
 import { UTApi } from '@/shared/api/UTApi/api';
 import { StateSchema } from './types';
+import { RTKApi } from '@/shared/api/RTKApi/api';
 
 const reducerManager = createReducerManager(RootReducer);
 
 export const store = configureStore({
   reducer: reducerManager.reduce as Reducer<StateSchema>,
   middleware: (getDefaultMiddleware) =>
-    getDefaultMiddleware().concat(UTApi.middleware),
+    getDefaultMiddleware().concat([UTApi.middleware, RTKApi.middleware]),
 });
 
 // @ts-expect-error EnhancedStore не имеет свойства reducerManager
