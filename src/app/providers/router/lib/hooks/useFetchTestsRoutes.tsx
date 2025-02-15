@@ -5,7 +5,7 @@ import { AppRoutes } from '@/shared/types/router';
 import { RouteProps } from 'react-router-dom';
 
 interface useFetchTestsResult {
-  fetchTests: () => Promise<Partial<Record<AppRoutes, RouteProps>> | null>;
+  fetchTests: () => Promise<Partial<Record<AppRoutes, RouteProps>> | never[]>;
 }
 
 export const useFetchTests = (): useFetchTestsResult => {
@@ -36,7 +36,7 @@ export const useFetchTests = (): useFetchTestsResult => {
       return testsRoutes;
     } catch (error) {
       console.error('Ошибка при загрузке тестов:', error);
-      return null;
+      return [];
     }
   };
 
