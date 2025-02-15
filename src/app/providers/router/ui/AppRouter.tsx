@@ -2,7 +2,6 @@ import { memo, Suspense, useEffect, useState } from 'react';
 import { Route, RouteProps, Routes } from 'react-router-dom';
 import { routeConfig } from '../config/routeConfig';
 import { PageLoading } from '@/shared/ui/PageLoading/ui/PageLoading';
-import { useAppDispatch } from '@/shared/store';
 import { AppRoutes } from '@/shared/types/router';
 import { useFetchTests } from '../lib/hooks/useFetchTestsRoutes';
 
@@ -21,21 +20,21 @@ export const AppRouter: React.FC = memo(() => {
     useState<Record<AppRoutes, RouteProps>>(routeConfig);
 
   // Получаем данные с бекенда
-  const dispatch = useAppDispatch();
-
   const { fetchTests } = useFetchTests();
 
   // Обновляем роуты
   useEffect(() => {
-    const testsRoutes = fetchTests();
+    const AsyncFetchData = async () => {
+      const testsRoutes = await fetchTests();
 
-    setRoutes((prevRoutes) => ({
-      ...prevRoutes,
-      ...testsRoutes,
-    }));
+      setRoutes((prevRoutes) => ({
+        ...prevRoutes,
+        ...testsRoutes,
+      }));
+    };
 
-    fetchTests();
-  }, [dispatch, fetchTests]);
+    AsyncFetchData();
+  }, [fetchTests]);
 
   return (
     <Suspense fallback={<PageLoading />}>
