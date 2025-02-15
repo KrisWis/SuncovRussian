@@ -23,6 +23,7 @@ export type WordsForTrainersTypes =
 
 interface WordsForTrainersGeneralItem {
   type: TrainerWordsType;
+  inHeader: boolean;
   items: WordsForTrainersTypes[];
 }
 
@@ -31,7 +32,7 @@ interface PrimaryWordsForTrainersItem extends WordsForTrainersGeneralItem {
   items: PrimaryWordsInterface[];
 }
 
-interface UnionsWordsForTrainersItem {
+interface UnionsWordsForTrainersItem extends WordsForTrainersGeneralItem {
   type: 'unions';
   items: UnionsWordsInterface[];
 }

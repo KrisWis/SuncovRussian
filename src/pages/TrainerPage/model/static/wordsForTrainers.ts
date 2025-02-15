@@ -3,6 +3,7 @@ import { WordsForTrainers } from '../types/types';
 export const wordsForTrainers: WordsForTrainers = {
   Ударения: {
     type: 'primary',
+    inHeader: true,
 
     items: [
       {
@@ -575,6 +576,8 @@ export const wordsForTrainers: WordsForTrainers = {
 
   Наречия: {
     type: 'primary',
+    inHeader: true,
+
     items: [
       {
         valid: 'без оглядки',
@@ -1126,6 +1129,8 @@ export const wordsForTrainers: WordsForTrainers = {
 
   'Словарные слова': {
     type: 'primary',
+    inHeader: true,
+
     items: [
       {
         valid: 'тишина',
@@ -1733,6 +1738,8 @@ export const wordsForTrainers: WordsForTrainers = {
 
   'Морфологические нормы': {
     type: 'primary',
+    inHeader: true,
+
     items: [
       {
         valid: 'инструкторы',
@@ -2209,6 +2216,8 @@ export const wordsForTrainers: WordsForTrainers = {
 
   'н/нн': {
     type: 'primary',
+    inHeader: true,
+
     items: [
       {
         valid: 'бараний',
@@ -2515,6 +2524,8 @@ export const wordsForTrainers: WordsForTrainers = {
 
   'пре-при': {
     type: 'primary',
+    inHeader: true,
+
     items: [
       {
         id: 0,
@@ -2893,6 +2904,7 @@ export const wordsForTrainers: WordsForTrainers = {
 
   'Виды союзов': {
     type: 'unions',
+    inHeader: true,
 
     items: [
       {
@@ -3114,6 +3126,1078 @@ export const wordsForTrainers: WordsForTrainers = {
         word: 'КАКОВ',
         unionType: 'Подчинительный',
         id: 43,
+      },
+    ],
+  },
+
+  'Наречия (6 класс)': {
+    type: 'primary',
+    inHeader: false,
+    items: [
+      {
+        valid: 'без ведома',
+        invalid: 'безведома',
+        id: 0,
+      },
+      {
+        valid: 'без оглядки',
+        invalid: 'безоглядки',
+        id: 1,
+      },
+      {
+        valid: 'без отказа',
+        invalid: 'безотказа',
+        id: 2,
+      },
+      {
+        valid: 'без просвета',
+        invalid: 'безпросвета',
+        id: 3,
+      },
+      {
+        valid: 'без просыпу',
+        invalid: 'безпросыпу',
+        id: 4,
+      },
+      {
+        valid: 'без разбору',
+        invalid: 'безразбору',
+        id: 5,
+      },
+      {
+        valid: 'без спросу',
+        invalid: 'безспросу',
+        id: 6,
+      },
+      {
+        valid: 'без толку',
+        invalid: 'безтолку',
+        id: 7,
+      },
+      {
+        valid: 'без удержу',
+        invalid: 'безудержу',
+        id: 8,
+      },
+      {
+        valid: 'без умолку',
+        invalid: 'безумолку',
+        id: 9,
+      },
+      {
+        valid: 'без устали',
+        invalid: 'безустали',
+        id: 10,
+      },
+      {
+        valid: 'без утайки',
+        invalid: 'безутайки',
+        id: 11,
+      },
+      {
+        valid: 'бок о бок',
+        invalid: 'бок-о-бок',
+        id: 12,
+      },
+      {
+        valid: 'вблизи',
+        invalid: 'в близи',
+        id: 13,
+      },
+      {
+        valid: 'вбок',
+        invalid: 'в бок',
+        id: 14,
+      },
+      {
+        valid: 'вброд',
+        invalid: 'в брод',
+        id: 15,
+      },
+      {
+        valid: 'ввек',
+        invalid: 'в век',
+        id: 16,
+      },
+      {
+        valid: 'вверх',
+        invalid: 'в верх',
+        id: 17,
+      },
+      {
+        valid: 'вволю',
+        invalid: 'в волю',
+        id: 18,
+      },
+      {
+        valid: 'ввысь',
+        invalid: 'в высь',
+        id: 19,
+      },
+      {
+        valid: 'вглубь',
+        invalid: 'в глубь',
+        id: 20,
+      },
+      {
+        valid: 'вдалеке',
+        invalid: 'в далеке',
+        id: 21,
+      },
+      {
+        valid: 'вдали',
+        invalid: 'в дали',
+        id: 22,
+      },
+      {
+        valid: 'вдаль',
+        invalid: 'в даль',
+        id: 23,
+      },
+      {
+        valid: 'вдвойне',
+        invalid: 'в двойне',
+        id: 24,
+      },
+      {
+        valid: 'вдесятеро',
+        invalid: 'в десятеро',
+        id: 25,
+      },
+      {
+        valid: 'вдобавок',
+        invalid: 'в добавок',
+        id: 26,
+      },
+      {
+        valid: 'вдогонку',
+        invalid: 'в догонку',
+        id: 27,
+      },
+      {
+        valid: 'вдребезги',
+        invalid: 'в дребезги',
+        id: 28,
+      },
+      {
+        valid: 'в заключение',
+        invalid: 'взаключение',
+        id: 29,
+      },
+      {
+        valid: 'взаймы',
+        invalid: 'в займы',
+        id: 30,
+      },
+      {
+        valid: 'взамен',
+        invalid: 'в замен',
+        id: 31,
+      },
+      {
+        valid: 'вконец',
+        invalid: 'в конец',
+        id: 32,
+      },
+      {
+        valid: 'в корне',
+        invalid: 'вконце',
+        id: 33,
+      },
+      {
+        valid: 'вкось',
+        invalid: 'в кось',
+        id: 34,
+      },
+      {
+        valid: 'вкривь',
+        invalid: 'в кривь',
+        id: 35,
+      },
+      {
+        valid: 'вкрутую',
+        invalid: 'в крутую',
+        id: 36,
+      },
+      {
+        valid: 'вкупе',
+        invalid: 'в купе',
+        id: 37,
+      },
+      {
+        valid: 'влет',
+        invalid: 'в лет',
+        id: 38,
+      },
+      {
+        valid: 'вмиг',
+        invalid: 'в миг',
+        id: 39,
+      },
+      {
+        valid: 'в обтяжку',
+        invalid: 'вобтяжку',
+        id: 40,
+      },
+      {
+        valid: 'в обхват',
+        invalid: 'вобхват',
+        id: 41,
+      },
+      {
+        valid: 'в общем',
+        invalid: 'вобщем',
+        id: 42,
+      },
+      {
+        valid: 'вовек',
+        invalid: 'во век',
+        id: 43,
+      },
+      {
+        valid: 'вовеки',
+        invalid: 'во веки',
+        id: 44,
+      },
+      {
+        valid: 'вовремя',
+        invalid: 'во время',
+        id: 45,
+      },
+      {
+        valid: 'вовсе',
+        invalid: 'во все',
+        id: 46,
+      },
+      {
+        valid: 'вовсю (заорать)',
+        invalid: 'во всю (заорать)',
+        id: 47,
+      },
+      {
+        valid: 'во всеоружии',
+        invalid: 'во все оружии',
+        id: 48,
+      },
+      {
+        valid: 'во всеуслышание',
+        invalid: 'во все услышание',
+        id: 49,
+      },
+      {
+        valid: 'в одиночку',
+        invalid: 'водиночку',
+        id: 50,
+      },
+      {
+        valid: 'во избежание',
+        invalid: 'воизбежание',
+        id: 51,
+      },
+      {
+        valid: 'воистину',
+        invalid: 'во истину',
+        id: 52,
+      },
+      {
+        valid: 'воочию',
+        invalid: 'во очию',
+        id: 53,
+      },
+      {
+        valid: 'в открытую',
+        invalid: 'воткрытую',
+        id: 54,
+      },
+      {
+        valid: 'впервые',
+        invalid: 'в первые',
+        id: 55,
+      },
+      {
+        valid: 'вперегонки',
+        invalid: 'в перегонки',
+        id: 56,
+      },
+      {
+        valid: 'вперемежку (чередовать)',
+        invalid: 'в перемежку (чередовать)',
+        id: 57,
+      },
+      {
+        valid: 'вперемешку (мешать)',
+        invalid: 'в перемешку (мешать)',
+        id: 58,
+      },
+      {
+        valid: 'вплотную',
+        invalid: 'в плотную',
+        id: 59,
+      },
+      {
+        valid: 'вповалку',
+        invalid: 'в повалку',
+        id: 60,
+      },
+      {
+        valid: 'вполоборота',
+        invalid: 'в полоборота',
+        id: 61,
+      },
+      {
+        valid: 'вполовину',
+        invalid: 'в половину',
+        id: 62,
+      },
+      {
+        valid: 'вполсилы',
+        invalid: 'в полсилы',
+        id: 63,
+      },
+      {
+        valid: 'впопыхах',
+        invalid: 'в попыхах',
+        id: 64,
+      },
+      {
+        valid: 'впору (по мерке)',
+        invalid: 'в пору (по мерке)',
+        id: 65,
+      },
+      {
+        valid: 'в пору (вовремя)',
+        invalid: 'впору (вовремя)',
+        id: 66,
+      },
+      {
+        valid: 'впоследствии',
+        invalid: 'в последствии',
+        id: 67,
+      },
+      {
+        valid: 'впотьмах',
+        invalid: 'в потьмах',
+        id: 68,
+      },
+      {
+        valid: 'вправду',
+        invalid: 'в правду',
+        id: 69,
+      },
+      {
+        valid: 'вприпрыжку',
+        invalid: 'в припрыжку',
+        id: 70,
+      },
+      {
+        valid: 'впустую',
+        invalid: 'в пустую',
+        id: 71,
+      },
+      {
+        valid: 'вправе',
+        invalid: 'в праве',
+        id: 72,
+      },
+      {
+        valid: 'вприглядку',
+        invalid: 'в приглядку',
+        id: 73,
+      },
+      {
+        valid: 'вприкуску',
+        invalid: 'в прикуску',
+        id: 74,
+      },
+      {
+        valid: 'вприсядку',
+        invalid: 'в присядку',
+        id: 75,
+      },
+      {
+        valid: 'впритык',
+        invalid: 'в притык',
+        id: 76,
+      },
+      {
+        valid: 'впроголодь',
+        invalid: 'в проголодь',
+        id: 77,
+      },
+      {
+        valid: 'впрок',
+        invalid: 'в прок',
+        id: 78,
+      },
+      {
+        valid: 'в рассрочку',
+        invalid: 'врассрочку',
+        id: 79,
+      },
+      {
+        valid: 'врассыпную',
+        invalid: 'в рассыпную',
+        id: 80,
+      },
+      {
+        valid: 'вроде',
+        invalid: 'в роде',
+        id: 81,
+      },
+      {
+        valid: 'врукопашную',
+        invalid: 'в рукопашную',
+        id: 82,
+      },
+      {
+        valid: 'вручную',
+        invalid: 'в ручную',
+        id: 83,
+      },
+      {
+        valid: 'вряд ли',
+        invalid: 'врядли',
+        id: 84,
+      },
+      {
+        valid: 'в сердцах',
+        invalid: 'всердцах',
+        id: 85,
+      },
+      {
+        valid: 'всецело',
+        invalid: 'все цело',
+        id: 86,
+      },
+      {
+        valid: 'в силу (вследствие)',
+        invalid: 'всилу (вследствие)',
+        id: 87,
+      },
+      {
+        valid: 'в складчину',
+        invalid: 'вскладчину',
+        id: 88,
+      },
+      {
+        valid: 'вскорости',
+        invalid: 'в скорости',
+        id: 89,
+      },
+      {
+        valid: 'вслед',
+        invalid: 'в след',
+        id: 90,
+      },
+      {
+        valid: 'вслепую',
+        invalid: 'в слепую',
+        id: 91,
+      },
+      {
+        valid: 'вслух',
+        invalid: 'в слух',
+        id: 92,
+      },
+      {
+        valid: 'всмятку',
+        invalid: 'в смятку',
+        id: 93,
+      },
+      {
+        valid: 'в старину',
+        invalid: 'встарину',
+        id: 94,
+      },
+      {
+        valid: 'встарь',
+        invalid: 'в старь',
+        id: 95,
+      },
+      {
+        valid: 'всуе(напрасно)',
+        invalid: 'в суе (напрасно)',
+        id: 96,
+      },
+      {
+        valid: 'втайне(сделать)',
+        invalid: 'в тайне (сделать)',
+        id: 97,
+      },
+      {
+        valid: 'в тайне(хранить)',
+        invalid: 'втайне (хранить)',
+        id: 98,
+      },
+      {
+        valid: 'втридорога',
+        invalid: 'в тридорога',
+        id: 99,
+      },
+      {
+        valid: 'втрое',
+        invalid: 'в трое',
+        id: 100,
+      },
+      {
+        valid: 'в упор',
+        invalid: 'вупор',
+        id: 101,
+      },
+      {
+        valid: 'в ходу',
+        invalid: 'входу',
+        id: 102,
+      },
+      {
+        valid: 'в целом',
+        invalid: 'вцелом',
+        id: 103,
+      },
+      {
+        valid: 'вчистую(проиграл)',
+        invalid: 'в чистую (проиграл)',
+        id: 104,
+      },
+      {
+        valid: 'вшестеро',
+        invalid: 'в шестеро',
+        id: 105,
+      },
+      {
+        valid: 'вширь',
+        invalid: 'в ширь',
+        id: 106,
+      },
+      {
+        valid: 'в шутку',
+        invalid: 'вшутку',
+        id: 107,
+      },
+      {
+        valid: 'въявь',
+        invalid: 'в явь',
+        id: 108,
+      },
+      {
+        valid: 'доверху',
+        invalid: 'до верху',
+        id: 109,
+      },
+      {
+        valid: 'до крайности',
+        invalid: 'докрайности',
+        id: 110,
+      },
+      {
+        valid: 'донизу',
+        invalid: 'до низу',
+        id: 111,
+      },
+      {
+        valid: 'доныне',
+        invalid: 'до ныне',
+        id: 112,
+      },
+      {
+        valid: 'до отказа',
+        invalid: 'доотказа',
+        id: 113,
+      },
+      {
+        valid: 'до свидания',
+        invalid: 'досвидания',
+        id: 114,
+      },
+      {
+        valid: 'дотла',
+        invalid: 'до тла',
+        id: 115,
+      },
+      {
+        valid: 'за границей',
+        invalid: 'заграницей',
+        id: 116,
+      },
+      {
+        valid: 'за границу',
+        invalid: 'заграницу',
+        id: 117,
+      },
+      {
+        valid: 'замуж',
+        invalid: 'за муж',
+        id: 118,
+      },
+      {
+        valid: 'внаймы',
+        invalid: 'в наймы',
+        id: 119,
+      },
+      {
+        valid: 'внакидку',
+        invalid: 'в накидку',
+        id: 120,
+      },
+      {
+        valid: 'внакладе',
+        invalid: 'в накладе',
+        id: 121,
+      },
+      {
+        valid: 'в насмешку',
+        invalid: 'внасмешку',
+        id: 122,
+      },
+      {
+        valid: 'вначале',
+        invalid: 'в начале',
+        id: 123,
+      },
+      {
+        valid: 'вниз',
+        invalid: 'в низ',
+        id: 124,
+      },
+      {
+        valid: 'вничью',
+        invalid: 'в ничью',
+        id: 125,
+      },
+      {
+        valid: 'вновь',
+        invalid: 'в новь',
+        id: 126,
+      },
+      {
+        valid: 'внутрь',
+        invalid: 'в нутри',
+        id: 127,
+      },
+      {
+        valid: 'в обрез',
+        invalid: 'вобрез',
+        id: 128,
+      },
+      {
+        valid: 'как раз',
+        invalid: 'какраз',
+        id: 129,
+      },
+      {
+        valid: 'крест-накрест',
+        invalid: 'крест накрест',
+        id: 130,
+      },
+      {
+        valid: 'на авось',
+        invalid: 'наавось',
+        id: 131,
+      },
+      {
+        valid: 'на бегу',
+        invalid: 'набегу',
+        id: 132,
+      },
+      {
+        valid: 'набок',
+        invalid: 'на бок',
+        id: 133,
+      },
+      {
+        valid: 'навек',
+        invalid: 'на век',
+        id: 134,
+      },
+      {
+        valid: 'навеки',
+        invalid: 'на веки',
+        id: 135,
+      },
+      {
+        valid: 'наверх',
+        invalid: 'на верх',
+        id: 136,
+      },
+      {
+        valid: 'на вид',
+        invalid: 'навид',
+        id: 137,
+      },
+      {
+        valid: 'на виду',
+        invalid: 'навиду',
+        id: 138,
+      },
+      {
+        valid: 'навряд ли',
+        invalid: 'на вряд ли',
+        id: 139,
+      },
+      {
+        valid: 'навстречу',
+        invalid: 'на встречу',
+        id: 140,
+      },
+      {
+        valid: 'навыпуск',
+        invalid: 'на выпуск',
+        id: 141,
+      },
+      {
+        valid: 'навытяжку',
+        invalid: 'на вытяжку',
+        id: 142,
+      },
+      {
+        valid: 'на глаз',
+        invalid: 'наглаз',
+        id: 143,
+      },
+      {
+        valid: 'на глазок',
+        invalid: 'наглазок',
+        id: 144,
+      },
+      {
+        valid: 'наголову',
+        invalid: 'на голову',
+        id: 145,
+      },
+      {
+        valid: 'на диво',
+        invalid: 'надиво',
+        id: 146,
+      },
+      {
+        valid: 'на днях',
+        invalid: 'наднях',
+        id: 147,
+      },
+      {
+        valid: 'на дыбы',
+        invalid: 'надыбы',
+        id: 148,
+      },
+      {
+        valid: 'назавтра',
+        invalid: 'на завтра',
+        id: 149,
+      },
+      {
+        valid: 'назло',
+        invalid: 'на зло',
+        id: 150,
+      },
+      {
+        valid: 'назубок',
+        invalid: 'на зубок',
+        id: 151,
+      },
+      {
+        valid: 'на износ',
+        invalid: 'наизнос',
+        id: 152,
+      },
+      {
+        valid: 'накануне',
+        invalid: 'на кануне',
+        id: 153,
+      },
+      {
+        valid: 'на лету',
+        invalid: 'налету',
+        id: 154,
+      },
+      {
+        valid: 'налицо',
+        invalid: 'на лицо',
+        id: 155,
+      },
+      {
+        valid: 'на миг',
+        invalid: 'намиг',
+        id: 156,
+      },
+      {
+        valid: 'на нет',
+        invalid: 'нанет',
+        id: 157,
+      },
+      {
+        valid: 'на отлично',
+        invalid: 'наотлично',
+        id: 158,
+      },
+      {
+        valid: 'наотмашь',
+        invalid: 'на отмашь',
+        id: 159,
+      },
+      {
+        valid: 'на ощупь',
+        invalid: 'наощупь',
+        id: 160,
+      },
+      {
+        valid: 'наперебой',
+        invalid: 'на перебой',
+        id: 161,
+      },
+      {
+        valid: 'наперегонки',
+        invalid: 'на перегонки',
+        id: 162,
+      },
+      {
+        valid: 'наперекор',
+        invalid: 'на перекор',
+        id: 163,
+      },
+      {
+        valid: 'наперерыв',
+        invalid: 'на перерыв',
+        id: 164,
+      },
+      {
+        valid: 'напоказ',
+        invalid: 'на показ',
+        id: 165,
+      },
+      {
+        valid: 'наполовину',
+        invalid: 'на половину',
+        id: 166,
+      },
+      {
+        valid: 'на полпути',
+        invalid: 'на пол пути',
+        id: 167,
+      },
+      {
+        valid: 'напополам',
+        invalid: 'на пополам',
+        id: 168,
+      },
+      {
+        valid: 'напрокат',
+        invalid: 'на прокат',
+        id: 169,
+      },
+      {
+        valid: 'впросак',
+        invalid: 'в просак',
+        id: 170,
+      },
+      {
+        valid: 'впятеро',
+        invalid: 'в пятеро',
+        id: 171,
+      },
+      {
+        valid: 'вразбивку',
+        invalid: 'в разбивку',
+        id: 172,
+      },
+      {
+        valid: 'вразброс',
+        invalid: 'в разброс',
+        id: 173,
+      },
+      {
+        valid: 'вразрез',
+        invalid: 'в разрез',
+        id: 174,
+      },
+      {
+        valid: 'на рысях',
+        invalid: 'нарысях',
+        id: 175,
+      },
+      {
+        valid: 'на славу',
+        invalid: 'наславу',
+        id: 176,
+      },
+      {
+        valid: 'насмерть (биться)',
+        invalid: 'на смерть(биться)',
+        id: 177,
+      },
+      {
+        valid: 'на смех',
+        invalid: 'насмех',
+        id: 178,
+      },
+      {
+        valid: 'натрое',
+        invalid: 'на трое',
+        id: 179,
+      },
+      {
+        valid: 'не вправе',
+        invalid: 'невправе',
+        id: 180,
+      },
+      {
+        valid: 'ненадолго',
+        invalid: 'на надолго',
+        id: 181,
+      },
+      {
+        valid: 'не сегодня-завтра',
+        invalid: 'не сегодня завтра',
+        id: 182,
+      },
+      {
+        valid: 'наудачу',
+        invalid: 'на удачу',
+        id: 183,
+      },
+      {
+        valid: 'на ходу',
+        invalid: 'находу',
+        id: 184,
+      },
+      {
+        valid: 'начеку',
+        invalid: 'на чеку',
+        id: 185,
+      },
+      {
+        valid: 'наяву',
+        invalid: 'на яву',
+        id: 186,
+      },
+      {
+        valid: 'недаром',
+        invalid: 'не даром',
+        id: 187,
+      },
+      {
+        valid: 'нипочем',
+        invalid: 'ни по чем',
+        id: 188,
+      },
+      {
+        valid: 'отроду (не видел)',
+        invalid: 'от роду (не видел)',
+        id: 189,
+      },
+      {
+        valid: 'отчасти',
+        invalid: 'от части',
+        id: 190,
+      },
+      {
+        valid: 'повсюду',
+        invalid: 'по всюду',
+        id: 191,
+      },
+      {
+        valid: 'под конец',
+        invalid: 'подконец',
+        id: 192,
+      },
+      {
+        valid: 'под мышки (взять)',
+        invalid: 'подмышки (взять)',
+        id: 193,
+      },
+      {
+        valid: 'под стать',
+        invalid: 'подстать',
+        id: 194,
+      },
+      {
+        valid: 'подчас',
+        invalid: 'под час',
+        id: 195,
+      },
+      {
+        valid: 'позавчера',
+        invalid: 'поза вчера',
+        id: 196,
+      },
+      {
+        valid: 'понаслышке',
+        invalid: 'по наслышке',
+        id: 197,
+      },
+      {
+        valid: 'понемногу',
+        invalid: 'по немногу',
+        id: 198,
+      },
+      {
+        valid: 'замужем',
+        invalid: 'за мужем',
+        id: 199,
+      },
+      {
+        valid: 'запанибрата',
+        invalid: 'за панибрата',
+        id: 200,
+      },
+      {
+        valid: 'извне',
+        invalid: 'из вне',
+        id: 201,
+      },
+      {
+        valid: 'из-под мышек',
+        invalid: 'из подмышек',
+        id: 202,
+      },
+      {
+        valid: 'исподтишка',
+        invalid: 'из под тишка',
+        id: 203,
+      },
+      {
+        valid: 'посередине',
+        invalid: 'по середине',
+        id: 204,
+      },
+      {
+        valid: 'посуху',
+        invalid: 'по суху',
+        id: 205,
+      },
+      {
+        valid: 'сбоку',
+        invalid: 'с боку',
+        id: 206,
+      },
+      {
+        valid: 'сверху донизу',
+        invalid: 'с верху до низу',
+        id: 207,
+      },
+      {
+        valid: 'смолоду',
+        invalid: 'с молоду',
+        id: 208,
+      },
+      {
+        valid: 'снизу доверху',
+        invalid: 'с низу до верху',
+        id: 209,
+      },
+      {
+        valid: 'с разгона',
+        invalid: 'сразгона',
+        id: 210,
+      },
+      {
+        valid: 'сряду',
+        invalid: 'с ряду',
+        id: 211,
+      },
+      {
+        valid: 'чересчур',
+        invalid: 'через чур',
+        id: 212,
       },
     ],
   },

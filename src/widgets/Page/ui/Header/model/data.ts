@@ -9,7 +9,11 @@ export const headerCategories: HeaderMenu = {
   Тесты: [],
   Диктанты: [...mockDictants.map((dictant) => dictant)],
   Теория: [],
-  Тренажеры: [...Object.keys(wordsForTrainers)],
+  Тренажеры: [
+    ...Object.keys(wordsForTrainers).filter(
+      (key) => wordsForTrainers[key].inHeader,
+    ),
+  ],
 };
 
 export const headerRoutesCategories: HeaderRoutes = {
