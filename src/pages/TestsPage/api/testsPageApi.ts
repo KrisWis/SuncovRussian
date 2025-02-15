@@ -12,4 +12,4 @@ const testsPageApi = RTKApi.injectEndpoints({
   }),
 });
 
-export const { useGetAllTestsQuery } = testsPageApi;
+export const getAllTests = testsPageApi.endpoints.getAllTests.initiate;
