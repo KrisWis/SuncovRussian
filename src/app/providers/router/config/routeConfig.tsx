@@ -3,7 +3,7 @@ import { MainPage } from '@/pages/MainPage';
 import { NotFoundPage } from '@/pages/NotFoundPage';
 import { PartsOfSpeachPage } from '@/pages/PartsOfSpeachPage';
 import { mockPartsOfSpeach } from '@/pages/PartsOfSpeachPage';
-import { mockTests, TestsPage } from '@/pages/TestsPage';
+
 import { TheoryPage } from '@/pages/TheoryPage';
 import { TrainerPage, wordsForTrainers } from '@/pages/TrainerPage';
 import {
@@ -11,7 +11,6 @@ import {
   getRouteMain,
   getRouteNotFound,
   getRoutePartsOfSpeach,
-  getRouteTests,
   getRouteTheory,
   getRouteTrainer,
 } from '@/shared/const/router';
@@ -41,11 +40,6 @@ export const routeConfig: Record<AppRoutes, RouteProps> = {
         element: <DictantsPage key={item.subtheme} dictant={item} />,
       })),
     ),
-
-    ...mockTests.map((test) => ({
-      path: getRouteTests(test.title),
-      element: <TestsPage theme={test.title} questions={test.questions} />,
-    })),
 
     ...Object.entries(mockPartsOfSpeach).map(([theme]) => ({
       path: getRoutePartsOfSpeach(theme),

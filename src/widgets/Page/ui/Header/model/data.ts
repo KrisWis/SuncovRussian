@@ -1,13 +1,12 @@
 /* eslint-disable ulbi-tv-plugin/layer-imports */
 import { mockDictants } from '@/pages/DictantsPage';
 import { HeaderMenu, HeaderRoutes } from './types';
-import { mockTests } from '@/pages/TestsPage';
 import { wordsForTrainers } from '@/pages/TrainerPage';
 import { mockPartsOfSpeach } from '@/pages/PartsOfSpeachPage';
 
 export const headerCategories: HeaderMenu = {
   'Части речи': [...Object.keys(mockPartsOfSpeach)],
-  Тесты: [...mockTests.map((test) => test.title)],
+  Тесты: [],
   Диктанты: [...mockDictants.map((dictant) => dictant)],
   Теория: [],
   Тренажеры: [...Object.keys(wordsForTrainers)],

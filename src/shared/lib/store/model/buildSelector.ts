@@ -1,6 +1,6 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { shallowEqual, useSelector } from 'react-redux';
-import { StateSchema } from '../../../../app/providers/store/config/types';
+import { StateSchema } from '../../../store/config/types';
 
 type Selector<T, Args extends any[]> = (state: StateSchema, ...args: Args) => T;
 type Hook<T, Args extends any[]> = (...args: Args) => T;

@@ -2,10 +2,12 @@ import { Flex } from '@/shared/lib/Stack';
 import * as styles from './Header.module.scss';
 import { Fragment, memo, useState } from 'react';
 import { headerCategories, headerRoutesCategories } from '../model/data';
-import { HeaderCategoryType } from '../model/types';
+import { HeaderCategoryType, HeaderMenu } from '../model/types';
 import { Link } from 'react-router-dom';
 import { transliterate } from '@/shared/utils/transliterate';
 import { isInJest } from '@/shared/tests/isInJest';
+
+import { FetchProvider } from './FetchProvider/FetchProvider';
 
 interface HeaderProps {
   withHomeButton?: boolean;
@@ -29,122 +31,128 @@ export const Header: React.FC<HeaderProps> = memo(
     const isDev = JSON.parse(document.body.getAttribute('data-isdev')!);
     const startPath = isDev ? '' : `/${publicUrl}`;
 
+    // Делаем категории хедера стейтом
+    const [categories, setCategories] = useState<HeaderMenu>(headerCategories);
+
     return (
       <header className={styles.Header}>
-        <Flex maxHeight>
-          {Object.entries(headerCategories).map(([category, submenu]) => {
-            // Инициализация ссылки предмета навигации
-            const itemLink = `/${headerRoutesCategories[category as HeaderCategoryType]}`;
-            const regexForCategory = new RegExp(itemLink.replace(/\//g, '\\/'));
+        <FetchProvider setCategories={setCategories}>
+          <Flex maxHeight>
+            {Object.entries(categories).map(([category, submenu]) => {
+              // Инициализация ссылки предмета навигации
+              const itemLink = `/${headerRoutesCategories[category as HeaderCategoryType]}`;
+              const regexForCategory = new RegExp(
+                itemLink.replace(/\//g, '\\/'),
+              );
 
-            return (
-              <Flex
-                onMouseLeave={() => setHoveredHeaderCategory(null)}
-                key={category}
-                direction="column"
-                relative
-                maxHeight
-              >
+              return (
                 <Flex
+                  onMouseLeave={() => setHoveredHeaderCategory(null)}
+                  key={category}
+                  direction="column"
+                  relative
                   maxHeight
-                  justify="center"
-                  onMouseEnter={() => setHoveredHeaderCategory(category)}
-                  className={`${styles.Header__item} 
-                ${regexForCategory.test(window.location.pathname) && styles.Header__item__active}`}
-                  data-testid={`Header__${category}`}
                 >
-                  {submenu.length > 0 ? (
-                    <>{category}</>
-                  ) : (
-                    <Link to={itemLink}>{category}</Link>
-                  )}
-                </Flex>
-
-                {submenu.length > 0 && (
                   <Flex
-                    align="start"
-                    className={`${styles.Header__submenu} 
-            ${headerHoveredCategory === category && styles.Header__submenu__active}`}
-                    direction="column"
+                    maxHeight
+                    justify="center"
+                    onMouseEnter={() => setHoveredHeaderCategory(category)}
+                    className={`${styles.Header__item} 
+                ${regexForCategory.test(window.location.pathname) && styles.Header__item__active}`}
+                    data-testid={`Header__${category}`}
                   >
-                    {submenu.map((menuItem) => {
-                      const isUsual = typeof menuItem === 'string';
+                    {submenu.length > 0 ? (
+                      <>{category}</>
+                    ) : (
+                      <Link to={itemLink}>{category}</Link>
+                    )}
+                  </Flex>
 
-                      return (
-                        <Fragment key={isUsual ? menuItem : menuItem.theme}>
-                          {isUsual
-                            ? (() => {
-                                // Инициализация предмета подменю
-                                const submenuItemLink: string = `/${headerRoutesCategories[category as HeaderCategoryType]}/${transliterate(menuItem)}`;
+                  {submenu.length > 0 && (
+                    <Flex
+                      align="start"
+                      className={`${styles.Header__submenu} 
+            ${headerHoveredCategory === category && styles.Header__submenu__active}`}
+                      direction="column"
+                    >
+                      {submenu.map((menuItem) => {
+                        const isUsual = typeof menuItem === 'string';
 
-                                return (
-                                  <Link
-                                    to={submenuItemLink}
-                                    className={`${styles.Header__submenu__item} 
-                                    ${`${startPath}${submenuItemLink}` === window.location.pathname && styles.Header__submenu__item__active}`}
-                                    onClick={() =>
-                                      setHoveredHeaderCategory(null)
-                                    }
-                                  >
-                                    {menuItem}
-                                  </Link>
-                                );
-                              })()
-                            : (() => {
-                                // Ссылка на подменю
-                                const submenuItemLink = (
-                                  subTheme: string,
-                                ): string =>
-                                  `/${headerRoutesCategories[category as HeaderCategoryType]}/${transliterate(menuItem.theme)}/${transliterate(subTheme)}`;
+                        return (
+                          <Fragment key={isUsual ? menuItem : menuItem.theme}>
+                            {isUsual
+                              ? (() => {
+                                  // Инициализация предмета подменю
+                                  const submenuItemLink: string = `/${headerRoutesCategories[category as HeaderCategoryType]}/${transliterate(menuItem)}`;
 
-                                // Разбитие подменю на слайсы по 10 штук
-                                const submenuItems = menuItem.items.reduce<
-                                  Array<typeof menuItem.items>
-                                >((acc, item, index) => {
-                                  const chunkIndex = Math.floor(index / 10);
-
-                                  if (!acc[chunkIndex]) {
-                                    acc[chunkIndex] = [];
-                                  }
-
-                                  acc[chunkIndex].push(item);
-                                  return acc;
-                                }, []);
-
-                                return (
-                                  <Flex align="start">
-                                    <span
+                                  return (
+                                    <Link
+                                      to={submenuItemLink}
                                       className={`${styles.Header__submenu__item} 
+                                    ${`${startPath}${submenuItemLink}` === window.location.pathname && styles.Header__submenu__item__active}`}
+                                      onClick={() =>
+                                        setHoveredHeaderCategory(null)
+                                      }
+                                    >
+                                      {menuItem}
+                                    </Link>
+                                  );
+                                })()
+                              : (() => {
+                                  // Ссылка на подменю
+                                  const submenuItemLink = (
+                                    subTheme: string,
+                                  ): string =>
+                                    `/${headerRoutesCategories[category as HeaderCategoryType]}/${transliterate(menuItem.theme)}/${transliterate(subTheme)}`;
+
+                                  // Разбитие подменю на слайсы по 10 штук
+                                  const submenuItems = menuItem.items.reduce<
+                                    Array<typeof menuItem.items>
+                                  >((acc, item, index) => {
+                                    const chunkIndex = Math.floor(index / 10);
+
+                                    if (!acc[chunkIndex]) {
+                                      acc[chunkIndex] = [];
+                                    }
+
+                                    acc[chunkIndex].push(item);
+                                    return acc;
+                                  }, []);
+
+                                  return (
+                                    <Flex align="start">
+                                      <span
+                                        className={`${styles.Header__submenu__item} 
                                     ${
                                       window.location.pathname.startsWith(
                                         `${startPath}/${headerRoutesCategories[category as HeaderCategoryType]}/${transliterate(menuItem.theme)}/`,
                                       ) && styles.Header__submenu__item__active
                                     }`}
-                                      onMouseEnter={() =>
-                                        setIsSubmenuVisible(true)
-                                      }
-                                    >
-                                      {menuItem.theme}
-                                    </span>
+                                        onMouseEnter={() =>
+                                          setIsSubmenuVisible(true)
+                                        }
+                                      >
+                                        {menuItem.theme}
+                                      </span>
 
-                                    <Flex
-                                      align="start"
-                                      onMouseLeave={() =>
-                                        setIsSubmenuVisible(false)
-                                      }
-                                      className={`${styles.Header__submenu__submenu} 
+                                      <Flex
+                                        align="start"
+                                        onMouseLeave={() =>
+                                          setIsSubmenuVisible(false)
+                                        }
+                                        className={`${styles.Header__submenu__submenu} 
                                         ${isSubmenuVisible && styles.Header__submenu__submenu__visible}`}
-                                      gap="20"
-                                    >
-                                      {submenuItems.map((items) => (
-                                        <Flex
-                                          key={items[0].subtheme}
-                                          direction="column"
-                                          align="start"
-                                        >
-                                          {items.map((item) => (
-                                            <Link
-                                              className={`${styles.Header__submenu__item} 
+                                        gap="20"
+                                      >
+                                        {submenuItems.map((items) => (
+                                          <Flex
+                                            key={items[0].subtheme}
+                                            direction="column"
+                                            align="start"
+                                          >
+                                            {items.map((item) => (
+                                              <Link
+                                                className={`${styles.Header__submenu__item} 
                                               ${
                                                 `${startPath}${submenuItemLink(
                                                   item.subtheme,
@@ -152,35 +160,36 @@ export const Header: React.FC<HeaderProps> = memo(
                                                   window.location.pathname &&
                                                 styles.Header__submenu__item__active
                                               }`}
-                                              to={submenuItemLink(
-                                                item.subtheme,
-                                              )}
-                                              key={item.subtheme}
-                                            >
-                                              {item.subtheme}
-                                            </Link>
-                                          ))}
-                                        </Flex>
-                                      ))}
+                                                to={submenuItemLink(
+                                                  item.subtheme,
+                                                )}
+                                                key={item.subtheme}
+                                              >
+                                                {item.subtheme}
+                                              </Link>
+                                            ))}
+                                          </Flex>
+                                        ))}
+                                      </Flex>
                                     </Flex>
-                                  </Flex>
-                                );
-                              })()}
-                        </Fragment>
-                      );
-                    })}
-                  </Flex>
-                )}
-              </Flex>
-            );
-          })}
-        </Flex>
-
-        {withHomeButton && (
-          <Flex maxHeight justify="center" className={styles.Header__item}>
-            <Link to="/">Домой</Link>
+                                  );
+                                })()}
+                          </Fragment>
+                        );
+                      })}
+                    </Flex>
+                  )}
+                </Flex>
+              );
+            })}
           </Flex>
-        )}
+
+          {withHomeButton && (
+            <Flex maxHeight justify="center" className={styles.Header__item}>
+              <Link to="/">Домой</Link>
+            </Flex>
+          )}
+        </FetchProvider>
       </header>
     );
   },
