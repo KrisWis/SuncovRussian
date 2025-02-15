@@ -5,7 +5,7 @@ import {
   SliceCaseReducers,
 } from '@reduxjs/toolkit';
 import { useMemo } from 'react';
-import { useAppDispatch } from '../../../store/config/AppStore';
+import { useAppDispatch } from '../../../../app/providers/store/config/AppStore';
 
 export const buildSlice = <
   State,

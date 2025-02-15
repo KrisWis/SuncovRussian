@@ -26,8 +26,3 @@ export const useAppSelector: TypedUseSelectorHook<RootState> = useSelector;
 export interface ReduxStoreWithManager extends EnhancedStore<StateSchema> {
   reducerManager: ReducerManager;
 }
-
-export interface ThunkConfig<T> {
-  rejectValue: T;
-  state: StateSchema;
-}

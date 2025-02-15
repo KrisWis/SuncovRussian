@@ -8,4 +8,4 @@ export const TestsPage: React.LazyExoticComponent<React.FC<TestsPageProps>> =
     })),
   );
 
-export { getTests } from './model/services/getTests';
+export { mockTests } from './model/static/mockTests';
