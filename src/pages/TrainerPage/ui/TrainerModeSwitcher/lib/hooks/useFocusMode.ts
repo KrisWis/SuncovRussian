@@ -2,6 +2,7 @@ import { useTrainerActions } from '../../../../model/slice/TrainerPageSlice';
 import { useWords } from '../../../../model/selectors/getTrainerWords/getTrainerWords';
 import { useCallback } from 'react';
 import { ModeSwitcherItemProps } from '@/widgets/ModeSwitcher';
+import devtoolsDetect from 'devtools-detect';
 
 interface useFocusModeResult {
   focusModeItem: ModeSwitcherItemProps;
@@ -36,24 +37,31 @@ export const useFocusMode = (
 
   // Функция очистки прогресса когда юзер выходит с вкладки
   const focusModeFunction = useCallback(() => {
-    if (document.hidden) {
+    if (document.hidden || devtoolsDetect.isOpen) {
       clearProgress();
     }
   }, [clearProgress]);
+
+  // Функция включения режима фокусировки
+  const focusModeOn = useCallback(() => {
+    document.onvisibilitychange = focusModeFunction;
+    document.addEventListener('click', focusModeFunction);
+  }, [focusModeFunction]);
 
   // Функция включения строгого режима
   const focusModeToggle = useCallback(() => {
     if (!focusModeIsOn) {
       clearProgress();
-      document.onvisibilitychange = focusModeFunction;
+      focusModeOn();
     } else {
       document.onvisibilitychange = null;
+      document.removeEventListener('click', focusModeFunction);
     }
-  }, [clearProgress, focusModeFunction, focusModeIsOn]);
+  }, [clearProgress, focusModeFunction, focusModeIsOn, focusModeOn]);
 
   // Включаем по-умолчанию
   if (focusModeIsOn) {
-    document.onvisibilitychange = focusModeFunction;
+    focusModeOn();
   }
 
   // Гененерируем айтем

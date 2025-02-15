@@ -109,7 +109,9 @@ export const useWordActions = (
         main.style.pointerEvents = 'all';
       }
 
-      document.onclick = null;
+      document.removeEventListener('click', () =>
+        showNewWord(words, isErrorWork, randomWordId),
+      );
     },
     [
       changeWordConsecutivelyTimes,
@@ -149,7 +151,9 @@ export const useWordActions = (
           main.style.pointerEvents = 'none';
         }
 
-        document.onclick = () => showNewWord(words, isErrorWork, randomWordId);
+        document.addEventListener('click', () =>
+          showNewWord(words, isErrorWork, randomWordId),
+        );
         clearTimeout(eventTimeout);
       }, 0);
     },

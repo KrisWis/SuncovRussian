@@ -19,8 +19,9 @@ import { useInitializeWords } from '../lib/hooks/useInitializeWords';
 import { UnionsWordsInterface } from '../model/types/unions';
 import { PrimaryTrainerWords } from './PrimaryTrainerWords/PrimaryTrainerWords';
 import { TrainerProgressBar } from './TrainerProgressBar/TrainerProgressBar';
-import { TrainerModeSwitcher } from './TrainerModeSwitcher/TrainerModeSwitcher';
+
 import { useArrowsActions } from '../lib/hooks/useArrowsActions';
+import { TrainerModeSwitcher } from './TrainerModeSwitcher/TrainerModeSwitcher';
 
 export interface TrainerPageProps {
   words: WordsForTrainersItem;
@@ -160,7 +161,11 @@ const TrainerInner: React.FC<TrainerPageProps> = memo(
                   </>
                 )}
 
-                <TrainerProgressBar />
+                <TrainerProgressBar
+                  randomWordId={randomWordId}
+                  setRandomWordsIsReverse={setRandomWordsIsReverse}
+                  setRandomWordId={setRandomWordId}
+                />
                 <TrainerModeSwitcher />
               </>
             ) : (

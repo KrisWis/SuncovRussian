@@ -3,6 +3,7 @@ import { useAppDispatch } from '@/shared/store';
 import { getTests } from '@/pages/TestsPage';
 import { memo, useEffect } from 'react';
 import { HeaderMenu } from '../../model/types';
+import { isInJest } from '@/shared/tests/isInJest';
 
 interface FetchProviderProps {
   children: React.ReactNode;
@@ -16,6 +17,8 @@ export const FetchProvider: React.FC<FetchProviderProps> = memo(
 
     useEffect(() => {
       const fetchTests = async () => {
+        if (isInJest()) return null;
+
         try {
           const testsData = await dispatch(getTests()).unwrap();
 

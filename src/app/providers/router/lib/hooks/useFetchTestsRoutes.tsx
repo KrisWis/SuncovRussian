@@ -4,6 +4,7 @@ import { getTests, TestsPage } from '@/pages/TestsPage';
 import { AppRoutes } from '@/shared/types/router';
 import { RouteProps } from 'react-router-dom';
 import { useCallback } from 'react';
+import { isInJest } from '@/shared/tests/isInJest';
 
 interface useFetchTestsResult {
   fetchTests: () => Promise<Partial<Record<AppRoutes, RouteProps>> | null>;
@@ -13,6 +14,8 @@ export const useFetchTests = (): useFetchTestsResult => {
   const dispatch = useAppDispatch();
 
   const fetchTests = useCallback(async () => {
+    if (isInJest()) return null;
+
     try {
       const testsData = await dispatch(getTests()).unwrap();
 

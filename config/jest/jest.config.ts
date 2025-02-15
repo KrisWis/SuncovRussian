@@ -20,6 +20,7 @@ const config: Config = {
     'react-pdf/dist/Page/TextLayer.css':
       '<rootDir>/config/jest/__mocks__/styleMock.js',
   },
+  transformIgnorePatterns: ['/node_modules/(?!(devtools-detect)/)'],
 
   globals: {
     __IS_DEV__: true,

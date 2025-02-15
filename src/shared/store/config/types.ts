@@ -1,3 +1,4 @@
+// eslint-disable-next-line ulbi-tv-plugin/layer-imports
 import { TrainerPageSliceSchema } from '@/pages/TrainerPage';
 import { RTKApi } from '@/shared/api/RTKApi/api';
 import { UTApi } from '@/shared/api/UTApi/api';
