@@ -12,10 +12,4 @@ const meta = {
 export default meta;
 type Story = StoryObj<typeof meta>;
 
-export const Primary: Story = {
-  args: {
-    randomWordId: 1,
-    setRandomWordsIsReverse: () => {},
-    setRandomWordId: () => {},
-  },
-};
+export const Primary: Story = {};

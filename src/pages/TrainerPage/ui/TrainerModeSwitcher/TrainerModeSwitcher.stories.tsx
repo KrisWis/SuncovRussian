@@ -1,7 +1,7 @@
 import type { Meta, StoryObj } from '@storybook/react';
 import { TrainerModeSwitcher } from './TrainerModeSwitcher';
-import { useState } from 'react';
 import { TrainerPageContext } from '../../model/context/TrainerPageContext';
+import { useState } from 'react';
 
 const TrainerModeSwitcherWrapper: React.FC = () => {
   // Настройка контекста

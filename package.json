@@ -21,7 +21,6 @@
   "dependencies": {
     "@reduxjs/toolkit": "^2.5.0",
     "cypress": "^13.17.0",
-    "devtools-detect": "^4.0.2",
     "react": "^19.0.0",
     "react-dom": "^19.0.0",
     "react-error-boundary": "^4.1.2",
