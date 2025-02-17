@@ -1,20 +1,28 @@
 import { getRouteTests } from '@/shared/const/router';
 import { useAppDispatch } from '@/shared/store/config/AppStore';
-import { getTests, TestsPage } from '@/pages/TestsPage';
+import { getAllTests, TestsPage } from '@/pages/TestsPage';
 import { AppRoutes } from '@/shared/types/router';
 import { RouteProps } from 'react-router-dom';
 import { useCallback } from 'react';
+import { getData } from '@/shared/services/getData';
+import { TestInterface } from '@/features/Test';
 
-interface useFetchTestsResult {
-  fetchTests: () => Promise<Partial<Record<AppRoutes, RouteProps>> | null>;
+interface useFetchTestsRoutesResult {
+  fetchTestsRoutes: () => Promise<Partial<
+    Record<AppRoutes, RouteProps>
+  > | null>;
 }
 
-export const useFetchTests = (): useFetchTestsResult => {
+export const useFetchTestsRoutes = (): useFetchTestsRoutesResult => {
   const dispatch = useAppDispatch();
 
-  const fetchTests = useCallback(async () => {
+  const fetchTestsRoutes = useCallback(async () => {
     try {
-      const testsData = await dispatch(getTests()).unwrap();
+      const asyncThunk = getData<TestInterface[]>(
+        'tests/getAllTests',
+        getAllTests,
+      );
+      const testsData = await dispatch(asyncThunk()).unwrap();
 
       const testsRoutes: Partial<Record<AppRoutes, RouteProps>> =
         testsData.reduce(
@@ -42,6 +50,6 @@ export const useFetchTests = (): useFetchTestsResult => {
   }, [dispatch]);
 
   return {
-    fetchTests,
+    fetchTestsRoutes,
   };
 };

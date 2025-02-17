@@ -3,7 +3,8 @@ import { Route, RouteProps, Routes } from 'react-router-dom';
 import { routeConfig } from '../config/routeConfig';
 import { PageLoading } from '@/shared/ui/PageLoading/ui/PageLoading';
 import { AppRoutes } from '@/shared/types/router';
-import { useFetchTests } from '../lib/hooks/useFetchTestsRoutes';
+import { useFetchTestsRoutes } from '../lib/hooks/useFetchTestsRoutes';
+import { useFetchDictantsRoutes } from '../lib/hooks/useFetchDictantsRoutes';
 
 export const AppRouter: React.FC = memo(() => {
   // Добавление data-атрибута в body в зависимости от режима сборки
@@ -20,21 +21,24 @@ export const AppRouter: React.FC = memo(() => {
     useState<Record<AppRoutes, RouteProps>>(routeConfig);
 
   // Получаем данные с бекенда
-  const { fetchTests } = useFetchTests();
+  const { fetchTestsRoutes } = useFetchTestsRoutes();
+  const { fetchDictantsRoutes } = useFetchDictantsRoutes();
 
   // Обновляем роуты
   useEffect(() => {
     const AsyncFetchData = async () => {
-      const testsRoutes = await fetchTests();
+      const testsRoutes = await fetchTestsRoutes();
+      const dictantsRoutes = await fetchDictantsRoutes();
 
       setRoutes((prevRoutes) => ({
         ...prevRoutes,
         ...testsRoutes,
+        ...dictantsRoutes,
       }));
     };
 
     AsyncFetchData();
-  }, [fetchTests]);
+  }, [fetchTestsRoutes, fetchDictantsRoutes]);
 
   return (
     <Suspense fallback={<PageLoading />}>

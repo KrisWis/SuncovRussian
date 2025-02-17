@@ -1,4 +1,3 @@
-import { DictantsPage, mockDictants } from '@/pages/DictantsPage';
 import { MainPage } from '@/pages/MainPage';
 import { NotFoundPage } from '@/pages/NotFoundPage';
 import { PartsOfSpeachPage } from '@/pages/PartsOfSpeachPage';
@@ -7,7 +6,6 @@ import { mockPartsOfSpeach } from '@/pages/PartsOfSpeachPage';
 import { TheoryPage } from '@/pages/TheoryPage';
 import { TrainerPage, wordsForTrainers } from '@/pages/TrainerPage';
 import {
-  getRouteDictant,
   getRouteMain,
   getRouteNotFound,
   getRoutePartsOfSpeach,
@@ -33,13 +31,6 @@ export const routeConfig: Record<AppRoutes, RouteProps> = {
       path: getRouteTrainer(theme),
       element: <TrainerPage theme={theme} key={theme} words={words} />,
     })),
-
-    ...mockDictants.map((dictant) =>
-      dictant.items.map((item) => ({
-        path: getRouteDictant(dictant.theme, item.subtheme),
-        element: <DictantsPage key={item.subtheme} dictant={item} />,
-      })),
-    ),
 
     ...Object.entries(mockPartsOfSpeach).map(([theme]) => ({
       path: getRoutePartsOfSpeach(theme),

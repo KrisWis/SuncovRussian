@@ -9,6 +9,5 @@ export const DictantsPage: React.LazyExoticComponent<
   })),
 );
 
-export { mockDictants } from './model/static/mockDictants';
-
 export type { DictantType } from '../../features/Dictant/model/types/types';
+export { getAllDictants } from './api/dictantsPageApi';
