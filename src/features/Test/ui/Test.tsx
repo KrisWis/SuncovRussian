@@ -47,9 +47,7 @@ export const Test: React.FC<TestProps> = memo(
       >
         <div data-name="Test__bg" className={styles.Test__bg}></div>
 
-        <h2 className={styles.Test__caption}>
-          {caption} (укажите ответ{!hasOneCorrectAnswer ? 'ы' : ''}):
-        </h2>
+        <h2 className={styles.Test__caption}>{caption}</h2>
 
         <Flex width="100" align="start" direction="column" gap="10">
           {answers.map((answer, answerIndex) => (
