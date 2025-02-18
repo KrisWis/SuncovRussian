@@ -8,4 +8,6 @@ export const PartsOfSpeachPage: React.LazyExoticComponent<
     default: PartsOfSpeachPage,
   })),
 );
-export { mockPartsOfSpeach } from './model/static/mockPartsOfSpeach';
+
+export { getAllPartsOfSpeach } from './api/partsOfSpeachApi';
+export type { PartsOfSpeachType } from './model/types/types';

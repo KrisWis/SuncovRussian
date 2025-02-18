@@ -9,7 +9,6 @@ import { store } from '@/shared/lib/store';
 import { BrowserRouter } from 'react-router-dom';
 
 // TODO: расписать "Прочие особенности" и сущности с фичами в README.md. Мб ещё доку для shared. Вообщем, всё как по прод.реакту
-// TODO: убрать ошибки, связанные с бекендом из юнит-тестов
 
 const container = document.getElementById('root');
 

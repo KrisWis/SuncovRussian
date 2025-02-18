@@ -1,0 +1,60 @@
+import { AppRoutes } from '@/shared/types/router';
+import { RouteProps } from 'react-router-dom';
+import { useCallback } from 'react';
+import { getData } from '@/shared/services/getData';
+
+import { useAppDispatch } from '@/shared/store';
+import {
+  PartsOfSpeachPage,
+  getAllPartsOfSpeach,
+} from '@/pages/PartsOfSpeachPage';
+import { getRoutePartsOfSpeach } from '@/shared/const/router';
+import { PartsOfSpeachType } from '@/pages/PartsOfSpeachPage';
+
+interface useFetchPartsOfSpeachRoutesResult {
+  fetchPartsOfSpeachRoutes: () => Promise<Partial<
+    Record<AppRoutes, RouteProps>
+  > | null>;
+}
+
+export const useFetchPartsOfSpeachRoutes =
+  (): useFetchPartsOfSpeachRoutesResult => {
+    const dispatch = useAppDispatch();
+
+    const fetchPartsOfSpeachRoutes = useCallback(async () => {
+      try {
+        const asyncThunk = getData<PartsOfSpeachType>(
+          'PartsOfSpeach/getAllPartsOfSpeach',
+          getAllPartsOfSpeach,
+        );
+
+        const PartsOfSpeachData = await dispatch(asyncThunk()).unwrap();
+
+        const PartsOfSpeachRoutes: Partial<Record<AppRoutes, RouteProps>> =
+          Object.keys(PartsOfSpeachData).reduce(
+            (acc, theme) => ({
+              ...acc,
+              [theme]: {
+                path: getRoutePartsOfSpeach(theme),
+                element: (
+                  <PartsOfSpeachPage
+                    theme={theme}
+                    item={PartsOfSpeachData[theme]}
+                  />
+                ),
+              },
+            }),
+            {},
+          );
+
+        return PartsOfSpeachRoutes;
+      } catch (error) {
+        console.error('Ошибка при загрузке частей речи:', error);
+        return null;
+      }
+    }, [dispatch]);
+
+    return {
+      fetchPartsOfSpeachRoutes,
+    };
+  };

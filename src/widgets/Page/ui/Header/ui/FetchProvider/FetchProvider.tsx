@@ -3,10 +3,9 @@ import { useAppDispatch } from '@/shared/store';
 import { getAllTests } from '@/pages/TestsPage';
 import { memo, useEffect } from 'react';
 import { HeaderMenu } from '../../model/types';
-import { getData } from '@/shared/services/getData';
-import { TestInterface } from '@/features/Test';
-import { DictantType } from '@/features/Dictant';
 import { getAllDictants } from '@/pages/DictantsPage';
+import { getDataForCategory } from './lib/getDataForCategory';
+import { getAllPartsOfSpeach } from '@/pages/PartsOfSpeachPage';
 
 interface FetchProviderProps {
   children: React.ReactNode;
@@ -22,18 +21,31 @@ export const FetchProvider: React.FC<FetchProviderProps> = memo(
       const fetchData = async () => {
         try {
           // Получаем тесты с бекенда
-          const asyncThunk = getData<TestInterface[]>(
-            'tests/getAllTests',
-            getAllTests,
+          const testsData = await getDataForCategory(
+            {
+              requestID: 'tests/getAllTests',
+              getRequest: getAllTests,
+            },
+            dispatch,
           );
-          const testsData = await dispatch(asyncThunk()).unwrap();
 
           // Получаем диктанты с бекенда
-          const asyncThunkDictants = getData<DictantType[]>(
-            'dictants/getAllDictants',
-            getAllDictants,
+          const dictantsData = await getDataForCategory(
+            {
+              requestID: 'dictants/getAllDictants',
+              getRequest: getAllDictants,
+            },
+            dispatch,
           );
-          const dictantsData = await dispatch(asyncThunkDictants()).unwrap();
+
+          // Получаем части речи с бекенда
+          const partsOfSpeachData = await getDataForCategory(
+            {
+              requestID: 'partsOfSpeach/getAllPartsOfSpeach',
+              getRequest: getAllPartsOfSpeach,
+            },
+            dispatch,
+          );
 
           // Обновляем стейт с категориями
           setCategories((prevCategories) => ({
@@ -47,6 +59,12 @@ export const FetchProvider: React.FC<FetchProviderProps> = memo(
                   subtheme: item.subtheme,
                 })),
               })),
+            ],
+
+            'Части речи': [
+              ...Object.keys(partsOfSpeachData).map(
+                (partOfSpeach) => partOfSpeach,
+              ),
             ],
           }));
         } catch (error) {

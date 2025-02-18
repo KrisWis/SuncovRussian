@@ -9,8 +9,8 @@ import {
   StartQueryActionCreator,
 } from '@reduxjs/toolkit/query';
 
-export const getData = <Returned>(
-  requestID: string,
+export interface getDataParams<Returned> {
+  requestID: string;
   getRequest: StartQueryActionCreator<
     QueryDefinition<
       void,
@@ -25,15 +25,17 @@ export const getData = <Returned>(
       Returned,
       'RTKApi'
     >
-  >,
-) =>
+  >;
+}
+
+export const getData = <Returned>(params: getDataParams<Returned>) =>
   createAsyncThunk<Returned, void, ThunkConfig<string>>(
-    requestID,
+    params.requestID,
     async (_, thunkApi) => {
       const { rejectWithValue, dispatch } = thunkApi;
 
       try {
-        const response = await dispatch(getRequest()).unwrap();
+        const response = await dispatch(params.getRequest()).unwrap();
 
         return response;
       } catch (e) {
