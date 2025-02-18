@@ -68,9 +68,7 @@ export const FetchProvider: React.FC<FetchProviderProps> = memo(
             ],
 
             'Части речи': [
-              ...Object.keys(partsOfSpeachData).map(
-                (partOfSpeach) => partOfSpeach,
-              ),
+              ...partsOfSpeachData.map((partOfSpeach) => partOfSpeach.theme),
             ],
           }));
         } catch (error) {

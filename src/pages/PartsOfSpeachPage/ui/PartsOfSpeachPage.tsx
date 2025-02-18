@@ -1,19 +1,19 @@
 import { memo } from 'react';
 import { Page } from '@/widgets/Page';
-import { PartsOfSpeachItem } from '../model/types/types';
+
 import { ProviderForTests } from '@/shared/lib/ProviderForTests';
 import { PartsOfSpeachItemTemplate } from './PartsOfSpeachItemTemplate/PartsOfSpeachItemTemplate';
+import { PartsOfSpeachType } from '../model/types/types';
 
 export interface PartsOfSpeachPageProps {
-  theme: string;
-  item: PartsOfSpeachItem;
+  item: PartsOfSpeachType;
 }
 
 export const PartsOfSpeachPage: React.FC<PartsOfSpeachPageProps> = memo(
-  ({ theme, item }): React.JSX.Element => {
+  ({ item }): React.JSX.Element => {
     return (
       <Page withMarginTop>
-        <ProviderForTests theme={theme} items={item.items}>
+        <ProviderForTests theme={item.theme} items={item.items}>
           <PartsOfSpeachItemTemplate />
         </ProviderForTests>
       </Page>

@@ -6,10 +6,9 @@ import { PartsOfSpeachPage } from './PartsOfSpeachPage';
 import userEvent from '@testing-library/user-event';
 
 // Mocks
-const mockTheme = 'Вводное слово';
-
-const mockTests: PartsOfSpeachType = {
-  [mockTheme]: {
+const mockTests: PartsOfSpeachType[] = [
+  {
+    theme: 'Вводное слово',
     items: [
       {
         text: 'Мама, *видимо,* поняла моё состояние. Она бросила шитье и задумалась. Я заметил, как слёзы выступили у неё на глазах и потекли по щекам.',
@@ -20,15 +19,15 @@ const mockTests: PartsOfSpeachType = {
       },
     ],
   },
-};
+];
 
 // Tests
 describe('Test with Parts Of Speach', () => {
   // Helpers
   const setupTest = () => {
     return renderWithProviders(
-      <PartsOfSpeachPage theme={mockTheme} item={mockTests[mockTheme]} />,
-      getRoutePartsOfSpeach(mockTheme),
+      <PartsOfSpeachPage item={mockTests[0]} />,
+      getRoutePartsOfSpeach(mockTests[0].theme),
     );
   };
 

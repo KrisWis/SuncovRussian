@@ -23,7 +23,7 @@ export const useFetchPartsOfSpeachRoutes =
 
     const fetchPartsOfSpeachRoutes = useCallback(async () => {
       try {
-        const asyncThunk = getData<PartsOfSpeachType>({
+        const asyncThunk = getData<PartsOfSpeachType[]>({
           requestID: 'PartsOfSpeach/getAllPartsOfSpeach',
           getRequest: getAllPartsOfSpeach,
         });
@@ -31,17 +31,12 @@ export const useFetchPartsOfSpeachRoutes =
         const PartsOfSpeachData = await dispatch(asyncThunk()).unwrap();
 
         const PartsOfSpeachRoutes: Partial<Record<AppRoutes, RouteProps>> =
-          Object.keys(PartsOfSpeachData).reduce(
-            (acc, theme) => ({
+          PartsOfSpeachData.reduce(
+            (acc, item) => ({
               ...acc,
-              [theme]: {
-                path: getRoutePartsOfSpeach(theme),
-                element: (
-                  <PartsOfSpeachPage
-                    theme={theme}
-                    item={PartsOfSpeachData[theme]}
-                  />
-                ),
+              [item.theme]: {
+                path: getRoutePartsOfSpeach(item.theme),
+                element: <PartsOfSpeachPage item={item} />,
               },
             }),
             {},

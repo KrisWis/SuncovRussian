@@ -39,7 +39,7 @@ export const getData = <Returned>(params: getDataParams<Returned>) =>
 
         return response;
       } catch (e) {
-        console.log(e);
+        console.error(e);
         return rejectWithValue('');
       }
     },

@@ -3,9 +3,9 @@ import { PartsOfSpeachType } from '../model/types/types';
 
 const partsOfSpeachPageApi = RTKApi.injectEndpoints({
   endpoints: (build) => ({
-    getAllPartsOfSpeach: build.query<PartsOfSpeachType, void>({
+    getAllPartsOfSpeach: build.query<PartsOfSpeachType[], void>({
       query: () => ({
-        url: `/dictations`,
+        url: `/part_of_speechs`,
         method: 'GET',
       }),
     }),

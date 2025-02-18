@@ -48,8 +48,8 @@ export const useFetchDictantsRoutes = (): useFetchDictantsRoutesResult => {
           const dictantAllItem: DictantItem = {
             subtheme: `Все ${dictant.theme}`,
             text: dictant.items
-              .map((item) => `${item.subtheme} ${item.text}.`)
-              .join('\n'),
+              .map((item) => `\n&${item.subtheme}& ${item.text}.`)
+              .join(''),
           };
 
           // Формируем роут для всех диктантов вида "Все..."
