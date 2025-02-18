@@ -55,9 +55,15 @@ export const FetchProvider: React.FC<FetchProviderProps> = memo(
             Диктанты: [
               ...dictantsData.map((dictant) => ({
                 theme: dictant.theme,
-                items: dictant.items.map((item) => ({
-                  subtheme: item.subtheme,
-                })),
+                items: [
+                  ...dictant.items.map((item) => ({
+                    subtheme: item.subtheme,
+                  })),
+
+                  {
+                    subtheme: `Все ${dictant.theme}`,
+                  },
+                ],
               })),
             ],
 

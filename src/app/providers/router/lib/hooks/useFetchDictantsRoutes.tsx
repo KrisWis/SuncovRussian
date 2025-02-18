@@ -10,6 +10,7 @@ import {
   getAllDictants,
 } from '@/pages/DictantsPage';
 import { getRouteDictant } from '@/shared/const/router';
+import { DictantItem } from '@/features/Dictant';
 
 interface useFetchDictantsRoutesResult {
   fetchDictantsRoutes: () => Promise<Partial<
@@ -31,6 +32,7 @@ export const useFetchDictantsRoutes = (): useFetchDictantsRoutesResult => {
 
       const DictantsRoutes: Partial<Record<AppRoutes, RouteProps>> =
         DictantsData.reduce((acc, dictant) => {
+          // Формируем роуты для всех обычных подтем диктантов
           const routes = dictant.items.reduce(
             (itemAcc, item) => ({
               ...itemAcc,
@@ -42,7 +44,28 @@ export const useFetchDictantsRoutes = (): useFetchDictantsRoutesResult => {
             {},
           );
 
-          return { ...acc, ...routes };
+          // Формируем объект диктанта вида "Все..."
+          const dictantAllItem: DictantItem = {
+            subtheme: `Все ${dictant.theme}`,
+            text: dictant.items
+              .map((item) => `${item.subtheme} ${item.text}.`)
+              .join('\n'),
+          };
+
+          // Формируем роут для всех диктантов вида "Все..."
+          const dictantAllRoute = {
+            [getRouteDictant(dictant.theme, dictantAllItem.subtheme)]: {
+              path: getRouteDictant(dictant.theme, dictantAllItem.subtheme),
+              element: (
+                <DictantsPage
+                  key={dictantAllItem.subtheme}
+                  dictant={dictantAllItem}
+                />
+              ),
+            },
+          };
+
+          return { ...acc, ...routes, ...dictantAllRoute };
         }, {});
 
       return DictantsRoutes;
