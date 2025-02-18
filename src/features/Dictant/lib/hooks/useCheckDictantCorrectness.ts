@@ -1,3 +1,4 @@
+import { splitSymbolForSentences } from '../../ui/Dictant';
 import * as styles from '../../ui/Dictant.module.scss';
 import { CheckButtonOnClickResult } from '@/shared/ui/TemplateForTests';
 interface useCheckDictantCorrectnessResult {
@@ -21,14 +22,24 @@ export const useCheckDictantCorrectness = (
     let isMissed: boolean = false;
     let isIncorrect: boolean = false;
     let minOneInputIsMissed: boolean = false;
-    const splitText: string[] = text.split('');
+    const splitText: string[] = text
+      .replace(
+        new RegExp(
+          `${splitSymbolForSentences}.+?${splitSymbolForSentences}\\s*`,
+          '',
+        ),
+        '',
+      )
+      .split('');
 
     // Функция для проверки, что инпут пустой
     const isInputMissed = (input: HTMLInputElement): boolean => {
       const letterId: number = Number(input.id.split('__')[1]);
+      const sentencesCount = text.slice(0, letterId).split('.').length - 1;
+      const globalLetterIndex = letterId - sentencesCount;
 
       const thisInputIsMissed: boolean =
-        !input.value && splitText[letterId] !== splitSymbol;
+        !input.value && splitText[globalLetterIndex] !== splitSymbol;
 
       return thisInputIsMissed;
     };
@@ -37,6 +48,8 @@ export const useCheckDictantCorrectness = (
     for (let i = 0; i < inputElements.length; i++) {
       const inputElement = inputElements[i];
       const letterId: number = Number(inputElement.id.split('__')[1]);
+      const sentencesCount = text.slice(0, letterId).split('.').length - 1;
+      const globalLetterIndex = letterId - sentencesCount;
 
       const thisInputIsMissed: boolean = isInputMissed(inputElement);
 
@@ -57,8 +70,8 @@ export const useCheckDictantCorrectness = (
       } else if (
         // Если неправильный
         !minOneInputIsMissed &&
-        inputElement.value !== splitText[letterId] &&
-        !(!inputElement.value && splitText[letterId] === splitSymbol)
+        inputElement.value !== splitText[globalLetterIndex] &&
+        !(!inputElement.value && splitText[globalLetterIndex] === splitSymbol)
       ) {
         inputElement.classList.add(styles.Dictant__input__incorrect);
         correctLetters--;
