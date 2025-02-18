@@ -7,7 +7,7 @@ import { Link } from 'react-router-dom';
 import { transliterate } from '@/shared/utils/transliterate';
 import { isInJest } from '@/shared/tests/isInJest';
 
-import { FetchProvider } from './FetchProvider/FetchProvider';
+import { FetchProvider } from '../lib/FetchProvider/FetchProvider';
 
 interface HeaderProps {
   withHomeButton?: boolean;
