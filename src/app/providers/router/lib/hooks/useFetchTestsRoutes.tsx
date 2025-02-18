@@ -18,10 +18,10 @@ export const useFetchTestsRoutes = (): useFetchTestsRoutesResult => {
 
   const fetchTestsRoutes = useCallback(async () => {
     try {
-      const asyncThunk = getData<TestInterface[]>(
-        'tests/getAllTests',
-        getAllTests,
-      );
+      const asyncThunk = getData<TestInterface[]>({
+        requestID: 'tests/getAllTests',
+        getRequest: getAllTests,
+      });
       const testsData = await dispatch(asyncThunk()).unwrap();
 
       const testsRoutes: Partial<Record<AppRoutes, RouteProps>> =

@@ -68,7 +68,7 @@ export const FetchProvider: React.FC<FetchProviderProps> = memo(
             ],
           }));
         } catch (error) {
-          console.error('Ошибка при загрузке тестов:', error);
+          console.error('Ошибка при загрузке категорий:', error);
         }
       };
 

@@ -22,10 +22,10 @@ export const useFetchDictantsRoutes = (): useFetchDictantsRoutesResult => {
 
   const fetchDictantsRoutes = useCallback(async () => {
     try {
-      const asyncThunk = getData<DictantType[]>(
-        'Dictants/getAllDictants',
-        getAllDictants,
-      );
+      const asyncThunk = getData<DictantType[]>({
+        requestID: 'Dictants/getAllDictants',
+        getRequest: getAllDictants,
+      });
 
       const DictantsData = await dispatch(asyncThunk()).unwrap();
 

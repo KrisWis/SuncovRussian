@@ -23,10 +23,10 @@ export const useFetchPartsOfSpeachRoutes =
 
     const fetchPartsOfSpeachRoutes = useCallback(async () => {
       try {
-        const asyncThunk = getData<PartsOfSpeachType>(
-          'PartsOfSpeach/getAllPartsOfSpeach',
-          getAllPartsOfSpeach,
-        );
+        const asyncThunk = getData<PartsOfSpeachType>({
+          requestID: 'PartsOfSpeach/getAllPartsOfSpeach',
+          getRequest: getAllPartsOfSpeach,
+        });
 
         const PartsOfSpeachData = await dispatch(asyncThunk()).unwrap();
 
