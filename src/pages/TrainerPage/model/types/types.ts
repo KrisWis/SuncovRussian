@@ -1,6 +1,7 @@
-import { UnionsWordsInterface } from './unions';
+import { ChoiceWordInterface, ChoiceWordsForTrainersItem } from './choice';
+import { UnionsWordsForTrainersItem, UnionsWordsInterface } from './unions';
 
-type TrainerWordsType = 'unions' | 'primary';
+type TrainerWordsType = 'unions' | 'primary' | 'choice';
 
 export interface TrainerWordsInterface {
   id: number;
@@ -19,9 +20,10 @@ export interface PrimaryWordsInterface extends TrainerWordsInterface {
 export type WordsForTrainersTypes =
   | TrainerWordsInterface
   | PrimaryWordsInterface
-  | UnionsWordsInterface;
+  | UnionsWordsInterface
+  | ChoiceWordInterface;
 
-interface WordsForTrainersGeneralItem {
+export interface WordsForTrainersGeneralItem {
   type: TrainerWordsType;
   inHeader: boolean;
   items: WordsForTrainersTypes[];
@@ -32,14 +34,10 @@ interface PrimaryWordsForTrainersItem extends WordsForTrainersGeneralItem {
   items: PrimaryWordsInterface[];
 }
 
-interface UnionsWordsForTrainersItem extends WordsForTrainersGeneralItem {
-  type: 'unions';
-  items: UnionsWordsInterface[];
-}
-
 export type WordsForTrainersItem =
   | PrimaryWordsForTrainersItem
-  | UnionsWordsForTrainersItem;
+  | UnionsWordsForTrainersItem
+  | ChoiceWordsForTrainersItem;
 
 export type WordsForTrainers = {
   [key in string]: WordsForTrainersItem;

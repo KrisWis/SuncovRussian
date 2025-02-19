@@ -21,6 +21,8 @@ import { TrainerPrimaryWords } from './TrainerPrimaryWords/TrainerPrimaryWords';
 import { TrainerProgressBar } from './TrainerProgressBar/TrainerProgressBar';
 import { TrainerModeSwitcher } from './TrainerModeSwitcher/TrainerModeSwitcher';
 import { useArrowsActions } from '../lib/hooks/useArrowsActions';
+import { ChoiceWordInterface } from '../model/types/choice';
+import { TrainerChoiceWords } from './TrainerChoiceWords/TrainerChoiceWords';
 
 export interface TrainerPageProps {
   words: WordsForTrainersItem;
@@ -155,6 +157,15 @@ const TrainerInner: React.FC<TrainerPageProps> = memo(
                         randomWord={randomWord as UnionsWordsInterface}
                         wordOnSuccess={wordOnSuccess}
                         wordOnFail={wordOnFail}
+                      />
+                    )}
+
+                    {words.type === 'choice' && (
+                      <TrainerChoiceWords
+                        randomWord={randomWord as ChoiceWordInterface}
+                        wordOnSuccess={wordOnSuccess}
+                        wordOnFail={wordOnFail}
+                        categories={words.categories}
                       />
                     )}
                   </>

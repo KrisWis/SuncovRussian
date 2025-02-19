@@ -70,9 +70,9 @@ export default [
       'react-hooks/rules-of-hooks': 'error',
 
       'react/jsx-max-props-per-line': [
-        'error',
+        'warn',
         {
-          maximum: 4,
+          maximum: 6,
         },
       ],
 

@@ -1,0 +1,44 @@
+.TrainerChoiceWords {
+  * {
+    line-height: 100%;
+    color: var(--color-black);
+  }
+
+  &__word {
+    font-family: var(--font-family-bold);
+    font-size: 36px;
+  }
+
+  &__category {
+    font-weight: 900;
+    font-size: 20px;
+    text-transform: lowercase;
+    width: 250px;
+  }
+
+  &__choiceWord {
+    font-weight: 400;
+    font-size: 18px;
+    padding: 20px;
+    border: 2px solid var(--color-black);
+    border-radius: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: var(--color-white);
+    cursor: pointer;
+    width: 20%;
+    transition: var(--transition-duration-default) linear;
+    transition-property: background-color, color, opacity;
+
+    &:hover {
+      background-color: var(--color-black);
+      color: var(--color-white);
+    }
+
+    &__inactive {
+      opacity: 0.4;
+      cursor: default;
+    }
+  }
+}
