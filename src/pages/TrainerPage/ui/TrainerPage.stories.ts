@@ -13,14 +13,14 @@ const meta = {
 export default meta;
 type Story = StoryObj<typeof meta>;
 
-export const PrimaryTrainerWords: Story = {
+export const TrainerPrimaryWords: Story = {
   args: {
     words: wordsForTrainers['Ударения'],
     theme: 'Ударения',
   },
 };
 
-export const UnionsTrainerWords: Story = {
+export const TrainerUnionsWords: Story = {
   args: {
     words: wordsForTrainers['Виды союзов'],
     theme: 'Виды союзов',

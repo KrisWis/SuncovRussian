@@ -1,15 +1,15 @@
 import type { Meta, StoryObj } from '@storybook/react';
 import { wordsForTrainers } from '../../model/static/wordsForTrainers';
-import { PrimaryTrainerWords } from './PrimaryTrainerWords';
+import { TrainerPrimaryWords } from './TrainerPrimaryWords';
 import { PrimaryWordsInterface } from '../../model/types/types';
 
 const meta = {
-  title: 'Pages/Trainer/PrimaryTrainerWords',
-  component: PrimaryTrainerWords,
+  title: 'Pages/Trainer/TrainerPrimaryWords',
+  component: TrainerPrimaryWords,
   parameters: {
     layout: 'centered',
   },
-} satisfies Meta<typeof PrimaryTrainerWords>;
+} satisfies Meta<typeof TrainerPrimaryWords>;
 
 export default meta;
 type Story = StoryObj<typeof meta>;

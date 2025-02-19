@@ -12,12 +12,12 @@ import { TrainerPageContext } from '../model/context/TrainerPageContext';
 import { useWords } from '../model/selectors/getTrainerWords/getTrainerWords';
 import { TrainerReducer } from '../model/slice/TrainerPageSlice';
 import { TrainerTotalResult } from './TrainerTotalResult/TrainerTotalResult';
-import { UnionsTrainerWords } from './UnionsTrainerWords/UnionsTrainerWords';
+import { TrainerUnionsWords } from './TrainerUnionsWords/TrainerUnionsWords';
 import { useRandomWord } from '../lib/hooks/useRandomWord';
 import { useWordActions } from '../lib/hooks/useWordActions';
 import { useInitializeWords } from '../lib/hooks/useInitializeWords';
 import { UnionsWordsInterface } from '../model/types/unions';
-import { PrimaryTrainerWords } from './PrimaryTrainerWords/PrimaryTrainerWords';
+import { TrainerPrimaryWords } from './TrainerPrimaryWords/TrainerPrimaryWords';
 import { TrainerProgressBar } from './TrainerProgressBar/TrainerProgressBar';
 import { TrainerModeSwitcher } from './TrainerModeSwitcher/TrainerModeSwitcher';
 import { useArrowsActions } from '../lib/hooks/useArrowsActions';
@@ -142,7 +142,7 @@ const TrainerInner: React.FC<TrainerPageProps> = memo(
                 {randomWord && (
                   <>
                     {words.type === 'primary' && (
-                      <PrimaryTrainerWords
+                      <TrainerPrimaryWords
                         randomWord={randomWord as PrimaryWordsInterface}
                         randomWordsIsReverse={randomWordsIsReverse}
                         wordOnFail={wordOnFail}
@@ -151,7 +151,7 @@ const TrainerInner: React.FC<TrainerPageProps> = memo(
                     )}
 
                     {words.type === 'unions' && (
-                      <UnionsTrainerWords
+                      <TrainerUnionsWords
                         randomWord={randomWord as UnionsWordsInterface}
                         wordOnSuccess={wordOnSuccess}
                         wordOnFail={wordOnFail}

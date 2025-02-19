@@ -15,10 +15,10 @@ import userEvent from '@testing-library/user-event';
 type ComparisonType = 'equal' | 'greaterThan';
 
 type WordsTestIDs =
-  | 'PrimaryTrainerWords__valid'
-  | 'PrimaryTrainerWords__invalid'
-  | 'UnionsTrainerWords__Подчинительный'
-  | 'UnionsTrainerWords__Сочинительный';
+  | 'TrainerPrimaryWords__valid'
+  | 'TrainerPrimaryWords__invalid'
+  | 'TrainerUnionsWords__Подчинительный'
+  | 'TrainerUnionsWords__Сочинительный';
 
 type ModeTypes = 'Одна жизнь' | 'Проверка';
 
@@ -69,7 +69,7 @@ const clickWordAndCheckUncorrectBar = async (
 };
 
 // Tests
-describe('PrimaryTrainerWords', () => {
+describe('TrainerPrimaryWords', () => {
   // Helpers
   const setupTest = () => {
     return renderWithProviders(
@@ -91,19 +91,19 @@ describe('PrimaryTrainerWords', () => {
     await waitFor(async () => {
       // Click valid words
       await clickWordAndCheckUncorrectBar(
-        'PrimaryTrainerWords__valid',
+        'TrainerPrimaryWords__valid',
         false,
         component,
       );
 
       await clickWordAndCheckUncorrectBar(
-        'PrimaryTrainerWords__valid',
+        'TrainerPrimaryWords__valid',
         false,
         component,
       );
 
       await clickWordAndCheckUncorrectBar(
-        'PrimaryTrainerWords__valid',
+        'TrainerPrimaryWords__valid',
         false,
         component,
       );
@@ -117,14 +117,14 @@ describe('PrimaryTrainerWords', () => {
     await waitFor(async () => {
       // Click valid word
       await clickWordAndCheckUncorrectBar(
-        'PrimaryTrainerWords__valid',
+        'TrainerPrimaryWords__valid',
         false,
         component,
       );
 
       // Click invalid word
       await clickWordAndCheckUncorrectBar(
-        'PrimaryTrainerWords__invalid',
+        'TrainerPrimaryWords__invalid',
         true,
         component,
       );
@@ -137,19 +137,19 @@ describe('PrimaryTrainerWords', () => {
   test('Click invalid words, check progress bar', async () => {
     // Click invalid words
     await clickWordAndCheckUncorrectBar(
-      'PrimaryTrainerWords__invalid',
+      'TrainerPrimaryWords__invalid',
       true,
       component,
     );
 
     await clickWordAndCheckUncorrectBar(
-      'PrimaryTrainerWords__invalid',
+      'TrainerPrimaryWords__invalid',
       true,
       component,
     );
 
     await clickWordAndCheckUncorrectBar(
-      'PrimaryTrainerWords__invalid',
+      'TrainerPrimaryWords__invalid',
       true,
       component,
     );
@@ -197,26 +197,26 @@ describe('TrainerModeSwitcher', () => {
 
     // Кликаем на правильные слова
     await clickWordAndCheckUncorrectBar(
-      'PrimaryTrainerWords__valid',
+      'TrainerPrimaryWords__valid',
       false,
       component,
     );
 
     await clickWordAndCheckUncorrectBar(
-      'PrimaryTrainerWords__valid',
+      'TrainerPrimaryWords__valid',
       false,
       component,
     );
 
     await clickWordAndCheckUncorrectBar(
-      'PrimaryTrainerWords__valid',
+      'TrainerPrimaryWords__valid',
       false,
       component,
     );
 
     // Но один раз кликаем на неправильное
     await clickWordAndCheckUncorrectBar(
-      'PrimaryTrainerWords__invalid',
+      'TrainerPrimaryWords__invalid',
       true,
       component,
     );
@@ -231,25 +231,25 @@ describe('TrainerModeSwitcher', () => {
 
     // Кликаем на неправильные слова
     await clickWordAndCheckUncorrectBar(
-      'PrimaryTrainerWords__invalid',
+      'TrainerPrimaryWords__invalid',
       true,
       component,
     );
 
     await clickWordAndCheckUncorrectBar(
-      'PrimaryTrainerWords__invalid',
+      'TrainerPrimaryWords__invalid',
       true,
       component,
     );
 
     await clickWordAndCheckUncorrectBar(
-      'PrimaryTrainerWords__invalid',
+      'TrainerPrimaryWords__invalid',
       true,
       component,
     );
 
     await clickWordAndCheckUncorrectBar(
-      'PrimaryTrainerWords__invalid',
+      'TrainerPrimaryWords__invalid',
       true,
       component,
     );
@@ -263,7 +263,7 @@ describe('TrainerModeSwitcher', () => {
   });
 });
 
-describe('UnionsTrainerWords', () => {
+describe('TrainerUnionsWords', () => {
   // Helpers
   const setupTest = () => {
     return renderWithProviders(
@@ -284,7 +284,7 @@ describe('UnionsTrainerWords', () => {
   });
 
   const getTypeOfCurrentWord = (): unionTypes => {
-    const word = component.getByTestId('UnionsTrainerWords__word');
+    const word = component.getByTestId('TrainerUnionsWords__word');
 
     expect(word).toBeInTheDocument();
 
@@ -305,19 +305,19 @@ describe('UnionsTrainerWords', () => {
 
       // Click valid words
       await clickWordAndCheckUncorrectBar(
-        `UnionsTrainerWords__${wordCurrentType}`,
+        `TrainerUnionsWords__${wordCurrentType}`,
         false,
         component,
       );
 
       await clickWordAndCheckUncorrectBar(
-        `UnionsTrainerWords__${wordCurrentType}`,
+        `TrainerUnionsWords__${wordCurrentType}`,
         false,
         component,
       );
 
       await clickWordAndCheckUncorrectBar(
-        `UnionsTrainerWords__${wordCurrentType}`,
+        `TrainerUnionsWords__${wordCurrentType}`,
         false,
         component,
       );
@@ -334,7 +334,7 @@ describe('UnionsTrainerWords', () => {
 
       // Click valid word
       await clickWordAndCheckUncorrectBar(
-        `UnionsTrainerWords__${wordCurrentType}`,
+        `TrainerUnionsWords__${wordCurrentType}`,
         false,
         component,
       );
@@ -347,7 +347,7 @@ describe('UnionsTrainerWords', () => {
 
       // Click invalid word
       await clickWordAndCheckUncorrectBar(
-        `UnionsTrainerWords__${wordOppositeType}`,
+        `TrainerUnionsWords__${wordOppositeType}`,
         true,
         component,
       );
@@ -367,7 +367,7 @@ describe('UnionsTrainerWords', () => {
 
     // Click invalid word
     await clickWordAndCheckUncorrectBar(
-      `UnionsTrainerWords__${wordOppositeType}`,
+      `TrainerUnionsWords__${wordOppositeType}`,
       true,
       component,
     );

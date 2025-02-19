@@ -7,14 +7,14 @@ import { TrainerWord } from '@/shared/ui/TrainerWord';
 import { PrimaryWordsInterface } from '../../model/types/types';
 import { wordActionsFunctionType } from '../../lib/hooks/useWordActions';
 
-interface PrimaryTrainerWordsProps {
+interface TrainerPrimaryWordsProps {
   randomWord: PrimaryWordsInterface;
   randomWordsIsReverse: boolean;
   wordOnSuccess: wordActionsFunctionType;
   wordOnFail: wordActionsFunctionType;
 }
 
-export const PrimaryTrainerWords: React.FC<PrimaryTrainerWordsProps> = memo(
+export const TrainerPrimaryWords: React.FC<TrainerPrimaryWordsProps> = memo(
   ({
     randomWord,
     randomWordsIsReverse,
@@ -78,7 +78,7 @@ export const PrimaryTrainerWords: React.FC<PrimaryTrainerWordsProps> = memo(
             width="100"
           >
             <TrainerWord
-              dataTestId="PrimaryTrainerWords__valid"
+              dataTestId="TrainerPrimaryWords__valid"
               onClick={() =>
                 wordOnSuccess(storeWords, isErrorWork, randomWord.id)
               }
@@ -102,7 +102,7 @@ export const PrimaryTrainerWords: React.FC<PrimaryTrainerWordsProps> = memo(
             </TrainerWord>
 
             <TrainerWord
-              dataTestId="PrimaryTrainerWords__invalid"
+              dataTestId="TrainerPrimaryWords__invalid"
               onClick={() => wordOnFail(storeWords, isErrorWork, randomWord.id)}
               type={isIncorrect ? 'invalid' : 'default'}
               style={{
@@ -130,4 +130,4 @@ export const PrimaryTrainerWords: React.FC<PrimaryTrainerWordsProps> = memo(
   },
 );
 
-PrimaryTrainerWords.displayName = 'PrimaryTrainerWords';
+TrainerPrimaryWords.displayName = 'TrainerPrimaryWords';

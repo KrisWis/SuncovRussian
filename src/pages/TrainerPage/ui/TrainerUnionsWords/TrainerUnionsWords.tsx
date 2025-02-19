@@ -3,18 +3,18 @@ import { Flex } from '@/shared/lib/Stack';
 import { tabletMediaQueryWidth } from '@/shared/const/global';
 import { TrainerWord } from '@/shared/ui/TrainerWord';
 import { TrainerPageContext } from '../../model/context/TrainerPageContext';
-import * as styles from './UnionsTrainerWords.module.scss';
+import * as styles from './TrainerUnionsWords.module.scss';
 import { useWords } from '../../model/selectors/getTrainerWords/getTrainerWords';
 import { wordActionsFunctionType } from '../../lib/hooks/useWordActions';
 import { UnionsWordsInterface, unionTypes } from '../../model/types/unions';
 
-interface UnionsTrainerWordsProps {
+interface TrainerUnionsWordsProps {
   randomWord: UnionsWordsInterface;
   wordOnSuccess: wordActionsFunctionType;
   wordOnFail: wordActionsFunctionType;
 }
 
-export const UnionsTrainerWords: React.FC<UnionsTrainerWordsProps> = memo(
+export const TrainerUnionsWords: React.FC<TrainerUnionsWordsProps> = memo(
   ({ randomWord, wordOnSuccess, wordOnFail }): React.JSX.Element => {
     // Инициализация данных и контекста
     const storeWords = useWords();
@@ -23,8 +23,8 @@ export const UnionsTrainerWords: React.FC<UnionsTrainerWordsProps> = memo(
     return (
       <Flex width="100" direction="column" gap="10" justify="center">
         <span
-          className={styles.UnionsTrainerWords__word}
-          data-testid="UnionsTrainerWords__word"
+          className={styles.TrainerUnionsWords__word}
+          data-testid="TrainerUnionsWords__word"
         >
           {randomWord.word}
         </span>
@@ -36,7 +36,7 @@ export const UnionsTrainerWords: React.FC<UnionsTrainerWordsProps> = memo(
         >
           {unionTypes.map((unionType, index) => (
             <TrainerWord
-              dataTestId={`UnionsTrainerWords__${unionType}`}
+              dataTestId={`TrainerUnionsWords__${unionType}`}
               onClick={
                 unionType === randomWord.unionType
                   ? () => wordOnSuccess(storeWords, isErrorWork, randomWord.id)
@@ -67,4 +67,4 @@ export const UnionsTrainerWords: React.FC<UnionsTrainerWordsProps> = memo(
   },
 );
 
-UnionsTrainerWords.displayName = 'UnionsTrainerWords';
+TrainerUnionsWords.displayName = 'TrainerUnionsWords';
