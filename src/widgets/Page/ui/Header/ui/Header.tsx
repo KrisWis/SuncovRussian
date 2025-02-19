@@ -21,7 +21,7 @@ export const Header: React.FC<HeaderProps> = memo(
     >(null);
 
     // Реализация показа подменю при наведении на категорию
-    const [isSubmenuVisible, setIsSubmenuVisible] = useState(false);
+    const [visibleSubmenu, setVisibleSubmenu] = useState<string | null>(null);
 
     // Получение дата-атрибутов из html
     const publicUrl = isInJest()
@@ -120,7 +120,12 @@ export const Header: React.FC<HeaderProps> = memo(
                                   }, []);
 
                                   return (
-                                    <Flex align="start">
+                                    <Flex
+                                      onMouseLeave={() =>
+                                        setVisibleSubmenu(null)
+                                      }
+                                      align="start"
+                                    >
                                       <span
                                         className={`${styles.Header__submenu__item} 
                                     ${
@@ -129,7 +134,7 @@ export const Header: React.FC<HeaderProps> = memo(
                                       ) && styles.Header__submenu__item__active
                                     }`}
                                         onMouseEnter={() =>
-                                          setIsSubmenuVisible(true)
+                                          setVisibleSubmenu(menuItem.theme)
                                         }
                                       >
                                         {menuItem.theme}
@@ -137,18 +142,17 @@ export const Header: React.FC<HeaderProps> = memo(
 
                                       <Flex
                                         align="start"
-                                        onMouseLeave={() =>
-                                          setIsSubmenuVisible(false)
-                                        }
                                         className={`${styles.Header__submenu__submenu} 
-                                        ${isSubmenuVisible && styles.Header__submenu__submenu__visible}`}
-                                        gap="20"
+                                        ${visibleSubmenu === menuItem.theme && styles.Header__submenu__submenu__visible}`}
                                       >
                                         {submenuItems.map((items) => (
                                           <Flex
                                             key={items[0].subtheme}
                                             direction="column"
                                             align="start"
+                                            className={
+                                              styles.Header__submenu__submenu__column
+                                            }
                                           >
                                             {items.map((item) => (
                                               <Link

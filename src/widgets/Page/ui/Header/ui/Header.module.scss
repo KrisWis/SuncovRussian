@@ -96,10 +96,17 @@
       transition-property: transform, opacity;
       padding-bottom: 5px;
       padding-left: 10px;
+      z-index: var(--z-index-hidden);
+      max-height: 0;
 
       &__visible {
         opacity: 1;
         transform: translateY(0);
+        z-index: var(--z-index-default);
+      }
+
+      &__column {
+        padding: 0 10px;
       }
     }
   }
