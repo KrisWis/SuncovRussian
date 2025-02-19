@@ -11,6 +11,7 @@ import {
 } from '@/pages/DictantsPage';
 import { getRouteDictant } from '@/shared/const/router';
 import { DictantItem } from '@/features/Dictant';
+import { DictantSymbolForEndSentences } from '@/features/Dictant';
 
 interface useFetchDictantsRoutesResult {
   fetchDictantsRoutes: () => Promise<Partial<
@@ -48,7 +49,10 @@ export const useFetchDictantsRoutes = (): useFetchDictantsRoutesResult => {
           const dictantAllItem: DictantItem = {
             subtheme: `Все ${dictant.theme}`,
             text: dictant.items
-              .map((item) => `&${item.subtheme}& ${item.text}.`)
+              .map(
+                (item) =>
+                  `&${item.subtheme}& ${item.text}${DictantSymbolForEndSentences}`,
+              )
               .join(''),
           };
 

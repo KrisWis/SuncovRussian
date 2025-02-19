@@ -1,7 +1,7 @@
 import { memo, useContext } from 'react';
 import {
   Dictant,
-  splitSymbolForMissed,
+  DictantSymbolForMissed,
   useCheckDictantCorrectness,
 } from '@/features/Dictant';
 import { ProviderForTestsContext } from '@/shared/lib/ProviderForTests';
@@ -29,7 +29,7 @@ export const DictantTemplate: React.FC<DictantTemplateProps> = memo(
     // Получаем функцию проверки из хука
     const { checkDictantCorrectness } = useCheckDictantCorrectness(
       text,
-      splitSymbolForMissed,
+      DictantSymbolForMissed,
       setCorrectAnswersCount,
       setMaxCorrectAnswersCount,
       setTestIsFailed,

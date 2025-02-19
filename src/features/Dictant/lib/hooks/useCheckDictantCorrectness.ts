@@ -1,4 +1,7 @@
-import { splitSymbolForSentences } from '../../ui/Dictant';
+import {
+  DictantSymbolForEndSentences,
+  DictantSymbolForSplitSentences,
+} from '../../ui/Dictant';
 import * as styles from '../../ui/Dictant.module.scss';
 import { CheckButtonOnClickResult } from '@/shared/ui/TemplateForTests';
 interface useCheckDictantCorrectnessResult {
@@ -25,7 +28,7 @@ export const useCheckDictantCorrectness = (
     const splitText: string[] = text
       .replace(
         new RegExp(
-          `${splitSymbolForSentences}.+?${splitSymbolForSentences}\\s*`,
+          `${DictantSymbolForSplitSentences}.+?${DictantSymbolForSplitSentences}\\s*`,
           '',
         ),
         '',
@@ -35,7 +38,8 @@ export const useCheckDictantCorrectness = (
     // Функция для проверки, что инпут пустой
     const isInputMissed = (input: HTMLInputElement): boolean => {
       const letterId: number = Number(input.id.split('__')[1]);
-      const sentencesCount = text.slice(0, letterId).split('.').length - 1;
+      const sentencesCount =
+        text.slice(0, letterId).split(DictantSymbolForEndSentences).length - 1;
       const globalLetterIndex = letterId - sentencesCount;
 
       const thisInputIsMissed: boolean =
@@ -48,7 +52,8 @@ export const useCheckDictantCorrectness = (
     for (let i = 0; i < inputElements.length; i++) {
       const inputElement = inputElements[i];
       const letterId: number = Number(inputElement.id.split('__')[1]);
-      const sentencesCount = text.slice(0, letterId).split('.').length - 1;
+      const sentencesCount =
+        text.slice(0, letterId).split(DictantSymbolForEndSentences).length - 1;
       const globalLetterIndex = letterId - sentencesCount;
 
       const thisInputIsMissed: boolean = isInputMissed(inputElement);

@@ -9,8 +9,9 @@ export interface DictantProps {
   isMissed: boolean;
 }
 
-export const splitSymbolForMissed: string = '*';
-export const splitSymbolForSentences: string = '&';
+export const DictantSymbolForMissed: string = '*';
+export const DictantSymbolForSplitSentences: string = '&';
+export const DictantSymbolForEndSentences: string = '@';
 
 export const Dictant: React.FC<DictantProps> = memo(
   ({ text, maxCorrectLetters, isMissed }): React.JSX.Element => {
@@ -18,7 +19,10 @@ export const Dictant: React.FC<DictantProps> = memo(
     const splitTextByWords: string[] = useMemo(() => text.split(' '), [text]);
 
     const splitTextBySentences: string[] = useMemo(
-      () => text.split('.').filter((sentence) => sentence.trim()),
+      () =>
+        text
+          .split(DictantSymbolForEndSentences)
+          .filter((sentence) => sentence.trim()),
       [text],
     );
 
@@ -37,7 +41,7 @@ export const Dictant: React.FC<DictantProps> = memo(
                     // Временно заменяем пробелы внутри &...& на специальный символ
                     const processedText = sentence.replace(
                       new RegExp(
-                        `${splitSymbolForSentences}([^${splitSymbolForSentences}]+)${splitSymbolForSentences}`,
+                        `${DictantSymbolForSplitSentences}([^${DictantSymbolForSplitSentences}]+)${DictantSymbolForSplitSentences}`,
                         'g',
                       ),
                       (match) => match.replace(/ /g, '△'),
@@ -53,13 +57,17 @@ export const Dictant: React.FC<DictantProps> = memo(
 
                     // Вычисляем смещение для текущего предложения
                     const previousSentencesLength =
-                      splitTextBySentences.slice(0, sentenceIndex).join('. ')
-                        .length + (sentenceIndex > 0 ? 2 : 0);
+                      splitTextBySentences
+                        .slice(0, sentenceIndex)
+                        .join(`${DictantSymbolForEndSentences} `).length +
+                      (sentenceIndex > 0 ? 2 : 0);
 
                     // Определяем, является ли первое слово темой
                     const firstWordIsTheme =
-                      sentenceWords[0].startsWith(splitSymbolForSentences) &&
-                      sentenceWords[0].endsWith(splitSymbolForSentences);
+                      sentenceWords[0].startsWith(
+                        DictantSymbolForSplitSentences,
+                      ) &&
+                      sentenceWords[0].endsWith(DictantSymbolForSplitSentences);
 
                     return (
                       <Flex
@@ -72,7 +80,7 @@ export const Dictant: React.FC<DictantProps> = memo(
                         {firstWordIsTheme && (
                           <span className={styles.Dictant__sentenceTheme}>
                             {sentenceWords[0].replace(
-                              new RegExp(splitSymbolForSentences, 'g'),
+                              new RegExp(DictantSymbolForSplitSentences, 'g'),
                               '',
                             )}
                           </span>
@@ -94,7 +102,7 @@ export const Dictant: React.FC<DictantProps> = memo(
                                 splitTextBySentences[i].trim();
 
                               if (i < sentenceIndex) {
-                                currentPosition += currentSentence.length + 2; // +2 для учета '. '
+                                currentPosition += currentSentence.length + 2; // +2 для учета '@ '
                               } else if (i === sentenceIndex) {
                                 break;
                               }
@@ -110,10 +118,8 @@ export const Dictant: React.FC<DictantProps> = memo(
                             return generateLetter(
                               localWordIndex,
                               globalLetterIndex,
-                              localWordIndex === sentence.split(' ').length - 3
-                                ? word + '.'
-                                : word,
-                              splitSymbolForMissed,
+                              word,
+                              DictantSymbolForMissed,
                               maxCorrectLetters,
                               isMissed,
                               firstWordIsTheme,
@@ -135,7 +141,7 @@ export const Dictant: React.FC<DictantProps> = memo(
                       wordIndex,
                       globalLetterIndex,
                       word,
-                      splitSymbolForMissed,
+                      DictantSymbolForMissed,
                       maxCorrectLetters,
                       isMissed,
                       false,
