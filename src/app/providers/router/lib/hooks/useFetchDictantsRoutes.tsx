@@ -45,31 +45,35 @@ export const useFetchDictantsRoutes = (): useFetchDictantsRoutesResult => {
             {},
           );
 
-          // Формируем объект диктанта вида "Все..."
-          const dictantAllItem: DictantItem = {
-            subtheme: `Все ${dictant.theme}`,
-            text: dictant.items
-              .map(
-                (item) =>
-                  `&${item.subtheme}& ${item.text}${DictantSymbolForEndSentences}`,
-              )
-              .join(''),
-          };
+          if (dictant.items.length > 1) {
+            // Формируем объект диктанта вида "Все..."
+            const dictantAllItem: DictantItem = {
+              subtheme: `Все ${dictant.theme}`,
+              text: dictant.items
+                .map(
+                  (item) =>
+                    `&${item.subtheme}& ${item.text}${DictantSymbolForEndSentences}`,
+                )
+                .join(''),
+            };
 
-          // Формируем роут для всех диктантов вида "Все..."
-          const dictantAllRoute = {
-            [getRouteDictant(dictant.theme, dictantAllItem.subtheme)]: {
-              path: getRouteDictant(dictant.theme, dictantAllItem.subtheme),
-              element: (
-                <DictantsPage
-                  key={dictantAllItem.subtheme}
-                  dictant={dictantAllItem}
-                />
-              ),
-            },
-          };
+            // Формируем роут для всех диктантов вида "Все..."
+            const dictantAllRoute = {
+              [getRouteDictant(dictant.theme, dictantAllItem.subtheme)]: {
+                path: getRouteDictant(dictant.theme, dictantAllItem.subtheme),
+                element: (
+                  <DictantsPage
+                    key={dictantAllItem.subtheme}
+                    dictant={dictantAllItem}
+                  />
+                ),
+              },
+            };
 
-          return { ...acc, ...routes, ...dictantAllRoute };
+            return { ...acc, ...routes, ...dictantAllRoute };
+          }
+
+          return { ...acc, ...routes };
         }, {});
 
       return DictantsRoutes;

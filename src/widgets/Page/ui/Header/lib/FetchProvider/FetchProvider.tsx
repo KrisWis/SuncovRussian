@@ -3,7 +3,7 @@ import { useAppDispatch } from '@/shared/store';
 import { getAllTests } from '@/pages/TestsPage';
 import { memo, useEffect } from 'react';
 import { HeaderMenu } from '../../model/types';
-import { getAllDictants } from '@/pages/DictantsPage';
+import { DictantType, getAllDictants } from '@/pages/DictantsPage';
 import { getDataForCategory } from './lib/getDataForCategory';
 import { getAllPartsOfSpeach } from '@/pages/PartsOfSpeachPage';
 
@@ -47,6 +47,13 @@ export const FetchProvider: React.FC<FetchProviderProps> = memo(
             dispatch,
           );
 
+          // Функция для получения объекта с диктантами
+          const getDictantsItems = (dictant: DictantType) => [
+            ...dictant.items.map((item) => ({
+              subtheme: item.subtheme,
+            })),
+          ];
+
           // Обновляем стейт с категориями
           setCategories((prevCategories) => ({
             ...prevCategories,
@@ -55,15 +62,16 @@ export const FetchProvider: React.FC<FetchProviderProps> = memo(
             Диктанты: [
               ...dictantsData.map((dictant) => ({
                 theme: dictant.theme,
-                items: [
-                  ...dictant.items.map((item) => ({
-                    subtheme: item.subtheme,
-                  })),
+                items:
+                  dictant.items.length > 1
+                    ? [
+                        ...getDictantsItems(dictant),
 
-                  {
-                    subtheme: `Все ${dictant.theme}`,
-                  },
-                ],
+                        {
+                          subtheme: `Все ${dictant.theme}`,
+                        },
+                      ]
+                    : [...getDictantsItems(dictant)],
               })),
             ],
 

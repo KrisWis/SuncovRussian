@@ -102,7 +102,7 @@ export const Dictant: React.FC<DictantProps> = memo(
                                 splitTextBySentences[i].trim();
 
                               if (i < sentenceIndex) {
-                                currentPosition += currentSentence.length + 2; // +2 для учета '@ '
+                                currentPosition += currentSentence.length + 4; // +4 для учета '@ '
                               } else if (i === sentenceIndex) {
                                 break;
                               }
