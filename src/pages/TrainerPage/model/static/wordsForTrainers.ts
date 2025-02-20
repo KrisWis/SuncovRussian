@@ -4232,8 +4232,8 @@ export const wordsForTrainers: WordsForTrainers = {
         id: 0,
       },
       {
-        choiceWord: 'временный',
-        word: 'на',
+        choiceWord: 'соединительный',
+        word: 'на 2',
         id: 1,
       },
     ],

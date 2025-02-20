@@ -1,5 +1,5 @@
 // TODO: написать тесты
-import { memo } from 'react';
+import { memo, useContext, useEffect } from 'react';
 import * as styles from './TrainerChoiceWords.module.scss';
 import {
   ChoiceWordInterface,
@@ -7,6 +7,10 @@ import {
 } from '../../model/types/choice';
 import { wordActionsFunctionType } from '../../lib/hooks/useWordActions';
 import { Flex } from '@/shared/lib/Stack';
+import { useWords } from '../../model/selectors/getTrainerWords/getTrainerWords';
+import { TrainerPageContext } from '../../model/context/TrainerPageContext';
+import { onFailHandler } from './lib/onFailHandler';
+import { clearClassesOnWord } from './lib/clearClassesOnWord';
 
 export interface TrainerChoiceWordsProps {
   randomWord: ChoiceWordInterface;
@@ -16,9 +20,30 @@ export interface TrainerChoiceWordsProps {
 }
 
 export const TrainerChoiceWords: React.FC<TrainerChoiceWordsProps> = memo(
-  ({ randomWord, categories }): React.JSX.Element => {
+  ({
+    randomWord,
+    categories,
+    wordOnFail,
+    wordOnSuccess,
+  }): React.JSX.Element => {
+    // Инициализация данных и контекста
+    const storeWords = useWords();
+    const { isErrorWork } = useContext(TrainerPageContext);
+
+    // При новом слове производим очистку классов у слов
+    useEffect(() => {
+      clearClassesOnWord();
+    }, [randomWord]);
+
     return (
-      <Flex maxHeight width="100" direction="column" gap="20" justify="center">
+      <Flex
+        className={styles.TrainerChoiceWords}
+        maxHeight
+        width="100"
+        direction="column"
+        gap="20"
+        justify="center"
+      >
         <span className={styles.TrainerChoiceWords__word}>
           {randomWord.word}
         </span>
@@ -30,11 +55,24 @@ export const TrainerChoiceWords: React.FC<TrainerChoiceWordsProps> = memo(
                 {category.category}
               </span>
 
-              <Flex width="100" wrap gap="15">
+              <Flex width="100" wrap gap="10">
                 {category.choiceWords.map((choiceWord) => (
                   <span
+                    onClick={(e) =>
+                      randomWord.choiceWord === choiceWord
+                        ? wordOnSuccess(storeWords, isErrorWork, randomWord.id)
+                        : onFailHandler(
+                            e,
+                            randomWord,
+                            wordOnFail,
+                            storeWords,
+                            isErrorWork,
+                          )
+                    }
                     className={styles.TrainerChoiceWords__choiceWord}
                     key={choiceWord}
+                    data-name="TrainerChoiceWords_choiceWord"
+                    data-value={choiceWord}
                   >
                     {choiceWord}
                   </span>

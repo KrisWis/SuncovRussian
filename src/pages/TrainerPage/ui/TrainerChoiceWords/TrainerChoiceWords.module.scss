@@ -1,4 +1,8 @@
+@use '@/app/styles/ScssVars' as *;
+
 .TrainerChoiceWords {
+  margin-top: 100px;
+
   * {
     line-height: 100%;
     color: var(--color-black);
@@ -31,7 +35,12 @@
     transition: var(--transition-duration-default) linear;
     transition-property: background-color, color, opacity;
 
-    &:hover {
+    @media (max-width: $laptop-mediaquery-width) {
+      width: 30%;
+    }
+
+    &:hover,
+    &__selected {
       background-color: var(--color-black);
       color: var(--color-white);
     }
