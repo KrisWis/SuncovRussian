@@ -70,6 +70,11 @@ export const useWordActions = (
       isErrorWork: boolean,
       randomWordId: number | null,
     ) => {
+      if (isOneLifeMode) {
+        initializeWords();
+        setAllAttemptsCount((prev) => prev + 1);
+      }
+
       setWaitRepeatedClickInFail(false);
       setIsIncorrect(false);
 
@@ -126,7 +131,10 @@ export const useWordActions = (
       changeWordInProgressStatus,
       changeWordProbability,
       changeWordUncorrectTimes,
+      initializeWords,
       isCheckMode,
+      isOneLifeMode,
+      setAllAttemptsCount,
       setIsIncorrect,
       updateRandomWord,
     ],
@@ -136,11 +144,6 @@ export const useWordActions = (
   const wordOnFail: wordOnFailType = useCallback(
     (words, isErrorWork, randomWordId, elemForClick = document) => {
       if (waitRepeatedClickInFail) return;
-
-      if (isOneLifeMode) {
-        initializeWords();
-        setAllAttemptsCount((prev) => prev + 1);
-      }
 
       playSound('FailSound');
 
@@ -160,14 +163,7 @@ export const useWordActions = (
         clearTimeout(eventTimeout);
       }, timeoutDurationForRender);
     },
-    [
-      initializeWords,
-      isOneLifeMode,
-      setAllAttemptsCount,
-      setIsIncorrect,
-      showNewWord,
-      waitRepeatedClickInFail,
-    ],
+    [setIsIncorrect, showNewWord, waitRepeatedClickInFail],
   );
 
   // Изменение вероятности при правильном ответе

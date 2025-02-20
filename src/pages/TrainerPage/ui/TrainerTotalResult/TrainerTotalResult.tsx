@@ -12,6 +12,7 @@ import { useTrainerActions } from '../../model/slice/TrainerPageSlice';
 import { useInitializeWords } from '../../lib/hooks/useInitializeWords';
 import { UnionsWordsInterface } from '../../model/types/unions';
 import { Button } from '@/shared/ui/Button/ui/Button';
+import { ChoiceWordInterface } from '../../model/types/choice';
 
 interface TrainerTotalResultProps {
   updateRandomWord: (words?: WordsForTrainersTypes[]) => void;
@@ -161,6 +162,17 @@ export const TrainerTotalResult: React.FC<TrainerTotalResultProps> = memo(
                           ? 'раза'
                           : 'раз'}{' '}
                         (Правильно: {(word as UnionsWordsInterface).unionType})
+                      </>
+                    )}
+
+                    {words.type === 'choice' && (
+                      <>
+                        {(word as ChoiceWordInterface).word} -{' '}
+                        {word.uncorrectTimes}{' '}
+                        {[2, 3, 4].includes(word.uncorrectTimes!)
+                          ? 'раза'
+                          : 'раз'}{' '}
+                        (Правильно: {(word as ChoiceWordInterface).choiceWord})
                       </>
                     )}
                   </span>

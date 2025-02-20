@@ -4202,7 +4202,7 @@ export const wordsForTrainers: WordsForTrainers = {
     ],
   },
 
-  'Много союзов': {
+  'Подвиды союзов': {
     inHeader: true,
     type: 'choice',
     categories: [
