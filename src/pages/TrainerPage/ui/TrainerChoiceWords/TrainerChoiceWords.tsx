@@ -1,4 +1,3 @@
-// TODO: написать тесты
 import { memo, useContext, useEffect } from 'react';
 import * as styles from './TrainerChoiceWords.module.scss';
 import {
@@ -49,7 +48,10 @@ export const TrainerChoiceWords: React.FC<TrainerChoiceWordsProps> = memo(
         gap="20"
         justify="center"
       >
-        <span className={styles.TrainerChoiceWords__word}>
+        <span
+          data-testid="TrainerChoiceWords_word"
+          className={styles.TrainerChoiceWords__word}
+        >
           {randomWord.word}
         </span>
 
@@ -79,6 +81,7 @@ export const TrainerChoiceWords: React.FC<TrainerChoiceWordsProps> = memo(
                     key={choiceWord}
                     data-name="TrainerChoiceWords_choiceWord"
                     data-value={choiceWord}
+                    data-testid="TrainerChoiceWords_choiceWord"
                   >
                     {choiceWord}
                   </span>

@@ -14,7 +14,7 @@ const mockDictant: DictantItem = {
 
 const mockDictantWithSentencesAndThemes: DictantItem = {
   subtheme: 'Тема',
-  text: '&гар - гор& певц*ы*, творец**.@&Зар - зор& рыб*ы*, шутка**.@',
+  text: '&гар - гор& певц*ы*, творец**@&Зар - зор& рыб*ы*, шутка**@',
 };
 
 const mockDictantTheme = 'theme';

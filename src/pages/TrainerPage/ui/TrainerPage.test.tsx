@@ -10,6 +10,10 @@ import { getRouteTrainer } from '@/shared/const/router';
 import { wordsForTrainers } from '../model/static/wordsForTrainers';
 import { UnionsWordsInterface, unionTypes } from '../model/types/unions';
 import userEvent from '@testing-library/user-event';
+import {
+  ChoiceWordInterface,
+  ChoiceWordsForTrainersItem,
+} from '../model/types/choice';
 
 // Types
 type ComparisonType = 'equal' | 'greaterThan';
@@ -58,6 +62,7 @@ const clickWordAndCheckUncorrectBar = async (
 
     await userEvent.click(element);
 
+    // Проверяем, появилась ли плашка "Неверно" или нет
     if (isUncorrectIsExpected) {
       expect(component.queryByTestId('Trainer__uncorrect')).toBeInTheDocument();
     } else {
@@ -65,19 +70,24 @@ const clickWordAndCheckUncorrectBar = async (
         component.queryByTestId('Trainer__uncorrect'),
       ).not.toBeInTheDocument();
     }
+
+    // Убираем плашку
+    await userEvent.click(document.body);
   });
 };
 
 // Tests
 describe('TrainerPrimaryWords', () => {
   // Helpers
+  const theme: string = 'Ударения';
   const setupTest = () => {
     return renderWithProviders(
-      <TrainerPage theme="Ударения" words={wordsForTrainers['Ударения']} />,
+      <TrainerPage theme={theme} words={wordsForTrainers[theme]} />,
       getRouteTrainer('udareniya'),
     );
   };
 
+  // BeforeEach
   let component: RenderResult<typeof queries, HTMLElement, HTMLElement>;
 
   beforeEach(async () => {
@@ -89,7 +99,7 @@ describe('TrainerPrimaryWords', () => {
   // Tests
   test('Click valid words and not get an error, check progress bar', async () => {
     await waitFor(async () => {
-      // Click valid words
+      // Кликаем на правильные слова
       await clickWordAndCheckUncorrectBar(
         'TrainerPrimaryWords__valid',
         false,
@@ -108,34 +118,34 @@ describe('TrainerPrimaryWords', () => {
         component,
       );
 
-      // Progress bar value must increase
+      // Прогресс бар должен увеличиться
       await checkProgressBarValue(0, component, 'greaterThan');
     });
   });
 
   test('Click invalid word and valid word and get an error, check progress bar', async () => {
     await waitFor(async () => {
-      // Click valid word
+      // Кликаем на правильное слово
       await clickWordAndCheckUncorrectBar(
         'TrainerPrimaryWords__valid',
         false,
         component,
       );
 
-      // Click invalid word
+      // Кликаем на неправильное слово
       await clickWordAndCheckUncorrectBar(
         'TrainerPrimaryWords__invalid',
         true,
         component,
       );
 
-      // Progress bar value must increase, because valid word was clicked
+      // Прогресс бар должен увеличиться, потому что правильное слово было кликнуто
       await checkProgressBarValue(0, component, 'greaterThan');
     });
   });
 
   test('Click invalid words, check progress bar', async () => {
-    // Click invalid words
+    // Кликаем на неправильные слова
     await clickWordAndCheckUncorrectBar(
       'TrainerPrimaryWords__invalid',
       true,
@@ -154,7 +164,7 @@ describe('TrainerPrimaryWords', () => {
       component,
     );
 
-    // Progress bar value must be equal zero
+    // Прогресс бар должен быть равен нулю
     await checkProgressBarValue(0, component);
   });
 
@@ -165,9 +175,10 @@ describe('TrainerPrimaryWords', () => {
 
 describe('TrainerModeSwitcher', () => {
   // Helpers
+  const theme: string = 'Ударения';
   const setupTest = () => {
     return renderWithProviders(
-      <TrainerPage theme="Ударения" words={wordsForTrainers['Ударения']} />,
+      <TrainerPage theme={theme} words={wordsForTrainers[theme]} />,
       getRouteTrainer('udareniya'),
     );
   };
@@ -177,7 +188,7 @@ describe('TrainerModeSwitcher', () => {
 
     await userEvent.click(modeItem);
 
-    // Проверяем, что режим действительно выбран
+    // Проверяем, что режим выбран
     expect(modeItem).toHaveAttribute('data-selected', 'true');
   };
 
@@ -214,14 +225,14 @@ describe('TrainerModeSwitcher', () => {
       component,
     );
 
-    // Но один раз кликаем на неправильное
+    // Кликаем на неправильное слово
     await clickWordAndCheckUncorrectBar(
       'TrainerPrimaryWords__invalid',
       true,
       component,
     );
 
-    // И прогресс бар должен обнулиться
+    // Прогресс бар должен быть равен нулю
     await checkProgressBarValue(0, component);
   });
 
@@ -254,7 +265,7 @@ describe('TrainerModeSwitcher', () => {
       component,
     );
 
-    // И прогресс бар должен быть больше 0
+    // Прогресс бар должен увеличиться
     await checkProgressBarValue(0, component, 'greaterThan');
   });
 
@@ -263,18 +274,53 @@ describe('TrainerModeSwitcher', () => {
   });
 });
 
-describe('TrainerUnionsWords', () => {
+describe('TrainerChoiceWords', () => {
   // Helpers
+  const theme: string = 'Подвиды союзов';
   const setupTest = () => {
     return renderWithProviders(
-      <TrainerPage
-        theme="Виды союзов"
-        words={wordsForTrainers['Виды союзов']}
-      />,
-      getRouteTrainer('vidy-soyuzov'),
+      <TrainerPage theme={theme} words={wordsForTrainers[theme]} />,
+      getRouteTrainer('podvidy-soyuzov'),
     );
   };
 
+  // Функция для получения текущего слова и его значений
+  const getCurrentWord = (): ChoiceWordInterface => {
+    // Получаем текущее слово и его значения
+    const TrainerChoiceWordsWord = component.getByTestId(
+      'TrainerChoiceWords_word',
+    );
+
+    const currentWordValues = (
+      wordsForTrainers[theme] as ChoiceWordsForTrainersItem
+    ).items.find((item) => item.word === TrainerChoiceWordsWord.textContent)!;
+
+    return currentWordValues;
+  };
+
+  // Функция для клика на слово
+  const clickChoiceWord = async (
+    currentWordValues: ChoiceWordInterface,
+    correct: boolean,
+  ) => {
+    // Получаем все варианты ответа
+    const TrainerChoiceWordsChoiceWords = component.getAllByTestId(
+      'TrainerChoiceWords_choiceWord',
+    );
+
+    // Получаем и кликаем на вариант ответа
+    const trainerChoiceWordsChoiceWord = TrainerChoiceWordsChoiceWords.find(
+      (choiceWord) =>
+        correct
+          ? choiceWord.textContent === currentWordValues.choiceWord
+          : choiceWord.textContent !== currentWordValues.choiceWord,
+    )!;
+
+    // Кликаем на вариант ответа
+    await userEvent.click(trainerChoiceWordsChoiceWord);
+  };
+
+  // BeforeEach
   let component: ReturnType<typeof setupTest>;
 
   beforeEach(async () => {
@@ -283,6 +329,61 @@ describe('TrainerUnionsWords', () => {
     });
   });
 
+  // Tests
+  test('Click valid choiceWord and not get an error, check progress bar', async () => {
+    await waitFor(async () => {
+      // Получаем текущее слово и его значения
+      const currentWordValues = getCurrentWord();
+
+      // Кликаем на правильный вариант ответа
+      await clickChoiceWord(currentWordValues, true);
+
+      // Прогресс бар должен увеличиться
+      await checkProgressBarValue(0, component, 'greaterThan');
+    });
+  });
+
+  test('Click invalid choiceWord and valid choiceWord and get an error, check progress bar', async () => {
+    await waitFor(async () => {
+      // Получаем текущее слово и его значения
+      const currentWordValues = getCurrentWord();
+
+      // Кликаем на правильный вариант ответа
+      await clickChoiceWord(currentWordValues, true);
+
+      // Кликаем на неправильный вариант ответа
+      await clickChoiceWord(currentWordValues, false);
+
+      // Прогресс бар должен увеличиться, потому что правильный вариант ответа был кликнут
+      await checkProgressBarValue(0, component, 'greaterThan');
+    });
+  });
+
+  test('Click invalid choiceWord, check progress bar', async () => {
+    await waitFor(async () => {
+      // Получаем текущее слово и его значения
+      const currentWordValues = getCurrentWord();
+
+      // Кликаем на неправильный вариант ответа
+      await clickChoiceWord(currentWordValues, false);
+
+      // Прогресс бар должен быть равен нулю
+      await checkProgressBarValue(0, component);
+    });
+  });
+});
+
+describe('TrainerUnionsWords', () => {
+  // Helpers
+  const theme: string = 'Виды союзов';
+  const setupTest = () => {
+    return renderWithProviders(
+      <TrainerPage theme={theme} words={wordsForTrainers[theme]} />,
+      getRouteTrainer('vidy-soyuzov'),
+    );
+  };
+
+  // Функция для получения типа текущего слова
   const getTypeOfCurrentWord = (): unionTypes => {
     const word = component.getByTestId('TrainerUnionsWords__word');
 
@@ -297,13 +398,22 @@ describe('TrainerUnionsWords', () => {
     return wordCurrentType;
   };
 
+  // BeforeEach
+  let component: ReturnType<typeof setupTest>;
+
+  beforeEach(async () => {
+    await waitFor(() => {
+      component = setupTest();
+    });
+  });
+
   // Tests
   test('Click valid words and not get an error, check progress bar', async () => {
     await waitFor(async () => {
-      // Get type of current word
+      // Получаем тип текущего слова
       const wordCurrentType = getTypeOfCurrentWord();
 
-      // Click valid words
+      // Кликаем на правильные слова
       await clickWordAndCheckUncorrectBar(
         `TrainerUnionsWords__${wordCurrentType}`,
         false,
@@ -322,57 +432,57 @@ describe('TrainerUnionsWords', () => {
         component,
       );
 
-      // Progress bar value must increase
+      // Прогресс бар должен увеличиться
       await checkProgressBarValue(0, component, 'greaterThan');
     });
   });
 
   test('Click invalid word and valid word and get an error, check progress bar', async () => {
     await waitFor(async () => {
-      // Get type of current word
+      // Получаем тип текущего слова
       const wordCurrentType = getTypeOfCurrentWord();
 
-      // Click valid word
+      // Кликаем на правильное слово
       await clickWordAndCheckUncorrectBar(
         `TrainerUnionsWords__${wordCurrentType}`,
         false,
         component,
       );
 
-      // Get opposite type of current word
+      // Получаем противоположный тип текущего слова
       const wordOppositeType: unionTypes =
         wordCurrentType === 'Подчинительный'
           ? 'Сочинительный'
           : 'Подчинительный';
 
-      // Click invalid word
+      // Кликаем на неправильное слово
       await clickWordAndCheckUncorrectBar(
         `TrainerUnionsWords__${wordOppositeType}`,
         true,
         component,
       );
 
-      // Progress bar value must increase, because valid word was clicked
+      // Прогресс бар должен увеличиться, потому что правильное слово было кликнуто
       await checkProgressBarValue(0, component, 'greaterThan');
     });
   });
 
   test('Click invalid word, check progress bar', async () => {
-    // Get type of current word
+    // Получаем тип текущего слова
     const wordCurrentType = getTypeOfCurrentWord();
 
-    // Get opposite type of current word
+    // Получаем противоположный тип текущего слова
     const wordOppositeType: unionTypes =
       wordCurrentType === 'Подчинительный' ? 'Сочинительный' : 'Подчинительный';
 
-    // Click invalid word
+    // Кликаем на неправильное слово
     await clickWordAndCheckUncorrectBar(
       `TrainerUnionsWords__${wordOppositeType}`,
       true,
       component,
     );
 
-    // Progress bar value must be equal zero
+    // Прогресс бар должен быть равен нулю
     await checkProgressBarValue(0, component);
   });
 
