@@ -14,7 +14,6 @@ import { TrainerReducer } from '../model/slice/TrainerPageSlice';
 import { TrainerTotalResult } from './TrainerTotalResult/TrainerTotalResult';
 import { TrainerUnionsWords } from './TrainerUnionsWords/TrainerUnionsWords';
 import { useRandomWord } from '../lib/hooks/useRandomWord';
-import { useWordActions } from '../lib/hooks/useWordActions';
 import { useInitializeWords } from '../lib/hooks/useInitializeWords';
 import { UnionsWordsInterface } from '../model/types/unions';
 import { TrainerPrimaryWords } from './TrainerPrimaryWords/TrainerPrimaryWords';
@@ -23,6 +22,8 @@ import { TrainerModeSwitcher } from './TrainerModeSwitcher/TrainerModeSwitcher';
 import { useArrowsActions } from '../lib/hooks/useArrowsActions';
 import { ChoiceWordInterface } from '../model/types/choice';
 import { TrainerChoiceWords } from './TrainerChoiceWords/TrainerChoiceWords';
+import { useWordActions } from '../lib/hooks/useWordActions';
+import { timeoutDurationForRender } from '@/shared/const/global';
 
 export interface TrainerPageProps {
   words: WordsForTrainersItem;
@@ -56,7 +57,7 @@ const TrainerInner: React.FC<TrainerPageProps> = memo(
     }, [randomWord, randomWordId]);
 
     // Появление плашки "Неверно"
-    const { wordOnFail, wordOnSuccess } = useWordActions(
+    const { wordOnFail, wordOnSuccess, showNewWord } = useWordActions(
       randomWordId,
       setRandomWordsIsReverse,
       setRandomWordId,
@@ -99,7 +100,7 @@ const TrainerInner: React.FC<TrainerPageProps> = memo(
         setTotalTime(0);
         initializeWords();
         clearTimeout(timeoutForInitializeWords);
-      }, 0);
+      }, timeoutDurationForRender);
     }, [initializeWords, setIsErrorWork, setIsIncorrect, setTotalTime]);
 
     return (
@@ -163,9 +164,10 @@ const TrainerInner: React.FC<TrainerPageProps> = memo(
                     {words.type === 'choice' && (
                       <TrainerChoiceWords
                         randomWord={randomWord as ChoiceWordInterface}
+                        categories={words.categories}
                         wordOnSuccess={wordOnSuccess}
                         wordOnFail={wordOnFail}
-                        categories={words.categories}
+                        showNewWord={showNewWord}
                       />
                     )}
                   </>

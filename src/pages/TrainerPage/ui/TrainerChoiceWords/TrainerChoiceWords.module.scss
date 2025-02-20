@@ -14,16 +14,16 @@
   }
 
   &__category {
-    font-weight: 900;
-    font-size: 20px;
+    font-weight: 500;
+    font-size: 24px;
     text-transform: lowercase;
-    width: 250px;
+    width: 30vw;
   }
 
   &__choiceWord {
-    font-weight: 400;
+    font-weight: 500;
     font-size: 18px;
-    padding: 20px;
+    padding: 22px;
     border: 2px solid var(--color-black);
     border-radius: 20px;
     display: flex;
@@ -34,6 +34,7 @@
     width: 20%;
     transition: var(--transition-duration-default) linear;
     transition-property: background-color, color, opacity;
+    pointer-events: all;
 
     @media (max-width: $laptop-mediaquery-width) {
       width: 30%;
@@ -48,6 +49,7 @@
     &__inactive {
       opacity: 0.4;
       cursor: default;
+      pointer-events: none;
     }
   }
 }

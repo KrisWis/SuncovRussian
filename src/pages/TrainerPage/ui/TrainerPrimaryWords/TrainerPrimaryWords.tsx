@@ -5,13 +5,16 @@ import { useWords } from '../../model/selectors/getTrainerWords/getTrainerWords'
 import { TrainerPageContext } from '../../model/context/TrainerPageContext';
 import { TrainerWord } from '@/shared/ui/TrainerWord';
 import { PrimaryWordsInterface } from '../../model/types/types';
-import { wordActionsFunctionType } from '../../lib/hooks/useWordActions';
+import {
+  wordActionsFunctionType,
+  wordOnFailType,
+} from '../../lib/hooks/useWordActions';
 
 interface TrainerPrimaryWordsProps {
   randomWord: PrimaryWordsInterface;
   randomWordsIsReverse: boolean;
   wordOnSuccess: wordActionsFunctionType;
-  wordOnFail: wordActionsFunctionType;
+  wordOnFail: wordOnFailType;
 }
 
 export const TrainerPrimaryWords: React.FC<TrainerPrimaryWordsProps> = memo(

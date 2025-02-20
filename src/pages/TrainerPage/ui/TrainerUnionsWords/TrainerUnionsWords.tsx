@@ -5,13 +5,16 @@ import { TrainerWord } from '@/shared/ui/TrainerWord';
 import { TrainerPageContext } from '../../model/context/TrainerPageContext';
 import * as styles from './TrainerUnionsWords.module.scss';
 import { useWords } from '../../model/selectors/getTrainerWords/getTrainerWords';
-import { wordActionsFunctionType } from '../../lib/hooks/useWordActions';
+import {
+  wordActionsFunctionType,
+  wordOnFailType,
+} from '../../lib/hooks/useWordActions';
 import { UnionsWordsInterface, unionTypes } from '../../model/types/unions';
 
 interface TrainerUnionsWordsProps {
   randomWord: UnionsWordsInterface;
   wordOnSuccess: wordActionsFunctionType;
-  wordOnFail: wordActionsFunctionType;
+  wordOnFail: wordOnFailType;
 }
 
 export const TrainerUnionsWords: React.FC<TrainerUnionsWordsProps> = memo(

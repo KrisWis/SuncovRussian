@@ -1,18 +1,26 @@
 import { WordsForTrainersTypes } from '../../../model/types/types';
-import { wordActionsFunctionType } from '../../../lib/hooks/useWordActions';
+import { wordOnFailType } from '../../../lib/hooks/useWordActions';
 import { ChoiceWordInterface } from '../../../model/types/choice';
 import * as styles from '../TrainerChoiceWords.module.scss';
 
-// Модификация действия при ошибке конкретно для этого тренажера
-export const onFailHandler = (
+export type onFailHandlerParams = (
   e: React.MouseEvent<HTMLSpanElement, MouseEvent>,
   randomWord: ChoiceWordInterface,
-  wordOnFail: wordActionsFunctionType,
+  wordOnFail: wordOnFailType,
   storeWords: WordsForTrainersTypes[],
   isErrorWork: boolean,
-) => {
+) => void;
+
+// Модификация действия при ошибке конкретно для этого тренажера
+export const onFailHandler: onFailHandlerParams = (
+  e,
+  randomWord,
+  wordOnFail,
+  storeWords,
+  isErrorWork,
+): void => {
   // Проходимся по каждому слову для выбора
-  const TrainerChoiceWordsChoiceWords = document.querySelectorAll(
+  const TrainerChoiceWordsChoiceWords = document.querySelectorAll<HTMLElement>(
     '[data-name="TrainerChoiceWords_choiceWord"]',
   );
 
@@ -35,5 +43,11 @@ export const onFailHandler = (
     }
   });
 
-  wordOnFail(storeWords, isErrorWork, randomWord.id);
+  // Получаем правильное слово
+  const correctChoiceWordElem = Array.from(TrainerChoiceWordsChoiceWords).find(
+    (choiceWordElem) =>
+      choiceWordElem.getAttribute('data-value') === randomWord.choiceWord,
+  );
+
+  wordOnFail(storeWords, isErrorWork, randomWord.id, correctChoiceWordElem);
 };

@@ -6,7 +6,10 @@ import { playSound } from '@/shared/utils/playSound';
 import { useInitializeWords } from './useInitializeWords';
 import { useWords } from '../../model/selectors/getTrainerWords/getTrainerWords';
 import { TrainerPageContext } from '../../model/context/TrainerPageContext';
-import { mobileMediaQueryWidth } from '@/shared/const/global';
+import {
+  mobileMediaQueryWidth,
+  timeoutDurationForRender,
+} from '@/shared/const/global';
 import { isInJest } from '@/shared/tests/isInJest';
 
 export type wordActionsFunctionType = (
@@ -15,10 +18,17 @@ export type wordActionsFunctionType = (
   randomWordId: number | null,
 ) => void;
 
+export type wordOnFailType = (
+  ...args: [
+    ...Parameters<wordActionsFunctionType>,
+    elemForClick?: HTMLElement | Document,
+  ]
+) => void;
+
 interface UseWordActionsResult {
   showNewWord: wordActionsFunctionType;
   wordOnSuccess: wordActionsFunctionType;
-  wordOnFail: wordActionsFunctionType;
+  wordOnFail: wordOnFailType;
   waitRepeatedClickInFail: boolean;
 }
 
@@ -123,12 +133,8 @@ export const useWordActions = (
   );
 
   // Изменение вероятности при правильном ответе
-  const wordOnFail = useCallback(
-    (
-      words: WordsForTrainersTypes[],
-      isErrorWork: boolean,
-      randomWordId: number | null,
-    ) => {
+  const wordOnFail: wordOnFailType = useCallback(
+    (words, isErrorWork, randomWordId, elemForClick = document) => {
       if (waitRepeatedClickInFail) return;
 
       if (isOneLifeMode) {
@@ -149,9 +155,10 @@ export const useWordActions = (
           main.style.pointerEvents = 'none';
         }
 
-        document.onclick = () => showNewWord(words, isErrorWork, randomWordId);
+        elemForClick.onclick = () =>
+          showNewWord(words, isErrorWork, randomWordId);
         clearTimeout(eventTimeout);
-      }, 0);
+      }, timeoutDurationForRender);
     },
     [
       initializeWords,
@@ -164,12 +171,8 @@ export const useWordActions = (
   );
 
   // Изменение вероятности при правильном ответе
-  const wordOnSuccess = useCallback(
-    (
-      words: WordsForTrainersTypes[],
-      isErrorWork: boolean,
-      randomWordId: number | null,
-    ) => {
+  const wordOnSuccess: wordActionsFunctionType = useCallback(
+    (words, isErrorWork, randomWordId) => {
       if (waitRepeatedClickInFail) return;
 
       const currentRandomWord = words.find((word) => word.id === randomWordId);

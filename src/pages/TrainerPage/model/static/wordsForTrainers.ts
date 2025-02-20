@@ -4228,13 +4228,53 @@ export const wordsForTrainers: WordsForTrainers = {
     items: [
       {
         choiceWord: 'временной',
-        word: 'на',
+        word: 'когда',
         id: 0,
       },
       {
         choiceWord: 'соединительный',
-        word: 'на 2',
+        word: 'и',
         id: 1,
+      },
+      {
+        choiceWord: 'причинный',
+        word: 'потому что',
+        id: 2,
+      },
+      {
+        choiceWord: 'противительный',
+        word: 'однако',
+        id: 3,
+      },
+      {
+        choiceWord: 'целевой',
+        word: 'чтобы',
+        id: 4,
+      },
+      {
+        choiceWord: 'разделительный',
+        word: 'либо',
+        id: 5,
+      },
+      {
+        choiceWord: 'условный',
+        word: 'если',
+        id: 6,
+      },
+      {
+        choiceWord: 'уступительный',
+        word: 'хотя',
+        id: 7,
+      },
+      {
+        choiceWord: 'сравнительный',
+        word: 'словно',
+        id: 8,
+      },
+      {
+        choiceWord: 'следственный',
+        word: 'поэтому',
+        id: 9,
       },
     ],
   },

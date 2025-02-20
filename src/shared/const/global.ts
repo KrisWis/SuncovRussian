@@ -15,3 +15,5 @@ export const tabletMediaQueryWidth: MediaQueryList = window.matchMedia(
 
 export const mobileMediaQueryWidth: MediaQueryList =
   window.matchMedia('(max-width: 600px)');
+
+export const timeoutDurationForRender: number = 0;

@@ -5,18 +5,22 @@ import {
   ChoiceWordInterface,
   ChoiceWordsCategory,
 } from '../../model/types/choice';
-import { wordActionsFunctionType } from '../../lib/hooks/useWordActions';
 import { Flex } from '@/shared/lib/Stack';
 import { useWords } from '../../model/selectors/getTrainerWords/getTrainerWords';
 import { TrainerPageContext } from '../../model/context/TrainerPageContext';
-import { onFailHandler } from './lib/onFailHandler';
 import { clearClassesOnWord } from './lib/clearClassesOnWord';
+import { ChoiceWordOnClick } from './lib/choiceWordOnClick';
+import {
+  wordActionsFunctionType,
+  wordOnFailType,
+} from '../../lib/hooks/useWordActions';
 
 export interface TrainerChoiceWordsProps {
   randomWord: ChoiceWordInterface;
-  wordOnSuccess: wordActionsFunctionType;
-  wordOnFail: wordActionsFunctionType;
   categories: ChoiceWordsCategory[];
+  wordOnSuccess: wordActionsFunctionType;
+  wordOnFail: wordOnFailType;
+  showNewWord: wordActionsFunctionType;
 }
 
 export const TrainerChoiceWords: React.FC<TrainerChoiceWordsProps> = memo(
@@ -25,6 +29,7 @@ export const TrainerChoiceWords: React.FC<TrainerChoiceWordsProps> = memo(
     categories,
     wordOnFail,
     wordOnSuccess,
+    showNewWord,
   }): React.JSX.Element => {
     // Инициализация данных и контекста
     const storeWords = useWords();
@@ -59,15 +64,16 @@ export const TrainerChoiceWords: React.FC<TrainerChoiceWordsProps> = memo(
                 {category.choiceWords.map((choiceWord) => (
                   <span
                     onClick={(e) =>
-                      randomWord.choiceWord === choiceWord
-                        ? wordOnSuccess(storeWords, isErrorWork, randomWord.id)
-                        : onFailHandler(
-                            e,
-                            randomWord,
-                            wordOnFail,
-                            storeWords,
-                            isErrorWork,
-                          )
+                      ChoiceWordOnClick(
+                        e,
+                        randomWord,
+                        choiceWord,
+                        wordOnSuccess,
+                        wordOnFail,
+                        isErrorWork,
+                        storeWords,
+                        showNewWord,
+                      )
                     }
                     className={styles.TrainerChoiceWords__choiceWord}
                     key={choiceWord}

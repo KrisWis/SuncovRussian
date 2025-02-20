@@ -22,8 +22,9 @@ export const Primary: Story = {
     randomWord: (
       wordsForTrainers['Много союзов'].items as ChoiceWordInterface[]
     )[0],
-    wordOnSuccess: () => {},
+    showNewWord: () => {},
     wordOnFail: () => {},
+    wordOnSuccess: () => {},
     categories: (wordsForTrainers['Много союзов'] as ChoiceWordsForTrainersItem)
       .categories,
   },
