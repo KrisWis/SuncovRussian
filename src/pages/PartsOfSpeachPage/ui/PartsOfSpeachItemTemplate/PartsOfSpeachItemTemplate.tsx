@@ -28,6 +28,9 @@ export const PartsOfSpeachItemTemplate: React.FC = memo(
     // Функционал выбора слова
     const [selectedWords, setSelectedWords] = useState<number[]>([]);
 
+    // Делаем стейт для индексов тестов, которые уже были пройдены
+    const [passedTestsIndexes, setPassedTestsIndexes] = useState<number[]>([]);
+
     // Получаем функцию проверки
     const { checkPartsOfSpeachItemCorrectness } =
       useCheckPartsOfSpeachItemCorrectness(
@@ -42,6 +45,8 @@ export const PartsOfSpeachItemTemplate: React.FC = memo(
       setCurrentItemIndex,
       currentItemIndex,
       items as PartsOfSpeachItemType[],
+      setPassedTestsIndexes,
+      passedTestsIndexes,
     );
 
     // Соединяем её с функцией очистки

@@ -8,14 +8,33 @@ export const useContinuePartsOfSpeachItem = (
   setCurrentItemIndex: React.Dispatch<React.SetStateAction<number>>,
   currentItemIndex: number,
   items: PartsOfSpeachItemType[],
+  setPassedTestsIndexes: React.Dispatch<React.SetStateAction<number[]>>,
+  passedTestsIndexes: number[],
 ): useContinuePartsOfSpeachItemResult => {
   const continuePartsOfSpeachItem = () => {
-    // Увеличиваем индекс текущего элемента (переходим к следующему элементу)
-    setCurrentItemIndex(currentItemIndex + 1);
+    // Добавляем текущий индекс в массив пройденых тестов
+    if (!passedTestsIndexes.includes(currentItemIndex))
+      setPassedTestsIndexes([...passedTestsIndexes, currentItemIndex]);
 
-    // Если достигли последнего элемента, то обнуляем индекс
-    if (currentItemIndex === items.length - 1) {
+    // Получаем все индексы, которые еще не были пройдены
+    const availableIndexes = items
+      .map((_, index) => index)
+      .filter(
+        (index) =>
+          !passedTestsIndexes.includes(index) && index !== currentItemIndex,
+      );
+
+    // Получаем случайный индекс из доступных
+    const randomNextIndex =
+      availableIndexes[Math.floor(Math.random() * availableIndexes.length)];
+
+    // Если есть доступные элементы, устанавливаем случайный
+    if (availableIndexes.length > 0) {
+      setCurrentItemIndex(randomNextIndex);
+    } else {
+      // Иначе начинаем сначала
       setCurrentItemIndex(0);
+      setPassedTestsIndexes([]); // Очищаем историю пройденных тестов
     }
   };
 
