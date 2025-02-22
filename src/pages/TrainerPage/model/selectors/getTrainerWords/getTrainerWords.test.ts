@@ -12,7 +12,7 @@ describe('getWords', () => {
 
     const initialStateWithUnionsTests: DeepPartial<StateSchema> = {
       Trainer: {
-        words: wordsForTrainers['Виды союзов'].items,
+        words: wordsForTrainers['Подвиды союзов'].items,
       },
     };
 
@@ -20,7 +20,7 @@ describe('getWords', () => {
       wordsForTrainers['Ударения'].items,
     );
     expect(getWords(initialStateWithUnionsTests as StateSchema)).toBe(
-      wordsForTrainers['Виды союзов'].items,
+      wordsForTrainers['Подвиды союзов'].items,
     );
   });
 });

@@ -26,3 +26,10 @@ export const TrainerUnionsWords: Story = {
     theme: 'Виды союзов',
   },
 };
+
+export const TrainerChoiceWords: Story = {
+  args: {
+    words: wordsForTrainers['Подвиды союзов'],
+    theme: 'Подвиды союзов',
+  },
+};
