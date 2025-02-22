@@ -5,7 +5,7 @@ const theoryPageApi = UTApi.injectEndpoints({
   endpoints: (build) => ({
     getAllTheories: build.mutation<getAllTheoriesResponse, void>({
       query: () => ({
-        url: `/v6/listFiles`,
+        url: `/listFiles`,
         method: 'POST',
         body: {},
       }),

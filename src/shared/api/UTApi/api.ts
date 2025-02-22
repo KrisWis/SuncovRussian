@@ -1,6 +1,6 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
 
-export const UTApiURL: string = 'https://api.uploadthing.com';
+export const UTApiURL: string = 'https://api.uploadthing.com/v6';
 
 export const UTApi = createApi({
   reducerPath: 'UTApi',
