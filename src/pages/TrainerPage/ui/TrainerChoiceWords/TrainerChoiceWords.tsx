@@ -57,10 +57,12 @@ export const TrainerChoiceWords: React.FC<TrainerChoiceWordsProps> = memo(
 
         <Flex width="100" justify="center" direction="column" gap="50">
           {categories.map((category) => (
-            <Flex width="100" key={category.category}>
-              <span className={styles.TrainerChoiceWords__category}>
-                {category.category}
-              </span>
+            <Flex width="100" key={category.choiceWords.join('')}>
+              {category.category && (
+                <span className={styles.TrainerChoiceWords__category}>
+                  {category.category}
+                </span>
+              )}
 
               <Flex width="100" wrap gap="10">
                 {category.choiceWords.map((choiceWord) => (
@@ -77,7 +79,10 @@ export const TrainerChoiceWords: React.FC<TrainerChoiceWordsProps> = memo(
                         showNewWord,
                       )
                     }
-                    className={styles.TrainerChoiceWords__choiceWord}
+                    className={`
+                    ${styles.TrainerChoiceWords__choiceWord}
+                    ${!category.category ? styles.TrainerChoiceWords__choiceWord__withoutCategory : ''}
+                    `}
                     key={choiceWord}
                     data-name="TrainerChoiceWords_choiceWord"
                     data-value={choiceWord}

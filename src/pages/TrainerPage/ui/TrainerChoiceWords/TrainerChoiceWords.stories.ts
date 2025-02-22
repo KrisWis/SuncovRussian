@@ -20,13 +20,13 @@ type Story = StoryObj<typeof meta>;
 export const Primary: Story = {
   args: {
     randomWord: (
-      wordsForTrainers['Подвиды союзов'].items as ChoiceWordInterface[]
+      wordsForTrainers['разряды союзов'].items as ChoiceWordInterface[]
     )[0],
     showNewWord: () => {},
     wordOnFail: () => {},
     wordOnSuccess: () => {},
     categories: (
-      wordsForTrainers['Подвиды союзов'] as ChoiceWordsForTrainersItem
+      wordsForTrainers['разряды союзов'] as ChoiceWordsForTrainersItem
     ).categories,
   },
 };

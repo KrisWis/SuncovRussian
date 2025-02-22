@@ -29,7 +29,7 @@ export const TrainerUnionsWords: Story = {
 
 export const TrainerChoiceWords: Story = {
   args: {
-    words: wordsForTrainers['Подвиды союзов'],
-    theme: 'Подвиды союзов',
+    words: wordsForTrainers['разряды союзов'],
+    theme: 'разряды союзов',
   },
 };

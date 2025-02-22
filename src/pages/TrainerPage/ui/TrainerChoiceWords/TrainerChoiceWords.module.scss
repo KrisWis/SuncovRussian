@@ -17,7 +17,17 @@
     font-weight: 500;
     font-size: 24px;
     text-transform: lowercase;
-    width: 30vw;
+    width: 16vw;
+    color: var(--color-gray);
+    text-align: center;
+
+    @media (max-width: $laptop-mediaquery-width) {
+      width: 20vw;
+    }
+
+    @media (max-width: $tablet-mediaquery-width) {
+      width: 30vw;
+    }
   }
 
   &__choiceWord {
@@ -35,6 +45,10 @@
     transition: var(--transition-duration-default) linear;
     transition-property: background-color, color, opacity;
     pointer-events: all;
+
+    &__withoutCategory {
+      width: 24.5%;
+    }
 
     @media (max-width: $laptop-mediaquery-width) {
       width: 30%;

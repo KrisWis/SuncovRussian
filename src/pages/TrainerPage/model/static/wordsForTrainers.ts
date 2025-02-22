@@ -4202,9 +4202,9 @@ export const wordsForTrainers: WordsForTrainers = {
     ],
   },
 
-  'Подвиды союзов': {
-    inHeader: true,
+  'разряды союзов': {
     type: 'choice',
+    inHeader: true,
     categories: [
       {
         category: 'Подчинительные',
@@ -4227,54 +4227,403 @@ export const wordsForTrainers: WordsForTrainers = {
 
     items: [
       {
-        choiceWord: 'временной',
-        word: 'когда',
+        choiceWord: 'соединительный',
+        word: 'и',
         id: 0,
       },
       {
         choiceWord: 'соединительный',
-        word: 'и',
+        word: 'также',
         id: 1,
       },
       {
-        choiceWord: 'причинный',
-        word: 'потому что',
+        choiceWord: 'соединительный',
+        word: 'тоже',
         id: 2,
+      },
+      {
+        choiceWord: 'соединительный',
+        word: 'ни…ни',
+        id: 3,
+      },
+      {
+        choiceWord: 'соединительный',
+        word: 'не только…, но и',
+        id: 4,
+      },
+      {
+        choiceWord: 'соединительный',
+        word: 'как…так и',
+        id: 5,
+      },
+      {
+        choiceWord: 'противительный',
+        word: 'а',
+        id: 6,
+      },
+      {
+        choiceWord: 'противительный',
+        word: 'но',
+        id: 7,
+      },
+      {
+        choiceWord: 'противительный',
+        word: 'зато',
+        id: 8,
       },
       {
         choiceWord: 'противительный',
         word: 'однако',
-        id: 3,
+        id: 9,
       },
       {
-        choiceWord: 'целевой',
-        word: 'чтобы',
-        id: 4,
+        choiceWord: 'противительный',
+        word: 'же',
+        id: 10,
+      },
+      {
+        choiceWord: 'разделительный',
+        word: 'или',
+        id: 11,
       },
       {
         choiceWord: 'разделительный',
         word: 'либо',
-        id: 5,
+        id: 12,
+      },
+      {
+        choiceWord: 'разделительный',
+        word: 'то…то',
+        id: 13,
+      },
+      {
+        choiceWord: 'разделительный',
+        word: 'не то…не то',
+        id: 14,
+      },
+      {
+        choiceWord: 'изъяснительный',
+        word: 'что',
+        id: 15,
+      },
+      {
+        choiceWord: 'целевой',
+        word: 'чтобы',
+        id: 16,
+      },
+      {
+        choiceWord: 'целевой',
+        word: 'дабы',
+        id: 17,
+      },
+      {
+        choiceWord: 'временной',
+        word: 'когда',
+        id: 18,
+      },
+      {
+        choiceWord: 'временной',
+        word: 'лишь',
+        id: 19,
+      },
+      {
+        choiceWord: 'временной',
+        word: 'пока',
+        id: 20,
+      },
+      {
+        choiceWord: 'временной',
+        word: 'едва',
+        id: 21,
+      },
+      {
+        choiceWord: 'временной',
+        word: 'прежде чем',
+        id: 22,
       },
       {
         choiceWord: 'условный',
         word: 'если',
-        id: 6,
+        id: 23,
       },
       {
-        choiceWord: 'уступительный',
-        word: 'хотя',
-        id: 7,
+        choiceWord: 'условный',
+        word: 'раз',
+        id: 24,
+      },
+      {
+        choiceWord: 'условный',
+        word: 'кабы',
+        id: 25,
+      },
+      {
+        choiceWord: 'сравнительный',
+        word: 'как',
+        id: 26,
+      },
+      {
+        choiceWord: 'сравнительный',
+        word: 'будто',
+        id: 27,
       },
       {
         choiceWord: 'сравнительный',
         word: 'словно',
+        id: 28,
+      },
+      {
+        choiceWord: 'сравнительный',
+        word: 'точно',
+        id: 29,
+      },
+      {
+        choiceWord: 'уступительный',
+        word: 'несмотря на то что',
+        id: 30,
+      },
+      {
+        choiceWord: 'уступительный',
+        word: 'хотя',
+        id: 31,
+      },
+      {
+        choiceWord: 'уступительный',
+        word: 'пусть',
+        id: 32,
+      },
+      {
+        choiceWord: 'следствия',
+        word: 'так что',
+        id: 33,
+      },
+    ],
+  },
+
+  'разряды предлогов': {
+    type: 'choice',
+    inHeader: true,
+    categories: [
+      {
+        choiceWords: [
+          'объектный',
+          'источник информации',
+          'образа действия',
+          'временной',
+          'пространственный',
+          'причинный',
+          'целевой',
+          'уступительный',
+          'условный',
+          'сравнительный',
+        ],
+      },
+    ],
+
+    items: [
+      {
+        choiceWord: 'объектный',
+        word: 'о',
+        id: 0,
+      },
+      {
+        choiceWord: 'объектный',
+        word: 'насчёт',
+        id: 1,
+      },
+      {
+        choiceWord: 'объектный',
+        word: 'про',
+        id: 2,
+      },
+      {
+        choiceWord: 'объектный',
+        word: 'по поводу',
+        id: 3,
+      },
+      {
+        choiceWord: 'источник информации',
+        word: 'согласно',
+        id: 4,
+      },
+      {
+        choiceWord: 'источник информации',
+        word: 'в соответствии с',
+        id: 5,
+      },
+      {
+        choiceWord: 'источник информации',
+        word: 'на основе',
+        id: 6,
+      },
+      {
+        choiceWord: 'образа действия',
+        word: 'посредством',
+        id: 7,
+      },
+      {
+        choiceWord: 'образа действия',
+        word: 'за счёт',
         id: 8,
       },
       {
-        choiceWord: 'следственный',
-        word: 'поэтому',
+        choiceWord: 'образа действия',
+        word: 'с помощью',
         id: 9,
+      },
+      {
+        choiceWord: 'образа действия',
+        word: 'при помощи',
+        id: 10,
+      },
+      {
+        choiceWord: 'временной',
+        word: 'в течение',
+        id: 11,
+      },
+      {
+        choiceWord: 'временной',
+        word: 'в продолжение',
+        id: 12,
+      },
+      {
+        choiceWord: 'временной',
+        word: 'спустя',
+        id: 13,
+      },
+      {
+        choiceWord: 'временной',
+        word: 'около',
+        id: 14,
+      },
+      {
+        choiceWord: 'временной',
+        word: 'по мере',
+        id: 15,
+      },
+      {
+        choiceWord: 'пространственный',
+        word: 'до',
+        id: 16,
+      },
+      {
+        choiceWord: 'пространственный',
+        word: 'из',
+        id: 17,
+      },
+      {
+        choiceWord: 'пространственный',
+        word: 'к',
+        id: 18,
+      },
+      {
+        choiceWord: 'пространственный',
+        word: 'на',
+        id: 19,
+      },
+      {
+        choiceWord: 'пространственный',
+        word: 'над',
+        id: 20,
+      },
+      {
+        choiceWord: 'пространственный',
+        word: 'от',
+        id: 21,
+      },
+      {
+        choiceWord: 'пространственный',
+        word: 'под',
+        id: 22,
+      },
+      {
+        choiceWord: 'пространственный',
+        word: 'перед',
+        id: 23,
+      },
+      {
+        choiceWord: 'пространственный',
+        word: 'у',
+        id: 24,
+      },
+      {
+        choiceWord: 'пространственный',
+        word: 'через',
+        id: 25,
+      },
+      {
+        choiceWord: 'пространственный',
+        word: 'около',
+        id: 26,
+      },
+      {
+        choiceWord: 'причинный',
+        word: 'из-за',
+        id: 27,
+      },
+      {
+        choiceWord: 'причинный',
+        word: 'ввиду',
+        id: 28,
+      },
+      {
+        choiceWord: 'причинный',
+        word: 'вследствие',
+        id: 29,
+      },
+      {
+        choiceWord: 'причинный',
+        word: 'по причине',
+        id: 30,
+      },
+      {
+        choiceWord: 'причинный',
+        word: 'благодаря',
+        id: 31,
+      },
+      {
+        choiceWord: 'целевой',
+        word: 'для',
+        id: 32,
+      },
+      {
+        choiceWord: 'целевой',
+        word: 'за',
+        id: 33,
+      },
+      {
+        choiceWord: 'целевой',
+        word: 'в целях',
+        id: 34,
+      },
+      {
+        choiceWord: 'уступительный',
+        word: 'несмотря на',
+        id: 35,
+      },
+      {
+        choiceWord: 'уступительный',
+        word: 'вопреки',
+        id: 36,
+      },
+      {
+        choiceWord: 'условный',
+        word: 'при условии',
+        id: 37,
+      },
+      {
+        choiceWord: 'сравнительный',
+        word: 'наподобие',
+        id: 38,
+      },
+      {
+        choiceWord: 'сравнительный',
+        word: 'вроде',
+        id: 39,
+      },
+      {
+        choiceWord: 'сравнительный',
+        word: 'в виде',
+        id: 40,
       },
     ],
   },

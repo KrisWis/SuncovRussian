@@ -1,7 +1,7 @@
 import { TrainerWordsInterface, WordsForTrainersGeneralItem } from './types';
 
 export interface ChoiceWordsCategory {
-  category: string;
+  category?: string;
   choiceWords: string[];
 }
 

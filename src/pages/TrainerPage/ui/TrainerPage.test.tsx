@@ -276,7 +276,7 @@ describe('TrainerModeSwitcher', () => {
 
 describe('TrainerChoiceWords', () => {
   // Helpers
-  const theme: string = 'Подвиды союзов';
+  const theme: string = 'разряды союзов';
   const setupTest = () => {
     return renderWithProviders(
       <TrainerPage theme={theme} words={wordsForTrainers[theme]} />,
