@@ -18,8 +18,7 @@ export const AppRouter: React.FC = memo(() => {
   }, []);
 
   // Делаем конфиг с роутами стейтом
-  const [routes, setRoutes] =
-    useState<Record<AppRoutes, RouteProps>>(routeConfig);
+  const [routes, setRoutes] = useState<Record<AppRoutes, RouteProps>>();
 
   // Получаем хуки для фетча данных с бека
   const { fetchTestsRoutes } = useFetchTestsRoutes();
@@ -35,6 +34,7 @@ export const AppRouter: React.FC = memo(() => {
 
       setRoutes((prevRoutes) => ({
         ...prevRoutes,
+        ...routeConfig,
         ...testsRoutes,
         ...dictantsRoutes,
         ...partsOfSpeachRoutes,
@@ -43,6 +43,11 @@ export const AppRouter: React.FC = memo(() => {
 
     AsyncFetchData();
   }, [fetchTestsRoutes, fetchDictantsRoutes, fetchPartsOfSpeachRoutes]);
+
+  // Если роуты не загружены, то показываем загрузку
+  if (!routes) {
+    return <PageLoading />;
+  }
 
   return (
     <Suspense fallback={<PageLoading />}>

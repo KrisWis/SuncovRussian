@@ -6,19 +6,23 @@ import { HeaderMenu } from '../../model/types';
 import { DictantType, getAllDictants } from '@/pages/DictantsPage';
 import { getDataForCategory } from './lib/getDataForCategory';
 import { getAllPartsOfSpeach } from '@/pages/PartsOfSpeachPage';
+import { headerCategories } from '../../model/data';
 
 interface FetchProviderProps {
   children: React.ReactNode;
   setCategories: React.Dispatch<React.SetStateAction<HeaderMenu>>;
+  setCategoriesLoading: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
 export const FetchProvider: React.FC<FetchProviderProps> = memo(
-  ({ children, setCategories }): React.JSX.Element => {
+  ({ children, setCategories, setCategoriesLoading }): React.JSX.Element => {
     // Получаем тесты с бекенда
     const dispatch = useAppDispatch();
 
     useEffect(() => {
       const fetchData = async () => {
+        setCategoriesLoading(true);
+
         try {
           // Получаем тесты с бекенда
           const testsData = await getDataForCategory(
@@ -57,6 +61,7 @@ export const FetchProvider: React.FC<FetchProviderProps> = memo(
           // Обновляем стейт с категориями
           setCategories((prevCategories) => ({
             ...prevCategories,
+            ...headerCategories,
             Тесты: [...testsData.map((test) => test.title)],
 
             Диктанты: [
@@ -81,11 +86,13 @@ export const FetchProvider: React.FC<FetchProviderProps> = memo(
           }));
         } catch (error) {
           console.error('Ошибка при загрузке категорий:', error);
+        } finally {
+          setCategoriesLoading(false);
         }
       };
 
       fetchData();
-    }, [dispatch, setCategories]);
+    }, [dispatch, setCategories, setCategoriesLoading]);
 
     return <>{children}</>;
   },

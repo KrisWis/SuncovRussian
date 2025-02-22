@@ -3,7 +3,7 @@ import * as styles from './Header.module.scss';
 import { Fragment, memo, useState } from 'react';
 import { headerCategories, headerRoutesCategories } from '../model/data';
 import { HeaderCategoryType, HeaderMenu } from '../model/types';
-import { Link } from 'react-router-dom';
+import { Link, matchPath } from 'react-router-dom';
 import { transliterate } from '@/shared/utils/transliterate';
 import { isInJest } from '@/shared/tests/isInJest';
 
@@ -34,16 +34,19 @@ export const Header: React.FC<HeaderProps> = memo(
     // Делаем категории хедера стейтом
     const [categories, setCategories] = useState<HeaderMenu>(headerCategories);
 
+    // Отображение загрузки, если категории не загружены
+    const [categoriesLoading, setCategoriesLoading] = useState<boolean>(true);
+
     return (
       <header className={styles.Header}>
-        <FetchProvider setCategories={setCategories}>
+        <FetchProvider
+          setCategories={setCategories}
+          setCategoriesLoading={setCategoriesLoading}
+        >
           <Flex maxHeight>
             {Object.entries(categories).map(([category, submenu]) => {
               // Инициализация ссылки предмета навигации
               const itemLink = `/${headerRoutesCategories[category as HeaderCategoryType]}`;
-              const regexForCategory = new RegExp(
-                itemLink.replace(/\//g, '\\/'),
-              );
 
               return (
                 <Flex
@@ -58,7 +61,7 @@ export const Header: React.FC<HeaderProps> = memo(
                     justify="center"
                     onMouseEnter={() => setHoveredHeaderCategory(category)}
                     className={`${styles.Header__item} 
-                ${regexForCategory.test(window.location.pathname) && styles.Header__item__active}`}
+                ${matchPath(itemLink, window.location.pathname) && styles.Header__item__active}`}
                     data-testid={`Header__${category}`}
                   >
                     {submenu.length > 0 ? (
@@ -89,7 +92,12 @@ export const Header: React.FC<HeaderProps> = memo(
                                     <Link
                                       to={submenuItemLink}
                                       className={`${styles.Header__submenu__item} 
-                                    ${`${startPath}${submenuItemLink}` === window.location.pathname && styles.Header__submenu__item__active}`}
+                                    ${
+                                      matchPath(
+                                        `${startPath}${submenuItemLink}`,
+                                        window.location.pathname,
+                                      ) && styles.Header__submenu__item__active
+                                    }`}
                                       onClick={() =>
                                         setHoveredHeaderCategory(null)
                                       }
@@ -158,10 +166,12 @@ export const Header: React.FC<HeaderProps> = memo(
                                               <Link
                                                 className={`${styles.Header__submenu__item} 
                                               ${
-                                                `${startPath}${submenuItemLink(
-                                                  item.subtheme,
-                                                )}` ===
-                                                  window.location.pathname &&
+                                                matchPath(
+                                                  `${startPath}${submenuItemLink(
+                                                    item.subtheme,
+                                                  )}`,
+                                                  window.location.pathname,
+                                                ) &&
                                                 styles.Header__submenu__item__active
                                               }`}
                                                 to={submenuItemLink(
@@ -187,6 +197,12 @@ export const Header: React.FC<HeaderProps> = memo(
               );
             })}
           </Flex>
+
+          {categoriesLoading && (
+            <Flex maxHeight justify="center">
+              <span className={styles.Header__item}>Идёт загрузка...</span>
+            </Flex>
+          )}
 
           {withHomeButton && (
             <Flex maxHeight justify="center" className={styles.Header__item}>
