@@ -1,4 +1,11 @@
-import { memo, useCallback, useContext, useEffect, useState } from 'react';
+import {
+  memo,
+  useCallback,
+  useContext,
+  useEffect,
+  useMemo,
+  useState,
+} from 'react';
 import { TemplateForTests } from '@/shared/ui/TemplateForTests';
 import {
   clearWords,
@@ -32,9 +39,14 @@ export const PartsOfSpeachItemTemplate: React.FC = memo(
     const [passedTestsIndexes, setPassedTestsIndexes] = useState<number[]>([]);
 
     // Получаем функцию проверки
+    const currentItem = useMemo(
+      () => (items as PartsOfSpeachItemType[])[currentItemIndex],
+      [currentItemIndex, items],
+    );
+
     const { checkPartsOfSpeachItemCorrectness } =
       useCheckPartsOfSpeachItemCorrectness(
-        (items as PartsOfSpeachItemType[])[currentItemIndex].text,
+        currentItem ? currentItem.text : '',
         setMaxCorrectAnswersCount,
         setCorrectAnswersCount,
         setTestIsFailed,
@@ -72,7 +84,7 @@ export const PartsOfSpeachItemTemplate: React.FC = memo(
       setTestIsFailed,
     ]);
 
-    // Обнуляем прошлые результаты
+    // Обнуляем прошлые результаты и значения при смене темы
     useEffect(() => {
       clearWords(
         setMaxCorrectAnswersCount,
@@ -80,38 +92,47 @@ export const PartsOfSpeachItemTemplate: React.FC = memo(
         setTestIsFailed,
         setSelectedWords,
       );
+
+      setCurrentItemIndex(0);
+      setPassedTestsIndexes([]);
     }, [
       theme,
       setCorrectAnswersCount,
       setMaxCorrectAnswersCount,
       setSelectedWords,
       setTestIsFailed,
+      setCurrentItemIndex,
+      items,
     ]);
 
     return (
-      <TemplateForTests
-        testElement={
-          <PartsOfSpeachItem
-            text={(items as PartsOfSpeachItemType[])[currentItemIndex].text}
+      <>
+        {currentItem && (
+          <TemplateForTests
+            testElement={
+              <PartsOfSpeachItem
+                text={currentItem.text}
+                maxCorrectAnswersCount={maxCorrectAnswersCount}
+                setSelectedWords={setSelectedWords}
+                selectedWords={selectedWords}
+              />
+            }
+            checkButtonOnClick={checkPartsOfSpeachItemCorrectness}
+            correctAnswersCount={correctAnswersCount}
             maxCorrectAnswersCount={maxCorrectAnswersCount}
-            setSelectedWords={setSelectedWords}
-            selectedWords={selectedWords}
+            testIsFailed={testIsFailed}
+            testHasMissedAnswers={false} // Всегда false, так как нет проверки на пропущенные слова
+            theme={theme}
+            continueButtonOnClick={continueButtonOnClick}
+            withDislike={false}
+            withLike
+            withResults={false}
+            dataTestIdForButton={`PartsOfSpeachPage__button`}
+            dataTestIdForDislike={`PartsOfSpeachPage__dislike`}
+            dataTestIdForLike={`PartsOfSpeachPage__like`}
           />
-        }
-        checkButtonOnClick={checkPartsOfSpeachItemCorrectness}
-        correctAnswersCount={correctAnswersCount}
-        maxCorrectAnswersCount={maxCorrectAnswersCount}
-        testIsFailed={testIsFailed}
-        testHasMissedAnswers={false} // Всегда false, так как нет проверки на пропущенные слова
-        theme={theme}
-        continueButtonOnClick={continueButtonOnClick}
-        withDislike={false}
-        withLike
-        withResults={false}
-        dataTestIdForButton={`PartsOfSpeachPage__button`}
-        dataTestIdForDislike={`PartsOfSpeachPage__dislike`}
-        dataTestIdForLike={`PartsOfSpeachPage__like`}
-      />
+        )}
+      </>
     );
   },
 );

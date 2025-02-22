@@ -29,10 +29,10 @@ export const useFetchDictantsRoutes = (): useFetchDictantsRoutesResult => {
         getRequest: getAllDictants,
       });
 
-      const DictantsData = await dispatch(asyncThunk()).unwrap();
+      const dictantsData = await dispatch(asyncThunk()).unwrap();
 
-      const DictantsRoutes: Partial<Record<AppRoutes, RouteProps>> =
-        DictantsData.reduce((acc, dictant) => {
+      const dictantsRoutes: Partial<Record<AppRoutes, RouteProps>> =
+        dictantsData.reduce((acc, dictant) => {
           // Формируем роуты для всех обычных подтем диктантов
           const routes = dictant.items.reduce(
             (itemAcc, item) => ({
@@ -76,7 +76,7 @@ export const useFetchDictantsRoutes = (): useFetchDictantsRoutesResult => {
           return { ...acc, ...routes };
         }, {});
 
-      return DictantsRoutes;
+      return dictantsRoutes;
     } catch (error) {
       console.error('Ошибка при загрузке диктантов:', error);
       return null;

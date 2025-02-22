@@ -28,10 +28,10 @@ export const useFetchPartsOfSpeachRoutes =
           getRequest: getAllPartsOfSpeach,
         });
 
-        const PartsOfSpeachData = await dispatch(asyncThunk()).unwrap();
+        const partsOfSpeachData = await dispatch(asyncThunk()).unwrap();
 
-        const PartsOfSpeachRoutes: Partial<Record<AppRoutes, RouteProps>> =
-          PartsOfSpeachData.reduce(
+        const partsOfSpeachRoutes: Partial<Record<AppRoutes, RouteProps>> =
+          partsOfSpeachData.reduce(
             (acc, item) => ({
               ...acc,
               [item.theme]: {
@@ -42,7 +42,7 @@ export const useFetchPartsOfSpeachRoutes =
             {},
           );
 
-        return PartsOfSpeachRoutes;
+        return partsOfSpeachRoutes;
       } catch (error) {
         console.error('Ошибка при загрузке частей речи:', error);
         return null;
