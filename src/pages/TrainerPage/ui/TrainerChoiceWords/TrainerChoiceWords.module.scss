@@ -41,7 +41,7 @@
     justify-content: center;
     background-color: var(--color-white);
     cursor: pointer;
-    width: 20%;
+    width: 13%;
     transition: var(--transition-duration-default) linear;
     transition-property: background-color, color, opacity;
     pointer-events: all;
@@ -51,7 +51,7 @@
     }
 
     @media (max-width: $laptop-mediaquery-width) {
-      width: 30%;
+      width: 23%;
     }
 
     &:hover,
