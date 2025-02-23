@@ -9,7 +9,10 @@ interface PDFViewerProps {
   url: string;
 }
 
-pdfjs.GlobalWorkerOptions.workerSrc = `${__IS_DEV__ ? '/' : ''}scripts/pdf.worker.min.mjs`;
+pdfjs.GlobalWorkerOptions.workerSrc = new URL(
+  'pdfjs-dist/build/pdf.worker.min.mjs',
+  import.meta.url,
+).toString();
 
 export const PDFViewer: React.FC<PDFViewerProps> = ({ url }) => {
   // Отображение PDF файла на сайте

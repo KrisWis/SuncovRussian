@@ -5,7 +5,7 @@ const theoryItemApi = UTApi.injectEndpoints({
   endpoints: (build) => ({
     getTheory: build.query<getTheoryResponse, string>({
       query: (fileKey) => ({
-        url: `/v6/pollUpload/${fileKey}`,
+        url: `/pollUpload/${fileKey}`,
       }),
 
       keepUnusedDataFor: 120,

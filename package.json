@@ -7,13 +7,19 @@
     "build:prod": "webpack --env mode=production",
     "build:dev": "webpack --env mode=development",
     "deploy": "npm run build:prod && gh-pages -d build",
+    "lint": "npx lint-staged",
     "lint:ts": "eslint \"**/*.{ts,tsx}\"",
     "lint:ts:fix": "eslint \"**/*.{ts,tsx}\" --fix",
     "lint:scss": "npx stylelint \"**/*.scss\"",
     "lint:scss:fix": "npx stylelint \"**/*.scss\" --fix",
-    "storybook": "storybook dev -p 6006 --ci",
     "test:unit": "jest --config ./config/jest/jest.config.ts",
     "test:e2e": "cypress open",
+    "storybook": "storybook dev -p 6006 --ci",
+    "test:ui": "npx loki test & npm run test:ui:report",
+    "test:ui:ok": "npx loki approve",
+    "test:ui:report": "npm run test:ui:report:json && npm run test:ui:report:html",
+    "test:ui:report:json": "node scripts/generate-visual-json-report.cjs",
+    "test:ui:report:html": "npx reg-cli --from .loki/report.json --report .loki/report.html",
     "prettier": "npx prettier --write **/*.{ts,tsx,json}"
   },
   "author": "EvgeniyWis",
@@ -80,6 +86,7 @@
     "jest-environment-jsdom": "^29.7.0",
     "jest-html-reporters": "^3.1.7",
     "lint-staged": "^15.2.11",
+    "loki": "^0.35.1",
     "prettier": "^3.4.2",
     "react-refresh": "^0.16.0",
     "reg-cli": "^0.18.9",
@@ -104,5 +111,19 @@
     "**/*.scss": [
       "stylelint"
     ]
+  },
+  "loki": {
+    "configurations": {
+      "chrome": {
+        "target": "chrome.app",
+        "width": 1440,
+        "height": 900,
+        "deviceScaleFactor": 1,
+        "mobile": false,
+        "chromeLoadTimeout": 60000,
+        "fetchFailIgnore": ".*",
+        "enableDelayedScreenshots": true
+      }
+    }
   }
 }

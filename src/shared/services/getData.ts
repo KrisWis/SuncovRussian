@@ -6,8 +6,8 @@ import {
   FetchArgs,
   FetchBaseQueryError,
   FetchBaseQueryMeta,
-  StartQueryActionCreator,
 } from '@reduxjs/toolkit/query';
+import { StartQueryActionCreator } from '../types/global';
 
 export interface getDataParams<Returned> {
   requestID: string;

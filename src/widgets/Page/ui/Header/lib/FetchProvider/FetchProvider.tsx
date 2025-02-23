@@ -5,8 +5,9 @@ import { memo, useEffect } from 'react';
 import { HeaderMenu } from '../../model/types';
 import { DictantType, getAllDictants } from '@/pages/DictantsPage';
 import { getDataForCategory } from './lib/getDataForCategory';
-import { getAllPartsOfSpeach } from '@/pages/PartsOfSpeachPage';
+import { getAllPartsOfSpeach, PartsOfSpeachType } from '@/pages/PartsOfSpeachPage';
 import { headerCategories } from '../../model/data';
+import { TestInterface } from '@/features/Test';
 
 interface FetchProviderProps {
   children: React.ReactNode;
@@ -25,7 +26,7 @@ export const FetchProvider: React.FC<FetchProviderProps> = memo(
 
         try {
           // Получаем тесты с бекенда
-          const testsData = await getDataForCategory(
+          const testsData = await getDataForCategory<TestInterface[]>(
             {
               requestID: 'tests/getAllTests',
               getRequest: getAllTests,
@@ -34,7 +35,7 @@ export const FetchProvider: React.FC<FetchProviderProps> = memo(
           );
 
           // Получаем диктанты с бекенда
-          const dictantsData = await getDataForCategory(
+          const dictantsData = await getDataForCategory<DictantType[]>(
             {
               requestID: 'dictants/getAllDictants',
               getRequest: getAllDictants,
@@ -43,7 +44,7 @@ export const FetchProvider: React.FC<FetchProviderProps> = memo(
           );
 
           // Получаем части речи с бекенда
-          const partsOfSpeachData = await getDataForCategory(
+          const partsOfSpeachData = await getDataForCategory<PartsOfSpeachType[]>(
             {
               requestID: 'partsOfSpeach/getAllPartsOfSpeach',
               getRequest: getAllPartsOfSpeach,

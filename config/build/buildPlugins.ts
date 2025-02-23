@@ -37,7 +37,6 @@ export function buildPlugins({
     new CopyWebpackPlugin({
       patterns: [
         { from: 'public/sounds', to: 'sounds' }, 
-        { from: 'public/scripts', to: 'scripts' }, 
         { from: 'public/gifs', to: 'gifs' }, 
         { from: 'public/favicon.ico', to: 'favicon.ico' },
         { from: 'public/404.html', to: '404.html' },

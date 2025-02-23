@@ -2,7 +2,7 @@ import { memo } from 'react';
 import { PageLoading } from '@/shared/ui/PageLoading/ui/PageLoading';
 import { ErrorComponent } from '@/shared/ui/ErrorComponent';
 import { PDFViewer } from '@/shared/lib/PDFViewer';
-import { useGetTheoryQuery } from '../model/api/theoryItemApi';
+import { useGetTheoryQuery } from '../api/theoryItemApi';
 
 interface TheoryItemProps {
   fileKey: string;
