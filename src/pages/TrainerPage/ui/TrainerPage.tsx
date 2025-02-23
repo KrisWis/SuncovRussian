@@ -6,7 +6,7 @@ import {
 import * as styles from './TrainerPage.module.scss';
 import { DynamicModuleLoader } from '@/shared/lib/DynamicModuleLoader';
 import { Hint } from '@/shared/ui/Hint';
-import { memo, useState, useContext, useEffect } from 'react';
+import { memo, useState, useContext, useEffect, useMemo } from 'react';
 import { Page } from '@/widgets/Page';
 import { TrainerPageContext } from '../model/context/TrainerPageContext';
 import { useWords } from '../model/selectors/getTrainerWords/getTrainerWords';
@@ -23,7 +23,10 @@ import { useArrowsActions } from '../lib/hooks/useArrowsActions';
 import { ChoiceWordInterface } from '../model/types/choice';
 import { TrainerChoiceWords } from './TrainerChoiceWords/TrainerChoiceWords';
 import { useWordActions } from '../lib/hooks/useWordActions';
-import { timeoutDurationForRender } from '@/shared/const/global';
+import {
+  laptopMediaQueryWidth,
+  timeoutDurationForRender,
+} from '@/shared/const/global';
 
 export interface TrainerPageProps {
   words: WordsForTrainersItem;
@@ -103,8 +106,14 @@ const TrainerInner: React.FC<TrainerPageProps> = memo(
       }, timeoutDurationForRender);
     }, [initializeWords, setIsErrorWork, setIsIncorrect, setTotalTime]);
 
+    // Определение, нужно ли использовать maxHeight
+    const withoutMaxHeight = useMemo(
+      () => words.type === 'choice' && laptopMediaQueryWidth.matches,
+      [words.type],
+    );
+
     return (
-      <Page className={styles.TrainerPage}>
+      <Page className={styles.TrainerPage} withMaxHeight={!withoutMaxHeight}>
         {storeWords.length > 0 && (
           <>
             {!totalTime ? (

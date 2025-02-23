@@ -8,6 +8,7 @@ interface PageProps {
   'data-testid'?: string;
   className?: string;
   withMarginTop?: boolean;
+  withMaxHeight?: boolean;
 }
 
 export const Page: React.FC<PageProps> = memo(
@@ -17,9 +18,15 @@ export const Page: React.FC<PageProps> = memo(
     'data-testid': dataTestId,
     className,
     withMarginTop = false,
+    withMaxHeight = true,
   }): React.JSX.Element => {
     return (
-      <Flex direction="column" width="100" maxHeight data-testid={dataTestId}>
+      <Flex
+        direction="column"
+        width="100"
+        maxHeight={withMaxHeight}
+        data-testid={dataTestId}
+      >
         <Header withHomeButton={withHomeButton} />
 
         <main

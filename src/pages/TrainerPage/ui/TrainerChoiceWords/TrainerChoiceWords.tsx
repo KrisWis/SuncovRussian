@@ -1,4 +1,4 @@
-import { memo, useContext, useEffect } from 'react';
+import { memo, useContext, useEffect, useMemo } from 'react';
 import * as styles from './TrainerChoiceWords.module.scss';
 import {
   ChoiceWordInterface,
@@ -39,6 +39,12 @@ export const TrainerChoiceWords: React.FC<TrainerChoiceWordsProps> = memo(
       clearClassesOnWord();
     }, [randomWord]);
 
+    // Определение того, что тренажер без категорий
+    const isWithoutCategory = useMemo(
+      () => !categories.find((category) => category.category),
+      [categories],
+    );
+
     return (
       <Flex
         className={styles.TrainerChoiceWords}
@@ -55,16 +61,29 @@ export const TrainerChoiceWords: React.FC<TrainerChoiceWordsProps> = memo(
           {randomWord.word}
         </span>
 
-        <Flex width="100" justify="center" direction="column" gap="50">
+        <Flex
+          className={`
+          ${styles.TrainerChoiceWords__choiceWordsWrapper}
+          ${isWithoutCategory ? styles.TrainerChoiceWords__choiceWordsWrapper__withoutCategory : ''}
+          `}
+          width="100"
+          justify="center"
+          direction="column"
+          gap="50"
+        >
           {categories.map((category) => (
-            <Flex width="100" key={category.choiceWords.join('')}>
+            <Flex
+              justify={isWithoutCategory ? 'center' : 'start'}
+              width="100"
+              key={category.choiceWords.join('')}
+            >
               {category.category && (
                 <span className={styles.TrainerChoiceWords__category}>
                   {category.category}
                 </span>
               )}
 
-              <Flex width="100" wrap gap="10">
+              <div className={styles.TrainerChoiceWords__choiceWords}>
                 {category.choiceWords.map((choiceWord) => (
                   <span
                     onClick={(e) =>
@@ -79,10 +98,7 @@ export const TrainerChoiceWords: React.FC<TrainerChoiceWordsProps> = memo(
                         showNewWord,
                       )
                     }
-                    className={`
-                    ${styles.TrainerChoiceWords__choiceWord}
-                    ${!category.category ? styles.TrainerChoiceWords__choiceWord__withoutCategory : ''}
-                    `}
+                    className={styles.TrainerChoiceWords__choiceWord}
                     key={choiceWord}
                     data-name="TrainerChoiceWords_choiceWord"
                     data-value={choiceWord}
@@ -91,7 +107,7 @@ export const TrainerChoiceWords: React.FC<TrainerChoiceWordsProps> = memo(
                     {choiceWord}
                   </span>
                 ))}
-              </Flex>
+              </div>
             </Flex>
           ))}
         </Flex>

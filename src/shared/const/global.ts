@@ -9,6 +9,10 @@ window.matchMedia =
     };
   };
 
+export const laptopMediaQueryWidth: MediaQueryList = window.matchMedia(
+  '(max-width: 1500px)',
+);
+
 export const tabletMediaQueryWidth: MediaQueryList = window.matchMedia(
   '(max-width: 1000px)',
 );

@@ -13,6 +13,25 @@
     font-size: 36px;
   }
 
+  &__choiceWords {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 10px;
+
+    &Wrapper {
+      position: relative;
+      left: 10.5vw;
+
+      &__withoutCategory {
+        left: 0;
+      }
+
+      @media (max-width: $laptop-mediaquery-width) {
+        left: 0;
+      }
+    }
+  }
+
   &__category {
     font-weight: 500;
     font-size: 24px;
@@ -41,18 +60,10 @@
     justify-content: center;
     background-color: var(--color-white);
     cursor: pointer;
-    width: 13%;
+    width: 100%;
     transition: var(--transition-duration-default) linear;
     transition-property: background-color, color, opacity;
     pointer-events: all;
-
-    &__withoutCategory {
-      width: 13%;
-    }
-
-    @media (max-width: $laptop-mediaquery-width) {
-      width: 23%;
-    }
 
     &:hover,
     &__selected {
