@@ -4,7 +4,7 @@ import { tabletMediaQueryWidth } from '@/shared/const/global';
 import { useWords } from '../../model/selectors/getTrainerWords/getTrainerWords';
 import { TrainerPageContext } from '../../model/context/TrainerPageContext';
 import { TrainerWord } from '@/shared/ui/TrainerWord';
-import { PrimaryWordsInterface } from '../../model/types/types';
+import { PrimaryWordsInterface } from '../../model/types/primary';
 import {
   wordActionsFunctionType,
   wordOnFailType,

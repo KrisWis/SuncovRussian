@@ -1,7 +1,12 @@
 import { ChoiceWordInterface, ChoiceWordsForTrainersItem } from './choice';
+import { PrimaryWordsForTrainersItem, PrimaryWordsInterface } from './primary';
 import { UnionsWordsForTrainersItem, UnionsWordsInterface } from './unions';
+import {
+  WithInputsWordsForTrainersItem,
+  WithInputsWordsInterface,
+} from './withInputs';
 
-type TrainerWordsType = 'unions' | 'primary' | 'choice';
+type TrainerWordsType = 'unions' | 'primary' | 'choice' | 'withInputs';
 
 export interface TrainerWordsInterface {
   id: number;
@@ -11,17 +16,12 @@ export interface TrainerWordsInterface {
   inProgress?: boolean;
 }
 
-export interface PrimaryWordsInterface extends TrainerWordsInterface {
-  valid: string;
-  invalid: string;
-  differenceIndexes?: number[];
-}
-
 export type WordsForTrainersTypes =
   | TrainerWordsInterface
   | PrimaryWordsInterface
   | UnionsWordsInterface
-  | ChoiceWordInterface;
+  | ChoiceWordInterface
+  | WithInputsWordsInterface;
 
 export interface WordsForTrainersGeneralItem {
   type: TrainerWordsType;
@@ -29,15 +29,11 @@ export interface WordsForTrainersGeneralItem {
   items: WordsForTrainersTypes[];
 }
 
-interface PrimaryWordsForTrainersItem extends WordsForTrainersGeneralItem {
-  type: 'primary';
-  items: PrimaryWordsInterface[];
-}
-
 export type WordsForTrainersItem =
   | PrimaryWordsForTrainersItem
   | UnionsWordsForTrainersItem
-  | ChoiceWordsForTrainersItem;
+  | ChoiceWordsForTrainersItem
+  | WithInputsWordsForTrainersItem;
 
 export type WordsForTrainers = {
   [key in string]: WordsForTrainersItem;

@@ -1,7 +1,7 @@
 import type { Meta, StoryObj } from '@storybook/react';
 import { wordsForTrainers } from '../../model/static/wordsForTrainers';
 import { TrainerPrimaryWords } from './TrainerPrimaryWords';
-import { PrimaryWordsInterface } from '../../model/types/types';
+import { PrimaryWordsInterface } from '../../model/types/primary';
 
 const meta = {
   title: 'Pages/Trainer/TrainerPrimaryWords',

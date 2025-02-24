@@ -1,8 +1,6 @@
 import { Flex } from '@/shared/lib/Stack';
-import {
-  PrimaryWordsInterface,
-  WordsForTrainersItem,
-} from '../model/types/types';
+import { WordsForTrainersItem } from '../model/types/types';
+import { PrimaryWordsInterface } from '../model/types/primary';
 import * as styles from './TrainerPage.module.scss';
 import { DynamicModuleLoader } from '@/shared/lib/DynamicModuleLoader';
 import { Hint } from '@/shared/ui/Hint';

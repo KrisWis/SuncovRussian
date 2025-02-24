@@ -3,10 +3,10 @@ import * as styles from './TrainerTotalResult.module.scss';
 import { memo, useCallback, useContext, useMemo } from 'react';
 import { useWords } from '../../model/selectors/getTrainerWords/getTrainerWords';
 import {
-  PrimaryWordsInterface,
   WordsForTrainersItem,
   WordsForTrainersTypes,
 } from '../../model/types/types';
+import { PrimaryWordsInterface } from '../../model/types/primary';
 import { TrainerPageContext } from '../../model/context/TrainerPageContext';
 import { useTrainerActions } from '../../model/slice/TrainerPageSlice';
 import { useInitializeWords } from '../../lib/hooks/useInitializeWords';
