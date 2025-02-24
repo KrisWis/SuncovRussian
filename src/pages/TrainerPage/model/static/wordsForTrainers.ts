@@ -4925,4 +4925,113 @@ export const wordsForTrainers: WordsForTrainers = {
       },
     ],
   },
+
+  'разряды наречий': {
+    type: 'choice',
+    inHeader: true,
+    categories: [
+      {
+        choiceWords: [
+          'места',
+          'времени',
+          'образа действия',
+          'порядок мыслей',
+          'причинно-следственный',
+        ],
+      },
+    ],
+
+    items: [
+      {
+        choiceWord: 'места',
+        word: 'где',
+        id: 0,
+      },
+      {
+        choiceWord: 'места',
+        word: 'там',
+        id: 1,
+      },
+      {
+        choiceWord: 'места',
+        word: 'тут',
+        id: 2,
+      },
+      {
+        choiceWord: 'места',
+        word: 'здесь',
+        id: 3,
+      },
+      {
+        choiceWord: 'времени',
+        word: 'когда',
+        id: 4,
+      },
+      {
+        choiceWord: 'времени',
+        word: 'тогда',
+        id: 5,
+      },
+      {
+        choiceWord: 'времени',
+        word: 'всегда',
+        id: 6,
+      },
+      {
+        choiceWord: 'образа действия',
+        word: 'как',
+        id: 7,
+      },
+      {
+        choiceWord: 'образа действия',
+        word: 'так',
+        id: 8,
+      },
+      {
+        choiceWord: 'порядок мыслей',
+        word: 'прежде всего',
+        id: 9,
+      },
+      {
+        choiceWord: 'порядок мыслей',
+        word: 'потом',
+        id: 10,
+      },
+      {
+        choiceWord: 'порядок мыслей',
+        word: 'затем',
+        id: 11,
+      },
+      {
+        choiceWord: 'порядок мыслей',
+        word: 'незачем',
+        id: 12,
+      },
+      {
+        choiceWord: 'причинно-следственный',
+        word: 'почему',
+        id: 13,
+      },
+      {
+        choiceWord: 'причинно-следственный',
+        word: 'поэтому',
+        id: 14,
+      },
+      {
+        choiceWord: 'причинно-следственный',
+        word: 'потому',
+        id: 15,
+      },
+      {
+        choiceWord: 'причинно-следственный',
+        word: 'оттого',
+        id: 16,
+      },
+      {
+        choiceWord: 'причинно-следственный',
+        word: 'отчего',
+        id: 17,
+      },
+    ],
+  },
 };
