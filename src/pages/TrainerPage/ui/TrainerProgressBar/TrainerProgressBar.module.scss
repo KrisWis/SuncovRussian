@@ -20,7 +20,7 @@
 
     &::-webkit-progress-value {
       background: var(--color-black);
-      border-radius: 8px;
+      border-radius: 10px 0 0 10px;
     }
   }
 }
