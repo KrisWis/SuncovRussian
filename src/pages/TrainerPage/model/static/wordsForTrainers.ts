@@ -4392,7 +4392,7 @@ export const wordsForTrainers: WordsForTrainers = {
         id: 32,
       },
       {
-        choiceWord: 'следствия',
+        choiceWord: 'следственный',
         word: 'так что',
         id: 33,
       },
