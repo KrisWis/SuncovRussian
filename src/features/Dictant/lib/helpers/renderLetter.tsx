@@ -3,7 +3,7 @@ import * as styles from '../../ui/Dictant.module.scss';
 import { goToNextInput } from './goToNextInput';
 import { goToPrevInput } from './goToPrevInput';
 
-export const generateLetter = (
+export const renderLetter = (
   localWordIndex: number,
   globalLetterIndex: number,
   word: string,

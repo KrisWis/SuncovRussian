@@ -5,9 +5,9 @@ import {
 } from '../../../lib/hooks/useWordActions';
 import { WithMissedLettersWordsInterface } from '../../../model/types/withMissedLetters';
 import * as styles from './TrainerWithMissedLettersWords.module.scss';
-import { memo } from 'react';
-import { MissedLetterInput } from '@/shared/ui/MissedLetterInput';
+import { Fragment, memo } from 'react';
 import { Button } from '@/shared/ui/Button';
+import { renderLetter } from '../lib/renderLetter';
 
 export interface TrainerWithMissedLettersWordsProps {
   randomWord: WithMissedLettersWordsInterface;
@@ -21,21 +21,12 @@ export const TrainerWithMissedLettersWords: React.FC<TrainerWithMissedLettersWor
     return (
       <Flex width="100" maxHeight justify="center" direction="column" gap="50">
         <span className={styles.TrainerWithMissedLettersWords__letter}>
-          {randomWord.word.split('').map((letter, index) => {
-            if (randomWord.missedLettersIndexes.includes(index + 1)) {
-              // eslint-disable-next-line react/no-array-index-key
-              return <MissedLetterInput key={index} />;
-            }
-
-            return (
-              <span
-                // eslint-disable-next-line react/no-array-index-key
-                key={index}
-              >
-                {letter}
-              </span>
-            );
-          })}
+          {randomWord.word.split('').map((letter, index) => (
+            // eslint-disable-next-line react/no-array-index-key
+            <Fragment key={index}>
+              {renderLetter(letter, index, randomWord.missedLettersIndexes)}
+            </Fragment>
+          ))}
         </span>
 
         <Button size="small" variant="inverse">

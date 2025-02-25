@@ -3,7 +3,14 @@ import { WordsForTrainersItem } from '../model/types/types';
 import * as styles from './TrainerPage.module.scss';
 import { DynamicModuleLoader } from '@/shared/lib/DynamicModuleLoader';
 import { Hint } from '@/shared/ui/Hint';
-import { memo, useState, useContext, useEffect, useMemo } from 'react';
+import {
+  memo,
+  useState,
+  useContext,
+  useEffect,
+  useMemo,
+  Fragment,
+} from 'react';
 import { Page } from '@/widgets/Page';
 import { TrainerPageContext } from '../model/context/TrainerPageContext';
 import { useWords } from '../model/selectors/getTrainerWords/getTrainerWords';
@@ -156,7 +163,9 @@ const TrainerInner: React.FC<TrainerPageProps> = memo(
                         showNewWord,
                       ),
                     ).map(([type, element]) => (
-                      <>{words.type === type && element}</>
+                      <Fragment key={type}>
+                        {words.type === type && element}
+                      </Fragment>
                     ))}
                   </>
                 )}

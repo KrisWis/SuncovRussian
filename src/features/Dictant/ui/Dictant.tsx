@@ -1,7 +1,7 @@
 import { Flex } from '@/shared/lib/Stack';
 import * as styles from './Dictant.module.scss';
 import { memo, useContext, useMemo } from 'react';
-import { generateLetter } from '../lib/helpers/generateLetter';
+import { renderLetter } from '../lib/helpers/renderLetter';
 import { DictantContext } from '../model/context/DictantContext';
 
 export interface DictantProps {
@@ -124,7 +124,7 @@ export const Dictant: React.FC<DictantProps> = memo(
                               (localWordIndex === 0 ? 2 : 1) -
                               sentenceWords[0].length;
 
-                            return generateLetter(
+                            return renderLetter(
                               localWordIndex,
                               globalLetterIndex,
                               word,
@@ -150,7 +150,7 @@ export const Dictant: React.FC<DictantProps> = memo(
                       splitTextByWords.slice(0, wordIndex).join(' ').length +
                       (wordIndex > 0 ? 2 : 1);
 
-                    return generateLetter(
+                    return renderLetter(
                       wordIndex,
                       globalLetterIndex,
                       word,
