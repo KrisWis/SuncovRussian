@@ -1,0 +1,63 @@
+import {
+  wordActionsFunctionType,
+  wordOnFailType,
+} from '../lib/hooks/useWordActions';
+import {
+  ChoiceWordInterface,
+  ChoiceWordsForTrainersItem,
+} from '../model/types/choice';
+import { PrimaryWordsInterface } from '../model/types/primary';
+import {
+  TrainerWordsType,
+  WordsForTrainersItem,
+  WordsForTrainersTypes,
+} from '../model/types/types';
+import { UnionsWordsInterface } from '../model/types/unions';
+import { TrainerChoiceWords } from '../ui/TrainerChoiceWords/TrainerChoiceWords';
+import { TrainerPrimaryWords } from '../ui/TrainerPrimaryWords/TrainerPrimaryWords';
+import { TrainerUnionsWords } from '../ui/TrainerUnionsWords/TrainerUnionsWords';
+import { TrainerWithMissedLettersWords } from '../ui/TrainerWithMissedLettersWords';
+
+type TrainerWords = {
+  [key in TrainerWordsType]: React.ReactNode;
+};
+
+export const trainerWords = (
+  randomWord: WordsForTrainersTypes,
+  randomWordsIsReverse: boolean,
+  wordOnFail: wordOnFailType,
+  wordOnSuccess: wordActionsFunctionType,
+  words: WordsForTrainersItem,
+  showNewWord: wordActionsFunctionType,
+): TrainerWords => {
+  return {
+    primary: (
+      <TrainerPrimaryWords
+        randomWord={randomWord as PrimaryWordsInterface}
+        randomWordsIsReverse={randomWordsIsReverse}
+        wordOnFail={wordOnFail}
+        wordOnSuccess={wordOnSuccess}
+      />
+    ),
+
+    unions: (
+      <TrainerUnionsWords
+        randomWord={randomWord as UnionsWordsInterface}
+        wordOnSuccess={wordOnSuccess}
+        wordOnFail={wordOnFail}
+      />
+    ),
+
+    choice: (
+      <TrainerChoiceWords
+        randomWord={randomWord as ChoiceWordInterface}
+        categories={(words as ChoiceWordsForTrainersItem).categories}
+        wordOnSuccess={wordOnSuccess}
+        wordOnFail={wordOnFail}
+        showNewWord={showNewWord}
+      />
+    ),
+
+    withMissedLetters: <TrainerWithMissedLettersWords />,
+  };
+};

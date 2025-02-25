@@ -1,6 +1,5 @@
 import { Flex } from '@/shared/lib/Stack';
 import { WordsForTrainersItem } from '../model/types/types';
-import { PrimaryWordsInterface } from '../model/types/primary';
 import * as styles from './TrainerPage.module.scss';
 import { DynamicModuleLoader } from '@/shared/lib/DynamicModuleLoader';
 import { Hint } from '@/shared/ui/Hint';
@@ -10,21 +9,17 @@ import { TrainerPageContext } from '../model/context/TrainerPageContext';
 import { useWords } from '../model/selectors/getTrainerWords/getTrainerWords';
 import { TrainerReducer } from '../model/slice/TrainerPageSlice';
 import { TrainerTotalResult } from './TrainerTotalResult/TrainerTotalResult';
-import { TrainerUnionsWords } from './TrainerUnionsWords/TrainerUnionsWords';
 import { useRandomWord } from '../lib/hooks/useRandomWord';
 import { useInitializeWords } from '../lib/hooks/useInitializeWords';
-import { UnionsWordsInterface } from '../model/types/unions';
-import { TrainerPrimaryWords } from './TrainerPrimaryWords/TrainerPrimaryWords';
 import { TrainerProgressBar } from './TrainerProgressBar/TrainerProgressBar';
 import { TrainerModeSwitcher } from './TrainerModeSwitcher/TrainerModeSwitcher';
 import { useArrowsActions } from '../lib/hooks/useArrowsActions';
-import { ChoiceWordInterface } from '../model/types/choice';
-import { TrainerChoiceWords } from './TrainerChoiceWords/TrainerChoiceWords';
 import { useWordActions } from '../lib/hooks/useWordActions';
 import {
   laptopMediaQueryWidth,
   timeoutDurationForRender,
 } from '@/shared/const/global';
+import { trainerWords } from '../config/trainerWords';
 
 export interface TrainerPageProps {
   words: WordsForTrainersItem;
@@ -151,32 +146,18 @@ const TrainerInner: React.FC<TrainerPageProps> = memo(
 
                 {randomWord && (
                   <>
-                    {words.type === 'primary' && (
-                      <TrainerPrimaryWords
-                        randomWord={randomWord as PrimaryWordsInterface}
-                        randomWordsIsReverse={randomWordsIsReverse}
-                        wordOnFail={wordOnFail}
-                        wordOnSuccess={wordOnSuccess}
-                      />
-                    )}
-
-                    {words.type === 'unions' && (
-                      <TrainerUnionsWords
-                        randomWord={randomWord as UnionsWordsInterface}
-                        wordOnSuccess={wordOnSuccess}
-                        wordOnFail={wordOnFail}
-                      />
-                    )}
-
-                    {words.type === 'choice' && (
-                      <TrainerChoiceWords
-                        randomWord={randomWord as ChoiceWordInterface}
-                        categories={words.categories}
-                        wordOnSuccess={wordOnSuccess}
-                        wordOnFail={wordOnFail}
-                        showNewWord={showNewWord}
-                      />
-                    )}
+                    {Object.entries(
+                      trainerWords(
+                        randomWord,
+                        randomWordsIsReverse,
+                        wordOnFail,
+                        wordOnSuccess,
+                        words,
+                        showNewWord,
+                      ),
+                    ).map(([type, element]) => (
+                      <>{words.type === type && element}</>
+                    ))}
                   </>
                 )}
 

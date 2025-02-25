@@ -21,8 +21,6 @@ export type { WordsForTrainersTypes } from './model/types/types';
 
 export { useWords } from './model/selectors/getTrainerWords/getTrainerWords';
 
-export { TrainerProgressBar } from './ui/TrainerProgressBar/TrainerProgressBar';
-
 export { TrainerPageContext } from './model/context/TrainerPageContext';
 
 // Static
