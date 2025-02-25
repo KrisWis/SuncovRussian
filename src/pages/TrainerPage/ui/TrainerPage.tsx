@@ -19,7 +19,7 @@ import {
   laptopMediaQueryWidth,
   timeoutDurationForRender,
 } from '@/shared/const/global';
-import { trainerWords } from '../config/trainerWords';
+import { generateTrainerWords } from '../config/generateTrainerWords';
 
 export interface TrainerPageProps {
   words: WordsForTrainersItem;
@@ -147,7 +147,7 @@ const TrainerInner: React.FC<TrainerPageProps> = memo(
                 {randomWord && (
                   <>
                     {Object.entries(
-                      trainerWords(
+                      generateTrainerWords(
                         randomWord,
                         randomWordsIsReverse,
                         wordOnFail,

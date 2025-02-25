@@ -33,3 +33,10 @@ export const TrainerChoiceWords: Story = {
     theme: 'разряды союзов',
   },
 };
+
+export const TrainerWithMissedLettersWords: Story = {
+  args: {
+    words: wordsForTrainers['словарные слова'],
+    theme: 'словарные слова',
+  },
+};

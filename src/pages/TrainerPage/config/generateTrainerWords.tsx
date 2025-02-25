@@ -13,6 +13,7 @@ import {
   WordsForTrainersTypes,
 } from '../model/types/types';
 import { UnionsWordsInterface } from '../model/types/unions';
+import { WithMissedLettersWordsInterface } from '../model/types/withMissedLetters';
 import { TrainerChoiceWords } from '../ui/TrainerChoiceWords/TrainerChoiceWords';
 import { TrainerPrimaryWords } from '../ui/TrainerPrimaryWords/TrainerPrimaryWords';
 import { TrainerUnionsWords } from '../ui/TrainerUnionsWords/TrainerUnionsWords';
@@ -22,7 +23,7 @@ type TrainerWords = {
   [key in TrainerWordsType]: React.ReactNode;
 };
 
-export const trainerWords = (
+export const generateTrainerWords = (
   randomWord: WordsForTrainersTypes,
   randomWordsIsReverse: boolean,
   wordOnFail: wordOnFailType,
@@ -58,6 +59,13 @@ export const trainerWords = (
       />
     ),
 
-    withMissedLetters: <TrainerWithMissedLettersWords />,
+    withMissedLetters: (
+      <TrainerWithMissedLettersWords
+        randomWord={randomWord as WithMissedLettersWordsInterface}
+        wordOnSuccess={wordOnSuccess}
+        wordOnFail={wordOnFail}
+        showNewWord={showNewWord}
+      />
+    ),
   };
 };

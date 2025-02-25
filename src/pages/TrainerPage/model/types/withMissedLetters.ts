@@ -2,7 +2,7 @@ import { TrainerWordsInterface, WordsForTrainersGeneralItem } from './types';
 
 export interface WithMissedLettersWordsInterface extends TrainerWordsInterface {
   word: string;
-  inputIndexes: number[];
+  missedLettersIndexes: number[];
 }
 
 export interface WithMissedLettersWordsForTrainersItem

@@ -1,12 +1,39 @@
 .Button {
   cursor: pointer;
   transition: var(--transition-duration-default) linear;
-  transition-property: background-color, color;
+  transition-property: background-color, color, border-color;
   font-weight: 600;
   line-height: 150%;
-  color: var(--color-black);
-  background-color: var(--color-white);
-  border: 1.5px solid var(--color-black);
+
+  &__primary {
+    background-color: var(--color-white);
+    border: 1.5px solid transparent;
+    color: var(--color-black);
+
+    &:hover {
+      background-color: var(--color-black);
+      color: var(--color-white);
+      border-color: var(--color-black);
+    }
+  }
+
+  &__inverse {
+    background-color: var(--color-black);
+    color: var(--color-white);
+    border: 1.5px solid transparent;
+
+    &:hover {
+      background-color: var(--color-white);
+      color: var(--color-black);
+      border-color: var(--color-black);
+    }
+  }
+
+  &__small {
+    padding: 3px 10px;
+    font-size: 16px;
+    border-radius: 20px;
+  }
 
   &__medium {
     padding: 31px 42px;
@@ -20,10 +47,5 @@
     padding: 20px 60px;
     font-size: 32px;
     border-radius: 20px;
-  }
-
-  &:hover {
-    background-color: var(--color-black);
-    color: var(--color-white);
   }
 }

@@ -110,7 +110,7 @@ export const TemplateForTests: React.FC<TemplateForTestsProps> = memo(
                     ? continueButtonOnClick
                     : checkButtonHandleClick
                 }
-                variant="medium"
+                size="medium"
                 type="button"
                 className={styles.TemplateForTests__check}
               >
