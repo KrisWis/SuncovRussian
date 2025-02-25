@@ -1,4 +1,4 @@
-import { memo, useContext } from 'react';
+import { memo, useContext, useState } from 'react';
 import {
   Dictant,
   DictantSymbolForMissed,
@@ -6,6 +6,7 @@ import {
 } from '@/features/Dictant';
 import { ProviderForTestsContext } from '@/shared/lib/ProviderForTests';
 import { TemplateForTests } from '@/shared/ui/TemplateForTests';
+import { DictantContext } from '@/features/Dictant';
 
 interface DictantTemplateProps {
   text: string;
@@ -14,6 +15,11 @@ interface DictantTemplateProps {
 
 export const DictantTemplate: React.FC<DictantTemplateProps> = memo(
   ({ text, theme }): React.JSX.Element => {
+    // Инициализация значений для контекста диктанта
+    const [missedInputsIDs, setMissedInputsIDs] = useState<number[]>([]);
+    const [correctInputsIDs, setCorrectInputsIDs] = useState<number[]>([]);
+    const [incorrectInputsIDs, setIncorrectInputsIDs] = useState<number[]>([]);
+
     // Получаем данные из контекста
     const {
       testHasMissedAnswers,
@@ -34,16 +40,30 @@ export const DictantTemplate: React.FC<DictantTemplateProps> = memo(
       setMaxCorrectAnswersCount,
       setTestIsFailed,
       setTestHasMissedAnswers,
+      setMissedInputsIDs,
+      setCorrectInputsIDs,
+      setIncorrectInputsIDs,
     );
 
     return (
       <TemplateForTests
         testElement={
-          <Dictant
-            isMissed={testHasMissedAnswers}
-            maxCorrectLetters={maxCorrectAnswersCount}
-            text={text}
-          />
+          <DictantContext.Provider
+            value={{
+              missedInputsIDs,
+              setMissedInputsIDs,
+              correctInputsIDs,
+              setCorrectInputsIDs,
+              incorrectInputsIDs,
+              setIncorrectInputsIDs,
+            }}
+          >
+            <Dictant
+              isMissed={testHasMissedAnswers}
+              maxCorrectLetters={maxCorrectAnswersCount}
+              text={text}
+            />
+          </DictantContext.Provider>
         }
         checkButtonOnClick={checkDictantCorrectness}
         correctAnswersCount={correctAnswersCount}

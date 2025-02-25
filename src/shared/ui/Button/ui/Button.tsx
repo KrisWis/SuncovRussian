@@ -1,6 +1,15 @@
 import * as styles from './Button.module.scss';
 import { memo } from 'react';
-import { ButtonProps } from '../model/types/types';
+
+interface ButtonProps
+  extends React.DetailedHTMLProps<
+    React.ButtonHTMLAttributes<HTMLButtonElement>,
+    HTMLButtonElement
+  > {
+  className?: string;
+  variant?: 'big' | 'medium';
+  children: React.ReactNode;
+}
 
 export const Button: React.FC<ButtonProps> = memo(
   ({

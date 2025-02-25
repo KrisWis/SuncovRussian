@@ -1,7 +1,8 @@
 import { Flex } from '@/shared/lib/Stack';
 import * as styles from './Dictant.module.scss';
-import { memo, useMemo } from 'react';
+import { memo, useContext, useMemo } from 'react';
 import { generateLetter } from '../lib/helpers/generateLetter';
+import { DictantContext } from '../model/context/DictantContext';
 
 export interface DictantProps {
   text: string;
@@ -25,6 +26,14 @@ export const Dictant: React.FC<DictantProps> = memo(
           .filter((sentence) => sentence.trim()),
       [text],
     );
+
+    // Получаем значения из контекста
+    const {
+      correctInputsIDs,
+      missedInputsIDs,
+      incorrectInputsIDs,
+      setMissedInputsIDs,
+    } = useContext(DictantContext);
 
     return (
       <Flex direction="column" gap="70" width="100">
@@ -123,6 +132,10 @@ export const Dictant: React.FC<DictantProps> = memo(
                               maxCorrectLetters,
                               isMissed,
                               firstWordIsTheme,
+                              correctInputsIDs,
+                              incorrectInputsIDs,
+                              missedInputsIDs,
+                              setMissedInputsIDs,
                             );
                           })}
                         </Flex>
@@ -145,6 +158,10 @@ export const Dictant: React.FC<DictantProps> = memo(
                       maxCorrectLetters,
                       isMissed,
                       false,
+                      correctInputsIDs,
+                      incorrectInputsIDs,
+                      missedInputsIDs,
+                      setMissedInputsIDs,
                     );
                   })}
                 </>

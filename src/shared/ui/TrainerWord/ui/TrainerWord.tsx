@@ -1,7 +1,17 @@
 import * as styles from './TrainerWord.module.scss';
 import { memo } from 'react';
-import { TrainerWordProps } from '../model/types/types';
 import { Flex } from '@/shared/lib/Stack';
+
+type TrainerWordTypes = 'default' | 'invalid';
+
+interface TrainerWordProps {
+  className?: string;
+  style?: React.CSSProperties;
+  dataTestId?: string;
+  onClick?: () => void;
+  type?: TrainerWordTypes;
+  children: React.ReactNode;
+}
 
 export const TrainerWord: React.FC<TrainerWordProps> = memo(
   ({

@@ -1,5 +1,5 @@
+import { MissedLetterInput } from '@/shared/ui/MissedLetterInput';
 import * as styles from '../../ui/Dictant.module.scss';
-
 import { goToNextInput } from './goToNextInput';
 import { goToPrevInput } from './goToPrevInput';
 
@@ -11,10 +11,19 @@ export const generateLetter = (
   maxCorrectLetters: number,
   isMissed: boolean,
   firstWordIsTheme: boolean,
+  correctInputsIDs: number[],
+  incorrectInputsIDs: number[],
+  missedInputsIDs: number[],
+  setMissedInputsIDs: React.Dispatch<React.SetStateAction<number[]>>,
 ): React.JSX.Element => {
   // Функция для объедения функций инпутов
-  const handleInput = (e: React.ChangeEvent<HTMLInputElement>) => {
-    e.target.classList.remove(styles.Dictant__input__missed);
+  const handleInput = (
+    e: React.ChangeEvent<HTMLInputElement>,
+    currentGlobalIndex: number,
+  ) => {
+    setMissedInputsIDs((prev) =>
+      prev.filter((item) => item !== currentGlobalIndex),
+    );
     goToNextInput(e);
   };
 
@@ -38,18 +47,19 @@ export const generateLetter = (
             letter === splitSymbol) ? (
           ''
         ) : letter === splitSymbol ? (
-          <input
+          <MissedLetterInput
             data-testid="Dictant__input"
-            onInput={handleInput}
+            onInput={(e: React.ChangeEvent<HTMLInputElement>) =>
+              handleInput(e, currentGlobalIndex)
+            }
             onKeyDown={goToPrevInput}
             id={`DictantInput__${currentGlobalIndex}`}
-            className={styles.Dictant__input}
             data-name="Dictant__input"
-            type="text"
-            maxLength={1}
             key={letter + currentGlobalIndex}
             readOnly={maxCorrectLetters > 0 && !isMissed}
-            autoComplete="off"
+            isCorrect={correctInputsIDs.includes(currentGlobalIndex)}
+            isIncorrect={incorrectInputsIDs.includes(currentGlobalIndex)}
+            isMissed={missedInputsIDs.includes(currentGlobalIndex)}
           />
         ) : (
           letter

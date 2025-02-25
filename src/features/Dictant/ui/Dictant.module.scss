@@ -17,57 +17,6 @@
     }
   }
 
-  &__input {
-    text-align: center;
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    width: 25px;
-    height: 25px;
-    border-radius: 100%;
-    background-color: var(--color-black);
-    color: var(--color-white);
-    transition: background-color var(--transition-duration-default) linear;
-    font-size: 30px;
-
-    @media (max-width: $laptop-mediaquery-width) {
-      font-size: 15px;
-      width: 15px;
-      height: 15px;
-    }
-
-    &:focus {
-      background-color: var(--color-gray);
-    }
-
-    &__incorrect {
-      background-color: var(--color-error);
-    }
-
-    &__correct {
-      background-color: var(--color-success);
-    }
-
-    &__missed {
-      animation: infinite input-missed-anim var(--animation-duration-default)
-        linear;
-
-      @keyframes input-missed-anim {
-        0% {
-          background-color: var(--color-black);
-        }
-
-        50% {
-          background-color: var(--color-white);
-        }
-
-        100% {
-          background-color: var(--color-black);
-        }
-      }
-    }
-  }
-
   &__firstWord {
     margin-left: 20px;
   }

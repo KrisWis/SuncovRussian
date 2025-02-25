@@ -2,7 +2,6 @@ import {
   DictantSymbolForEndSentences,
   DictantSymbolForSplitSentences,
 } from '../../ui/Dictant';
-import * as styles from '../../ui/Dictant.module.scss';
 import { CheckButtonOnClickResult } from '@/shared/ui/TemplateForTests';
 interface useCheckDictantCorrectnessResult {
   checkDictantCorrectness: () => CheckButtonOnClickResult;
@@ -15,8 +14,12 @@ export const useCheckDictantCorrectness = (
   setMaxCorrectLetters: React.Dispatch<React.SetStateAction<number>>,
   setIsIncorrect: React.Dispatch<React.SetStateAction<boolean>>,
   setIsMissed: React.Dispatch<React.SetStateAction<boolean>>,
+  setMissedInputsIDs: React.Dispatch<React.SetStateAction<number[]>>,
+  setCorrectInputsIDs: React.Dispatch<React.SetStateAction<number[]>>,
+  setIncorrectInputsIDs: React.Dispatch<React.SetStateAction<number[]>>,
 ): useCheckDictantCorrectnessResult => {
   const checkDictantCorrectness = (): CheckButtonOnClickResult => {
+    // Инициализация всех элементов и переменных
     const inputElements = document.querySelectorAll(
       '[data-name="Dictant__input"]',
     ) as NodeListOf<HTMLInputElement>;
@@ -70,7 +73,7 @@ export const useCheckDictantCorrectness = (
 
       if (thisInputIsMissed) {
         // Навешиваем стили если инпут с пропуском
-        inputElement.classList.add(styles.Dictant__input__missed);
+        setMissedInputsIDs((prev) => [...prev, letterId]);
         correctLetters--;
       } else if (
         // Если неправильный
@@ -78,7 +81,7 @@ export const useCheckDictantCorrectness = (
         inputElement.value !== splitText[globalLetterIndex] &&
         !(!inputElement.value && splitText[globalLetterIndex] === splitSymbol)
       ) {
-        inputElement.classList.add(styles.Dictant__input__incorrect);
+        setIncorrectInputsIDs((prev) => [...prev, letterId]);
         correctLetters--;
 
         if (!minOneInputIsMissed) {
@@ -87,7 +90,7 @@ export const useCheckDictantCorrectness = (
         }
       } else if (!minOneInputIsMissed) {
         // И если правильный
-        inputElement.classList.add(styles.Dictant__input__correct);
+        setCorrectInputsIDs((prev) => [...prev, letterId]);
       }
     }
 
