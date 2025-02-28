@@ -1,26 +1,24 @@
-import { memo, useContext, useState } from 'react';
+import { memo, useContext } from 'react';
 import {
   Dictant,
   DictantSymbolForMissed,
-  useCheckDictantCorrectness,
+  useCheckCorrectness,
 } from '@/features/Dictant';
 import { ProviderForTestsContext } from '@/shared/lib/ProviderForTests';
 import { TemplateForTests } from '@/shared/ui/TemplateForTests';
-import { DictantContext } from '@/features/Dictant';
+import {
+  MissedLetterInputContext,
+  MissedLetterInputProvider,
+} from '@/shared/ui/MissedLetterInput';
 
 interface DictantTemplateProps {
   text: string;
   theme: string;
 }
 
-export const DictantTemplate: React.FC<DictantTemplateProps> = memo(
+const DictantTemplateInner: React.FC<DictantTemplateProps> = memo(
   ({ text, theme }): React.JSX.Element => {
-    // Инициализация значений для контекста диктанта
-    const [missedInputsIDs, setMissedInputsIDs] = useState<number[]>([]);
-    const [correctInputsIDs, setCorrectInputsIDs] = useState<number[]>([]);
-    const [incorrectInputsIDs, setIncorrectInputsIDs] = useState<number[]>([]);
-
-    // Получаем данные из контекста
+    // Получаем данные из контекстов
     const {
       testHasMissedAnswers,
       maxCorrectAnswersCount,
@@ -32,8 +30,11 @@ export const DictantTemplate: React.FC<DictantTemplateProps> = memo(
       setTestHasMissedAnswers,
     } = useContext(ProviderForTestsContext);
 
+    const { setMissedInputsIDs, setCorrectInputsIDs, setIncorrectInputsIDs } =
+      useContext(MissedLetterInputContext);
+
     // Получаем функцию проверки из хука
-    const { checkDictantCorrectness } = useCheckDictantCorrectness(
+    const { checkCorrectness } = useCheckCorrectness(
       text,
       DictantSymbolForMissed,
       setCorrectAnswersCount,
@@ -48,24 +49,13 @@ export const DictantTemplate: React.FC<DictantTemplateProps> = memo(
     return (
       <TemplateForTests
         testElement={
-          <DictantContext.Provider
-            value={{
-              missedInputsIDs,
-              setMissedInputsIDs,
-              correctInputsIDs,
-              setCorrectInputsIDs,
-              incorrectInputsIDs,
-              setIncorrectInputsIDs,
-            }}
-          >
-            <Dictant
-              isMissed={testHasMissedAnswers}
-              maxCorrectLetters={maxCorrectAnswersCount}
-              text={text}
-            />
-          </DictantContext.Provider>
+          <Dictant
+            isMissed={testHasMissedAnswers}
+            maxCorrectLetters={maxCorrectAnswersCount}
+            text={text}
+          />
         }
-        checkButtonOnClick={checkDictantCorrectness}
+        checkButtonOnClick={checkCorrectness}
         correctAnswersCount={correctAnswersCount}
         maxCorrectAnswersCount={maxCorrectAnswersCount}
         testIsFailed={testIsFailed}
@@ -75,6 +65,18 @@ export const DictantTemplate: React.FC<DictantTemplateProps> = memo(
         dataTestIdForLike={'Dictant__like'}
         dataTestIdForDislike={'Dictant__dislike'}
       />
+    );
+  },
+);
+
+DictantTemplateInner.displayName = 'DictantTemplateInner';
+
+export const DictantTemplate: React.FC<DictantTemplateProps> = memo(
+  (props): React.JSX.Element => {
+    return (
+      <MissedLetterInputProvider>
+        <DictantTemplateInner {...props} />
+      </MissedLetterInputProvider>
     );
   },
 );

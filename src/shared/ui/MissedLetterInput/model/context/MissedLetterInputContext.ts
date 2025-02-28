@@ -1,6 +1,6 @@
 import { createContext } from 'react';
 
-export interface DictantContext {
+export interface MissedLetterInputContext {
   missedInputsIDs: number[];
   setMissedInputsIDs: React.Dispatch<React.SetStateAction<number[]>>;
   correctInputsIDs: number[];
@@ -9,11 +9,13 @@ export interface DictantContext {
   setIncorrectInputsIDs: React.Dispatch<React.SetStateAction<number[]>>;
 }
 
-export const DictantContext = createContext<DictantContext>({
-  missedInputsIDs: [],
-  setMissedInputsIDs: () => {},
-  correctInputsIDs: [],
-  setCorrectInputsIDs: () => {},
-  incorrectInputsIDs: [],
-  setIncorrectInputsIDs: () => {},
-});
+export const MissedLetterInputContext = createContext<MissedLetterInputContext>(
+  {
+    missedInputsIDs: [],
+    setMissedInputsIDs: () => {},
+    correctInputsIDs: [],
+    setCorrectInputsIDs: () => {},
+    incorrectInputsIDs: [],
+    setIncorrectInputsIDs: () => {},
+  },
+);

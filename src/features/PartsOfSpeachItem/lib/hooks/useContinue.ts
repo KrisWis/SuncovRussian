@@ -1,17 +1,17 @@
 import { PartsOfSpeachItemType } from '../../model/types/types';
 
 interface useContinuePartsOfSpeachItemResult {
-  continuePartsOfSpeachItem: () => void;
+  continueFunc: () => void;
 }
 
-export const useContinuePartsOfSpeachItem = (
+export const useContinue = (
   setCurrentItemIndex: React.Dispatch<React.SetStateAction<number>>,
   currentItemIndex: number,
   items: PartsOfSpeachItemType[],
   setPassedTestsIndexes: React.Dispatch<React.SetStateAction<number[]>>,
   passedTestsIndexes: number[],
 ): useContinuePartsOfSpeachItemResult => {
-  const continuePartsOfSpeachItem = () => {
+  const continueFunc = () => {
     // Добавляем текущий индекс в массив пройденых тестов
     if (!passedTestsIndexes.includes(currentItemIndex))
       setPassedTestsIndexes([...passedTestsIndexes, currentItemIndex]);
@@ -39,6 +39,6 @@ export const useContinuePartsOfSpeachItem = (
   };
 
   return {
-    continuePartsOfSpeachItem,
+    continueFunc,
   };
 };

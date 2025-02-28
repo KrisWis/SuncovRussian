@@ -3,11 +3,11 @@ import {
   DictantSymbolForSplitSentences,
 } from '../../ui/Dictant';
 import { CheckButtonOnClickResult } from '@/shared/ui/TemplateForTests';
-interface useCheckDictantCorrectnessResult {
-  checkDictantCorrectness: () => CheckButtonOnClickResult;
+interface useCheckCorrectnessResult {
+  checkCorrectness: () => CheckButtonOnClickResult;
 }
 
-export const useCheckDictantCorrectness = (
+export const useCheckCorrectness = (
   text: string,
   splitSymbol: string,
   setCorrectLetters: React.Dispatch<React.SetStateAction<number>>,
@@ -17,8 +17,8 @@ export const useCheckDictantCorrectness = (
   setMissedInputsIDs: React.Dispatch<React.SetStateAction<number[]>>,
   setCorrectInputsIDs: React.Dispatch<React.SetStateAction<number[]>>,
   setIncorrectInputsIDs: React.Dispatch<React.SetStateAction<number[]>>,
-): useCheckDictantCorrectnessResult => {
-  const checkDictantCorrectness = (): CheckButtonOnClickResult => {
+): useCheckCorrectnessResult => {
+  const checkCorrectness = (): CheckButtonOnClickResult => {
     // Инициализация всех элементов и переменных
     const inputElements = document.querySelectorAll(
       '[data-name="Dictant__input"]',
@@ -113,6 +113,6 @@ export const useCheckDictantCorrectness = (
   };
 
   return {
-    checkDictantCorrectness,
+    checkCorrectness,
   };
 };

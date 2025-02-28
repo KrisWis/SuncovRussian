@@ -11,10 +11,10 @@ import {
   clearWords,
   PartsOfSpeachItem,
   PartsOfSpeachItemType,
-  useContinuePartsOfSpeachItem,
+  useContinue,
 } from '@/features/PartsOfSpeachItem';
 import { ProviderForTestsContext } from '@/shared/lib/ProviderForTests';
-import { useCheckPartsOfSpeachItemCorrectness } from '@/features/PartsOfSpeachItem';
+import { useCheckCorrectness } from '@/features/PartsOfSpeachItem';
 
 export const PartsOfSpeachItemTemplate: React.FC = memo(
   (): React.JSX.Element => {
@@ -44,16 +44,15 @@ export const PartsOfSpeachItemTemplate: React.FC = memo(
       [currentItemIndex, items],
     );
 
-    const { checkPartsOfSpeachItemCorrectness } =
-      useCheckPartsOfSpeachItemCorrectness(
-        currentItem ? currentItem.text : '',
-        setMaxCorrectAnswersCount,
-        setCorrectAnswersCount,
-        setTestIsFailed,
-      );
+    const { checkCorrectness } = useCheckCorrectness(
+      currentItem ? currentItem.text : '',
+      setMaxCorrectAnswersCount,
+      setCorrectAnswersCount,
+      setTestIsFailed,
+    );
 
     // Получаем функцию продолжения
-    const { continuePartsOfSpeachItem } = useContinuePartsOfSpeachItem(
+    const { continueFunc } = useContinue(
       setCurrentItemIndex,
       currentItemIndex,
       items as PartsOfSpeachItemType[],
@@ -73,14 +72,13 @@ export const PartsOfSpeachItemTemplate: React.FC = memo(
 
       const timeoutForClearing = setTimeout(() => {
         // Вызываем функцию продолжения
-        continuePartsOfSpeachItem();
+        continueFunc();
         clearTimeout(timeoutForClearing);
       }, 300);
     }, [
-      continuePartsOfSpeachItem,
+      continueFunc,
       setCorrectAnswersCount,
       setMaxCorrectAnswersCount,
-      setSelectedWords,
       setTestIsFailed,
     ]);
 
@@ -117,7 +115,7 @@ export const PartsOfSpeachItemTemplate: React.FC = memo(
                 selectedWords={selectedWords}
               />
             }
-            checkButtonOnClick={checkPartsOfSpeachItemCorrectness}
+            checkButtonOnClick={checkCorrectness}
             correctAnswersCount={correctAnswersCount}
             maxCorrectAnswersCount={maxCorrectAnswersCount}
             testIsFailed={testIsFailed}

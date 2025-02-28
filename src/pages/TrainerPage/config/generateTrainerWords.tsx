@@ -1,3 +1,4 @@
+import { MissedLetterInputProvider } from '@/shared/ui/MissedLetterInput';
 import {
   wordActionsFunctionType,
   wordOnFailType,
@@ -60,12 +61,14 @@ export const generateTrainerWords = (
     ),
 
     withMissedLetters: (
-      <TrainerWithMissedLettersWords
-        randomWord={randomWord as WithMissedLettersWordsInterface}
-        wordOnSuccess={wordOnSuccess}
-        wordOnFail={wordOnFail}
-        showNewWord={showNewWord}
-      />
+      <MissedLetterInputProvider>
+        <TrainerWithMissedLettersWords
+          randomWord={randomWord as WithMissedLettersWordsInterface}
+          wordOnSuccess={wordOnSuccess}
+          wordOnFail={wordOnFail}
+          showNewWord={showNewWord}
+        />
+      </MissedLetterInputProvider>
     ),
   };
 };

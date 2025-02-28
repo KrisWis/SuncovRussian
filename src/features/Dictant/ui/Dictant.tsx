@@ -2,7 +2,7 @@ import { Flex } from '@/shared/lib/Stack';
 import * as styles from './Dictant.module.scss';
 import { memo, useContext, useMemo } from 'react';
 import { renderLetter } from '../lib/helpers/renderLetter';
-import { DictantContext } from '../model/context/DictantContext';
+import { MissedLetterInputContext } from '@/shared/ui/MissedLetterInput';
 
 export interface DictantProps {
   text: string;
@@ -33,7 +33,7 @@ export const Dictant: React.FC<DictantProps> = memo(
       missedInputsIDs,
       incorrectInputsIDs,
       setMissedInputsIDs,
-    } = useContext(DictantContext);
+    } = useContext(MissedLetterInputContext);
 
     return (
       <Flex direction="column" gap="70" width="100">

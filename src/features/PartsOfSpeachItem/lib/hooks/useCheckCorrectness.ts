@@ -3,16 +3,16 @@ import { isWordCorrect } from '../helpers/isWordCorrect';
 import * as styles from '../../ui/PartsOfSpeachItem.module.scss';
 
 interface useCheckPartsOfSpeachItemCorrectnessResult {
-  checkPartsOfSpeachItemCorrectness: () => CheckButtonOnClickResult;
+  checkCorrectness: () => CheckButtonOnClickResult;
 }
 
-export const useCheckPartsOfSpeachItemCorrectness = (
+export const useCheckCorrectness = (
   text: string,
   setMaxCorrectAnswersCount: React.Dispatch<React.SetStateAction<number>>,
   setCorrectAnswersCount: React.Dispatch<React.SetStateAction<number>>,
   setTestIsFailed: React.Dispatch<React.SetStateAction<boolean>>,
 ): useCheckPartsOfSpeachItemCorrectnessResult => {
-  const checkPartsOfSpeachItemCorrectness = (): CheckButtonOnClickResult => {
+  const checkCorrectness = (): CheckButtonOnClickResult => {
     // Получаем все слова
     const PartsOfSpeachItemWords = document.querySelectorAll(
       '[data-name="PartsOfSpeachItem__word"]',
@@ -68,6 +68,6 @@ export const useCheckPartsOfSpeachItemCorrectness = (
   };
 
   return {
-    checkPartsOfSpeachItemCorrectness,
+    checkCorrectness,
   };
 };

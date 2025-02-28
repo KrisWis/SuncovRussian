@@ -4,5 +4,4 @@ export {
   DictantSymbolForEndSentences,
 } from './ui/Dictant';
 export type { DictantItem, DictantType } from './model/types/types';
-export { useCheckDictantCorrectness } from './lib/hooks/useCheckDictantCorrectness';
-export { DictantContext } from './model/context/DictantContext';
+export { useCheckCorrectness } from './lib/hooks/useCheckCorrectness';

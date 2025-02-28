@@ -3,17 +3,17 @@ import { CheckButtonOnClickResult } from '@/shared/ui/TemplateForTests';
 import { Question } from '../../model/types/types';
 
 interface useCheckTestCorrectnessResult {
-  checkTestCorrectness: () => CheckButtonOnClickResult;
+  checkCorrectness: () => CheckButtonOnClickResult;
 }
 
-export const useCheckTestCorrectness = (
+export const useCheckCorrectness = (
   questions: Question[],
   setMaxCorrectAnswersCount: React.Dispatch<React.SetStateAction<number>>,
   setCorrectAnswersCount: React.Dispatch<React.SetStateAction<number>>,
   setTestIsFailed: React.Dispatch<React.SetStateAction<boolean>>,
   setTestHasMissedAnswers: React.Dispatch<React.SetStateAction<boolean>>,
 ): useCheckTestCorrectnessResult => {
-  const checkTestCorrectness = (): CheckButtonOnClickResult => {
+  const checkCorrectness = (): CheckButtonOnClickResult => {
     // Получаем нужные все тесты-элементы (вопросы)
     const allQuestions = document.querySelectorAll(
       '[data-name="Test"]',
@@ -109,6 +109,6 @@ export const useCheckTestCorrectness = (
   };
 
   return {
-    checkTestCorrectness,
+    checkCorrectness,
   };
 };

@@ -1,5 +1,5 @@
 import { memo, useContext } from 'react';
-import { Question, Test, useCheckTestCorrectness } from '@/features/Test';
+import { Question, Test, useCheckCorrectness } from '@/features/Test';
 import { TemplateForTests } from '@/shared/ui/TemplateForTests';
 import { Flex } from '@/shared/lib/Stack';
 import { ProviderForTestsContext } from '@/shared/lib/ProviderForTests';
@@ -20,7 +20,7 @@ export const TestTemplate: React.FC = memo((): React.JSX.Element => {
   } = useContext(ProviderForTestsContext);
 
   // Получение функции проверки
-  const { checkTestCorrectness } = useCheckTestCorrectness(
+  const { checkCorrectness } = useCheckCorrectness(
     items as Question[],
     setMaxCorrectAnswersCount,
     setCorrectAnswersCount,
@@ -45,7 +45,7 @@ export const TestTemplate: React.FC = memo((): React.JSX.Element => {
           ))}
         </Flex>
       }
-      checkButtonOnClick={checkTestCorrectness}
+      checkButtonOnClick={checkCorrectness}
       correctAnswersCount={correctAnswersCount}
       maxCorrectAnswersCount={maxCorrectAnswersCount}
       testIsFailed={testIsFailed}
