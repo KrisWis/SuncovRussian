@@ -7,14 +7,14 @@ import * as styles from './TrainerUnionsWords.module.scss';
 import { useWords } from '../../model/selectors/getTrainerWords/getTrainerWords';
 import {
   wordActionsFunctionType,
-  wordOnFailType,
+  wordActionsFunctionTypeWithElemForClick,
 } from '../../lib/hooks/useWordActions';
 import { UnionsWordsInterface, unionTypes } from '../../model/types/unions';
 
 interface TrainerUnionsWordsProps {
   randomWord: UnionsWordsInterface;
   wordOnSuccess: wordActionsFunctionType;
-  wordOnFail: wordOnFailType;
+  wordOnFail: wordActionsFunctionTypeWithElemForClick;
 }
 
 export const TrainerUnionsWords: React.FC<TrainerUnionsWordsProps> = memo(

@@ -18,7 +18,7 @@ export type wordActionsFunctionType = (
   randomWordId: number | null,
 ) => void;
 
-export type wordOnFailType = (
+export type wordActionsFunctionTypeWithElemForClick = (
   ...args: [
     ...Parameters<wordActionsFunctionType>,
     elemForClick?: HTMLElement | Document,
@@ -26,9 +26,9 @@ export type wordOnFailType = (
 ) => void;
 
 interface UseWordActionsResult {
-  showNewWord: wordActionsFunctionType;
+  showNewWord: wordActionsFunctionTypeWithElemForClick;
   wordOnSuccess: wordActionsFunctionType;
-  wordOnFail: wordOnFailType;
+  wordOnFail: wordActionsFunctionTypeWithElemForClick;
   waitRepeatedClickInFail: boolean;
 }
 
@@ -64,11 +64,12 @@ export const useWordActions = (
   );
 
   // Показ нового слова
-  const showNewWord = useCallback(
+  const showNewWord: wordActionsFunctionTypeWithElemForClick = useCallback(
     (
       words: WordsForTrainersTypes[],
       isErrorWork: boolean,
       randomWordId: number | null,
+      elemForClick = document,
     ) => {
       if (isOneLifeMode) {
         initializeWords();
@@ -124,7 +125,10 @@ export const useWordActions = (
         main.style.pointerEvents = 'all';
       }
 
-      document.onclick = null;
+      // Сбрасываем события
+      elemForClick.onclick = null;
+
+      document.onkeydown = null;
     },
     [
       changeWordConsecutivelyTimes,
@@ -141,7 +145,7 @@ export const useWordActions = (
   );
 
   // Изменение вероятности при правильном ответе
-  const wordOnFail: wordOnFailType = useCallback(
+  const wordOnFail: wordActionsFunctionTypeWithElemForClick = useCallback(
     (words, isErrorWork, randomWordId, elemForClick = document) => {
       if (waitRepeatedClickInFail) return;
 
@@ -158,8 +162,16 @@ export const useWordActions = (
           main.style.pointerEvents = 'none';
         }
 
+        // Добавляем события
         elemForClick.onclick = () =>
           showNewWord(words, isErrorWork, randomWordId);
+
+        document.onkeydown = (e: KeyboardEvent) => {
+          if (e.key === 'Enter') {
+            showNewWord(words, isErrorWork, randomWordId);
+          }
+        };
+
         clearTimeout(eventTimeout);
       }, timeoutDurationForRender);
     },

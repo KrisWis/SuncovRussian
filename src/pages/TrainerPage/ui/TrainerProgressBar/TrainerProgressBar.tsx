@@ -48,12 +48,7 @@ export const TrainerProgressBar: React.FC = memo((): React.JSX.Element => {
   }, [setTotalTime, wordsInProgressProbabilityPercent]);
 
   return (
-    <Flex
-      className={styles.TrainerProgressBar}
-      width="50"
-      justify="center"
-      gap="10"
-    >
+    <Flex width="50" justify="center" gap="10">
       <span className={styles.TrainerProgressBar__percent}>
         {Math.round(wordsInProgressProbabilityPercent * 100)}%
       </span>

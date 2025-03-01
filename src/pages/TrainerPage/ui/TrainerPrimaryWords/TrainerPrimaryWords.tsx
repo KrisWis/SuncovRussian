@@ -7,14 +7,14 @@ import { TrainerWord } from '@/shared/ui/TrainerWord';
 import { PrimaryWordsInterface } from '../../model/types/primary';
 import {
   wordActionsFunctionType,
-  wordOnFailType,
+  wordActionsFunctionTypeWithElemForClick,
 } from '../../lib/hooks/useWordActions';
 
 interface TrainerPrimaryWordsProps {
   randomWord: PrimaryWordsInterface;
   randomWordsIsReverse: boolean;
   wordOnSuccess: wordActionsFunctionType;
-  wordOnFail: wordOnFailType;
+  wordOnFail: wordActionsFunctionTypeWithElemForClick;
 }
 
 export const TrainerPrimaryWords: React.FC<TrainerPrimaryWordsProps> = memo(

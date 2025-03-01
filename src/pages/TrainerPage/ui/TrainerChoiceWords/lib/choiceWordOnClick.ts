@@ -1,7 +1,7 @@
 import { WordsForTrainersTypes } from '../../../model/types/types';
 import {
   wordActionsFunctionType,
-  wordOnFailType,
+  wordActionsFunctionTypeWithElemForClick,
 } from '../../../lib/hooks/useWordActions';
 import { ChoiceWordInterface } from '../../../model/types/choice';
 import { onFailHandler } from './onFailHandler';
@@ -12,7 +12,7 @@ export const ChoiceWordOnClick = (
   randomWord: ChoiceWordInterface,
   choiceWord: string,
   wordOnSuccess: wordActionsFunctionType,
-  wordOnFail: wordOnFailType,
+  wordOnFail: wordActionsFunctionTypeWithElemForClick,
   isErrorWork: boolean,
   storeWords: WordsForTrainersTypes[],
   showNewWord: wordActionsFunctionType,

@@ -1,16 +1,29 @@
+import { WordsForTrainersTypes } from '../../../model/types/types';
+import {
+  wordActionsFunctionType,
+  wordActionsFunctionTypeWithElemForClick,
+} from '../../../lib/hooks/useWordActions';
+import { WithMissedLettersWordsInterface } from '../../../model/types/withMissedLetters';
+
 interface onContinueHandlerParams {
-  word: string;
-  setMissedInputsIDs: React.Dispatch<React.SetStateAction<number[]>>;
-  setCorrectInputsIDs: React.Dispatch<React.SetStateAction<number[]>>;
+  randomWord: WithMissedLettersWordsInterface;
   setIncorrectInputsIDs: React.Dispatch<React.SetStateAction<number[]>>;
+  wordOnSuccess: wordActionsFunctionType;
+  wordOnFail: wordActionsFunctionTypeWithElemForClick;
+  storeWords: WordsForTrainersTypes[];
+  isErrorWork: boolean;
+  setIsIncorrect: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
 // Функционал того, что если вставлена правильная буква, то срабатывает функция успеха
 export const onContinueHandler = ({
-  word,
-  setMissedInputsIDs,
-  setCorrectInputsIDs,
+  randomWord,
   setIncorrectInputsIDs,
+  wordOnSuccess,
+  wordOnFail,
+  storeWords,
+  isErrorWork,
+  setIsIncorrect,
 }: onContinueHandlerParams) => {
   // Получаем все инпуты в тренажёре
   const TrainerWithMissedLettersInputs =
@@ -22,19 +35,15 @@ export const onContinueHandler = ({
   for (const input of TrainerWithMissedLettersInputs) {
     const inputIndex = Number(input.getAttribute('data-index')!);
 
-    // Проверяем, что в инпуте пропущена буква
-    if (!input.value) {
-      setMissedInputsIDs((prev) => [...prev, inputIndex]);
-      return;
-    }
-
     // Проверяем, правильный-ли инпут;
-    const isCorrect = input.value === word[inputIndex - 1];
+    const isCorrect = input.value === randomWord.word[inputIndex - 1];
 
     if (isCorrect) {
-      setCorrectInputsIDs((prev) => [...prev, inputIndex]);
+      wordOnSuccess(storeWords, isErrorWork, randomWord.id);
     } else {
+      setIsIncorrect(true);
       setIncorrectInputsIDs((prev) => [...prev, inputIndex]);
+      wordOnFail(storeWords, isErrorWork, randomWord.id);
     }
   }
 };

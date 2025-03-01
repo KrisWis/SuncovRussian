@@ -1,12 +1,12 @@
 import { WordsForTrainersTypes } from '../../../model/types/types';
-import { wordOnFailType } from '../../../lib/hooks/useWordActions';
+import { wordActionsFunctionTypeWithElemForClick } from '../../../lib/hooks/useWordActions';
 import { ChoiceWordInterface } from '../../../model/types/choice';
 import * as styles from '../TrainerChoiceWords.module.scss';
 
 export type onFailHandlerParams = (
   e: React.MouseEvent<HTMLSpanElement, MouseEvent>,
   randomWord: ChoiceWordInterface,
-  wordOnFail: wordOnFailType,
+  wordOnFail: wordActionsFunctionTypeWithElemForClick,
   storeWords: WordsForTrainersTypes[],
   isErrorWork: boolean,
 ) => void;

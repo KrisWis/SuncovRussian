@@ -5,21 +5,43 @@
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  width: 25px;
-  height: 25px;
   border-radius: 100%;
   background-color: var(--color-black);
   color: var(--color-white);
   transition: background-color var(--transition-duration-default) linear;
-  font-size: 30px;
+  position: relative;
+  top: 3px;
 
-  @media (max-width: $laptop-mediaquery-width) {
-    font-size: 15px;
-    width: 15px;
-    height: 15px;
+  &__small {
+    width: 25px;
+    height: 25px;
+    font-size: 30px;
+
+    @media (max-width: $laptop-mediaquery-width) {
+      font-size: 15px;
+      width: 15px;
+      height: 15px;
+    }
   }
 
-  &:focus {
+  &__big {
+    width: 35px;
+    height: 35px;
+    font-size: 50px;
+
+    @media (max-width: $laptop-mediaquery-width) {
+      font-size: 30px;
+      width: 30px;
+      height: 30px;
+      top: 0;
+    }
+  }
+
+  &:focus:not(
+      .MissedLetterInput__missed,
+      .MissedLetterInput__incorrect,
+      .MissedLetterInput__correct
+    ) {
     background-color: var(--color-gray);
   }
 

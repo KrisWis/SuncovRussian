@@ -11,14 +11,14 @@ import { clearClassesOnWord } from './lib/clearClassesOnWord';
 import { ChoiceWordOnClick } from './lib/choiceWordOnClick';
 import {
   wordActionsFunctionType,
-  wordOnFailType,
+  wordActionsFunctionTypeWithElemForClick,
 } from '../../lib/hooks/useWordActions';
 
 export interface TrainerChoiceWordsProps {
   randomWord: ChoiceWordInterface;
   categories: ChoiceWordsCategory[];
   wordOnSuccess: wordActionsFunctionType;
-  wordOnFail: wordOnFailType;
+  wordOnFail: wordActionsFunctionTypeWithElemForClick;
   showNewWord: wordActionsFunctionType;
 }
 
